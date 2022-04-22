@@ -1,5 +1,5 @@
-blank-python-project
-====================
+astartes
+========
 
 .. toctree::
    :maxdepth: 4
