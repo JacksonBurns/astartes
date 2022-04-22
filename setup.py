@@ -26,12 +26,12 @@ cwd = pathlib.Path(__file__).parent
 README = (cwd / "README.md").read_text()
 
 setup(
-    name="blpyproj",
-    version=get_version("blankpythonproject/__init__.py"),
-    description="Catchy slogan.",
+    name="test pypi_name",
+    version=get_version("astartes/__init__.py"),
+    description="Train:Test Algorithmic Sampling for Molecules, Images, and Arbitrary Arrays",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/JacksonBurns/blank-python-project",
+    url="https://github.com/JacksonBurns/astartes",
     author="Jackson Burns",
     license="MIT",
     classifiers=["Programming Language :: Python :: 3"],

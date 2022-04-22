@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 
 # -- Project information -----------------------------------------------------
-project = 'blankpythonproject'
+project = 'astartes'
 copyright = '2022, Jackson Burns'
 author = 'Jackson Burns'
 # The full version, including alpha/beta/rc tags
@@ -55,7 +55,7 @@ def setup(app):
     app.connect("autodoc-skip-member", skip)
 
 
-release = get_version("../blankpythonproject/__init__.py")
+release = get_version("../astartes/__init__.py")
 
 
 # -- General configuration ---------------------------------------------------

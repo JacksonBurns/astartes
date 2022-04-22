@@ -2,12 +2,12 @@ import os
 import sys
 import unittest
 
-# from blankpythonproject import blankpythonproject
+# from astartes import astartes
 
 
-class Test_blankpythonproject(unittest.TestCase):
+class Test_astartes(unittest.TestCase):
     """
-    Test the various functionalities of blankpythonproject.
+    Test the various functionalities of astartes.
     """
 
     @classmethod

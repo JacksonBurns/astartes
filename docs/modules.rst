@@ -4,7 +4,7 @@ astartes
 .. toctree::
    :maxdepth: 4
 
-   blankpythonproject
+   astartes
    setup
    start_project
    test
