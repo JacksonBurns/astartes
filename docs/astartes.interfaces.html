@@ -47,8 +47,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="astartes.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="astartes.html#astartes-astartes-module">astartes.astartes module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="astartes.html#module-contents">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.html#module-astartes.astartes">astartes.astartes module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.html#module-astartes">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="setup.html">setup module</a></li>
@@ -88,14 +88,24 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
 </section>
-<section id="astartes-interfaces-train-test-split-images-module">
-<h2>astartes.interfaces.train_test_split_images module<a class="headerlink" href="#astartes-interfaces-train-test-split-images-module" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.interfaces.train_test_split_images">
+<span id="astartes-interfaces-train-test-split-images-module"></span><h2>astartes.interfaces.train_test_split_images module<a class="headerlink" href="#module-astartes.interfaces.train_test_split_images" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.interfaces.train_test_split_images.train_test_split_images">
+<span class="sig-prename descclassname"><span class="pre">astartes.interfaces.train_test_split_images.</span></span><span class="sig-name descname"><span class="pre">train_test_split_images</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#astartes.interfaces.train_test_split_images.train_test_split_images" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </section>
-<section id="astartes-interfaces-train-test-split-molecules-module">
-<h2>astartes.interfaces.train_test_split_molecules module<a class="headerlink" href="#astartes-interfaces-train-test-split-molecules-module" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.interfaces.train_test_split_molecules">
+<span id="astartes-interfaces-train-test-split-molecules-module"></span><h2>astartes.interfaces.train_test_split_molecules module<a class="headerlink" href="#module-astartes.interfaces.train_test_split_molecules" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.interfaces.train_test_split_molecules.train_test_split_molecules">
+<span class="sig-prename descclassname"><span class="pre">astartes.interfaces.train_test_split_molecules.</span></span><span class="sig-name descname"><span class="pre">train_test_split_molecules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.array</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splitter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fingerprint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'morgan_fingerprint'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_as</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'fprint'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hopts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fprints_hopts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.interfaces.train_test_split_molecules.train_test_split_molecules" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.interfaces">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-astartes.interfaces" title="Permalink to this headline"></a></h2>
 </section>
 </section>
 
