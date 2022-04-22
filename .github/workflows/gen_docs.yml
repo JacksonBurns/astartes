@@ -1,0 +1,33 @@
+name: Generate Docs
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          conda install python=3.8
+          python -m pip install -e .
+          python -m pip install sphinx sphinx-rtd-theme m2r mistune==0.8.4
+      
+      - name: Generate Documentation
+        run: |
+          cd docs
+          rm *.html *.doctree || true
+          sphinx-apidoc -f -o . ..
+          make clean
+          make html
+          cp -r _build/html/* .
+          cp -r _build/doctrees/* .
+          echo "" > .nojekyll
+          git add .
+          git commit -m "Automated Docs Update" -a || true
+          git push -f
