@@ -1,13 +1,13 @@
-test package
-============
+astartes package
+================
 
 Submodules
 ----------
 
-test.test\_astartes module
---------------------------
+astartes.astartes module
+------------------------
 
-.. automodule:: test.test_astartes
+.. automodule:: astartes.astartes
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ test.test\_astartes module
 Module contents
 ---------------
 
-.. automodule:: test
+.. automodule:: astartes
    :members:
    :undoc-members:
    :show-inheritance:

@@ -6,5 +6,4 @@ astartes
 
    astartes
    setup
-   start_project
    test
