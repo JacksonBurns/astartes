@@ -1,14 +1,4 @@
-# astartes
-## Using this template:
-1. Run `start_project.py`, which will gather some info and rename everything.
-2. Add tests.
-3. Add your source code to your source directory.
-4. Add your requirements to `./requirements.txt`.
-5. Curate examples as python notebooks and add them to `./examples/`.
-6. Replace `./astartes_logo.png` with your logo.
-7. Delete this line and everything above it, as well as `start_project.py`.
-
-<h1 align="center">BlankPythonProject</h1> 
+<h1 align="center">astartes</h1> 
 <h3 align="center">Train:Test Algorithmic Sampling for Molecules, Images, and Arbitrary Arrays</h3>
 
 <p align="center">  
