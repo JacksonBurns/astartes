@@ -56,4 +56,4 @@ class Sampler(ABC):
         Get idx of the next batch of samples.
 
         """
-        return [self.get_next_sample_id() for _ in range(n_samples)]
+        return [self.get_sample_id() for _ in range(n_samples)]
