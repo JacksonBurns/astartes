@@ -35,7 +35,7 @@ class Sampler(abc):
         return self.samples[-1]
 
     @abstractmethod
-    def get_next_sample_id(self):
+    def get_sample_id(self):
         """
         Get the id of the next sample.
 
@@ -43,7 +43,7 @@ class Sampler(abc):
         pass
 
     @abstractmethod
-    def get_batch_samples(self, n_samples):
+    def get_batch_sample(self, n_samples):
         """
         Get a batch of samples
 
