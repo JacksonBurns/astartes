@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from ..exceptions import *
 
 
-class Sampler(abc):
+class Sampler(ABC):
     @abstractmethod
     def __init__(self, configs):
         pass
@@ -56,4 +56,4 @@ class Sampler(abc):
         Get idx of the next batch of samples.
 
         """
-        return [self.get_next_sample_id() for _ in range(n_samples)]
+        return [self.get_sample_id() for _ in range(n_samples)]
