@@ -52,10 +52,10 @@ astartes.samplers.optisim module
    :undoc-members:
    :show-inheritance:
 
-astartes.samplers.random module
--------------------------------
+astartes.samplers.random\_split module
+--------------------------------------
 
-.. automodule:: astartes.samplers.random
+.. automodule:: astartes.samplers.random_split
    :members:
    :undoc-members:
    :show-inheritance:
