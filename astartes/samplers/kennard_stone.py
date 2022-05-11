@@ -2,7 +2,7 @@ import numpy as np
 from numpy.linalg import matrix_rank
 from scipy.spatial.distance import pdist, squareform
 
-from sampler import Sampler
+from .sampler import Sampler
 
 
 class KennardStone(Sampler):
