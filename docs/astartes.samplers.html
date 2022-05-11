@@ -48,6 +48,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="astartes.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="astartes.html#astartes-astartes-module">astartes.astartes module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.html#module-astartes.exceptions">astartes.exceptions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="astartes.html#module-contents">Module contents</a></li>
 </ul>
 </li>
@@ -88,35 +89,121 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
 </section>
-<section id="astartes-samplers-dbscan-module">
-<h2>astartes.samplers.dbscan module<a class="headerlink" href="#astartes-samplers-dbscan-module" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.samplers.dbscan">
+<span id="astartes-samplers-dbscan-module"></span><h2>astartes.samplers.dbscan module<a class="headerlink" href="#module-astartes.samplers.dbscan" title="Permalink to this headline"></a></h2>
 </section>
-<section id="astartes-samplers-doptimal-module">
-<h2>astartes.samplers.doptimal module<a class="headerlink" href="#astartes-samplers-doptimal-module" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.samplers.doptimal">
+<span id="astartes-samplers-doptimal-module"></span><h2>astartes.samplers.doptimal module<a class="headerlink" href="#module-astartes.samplers.doptimal" title="Permalink to this headline"></a></h2>
 </section>
-<section id="astartes-samplers-duplex-module">
-<h2>astartes.samplers.duplex module<a class="headerlink" href="#astartes-samplers-duplex-module" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.samplers.duplex">
+<span id="astartes-samplers-duplex-module"></span><h2>astartes.samplers.duplex module<a class="headerlink" href="#module-astartes.samplers.duplex" title="Permalink to this headline"></a></h2>
 </section>
-<section id="astartes-samplers-kennard-stone-module">
-<h2>astartes.samplers.kennard_stone module<a class="headerlink" href="#astartes-samplers-kennard-stone-module" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.samplers.kennard_stone">
+<span id="astartes-samplers-kennard-stone-module"></span><h2>astartes.samplers.kennard_stone module<a class="headerlink" href="#module-astartes.samplers.kennard_stone" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="astartes.samplers.kennard_stone.KennardStone">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.samplers.kennard_stone.</span></span><span class="sig-name descname"><span class="pre">KennardStone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_point_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.kennard_stone.KennardStone" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#astartes.samplers.sampler.Sampler" title="astartes.samplers.sampler.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">astartes.samplers.sampler.Sampler</span></code></a></p>
+<p>Implements the algorithm outlined in
+Kennard, R. W., &amp; Stone, L. A. (1969).
+Computer Aided Design of Experiments. Technometrics, 11(1), 137–148.
+<a class="reference external" href="https://doi.org/10.1080/00401706.1969.10490666">https://doi.org/10.1080/00401706.1969.10490666</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.samplers.kennard_stone.KennardStone.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_point_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.kennard_stone.KennardStone.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.samplers.kennard_stone.KennardStone.get_batch_sample">
+<span class="sig-name descname"><span class="pre">get_batch_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.kennard_stone.KennardStone.get_batch_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Get a batch of samples</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.samplers.kennard_stone.KennardStone.get_batch_sample_idx">
+<span class="sig-name descname"><span class="pre">get_batch_sample_idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.kennard_stone.KennardStone.get_batch_sample_idx" title="Permalink to this definition"></a></dt>
+<dd><p>Get idx of the next batch of samples.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.samplers.kennard_stone.KennardStone.get_sample">
+<span class="sig-name descname"><span class="pre">get_sample</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.kennard_stone.KennardStone.get_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Get one sample.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.samplers.kennard_stone.KennardStone.get_sample_id">
+<span class="sig-name descname"><span class="pre">get_sample_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.kennard_stone.KennardStone.get_sample_id" title="Permalink to this definition"></a></dt>
+<dd><p>Get the id of the next sample.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="astartes-samplers-mtsd-module">
-<h2>astartes.samplers.mtsd module<a class="headerlink" href="#astartes-samplers-mtsd-module" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.samplers.mtsd">
+<span id="astartes-samplers-mtsd-module"></span><h2>astartes.samplers.mtsd module<a class="headerlink" href="#module-astartes.samplers.mtsd" title="Permalink to this headline"></a></h2>
 </section>
-<section id="astartes-samplers-optisim-module">
-<h2>astartes.samplers.optisim module<a class="headerlink" href="#astartes-samplers-optisim-module" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.samplers.optisim">
+<span id="astartes-samplers-optisim-module"></span><h2>astartes.samplers.optisim module<a class="headerlink" href="#module-astartes.samplers.optisim" title="Permalink to this headline"></a></h2>
 </section>
-<section id="astartes-samplers-random-split-module">
-<h2>astartes.samplers.random_split module<a class="headerlink" href="#astartes-samplers-random-split-module" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.samplers.random_split">
+<span id="astartes-samplers-random-split-module"></span><h2>astartes.samplers.random_split module<a class="headerlink" href="#module-astartes.samplers.random_split" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.samplers.random_split.random">
+<span class="sig-prename descclassname"><span class="pre">astartes.samplers.random_split.</span></span><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stratify</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.random_split.random" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </section>
-<section id="astartes-samplers-sampler-module">
-<h2>astartes.samplers.sampler module<a class="headerlink" href="#astartes-samplers-sampler-module" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.samplers.sampler">
+<span id="astartes-samplers-sampler-module"></span><h2>astartes.samplers.sampler module<a class="headerlink" href="#module-astartes.samplers.sampler" title="Permalink to this headline"></a></h2>
+<p>Abstract Sampling class</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="astartes.samplers.sampler.Sampler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.samplers.sampler.</span></span><span class="sig-name descname"><span class="pre">Sampler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.sampler.Sampler" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.samplers.sampler.Sampler.__init__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.sampler.Sampler.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.samplers.sampler.Sampler.get_batch_sample">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_batch_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.sampler.Sampler.get_batch_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Get a batch of samples</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.samplers.sampler.Sampler.get_batch_sample_idx">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_batch_sample_idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.sampler.Sampler.get_batch_sample_idx" title="Permalink to this definition"></a></dt>
+<dd><p>Get idx of the next batch of samples.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.samplers.sampler.Sampler.get_sample">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_sample</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.sampler.Sampler.get_sample" title="Permalink to this definition"></a></dt>
+<dd><p>Get one sample.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.samplers.sampler.Sampler.get_sample_id">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_sample_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.sampler.Sampler.get_sample_id" title="Permalink to this definition"></a></dt>
+<dd><p>Get the id of the next sample.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.samplers.sampler.Sampler.populate">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.samplers.sampler.Sampler.populate" title="Permalink to this definition"></a></dt>
+<dd><p>Load data in this instance.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="astartes-samplers-sphere-exclusion-module">
-<h2>astartes.samplers.sphere_exclusion module<a class="headerlink" href="#astartes-samplers-sphere-exclusion-module" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.samplers.sphere_exclusion">
+<span id="astartes-samplers-sphere-exclusion-module"></span><h2>astartes.samplers.sphere_exclusion module<a class="headerlink" href="#module-astartes.samplers.sphere_exclusion" title="Permalink to this headline"></a></h2>
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline"></a></h2>
+<section id="module-astartes.samplers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-astartes.samplers" title="Permalink to this headline"></a></h2>
 </section>
 </section>
 
