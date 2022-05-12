@@ -5,6 +5,11 @@ from astartes.samplers import (
     KennardStone,
 )
 
+IMPLEMENTED_SAMPLERS = [
+    'random',
+    'kennard_stone',
+]
+
 
 def train_test_split(
     X: np.array,
