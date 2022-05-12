@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers import random
+from astartes.samplers import Random
 
 
 class Test_random(unittest.TestCase):
