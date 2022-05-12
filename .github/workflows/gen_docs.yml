@@ -17,7 +17,14 @@ jobs:
           conda install python=3.8
           python -m pip install -e .
           python -m pip install sphinx sphinx-rtd-theme m2r mistune==0.8.4
-      
+          
+      - uses: actions/checkout@v3
+        with:
+          ref: docs
+      - name: Update Docs to Main    
+        run: |
+          git merge main
+        
       - name: Generate Documentation
         run: |
           cd docs
@@ -28,14 +35,9 @@ jobs:
           cp -r _build/html/* .
           cp -r _build/doctrees/* .
           echo "" > .nojekyll
-          git stash
           
-      - uses: actions/checkout@v3
-        with:
-          ref: docs
       - name: Push to Docs Branch
         run: |
-          git stash show -p | git apply && git stash drop
           git add .
           git commit -m "Automated Docs Update" -a || true
           git push -f
