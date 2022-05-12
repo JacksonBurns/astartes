@@ -2,8 +2,8 @@ import numpy as np
 from numpy.linalg import matrix_rank
 from scipy.spatial.distance import pdist, squareform
 
-from .sampler import Sampler
 from ..utils import matrix_ops
+from .sampler import Sampler
 
 
 class KennardStone(Sampler):
@@ -14,6 +14,7 @@ class KennardStone(Sampler):
     https://doi.org/10.1080/00401706.1969.10490666
 
     """
+
     def __init__(self, X, y=None, distance_matrix=None, initial_point_id=None):
         """
 
@@ -60,9 +61,9 @@ class KennardStone(Sampler):
         for row in range(n_samples-1):
             for col in range(row+1, n_samples):
                 dist = self.distance_matrix[matrix_ops.square_to_condensed(
-                        row,
-                        col,
-                        n_samples)]
+                    row,
+                    col,
+                    n_samples)]
                 if dist > max_dist:
                     max_dist = dist
                     idx1, idx2 = row, col
