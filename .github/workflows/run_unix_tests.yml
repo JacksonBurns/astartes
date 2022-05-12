@@ -24,7 +24,7 @@ jobs:
         run: |
           coverage report -m > temp.txt
           cat temp.txt
-          python coverage_helper.py
+          python .github/workflows/coverage_helper.py
           env.COVERAGE_PERCENT='cat temp2.txt'
 
       - name: Comment Low Coverage
