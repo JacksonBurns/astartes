@@ -1,6 +1,6 @@
 import codecs
 
-with codecs.open("temp.txt", encoding='utf-16') as file:
+with codecs.open("temp.txt", encoding='utf-8') as file:
     lines = file.readlines()
 
 print(lines)
