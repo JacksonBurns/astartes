@@ -70,5 +70,5 @@ def train_test_split_INTERFACE(
 ```
 
 ## JOSS Branch
-`paper.md` is stored in a separate branch aptly named `joss-paper`. To push changes from the `main` branch into the `joss-paper` branch, run the `Update JOSS Branch` workflow.
+`paper.md` is stored in a separate branch named `joss-paper`. To push changes from the `main` branch into the `joss-paper` branch, run the `Update JOSS Branch` workflow.
 
