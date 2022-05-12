@@ -21,14 +21,6 @@ astartes.astartes module
    :undoc-members:
    :show-inheritance:
 
-astartes.exceptions module
---------------------------
-
-.. automodule:: astartes.exceptions
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Module contents
 ---------------
 
