@@ -1,59 +1,58 @@
 """Abstract Sampling class"""
 from abc import ABC, abstractmethod
 
-from ..exceptions import *
+from astartes.exceptions import (
+    NotInitializedError,
+    DatasetError,
+)
 
 
 class Sampler(ABC):
+    """
+    Abstract Base Class for samplers.
+    """
     @abstractmethod
     def __init__(self, configs):
         pass
 
     @abstractmethod
-    def populate(self, X, y=None):
+    def _get_next_sample_idx(self):
         """
-        Load data in this instance.
-
-        """
-        self.X = X
-        self.y = y
-        self.samples = []
-
-    @abstractmethod
-    def get_sample(self):
-        """
-        Get one sample.
-
-        """
-        if not self.is_populated:
-            raise NotInitializedError('Populate sampler instance with '
-                                      'data to get samples')
-        if len(self.samples) == len(X):
-            raise ValueError('Dataset exhausted')
-
-        self.samples.append(self.get_next_samle_id())
-        return self.samples[-1]
-
-    @abstractmethod
-    def get_next_sample_id(self):
-        """
-        Get the id of the next sample.
-
+        Get the idx of the next sample.
         """
         pass
 
-    @abstractmethod
-    def get_batch_samples(self, n_samples):
+    def populate(self, X, y=None):
         """
-        Get a batch of samples
+        Load data in the instance.
+        """
+        self.X = X
+        self.y = y
+        self.is_populated = True
+        self.sample_count = 0
 
+    def get_samples(self, n_samples):
         """
-        return self.X[self.get_batch_sample_idx(n_samples)]
+        Get samples.
+        """
+        self._verify_call(n_samples)
+        return [self.X[i] for i in self.get_sample_idxs(n_samples)]
 
-    @abstractmethod
-    def get_batch_sample_idx(self, n_samples):
+    def get_sample_idxs(self, n_samples):
         """
-        Get idx of the next batch of samples.
+        Get idxs of samples.
+        """
+        self._verify_call(n_samples)
+        return [self._get_next_sample_idx() for _ in range(n_samples)]
 
-        """
-        return [self.get_next_sample_id() for _ in range(n_samples)]
+    def _verify_call(self, n_samples):
+        if not self.is_populated:
+            raise NotInitializedError(
+                'Populate sampler instance with data to get samples'
+            )
+        if self.sample_count > len(self.X) or self.sample_count + n_samples > len(self.X):
+            raise DatasetError(
+                'Dataset exhausted.'
+            )
+        self.sample_count += n_samples
+        return
