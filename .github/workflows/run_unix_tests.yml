@@ -32,5 +32,5 @@ jobs:
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
-            Warning: test coverage is below 90% (currently at $env.COVERAGE_PERCENT). Increase this before merging.
+            Warning: test coverage is below 90% (currently at ${{ env.COVERAGE_PERCENT }}%). Increase to at least 90% before merging.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
