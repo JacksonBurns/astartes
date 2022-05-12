@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from ..exceptions import *
 
 
-class Sampler(abc):
+class Sampler(ABC):
     @abstractmethod
     def __init__(self, configs):
         pass
