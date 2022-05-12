@@ -35,7 +35,7 @@ jobs:
           ref: docs
       - name: Push to Docs Branch
         run: |
-          git stash pop
+          git stash show -p | git apply && git stash drop
           git add .
           git commit -m "Automated Docs Update" -a || true
           git push -f
