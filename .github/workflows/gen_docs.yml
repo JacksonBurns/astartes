@@ -30,4 +30,4 @@ jobs:
           echo "" > .nojekyll
           git add .
           git commit -m "Automated Docs Update" -a || true
-          git push -f
+          git push -f --no-verify
