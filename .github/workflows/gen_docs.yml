@@ -23,7 +23,7 @@ jobs:
           ref: docs
       - name: Update Docs to Main    
         run: |
-          git merge main
+          git merge origin/main
         
       - name: Generate Documentation
         run: |
