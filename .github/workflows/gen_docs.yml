@@ -28,6 +28,9 @@ jobs:
           cp -r _build/html/* .
           cp -r _build/doctrees/* .
           echo "" > .nojekyll
+          git stash
+          git checkout docs
+          git stash pop
           git add .
           git commit -m "Automated Docs Update" -a || true
-          git push -f --no-verify
+          git push -f
