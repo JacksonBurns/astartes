@@ -1,2 +1,3 @@
-from .random import random
-from .kennard_stone import kennard_stone
+from .sampler import Sampler
+from .random import Random
+from .kennardstone import KennardStone
