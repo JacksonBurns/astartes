@@ -10,7 +10,6 @@ class Random(Sampler):
         self._random_state = configs.get('random_state', None)
         self._shuffle = configs.get('shuffle', True)
         self._sample_idxs = []
-        return self
 
     def _rand_split(self):
         _, _, samples_idxs, spare_idx = train_test_split(

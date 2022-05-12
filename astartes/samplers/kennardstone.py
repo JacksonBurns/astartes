@@ -24,7 +24,6 @@ class KennardStone(Sampler):
         """
         self._distance_matrix = configs.get('distance_matrix', None)
         self._initial_point_id = configs.get('initial_point_id', None)
-        return self
 
     def _get_heuristic_init_points(self):
         max_dist = -np.inf
