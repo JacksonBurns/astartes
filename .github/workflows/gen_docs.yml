@@ -23,7 +23,7 @@ jobs:
           ref: docs
       - name: Update Docs to Main    
         run: |
-          git merge origin/main
+          git merge origin/main --allow-unrelated-histories
         
       - name: Generate Documentation
         run: |
