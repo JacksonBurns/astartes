@@ -25,7 +25,7 @@ jobs:
           coverage report -m > temp.txt
           cat temp.txt
           python .github/workflows/coverage_helper.py
-          env.COVERAGE_PERCENT='cat temp2.txt'
+          echo "COVERAGE_PERCENT=$(cat temp2.txt)" >> $GITHUB_ENV
 
       - name: Comment Low Coverage
         if: ${{ env.COVERAGE_PERCENT < 0.90 }}
