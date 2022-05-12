@@ -22,11 +22,15 @@ jobs:
           coverage run --source=. --omit=extended_train_test_split/__init__.py,setup.py,test/* -m unittest discover -v
       - name: Show Coverage
         run: |
-          coverage report -m
+          coverage report -m > temp.txt
+          cat temp.txt
+          python coverage_helper.py
+          env.COVERAGE_PERCENT='cat temp2.txt'
 
-      - name: Comment PR
+      - name: Comment Low Coverage
+        if: ${{ env.COVERAGE_PERCENT < 0.90 }}
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
-            Hello world !
+            Test Coverage is below 90%, please increase this before merging.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
