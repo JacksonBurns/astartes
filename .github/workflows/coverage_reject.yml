@@ -1,0 +1,50 @@
+name: Ensure Sufficient Coverage
+on:
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install -e .
+          python -m pip install coverage
+      - name: Run Tests
+        run: |
+          coverage run --source=. --omit=extended_train_test_split/__init__.py,setup.py,test/* -m unittest discover -v
+      - name: Show Coverage
+        run: |
+          coverage report -m > temp.txt
+          cat temp.txt
+          python .github/workflows/coverage_helper.py
+          echo "COVERAGE_PERCENT=$(cat temp2.txt)" >> $GITHUB_ENV
+
+      # - name: Comment Low Coverage
+      #   if: ${{ env.COVERAGE_PERCENT < 90 }}
+      #   uses: thollander/actions-comment-pull-request@v1
+      #   with:
+      #     message: |
+      #       Warning: test coverage is below 90% (currently at ${{ env.COVERAGE_PERCENT }}%). Increase to at least 90% before merging.
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+
+      - name: Request Changes via Review
+        if: ${{ env.COVERAGE_PERCENT < 90 }}
+        uses: andrewmusgrave/automatic-pull-request-review@0.0.5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          event: REQUEST_CHANGES
+          body: 'Increase test coverage from ${{ env.COVERAGE_PERCENT }}% to at least 90% before merging.'
+  
+      - name: Approve PR if Coverage Sufficient
+        if: ${{ env.COVERAGE_PERCENT > 89 }}
+        uses: andrewmusgrave/automatic-pull-request-review@0.0.5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          event: APPROVE
+          body: 'Test coverage meets or exceeds 90% threshold (currently ${{ env.COVERAGE_PERCENT }}%).'
