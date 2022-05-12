@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  generate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +29,12 @@ jobs:
           cp -r _build/doctrees/* .
           echo "" > .nojekyll
           git stash
-          git checkout docs
+          
+      - uses: actions/checkout@v3
+        with:
+          ref: docs
+      - name: Push to Docs Branch
+        run: |
           git stash pop
           git add .
           git commit -m "Automated Docs Update" -a || true
