@@ -22,6 +22,9 @@ class Sampler(ABC):
         """
         pass
 
+    def _is_split(self):
+        return len(self._sample_idxs) > 0
+
     def populate(self, X, y=None):
         """
         Load data in the instance.

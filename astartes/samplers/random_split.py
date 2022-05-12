@@ -7,10 +7,10 @@ from sklearn.model_selection import train_test_split
 class Random(Sampler):
 
     def __init__(self, configs):
-        self._split = False
         self._random_state = configs.get('random_state', None)
         self._shuffle = configs.get('shuffle', True)
-        self._samples_idxs = []
+        self._sample_idxs = []
+        return self
 
     def _rand_split(self):
         _, _, samples_idxs, spare_idx = train_test_split(
@@ -19,12 +19,11 @@ class Random(Sampler):
             random_state=self._random_state,
             shuffle=self._shuffle,
         )
-        self._samples_idxs = samples_idxs + spare_idx
+        self._sample_idxs = samples_idxs + spare_idx
 
     def _get_next_sample_idx(self):
-        if self._split:
-            return self._samples_idxs.pop(0)
+        if self._is_split():
+            return self._sample_idxs.pop(0)
         else:
             self._rand_split()
-            self._split = True
             return self._get_next_sample_idx()
