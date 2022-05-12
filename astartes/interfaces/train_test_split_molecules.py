@@ -1,6 +1,6 @@
 from typing import List
 import numpy as np
-from AIMSim.chemical_datastructures import Molecule
+from aimsim.chemical_datastructures import Molecule
 
 from astartes import train_test_split
 

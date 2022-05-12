@@ -1,2 +1,2 @@
-AIMSim
+aimsim
 kennard_stone
