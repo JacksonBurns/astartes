@@ -36,11 +36,11 @@ def train_test_split(
     n_train_samples = floor(len(X) * train_size)
     train_idxs = sampler.get_sample_idxs(n_train_samples)
     test_idxs = sampler.get_sample_idxs(len(X)-n_train_samples)
-    X_train = np.array([X[i] for i in train_idxs])
-    X_test = np.array([X[i] for i in test_idxs])
+    X_train = np.array([X[i] for i in train_idxs], dtype=object)
+    X_test = np.array([X[i] for i in test_idxs], dtype=object)
     if y is None:
         return X_train, X_test
     else:
-        y_train = np.array([y[i] for i in train_idxs])
-        y_test = np.array([y[i] for i in test_idxs])
+        y_train = np.array([y[i] for i in train_idxs], dtype=object)
+        y_test = np.array([y[i] for i in test_idxs], dtype=object)
         return X_train, X_test, y_train, y_test
