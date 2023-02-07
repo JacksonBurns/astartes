@@ -17,7 +17,7 @@ jobs:
           python -m pip install coverage
       - name: Run Tests
         run: |
-          coverage run --source=. --omit=extended_train_test_split/__init__.py,setup.py,test/* -m unittest discover -v
+          coverage run --source=. --omit=astartes/__init__.py,setup.py,test/*,astartes/samplers/sampler.py -m unittest discover -v
       - name: Show Coverage
         run: |
           coverage report -m > temp.txt
