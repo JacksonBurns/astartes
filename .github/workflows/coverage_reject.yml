@@ -26,14 +26,6 @@ jobs:
           python .github/workflows/coverage_helper.py
           echo "COVERAGE_PERCENT=$(cat temp2.txt)" >> $GITHUB_ENV
 
-      # - name: Comment Low Coverage
-      #   if: ${{ env.COVERAGE_PERCENT < 90 }}
-      #   uses: thollander/actions-comment-pull-request@v1
-      #   with:
-      #     message: |
-      #       Warning: test coverage is below 90% (currently at ${{ env.COVERAGE_PERCENT }}%). Increase to at least 90% before merging.
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-
       - name: Request Changes via Review
         if: ${{ env.COVERAGE_PERCENT < 90 }}
         uses: andrewmusgrave/automatic-pull-request-review@0.0.5
