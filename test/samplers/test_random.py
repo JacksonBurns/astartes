@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers import Random
+from astartes.samplers.unsupervised import Random
 
 
 class Test_random(unittest.TestCase):
@@ -17,10 +17,9 @@ class Test_random(unittest.TestCase):
         return
 
     def test_random(self):
-        """
-        """
+        """ """
         return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

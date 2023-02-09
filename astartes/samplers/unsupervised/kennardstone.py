@@ -1,11 +1,10 @@
-from astartes.samplers import Sampler
+from astartes.samplers import AbstractUnsupervisedSampler
 
 # https://github.com/yu9824/kennard_stone
 from kennard_stone import train_test_split
 
 
-class KennardStone(Sampler):
-
+class KennardStone(AbstractUnsupervisedSampler):
     def __init__(self, configs):
         self._split = False
         self._samples_idxs = []
@@ -20,8 +19,9 @@ class KennardStone(Sampler):
         index into the list at the end to circumvent this.
         """
         _, _, samples_idxs, spare_idx = train_test_split(
-            self.X, list(range(len(self.X))),
-            train_size=len(self.X)-1,
+            self.X,
+            list(range(len(self.X))),
+            train_size=len(self.X) - 1,
         )
         self._samples_idxs = samples_idxs + spare_idx
 
