@@ -15,3 +15,11 @@ class DatasetError(ValueError):
     def __init__(self, message=None):
         self.message = message
         super().__init__(message)
+
+
+class MoleculesNotInstalledError(ValueError):
+    """Used when attempting to featurize molecules without install."""
+
+    def __init__(self, message=None):
+        self.message = message
+        super().__init__(message)
