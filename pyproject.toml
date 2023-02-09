@@ -5,12 +5,20 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "astartes"
 version = "0.0.0"
-authors = [{name = "Jackson Burns"}]
-license = {text = "MIT"}
+authors = [
+    { name = "Jackson Burns", email = "jwburns@mit.edu" },
+    { name = "Himaghna Bhattacharjee", email = "himaghna@udel.edu" },
+    { name = "Kevin Spiekermann", email = "kspieker@mit.edu" },
+]
+license = { text = "MIT" }
 description = "Train:Test Algorithmic Sampling for Molecules, Images, and Arbitrary Arrays"
 classifiers = ["Programming Language :: Python :: 3"]
-urls = {Homepage = "https://github.com/JacksonBurns/astartes"}
-dependencies = ["aimsim", "kennard_stone"]
+urls = { Homepage = "https://github.com/JacksonBurns/astartes" }
+requires-python = ">=3.7"
+dependencies = ["kennard_stone"]
+
+[project.optional-dependencies]
+molecules = ["aimsim"]
 
 [project.readme]
 file = "README.md"
@@ -20,4 +28,4 @@ content-type = "text/markdown"
 include-package-data = true
 
 [tool.setuptools.packages]
-find = {namespaces = false}
+find = { namespaces = false }
