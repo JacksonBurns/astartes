@@ -5,7 +5,7 @@ import warnings
 
 import numpy as np
 
-from astartes import train_test_split_molecules
+from astartes.molecules import train_test_split_molecules
 from astartes.samplers import (
     IMPLEMENTED_SUPERVISED_SAMPLERS,
     IMPLEMENTED_UNSUPERVISED_SAMPLERS,
