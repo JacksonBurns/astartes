@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "test pypi_name"
+version = "0.0.0"
+authors = [{name = "Jackson Burns"}]
+license = {text = "MIT"}
+description = "Train:Test Algorithmic Sampling for Molecules, Images, and Arbitrary Arrays"
+classifiers = ["Programming Language :: Python :: 3"]
+urls = {Homepage = "https://github.com/JacksonBurns/astartes"}
+dependencies = ["aimsim", "kennard_stone"]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages]
+find = {namespaces = false}
