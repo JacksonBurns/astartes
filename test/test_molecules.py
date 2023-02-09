@@ -20,8 +20,8 @@ class Test_molecules_interface(unittest.TestCase):
         with open(os.path.join("test", "data", "qm9_smiles.txt"), "r") as file:
             lines = file.readlines()
 
-        qm9_smiles_short = [i.replace('\n', '') for i in lines[:100]]
-        qm9_smiles_full = [i.replace('\n', '') for i in lines]
+        qm9_smiles_short = [i.replace("\n", "") for i in lines[:100]]
+        qm9_smiles_full = [i.replace("\n", "") for i in lines]
 
         self.X = qm9_smiles_short
         self.y = list(range(len(qm9_smiles_short)))
@@ -30,21 +30,20 @@ class Test_molecules_interface(unittest.TestCase):
         self.y_long = list(range(len(qm9_smiles_full)))
 
     def test_molecules_interface(self):
-        """
-        """
+        """ """
         for sampler in IMPLEMENTED_SAMPLERS:
             tts = train_test_split_molecules(
                 self.X,
                 self.y,
                 0.2,
                 splitter=sampler,
-                fprints_hopts={'n_bits': 100},
+                fprints_hopts={"n_bits": 100},
             )
 
     def test_fingerprints(self):
         for fprint in [
-            'morgan_fingerprint',
-            'topological_fingerprint',
+            "morgan_fingerprint",
+            "topological_fingerprint",
         ]:
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
@@ -52,7 +51,7 @@ class Test_molecules_interface(unittest.TestCase):
                     self.X,
                     self.y,
                     0.2,
-                    splitter='random',
+                    splitter="random",
                     fingerprint=fprint,
                 )
 
@@ -61,16 +60,16 @@ class Test_molecules_interface(unittest.TestCase):
             self.X,
             self.y,
             0.2,
-            splitter='random',
-            fingerprint='daylight_fingerprint',
+            splitter="random",
+            fingerprint="daylight_fingerprint",
             fprints_hopts={
-                'minPath': 2,
-                'maxPath': 5,
-                'fpSize': 200,
-                'bitsPerHash': 4,
-                'useHs': 1,
-                'tgtDensity': 0.4,
-                'minSize': 64,
+                "minPath": 2,
+                "maxPath": 5,
+                "fpSize": 200,
+                "bitsPerHash": 4,
+                "useHs": 1,
+                "tgtDensity": 0.4,
+                "minSize": 64,
             },
         )
 
@@ -79,10 +78,10 @@ class Test_molecules_interface(unittest.TestCase):
             self.X,
             self.y,
             0.2,
-            splitter='random',
+            splitter="random",
             hopts={
-                'random_state': 42,
-                'shuffle': True,
+                "random_state": 42,
+                "shuffle": True,
             },
         )
 
@@ -91,23 +90,23 @@ class Test_molecules_interface(unittest.TestCase):
             self.X,
             self.y,
             0.2,
-            fingerprint='daylight_fingerprint',
+            fingerprint="daylight_fingerprint",
             fprints_hopts={
-                'minPath': 2,
-                'maxPath': 5,
-                'fpSize': 200,
-                'bitsPerHash': 4,
-                'useHs': 1,
-                'tgtDensity': 0.4,
-                'minSize': 64,
+                "minPath": 2,
+                "maxPath": 5,
+                "fpSize": 200,
+                "bitsPerHash": 4,
+                "useHs": 1,
+                "tgtDensity": 0.4,
+                "minSize": 64,
             },
-            splitter='random',
+            splitter="random",
             hopts={
-                'random_state': 42,
-                'shuffle': True,
+                "random_state": 42,
+                "shuffle": True,
             },
         )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
