@@ -5,8 +5,11 @@ import warnings
 
 import numpy as np
 
-from astartes.interfaces import train_test_split_molecules
-from astartes import IMPLEMENTED_SAMPLERS
+from astartes import train_test_split_molecules
+from astartes.samplers import (
+    IMPLEMENTED_SUPERVISED_SAMPLERS,
+    IMPLEMENTED_UNSUPERVISED_SAMPLERS,
+)
 
 
 class Test_molecules_interface(unittest.TestCase):
@@ -31,7 +34,7 @@ class Test_molecules_interface(unittest.TestCase):
 
     def test_molecules_interface(self):
         """ """
-        for sampler in IMPLEMENTED_SAMPLERS:
+        for sampler in IMPLEMENTED_UNSUPERVISED_SAMPLERS:
             tts = train_test_split_molecules(
                 self.X,
                 self.y,
