@@ -11,6 +11,46 @@
   <img alt="PyPI - License" src="https://img.shields.io/github/license/JacksonBurns/astartes">
 </p>
 
+## Installing `astartes`
+We reccomend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management.
+
+`astartes` is availble on `PyPI` and can be installed using `pip`:
+
+ - To include the featurization options for chemical data, use `pip install astartes[molecules]`.
+ - To install only the sampling algorithms, use `pip install astartes` (this install will have fewer depdencies and may be more readily compatible in environments with existing workflows).
+
+## Using `astartes`
+`astartes` is designed as a drop-in replacement for `sklearn`'s `train_test_split` function. To switch to `astartes`, change `from sklearn.model_selection import train_test_split` to 'from astartes import train_test_split`.
+
+By default, `astartes` will use a random splitting approach identical to that which is implemented in `sklearn`, and a variety of deterministic sampling approaches can be used by specifying one additional argument ot the function:
+
+```python
+X_train, X_test, y_train, y_test = train_test_split(
+  X,
+  y,
+  sampler = 'kennard_stone',  # any of the supported samplers
+)
+```
+
+There are two broad categories of sampling algorithms implemented in `astartes`: supervised (requires labeled data) and unsupervised. All can be accessed via `train_test_split`, but supervised algorithms require an additional argument `labels` to be specified:
+
+```python
+X_train, X_test, y_train, y_test = train_test_split(
+  X,
+  y,
+  sampler = 'time_split',  # any of the supported samplers
+)
+```
+
+Here is a list of all implement sampling algorithms:
+
+| Sampler Name | Usage String | Type | Reference | Notes |
+|:---:|---|---|---|---|
+| Random | 'random' | Unsupervised | [sklearn `train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) | This sampler is a direct passthrough to sklearn's `train_test_split`. |
+| Scaffold | 'scaffold' | Supervised | [`chemprop`'s `scaffold_split`](https://github.com/chemprop/chemprop/blob/959176dd0c6475bdca259b4ce71bab9b0a71ba4e/chemprop/data/scaffold.py#L53) | This sampler is  |
+|  |  |  |  |  |
+
+
 ## Online Documentation
 [Click here to read the documentation](https://JacksonBurns.github.io/astartes/)
 
@@ -33,10 +73,17 @@ While much machine learning is done with a random choice between training/test/v
  - RBM
  - Time Split
 
-## Extending Functionality
+
+## Development
+To install the most updated release of `astartes` for development purposes, use `pip install -e --target=. asartes[molecules]` or clone this repository. Pull requests are welcome!
+
+### Adding New Samplers
 Adding a new sampler should extend the `sampler.py` abstract base class.
 
-It can be as simple as a passthrough to a another `train_test_split`, or it can be an original implementation that results in X and y being split into two lists.
+It can be as simple as a passthrough to a another `train_test_split`, or it can be an original implementation that results in X and y being split into two lists. Take a look at `astartes/samplers/random_split.py` for a basic example!
+
+### Adding New Featurization Schemes
+All of the sampling methods implemented in `astartes` accept arbitrary arrays of numbers and return the sampled groups -- if you have an existing featurization scheme (i.e. take an arbitrary input and turn it into an array of numbers), we would be thrilled to include it in `astartes`.
 
 Adding a new interface should take on this format:
 
@@ -69,6 +116,6 @@ def train_test_split_INTERFACE(
     )
 ```
 
-## JOSS Branch
-`paper.md` is stored in a separate branch aptly named `joss-paper`. To push changes from the `main` branch into the `joss-paper` branch, run the `Update JOSS Branch` workflow.
+## JORS Branch
+`paper.tex` is stored in a separate branch aptly named `jors-paper`. To push changes from the `main` branch into the `jors-paper` branch, run the `Update JORS Branch` workflow.
 
