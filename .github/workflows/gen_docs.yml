@@ -8,14 +8,20 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: '3.10'
       - name: Install Dependencies
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          conda install python=3.8
-          python -m pip install -e .
+          python -m pip install -e .[molecules]
           python -m pip install sphinx sphinx-rtd-theme m2r mistune==0.8.4
           
       - uses: actions/checkout@v3
