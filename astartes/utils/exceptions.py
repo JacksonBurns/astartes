@@ -17,7 +17,15 @@ class DatasetError(ValueError):
         super().__init__(message)
 
 
-class MoleculesNotInstalledError(ValueError):
+class InvalidAstartesConfigurationError(ValueError):
+    """Used when astartes train_test_split if called in an invalid manner."""
+
+    def __init__(self, message=None):
+        self.message = message
+        super().__init__(message)
+
+
+class MoleculesNotInstalledError(RuntimeError):
     """Used when attempting to featurize molecules without install."""
 
     def __init__(self, message=None):

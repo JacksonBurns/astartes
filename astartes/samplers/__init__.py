@@ -19,14 +19,14 @@ from .supervised import (
 
 
 IMPLEMENTED_UNSUPERVISED_SAMPLERS = (
-    "Random",
-    "DBSCAN",
-    "DOptimal",
-    "Duplex",
-    "KennardStone",
-    "MTSD",
-    "OptiSim",
-    "SphereExclusion",
+    "random",
+    "dbscan",
+    "doptimal",
+    "duplex",
+    "kennard_stone",
+    "mtsd",
+    "optisim",
+    "sphere_exclusion",
 )
 
-IMPLEMENTED_SUPERVISED_SAMPLERS = ("Scaffold",)
+IMPLEMENTED_SUPERVISED_SAMPLERS = ("scaffold",)
