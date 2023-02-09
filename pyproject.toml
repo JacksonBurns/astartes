@@ -3,7 +3,7 @@ requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "test pypi_name"
+name = "astartes"
 version = "0.0.0"
 authors = [{name = "Jackson Burns"}]
 license = {text = "MIT"}
