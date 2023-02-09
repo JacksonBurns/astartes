@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers import mtsd
+from astartes.samplers.unsupervised import mtsd
 
 
 class Test_mtsd(unittest.TestCase):
@@ -17,10 +17,9 @@ class Test_mtsd(unittest.TestCase):
         return
 
     def test_mtsd(self):
-        """
-        """
+        """ """
         return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

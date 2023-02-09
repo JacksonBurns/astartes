@@ -1,16 +1,17 @@
 """Abstract Sampling class"""
 from abc import ABC, abstractmethod
 
-from astartes.exceptions import (
+from astartes.utils.exceptions import (
     NotInitializedError,
     DatasetError,
 )
 
 
-class Sampler(ABC):
+class AbstractUnsupervisedSampler(ABC):
     """
-    Abstract Base Class for samplers.
+    Abstract Base Class for unsupervised samplers.
     """
+
     @abstractmethod
     def __init__(self, configs):
         pass
@@ -48,11 +49,11 @@ class Sampler(ABC):
     def _verify_call(self, n_samples):
         if not self.is_populated:
             raise NotInitializedError(
-                'Populate sampler instance with data to get samples'
+                "Populate sampler instance with data to get samples"
             )
-        if self.sample_count > len(self.X) or self.sample_count + n_samples > len(self.X):
-            raise DatasetError(
-                'Dataset exhausted.'
-            )
+        if self.sample_count > len(self.X) or self.sample_count + n_samples > len(
+            self.X
+        ):
+            raise DatasetError("Dataset exhausted.")
         self.sample_count += n_samples
         return

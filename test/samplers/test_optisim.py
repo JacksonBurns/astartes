@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers import optisim
+from astartes.samplers.unsupervised import optisim
 
 
 class Test_optisim(unittest.TestCase):
@@ -17,10 +17,9 @@ class Test_optisim(unittest.TestCase):
         return
 
     def test_optisim(self):
-        """
-        """
+        """ """
         return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

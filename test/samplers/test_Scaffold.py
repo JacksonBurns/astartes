@@ -4,19 +4,19 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers.unsupervised import sphere_exclusion
+from astartes.samplers.supervised import scaffold
 
 
-class Test_sphere_exclusion(unittest.TestCase):
+class Test_random(unittest.TestCase):
     """
-    Test the various functionalities of sphere_exclusion.
+    Test the various functionalities of random.
     """
 
     @classmethod
     def setUpClass(self):
         return
 
-    def test_sphere_exclusion(self):
+    def test_random(self):
         """ """
         return
 
