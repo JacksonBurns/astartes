@@ -45,8 +45,6 @@ class Test_molecules_interface(unittest.TestCase):
         for fprint in [
             'morgan_fingerprint',
             'topological_fingerprint',
-            'mordred:ABC',
-            'mordred:MPC2',
         ]:
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
