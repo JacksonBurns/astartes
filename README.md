@@ -107,7 +107,7 @@ While much machine learning is done with a random choice between training/test/v
 To install the most updated release of `astartes` for development purposes, use `pip install -e --target=. asartes[molecules]` or clone this repository. Pull requests are welcome!
 
 ### Adding New Samplers
-Adding a new sampler should extend the `sampler.py` abstract base class.
+Adding a new sampler should extend the `abstract_sampler.py` abstract base class.
 
 It can be as simple as a passthrough to a another `train_test_split`, or it can be an original implementation that results in X and y being split into two lists. Take a look at `astartes/samplers/random_split.py` for a basic example!
 
