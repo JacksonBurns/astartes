@@ -2,7 +2,7 @@
 from .abstract_sampler import AbstractSampler
 
 # implementations
-from .unsupervised import (
+from .interpolation import (
     Random,
     DBSCAN,
     DOptimal,
@@ -12,20 +12,26 @@ from .unsupervised import (
     OptiSim,
     SphereExclusion,
 )
-from .supervised import (
+from .extrapolation import (
     Scaffold,
+    KMeans,
 )
 
 
-IMPLEMENTED_UNSUPERVISED_SAMPLERS = (
+IMPLEMENTED_INTERPOLATION_SAMPLERS = (
     "random",
-    "dbscan",
-    "doptimal",
-    "duplex",
-    "kennard_stone",
-    "mtsd",
-    "optisim",
-    "sphere_exclusion",
+    # "dbscan",
+    # "doptimal",
+    # "duplex",
+    # "kennard_stone",
+    # "mtsd",
+    # "optisim",
+    # "sphere_exclusion",
 )
 
-IMPLEMENTED_SUPERVISED_SAMPLERS = ("scaffold",)
+IMPLEMENTED_EXTRAPOLATION_SAMPLERS = (
+    # "scaffold",
+    "kmeans",
+)
+
+ALL_SAMPLERS = IMPLEMENTED_EXTRAPOLATION_SAMPLERS + IMPLEMENTED_INTERPOLATION_SAMPLERS

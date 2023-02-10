@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers.unsupervised import duplex
+from astartes.samplers.interpolation import duplex
 
 
 class Test_duplex(unittest.TestCase):

@@ -7,8 +7,8 @@ import numpy as np
 
 from astartes.molecules import train_test_split_molecules
 from astartes.samplers import (
-    IMPLEMENTED_SUPERVISED_SAMPLERS,
-    IMPLEMENTED_UNSUPERVISED_SAMPLERS,
+    IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
+    IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
 
 
@@ -34,7 +34,7 @@ class Test_molecules(unittest.TestCase):
 
     def test_molecules(self):
         """ """
-        for sampler in IMPLEMENTED_UNSUPERVISED_SAMPLERS:
+        for sampler in IMPLEMENTED_INTERPOLATION_SAMPLERS:
             tts = train_test_split_molecules(
                 self.X,
                 self.y,

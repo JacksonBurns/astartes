@@ -7,8 +7,8 @@ import numpy as np
 from astartes import train_test_split
 
 from astartes.samplers import (
-    IMPLEMENTED_UNSUPERVISED_SAMPLERS,
-    IMPLEMENTED_SUPERVISED_SAMPLERS,
+    IMPLEMENTED_INTERPOLATION_SAMPLERS,
+    IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
 )
 
 
@@ -26,9 +26,10 @@ class Test_astartes(unittest.TestCase):
         X_train, X_test, y_train, y_test = train_test_split(
             np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
             np.array([10, 11, 12]),
+            labels=["apple", "banana", "apple"],
             test_size=0.2,
             train_size=0.8,
-            sampler="random",
+            sampler="kmeans",
             hopts={
                 "random_state": 42,
             },

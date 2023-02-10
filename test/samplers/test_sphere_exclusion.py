@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers.unsupervised import sphere_exclusion
+from astartes.samplers.interpolation import sphere_exclusion
 
 
 class Test_sphere_exclusion(unittest.TestCase):

@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers.unsupervised import doptimal
+from astartes.samplers.interpolation import doptimal
 
 
 class Test_doptimal(unittest.TestCase):

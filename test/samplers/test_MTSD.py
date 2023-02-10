@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers.unsupervised import mtsd
+from astartes.samplers.interpolation import mtsd
 
 
 class Test_mtsd(unittest.TestCase):

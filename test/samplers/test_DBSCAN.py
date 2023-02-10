@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers.unsupervised import dbscan
+from astartes.samplers.interpolation import dbscan
 
 
 class Test_dbscan(unittest.TestCase):

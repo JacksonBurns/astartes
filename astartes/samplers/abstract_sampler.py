@@ -1,5 +1,6 @@
 """Abstract Sampling class"""
 from abc import ABC, abstractmethod
+from collections import Counter
 
 from astartes.utils.exceptions import (
     DatasetError,
@@ -18,11 +19,12 @@ class AbstractSampler(ABC):
         self.labels = labels
         self._configs = configs
         self._samples_idxs = []
+        self._samples_clusters = []
         self._sample()
 
     @abstractmethod
     def _sample(self):
-        """This method should set self._samples_idxs"""
+        """This method should set self._samples_idxs (and self._samples_clusters if usng extrapolative method)"""
         pass
 
     def get_config(self, key, default=None):
@@ -33,3 +35,9 @@ class AbstractSampler(ABC):
         Get idxs of samples.
         """
         return [self._samples_idxs.pop(0) for _ in range(n_samples)]
+
+    def get_cluster_counter(self):
+        return Counter(self._samples_clusters)
+
+    def get_clusters(self):
+        return self._samples_clusters

@@ -9,5 +9,5 @@ class Random(AbstractSampler):
 
     def _sample(self):
         idx_list = list(range(len(self.X)))
-        random.Random(self._configs.get("random_state", None)).shuffle(idx_list)
+        random.Random(self.get_config("random_state", None)).shuffle(idx_list)
         self._samples_idxs = idx_list

@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers.unsupervised import KennardStone
+from astartes.samplers.interpolation import KennardStone
 
 
 class Test_kennard_stone(unittest.TestCase):
