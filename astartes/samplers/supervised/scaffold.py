@@ -1,5 +1,5 @@
-from astartes.samplers import AbstractSupervisedSampler
+from astartes.samplers import AbstractSampler
 
 
-class Scaffold(AbstractSupervisedSampler):
+class Scaffold(AbstractSampler):
     pass

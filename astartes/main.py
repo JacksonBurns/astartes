@@ -20,11 +20,12 @@ from astartes.samplers import (
 def train_test_split(
     X: np.array,
     y: np.array = None,
+    labels: np.array = None,
     test_size: float = None,
     train_size: float = 0.75,
     sampler: str = "random",
     hopts: dict = {},
-    labels: np.array = None,
+    return_indices: bool = False,
 ):
     """Deterministic train_test_splitting of arbitrary matrices.
 
@@ -44,6 +45,7 @@ def train_test_split(
     Returns:
         np.array: Training and test data split into arrays.
     """
+
     # validationm for supervised sampling
     if sampler in IMPLEMENTED_SUPERVISED_SAMPLERS:
         msg = None
@@ -61,9 +63,9 @@ def train_test_split(
         if msg:
             raise InvalidAstartesConfigurationError(msg)
     if sampler == "random":
-        sampler = Random(hopts)
+        sampler_class = Random
     elif sampler == "kennard_stone":
-        sampler = KennardStone(hopts)
+        sampler_class = KennardStone
     else:
         possiblity = get_close_matches(
             sampler,
@@ -79,19 +81,32 @@ def train_test_split(
             "Sampler {:s} has not been implemented.".format(sampler) + addendum
         )
 
-    sampler.populate(X, y)
+    sampler_instance = sampler_class(X, y, labels, hopts)
 
     if test_size is not None:
         train_size = 1.0 - test_size
 
     n_train_samples = floor(len(X) * train_size)
-    train_idxs = sampler.get_sample_idxs(n_train_samples)
-    test_idxs = sampler.get_sample_idxs(len(X) - n_train_samples)
-    X_train = np.array([X[i] for i in train_idxs], dtype=object)
-    X_test = np.array([X[i] for i in test_idxs], dtype=object)
-    if y is None:
-        return X_train, X_test
+    train_idxs = sampler_instance.get_sample_idxs(n_train_samples)
+    test_idxs = sampler_instance.get_sample_idxs(len(X) - n_train_samples)
+    if return_indices:
+        return train_idxs, test_idxs
     else:
-        y_train = np.array([y[i] for i in train_idxs], dtype=object)
-        y_test = np.array([y[i] for i in test_idxs], dtype=object)
-        return X_train, X_test, y_train, y_test
+        out = []
+        X_train = np.array([X[i] for i in train_idxs], dtype=object)
+        out.append(X_train)
+        X_test = np.array([X[i] for i in test_idxs], dtype=object)
+        out.append(X_test)
+
+        if y is not None:
+            y_train = np.array([y[i] for i in train_idxs], dtype=object)
+            out.append(y_train)
+            y_test = np.array([y[i] for i in test_idxs], dtype=object)
+            out.append(y_test)
+        if labels is not None:
+            labels_train = np.array([labels[i] for i in train_idxs], dtype=object)
+            out.append(labels_train)
+            labels_test = np.array([labels[i] for i in test_idxs], dtype=object)
+            out.append(labels_test)
+
+        return (*out,)

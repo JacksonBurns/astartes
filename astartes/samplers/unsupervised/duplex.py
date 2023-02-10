@@ -1,5 +1,5 @@
-from astartes.samplers import AbstractUnsupervisedSampler
+from astartes.samplers import AbstractSampler
 
 
-class Duplex(AbstractUnsupervisedSampler):
+class Duplex(AbstractSampler):
     pass

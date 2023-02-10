@@ -12,9 +12,9 @@ from astartes.samplers import (
 )
 
 
-class Test_molecules_interface(unittest.TestCase):
+class Test_molecules(unittest.TestCase):
     """
-    Test the various functionalities of molecules_interface.
+    Test the various functionalities of molecules.
     """
 
     @classmethod
@@ -32,14 +32,14 @@ class Test_molecules_interface(unittest.TestCase):
         self.X_long = qm9_smiles_full
         self.y_long = list(range(len(qm9_smiles_full)))
 
-    def test_molecules_interface(self):
+    def test_molecules(self):
         """ """
         for sampler in IMPLEMENTED_UNSUPERVISED_SAMPLERS:
             tts = train_test_split_molecules(
                 self.X,
                 self.y,
                 0.2,
-                splitter=sampler,
+                sampler=sampler,
                 fprints_hopts={"n_bits": 100},
             )
 
@@ -54,7 +54,7 @@ class Test_molecules_interface(unittest.TestCase):
                     self.X,
                     self.y,
                     0.2,
-                    splitter="random",
+                    sampler="random",
                     fingerprint=fprint,
                 )
 
@@ -63,7 +63,7 @@ class Test_molecules_interface(unittest.TestCase):
             self.X,
             self.y,
             0.2,
-            splitter="random",
+            sampler="random",
             fingerprint="daylight_fingerprint",
             fprints_hopts={
                 "minPath": 2,
@@ -81,7 +81,7 @@ class Test_molecules_interface(unittest.TestCase):
             self.X,
             self.y,
             0.2,
-            splitter="random",
+            sampler="random",
             hopts={
                 "random_state": 42,
                 "shuffle": True,
@@ -103,7 +103,7 @@ class Test_molecules_interface(unittest.TestCase):
                 "tgtDensity": 0.4,
                 "minSize": 64,
             },
-            splitter="random",
+            sampler="random",
             hopts={
                 "random_state": 42,
                 "shuffle": True,

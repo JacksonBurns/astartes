@@ -1,6 +1,5 @@
 # abstract base classes
-from .abstract_unsupervised_sampler import AbstractUnsupervisedSampler
-from .abstract_supervised_sampler import AbstractSupervisedSampler
+from .abstract_sampler import AbstractSampler
 
 # implementations
 from .unsupervised import (

@@ -1,10 +1,10 @@
-from astartes.samplers import AbstractUnsupervisedSampler
+from astartes.samplers import AbstractSampler
 
 # https://github.com/yu9824/kennard_stone
 from kennard_stone import train_test_split
 
 
-class KennardStone(AbstractUnsupervisedSampler):
+class KennardStone(AbstractSampler):
     def __init__(self, configs):
         self._split = False
         self._samples_idxs = []

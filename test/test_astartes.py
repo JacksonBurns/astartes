@@ -30,11 +30,10 @@ class Test_astartes(unittest.TestCase):
             train_size=0.8,
             sampler="random",
             hopts={
-                "shuffle": True,
                 "random_state": 42,
             },
         )
-        for elt, ans in zip(X_train.flatten(), [4, 5, 6, 7, 8, 9]):
+        for elt, ans in zip(X_train.flatten(), [4, 5, 6, 1, 2, 3]):
             self.assertEqual(elt, ans)
 
 
