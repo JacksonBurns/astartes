@@ -20,6 +20,7 @@ class AbstractSampler(ABC):
         self._configs = configs
         self._samples_idxs = []
         self._samples_clusters = []
+        self._current_sample_idx = 0
         self._sample()
 
     @abstractmethod
@@ -34,7 +35,11 @@ class AbstractSampler(ABC):
         """
         Get idxs of samples.
         """
-        return [self._samples_idxs.pop(0) for _ in range(n_samples)]
+        out = self._samples_idxs[
+            self._current_sample_idx : self._current_sample_idx + n_samples
+        ]
+        self._current_sample_idx += n_samples
+        return out
 
     def get_cluster_counter(self):
         return Counter(self._samples_clusters)
