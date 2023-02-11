@@ -1,6 +1,7 @@
 """Abstract Sampling class"""
 from abc import ABC, abstractmethod
-from collections import Counter
+
+import numpy as np
 
 from astartes.utils.exceptions import (
     DatasetError,
@@ -14,18 +15,34 @@ class AbstractSampler(ABC):
 
     def __init__(self, X, y, labels, configs):
         """Copies X, y, labels, and configs into class attributes and then calls sampler."""
+        # required in all splitting methods
         self.X = X
+
+        # optional in all splitting methods
         self.y = y
         self.labels = labels
         self._configs = configs
-        self._samples_idxs = []
-        self._samples_clusters = []
+
+        # this must be set by _sample
+        self._samples_idxs = np.ndarray([], dtype=int)
+
+        # these must also be set if using a clustering algorithm
+        self._samples_clusters = np.ndarray([], dtype=int)
+        self._sorted_cluster_counter = {}
+
+        # internal machinery
         self._current_sample_idx = 0
         self._sample()
 
     @abstractmethod
     def _sample(self):
-        """This method should set self._samples_idxs (and self._samples_clusters if usng extrapolative method)"""
+        """
+        This method should:
+         - set self._samples_idxs with the order in which the algorithm dictates drawing samples
+        and if using clustering:
+         - set self._samples_clusters with the labels produced by clustering
+         - set self._sorted_cluster_counter with a dict containing cluter_id: #_elts sorted by #_elts, ascending
+        """
         pass
 
     def get_config(self, key, default=None):
@@ -41,8 +58,8 @@ class AbstractSampler(ABC):
         self._current_sample_idx += n_samples
         return out
 
-    def get_cluster_counter(self):
-        return Counter(self._samples_clusters)
+    def get_sorted_cluster_counter(self):
+        return self._sorted_cluster_counter
 
     def get_clusters(self):
         return self._samples_clusters
