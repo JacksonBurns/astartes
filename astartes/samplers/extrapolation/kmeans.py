@@ -16,7 +16,7 @@ class KMeans(AbstractSampler):
         # use the sklearn kmeans model
         kmeanModel = sk_KMeans(
             n_clusters=self.get_config("n_clusters", floor(len(self.X) * 0.1) + 1),
-            n_init=self.get_config("n_init", "auto"),
+            n_init=self.get_config("n_init", 1),
             random_state=self.get_config("random_state", None),
         ).fit(self.X)
         self._samples_clusters = kmeanModel.labels_
