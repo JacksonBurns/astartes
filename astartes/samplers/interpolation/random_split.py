@@ -1,5 +1,5 @@
 from astartes.samplers import AbstractSampler
-
+import numpy as np
 import random
 
 
@@ -10,4 +10,4 @@ class Random(AbstractSampler):
     def _sample(self):
         idx_list = list(range(len(self.X)))
         random.Random(self.get_config("random_state", None)).shuffle(idx_list)
-        self._samples_idxs = idx_list
+        self._samples_idxs = np.array(idx_list, dtype=int)

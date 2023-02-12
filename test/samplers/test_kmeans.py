@@ -3,6 +3,9 @@ import unittest
 import numpy as np
 
 from astartes.samplers import KMeans
+from astartes.utils.warnings import (
+    ImperfectSplittingWarning,
+)
 from astartes import train_test_split
 
 
@@ -35,7 +38,7 @@ class Test_kmeans(unittest.TestCase):
 
     def test_kmeans_sampling(self):
         """Use kmeans in the train_test_split and verify results."""
-        with self.assertWarns(RuntimeWarning):
+        with self.assertWarns(ImperfectSplittingWarning):
             (
                 X_train,
                 X_test,

@@ -42,7 +42,6 @@ class KMeans(AbstractSampler):
                 pair[0]
             ],  # use the number of elements in the cluster for sorting
         ):
-            print(label, sample_idx)
             sorted_idxs.append(sample_idx)
             if label not in sorted_cluster_counter:
                 sorted_cluster_counter[label] = 1
@@ -51,8 +50,5 @@ class KMeans(AbstractSampler):
 
         # can't use np.argsort because it does not allow for a custom comparison key
         # and will instead sort by the value of the cluster labels (wrong!)
-
-        print(self.X)
-        print(sorted_idxs, kmeanModel.labels_[sorted_idxs], kmeanModel.labels_)
-        self._samples_idxs = sorted_idxs
+        self._samples_idxs = np.array(sorted_idxs, dtype=int)
         self._sorted_cluster_counter = sorted_cluster_counter

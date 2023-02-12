@@ -15,6 +15,9 @@ from astartes.samplers import (
 class Test_molecules(unittest.TestCase):
     """
     Test the various functionalities of molecules.
+
+    Note: daylight_fingerprint is not compatible -- inhomogenous arrays
+    (variable length descriptor)
     """
 
     @classmethod
@@ -26,11 +29,11 @@ class Test_molecules(unittest.TestCase):
         qm9_smiles_short = [i.replace("\n", "") for i in lines[:100]]
         qm9_smiles_full = [i.replace("\n", "") for i in lines]
 
-        self.X = qm9_smiles_short
-        self.y = list(range(len(qm9_smiles_short)))
+        self.X = np.array(qm9_smiles_short)
+        self.y = np.array(list(range(len(qm9_smiles_short))))
 
-        self.X_long = qm9_smiles_full
-        self.y_long = list(range(len(qm9_smiles_full)))
+        self.X_long = np.array(qm9_smiles_full)
+        self.y_long = np.array(list(range(len(qm9_smiles_full))))
 
     def test_molecules(self):
         """ """
@@ -64,7 +67,7 @@ class Test_molecules(unittest.TestCase):
             self.y,
             0.2,
             sampler="random",
-            fingerprint="daylight_fingerprint",
+            fingerprint="topological_fingerprint",
             fprints_hopts={
                 "minPath": 2,
                 "maxPath": 5,
@@ -84,7 +87,6 @@ class Test_molecules(unittest.TestCase):
             sampler="random",
             hopts={
                 "random_state": 42,
-                "shuffle": True,
             },
         )
 
@@ -93,7 +95,7 @@ class Test_molecules(unittest.TestCase):
             self.X,
             self.y,
             0.2,
-            fingerprint="daylight_fingerprint",
+            fingerprint="topological_fingerprint",
             fprints_hopts={
                 "minPath": 2,
                 "maxPath": 5,
@@ -106,7 +108,6 @@ class Test_molecules(unittest.TestCase):
             sampler="random",
             hopts={
                 "random_state": 42,
-                "shuffle": True,
             },
         )
 

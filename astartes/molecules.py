@@ -36,6 +36,7 @@ def train_test_split_molecules(
             fingerprint_params=fprints_hopts,
         )
         X.append(mol.descriptor.to_numpy())
+    X = np.array(X)
     # call train test split with this input
     return train_test_split(
         X,

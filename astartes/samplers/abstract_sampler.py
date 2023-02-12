@@ -24,10 +24,10 @@ class AbstractSampler(ABC):
         self._configs = configs
 
         # this must be set by _sample
-        self._samples_idxs = np.ndarray([], dtype=int)
+        self._samples_idxs = np.array([], dtype=int)
 
         # these must also be set if using a clustering algorithm
-        self._samples_clusters = np.ndarray([], dtype=int)
+        self._samples_clusters = np.array([], dtype=int)
         self._sorted_cluster_counter = {}
 
         # internal machinery
@@ -37,7 +37,7 @@ class AbstractSampler(ABC):
     @abstractmethod
     def _sample(self):
         """
-        This method should:
+        This method should: (arrays should be np.ndarray)
          - set self._samples_idxs with the order in which the algorithm dictates drawing samples
         and if using clustering:
          - set self._samples_clusters with the labels produced by clustering

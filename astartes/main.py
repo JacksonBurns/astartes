@@ -9,8 +9,8 @@ from astartes.samplers import (
     KennardStone,
     KMeans,
 )
-from astartes.utils.exceptions import (
-    InvalidAstartesConfigurationError,
+from astartes.utils.warnings import (
+    ImperfectSplittingWarning,
 )
 
 from astartes.samplers import (
@@ -105,7 +105,6 @@ def _extrapolative_sampling(
     test_idxs, train_idxs = np.array([], dtype=int), np.array([], dtype=int)
     for cluster_idx, cluster_length in cluster_counter.items():
         # assemble test first
-        print(cluster_idx, len(test_idxs), cluster_length, n_test_samples)
         if (len(test_idxs) + cluster_length) <= n_test_samples:  # will not overfill
             test_idxs = np.append(
                 test_idxs, sampler_instance.get_sample_idxs(cluster_length)
@@ -114,7 +113,6 @@ def _extrapolative_sampling(
             train_idxs = np.append(
                 train_idxs, sampler_instance.get_sample_idxs(cluster_length)
             )
-        print(test_idxs, train_idxs)
     _check_actual_split(train_idxs, test_idxs, train_size, test_size)
     return _return_helper(sampler_instance, train_idxs, test_idxs, return_indices)
 
@@ -127,11 +125,11 @@ def _interpolative_sampling(
 ):
 
     n_train_samples = floor(len(sampler_instance.X) * train_size)
+    n_test_samples = len(sampler_instance.X) - n_train_samples
 
     train_idxs = sampler_instance.get_sample_idxs(n_train_samples)
-    test_idxs = sampler_instance.get_sample_idxs(
-        len(sampler_instance.X) - n_train_samples
-    )
+    test_idxs = sampler_instance.get_sample_idxs(n_test_samples)
+
     _check_actual_split(train_idxs, test_idxs, train_size, test_size)
     return _return_helper(sampler_instance, train_idxs, test_idxs, return_indices)
 
@@ -151,38 +149,29 @@ def _return_helper(
     out.append(X_test)
 
     if sampler_instance.y is not None:
-        y_train = np.array([sampler_instance.y[i] for i in train_idxs], dtype=object)
+        y_train = sampler_instance.y[train_idxs]
         out.append(y_train)
-        y_test = np.array([sampler_instance.y[i] for i in test_idxs], dtype=object)
+        y_test = sampler_instance.y[test_idxs]
         out.append(y_test)
     if sampler_instance.labels is not None:
-        labels_train = np.array(
-            [sampler_instance.labels[i] for i in train_idxs], dtype=object
-        )
+        labels_train = sampler_instance.labels[train_idxs]
         out.append(labels_train)
-        labels_test = np.array(
-            [sampler_instance.labels[i] for i in test_idxs], dtype=object
-        )
+        labels_test = sampler_instance.labels[test_idxs]
         out.append(labels_test)
     if len(sampler_instance.get_clusters()):  # true when the list has been filled
-        clusters_train = np.array(
-            [sampler_instance.get_clusters()[i] for i in train_idxs], dtype=object
-        )
+        clusters_train = sampler_instance.get_clusters()[train_idxs]
         out.append(clusters_train)
-        clusters_test = np.array(
-            [sampler_instance.get_clusters()[i] for i in test_idxs], dtype=object
-        )
+        clusters_test = sampler_instance.get_clusters()[test_idxs]
         out.append(clusters_test)
 
     return (*out,)
 
 
 def _check_actual_split(train_idxs, test_idxs, train_size, test_size):
-    # print(train_idxs, test_idxs, train_size, test_size)
-    actual_train_size = round(len(train_idxs) / (len(test_idxs) + len(train_idxs)), 3)
-    requested_train_size = round(train_size, 3)
-    actual_test_size = round(1.0 - actual_train_size, 3)
-    requested_test_size = round(test_size, 3)
+    actual_train_size = round(len(train_idxs) / (len(test_idxs) + len(train_idxs)), 2)
+    requested_train_size = round(train_size, 2)
+    actual_test_size = round(1.0 - actual_train_size, 2)
+    requested_test_size = round(test_size, 2)
     msg = ""
     if actual_train_size != requested_train_size:
         msg += "Requested train size of {:.2f}, got {:.2f}. ".format(
@@ -197,5 +186,5 @@ def _check_actual_split(train_idxs, test_idxs, train_size, test_size):
     if msg:
         warn(
             "Actual train/test split differs from requested size. " + msg,
-            RuntimeWarning,
+            ImperfectSplittingWarning,
         )
