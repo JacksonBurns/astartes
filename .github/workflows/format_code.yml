@@ -24,4 +24,4 @@ jobs:
       
       - name: Check Errors
         run: |
-          pycodestyle --statistics --count --max-line-length=150 --show-source .
+          pycodestyle --statistics --count --max-line-length=150 --show-source --ignore=E203 .
