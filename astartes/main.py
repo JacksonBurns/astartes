@@ -12,6 +12,9 @@ from astartes.samplers import (
 from astartes.utils.warnings import (
     ImperfectSplittingWarning,
 )
+from astartes.utils.exceptions import (
+    NotImplementedError,
+)
 
 from astartes.samplers import (
     IMPLEMENTED_INTERPOLATION_SAMPLERS,

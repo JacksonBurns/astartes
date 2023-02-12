@@ -39,7 +39,6 @@ class AbstractSampler(ABC):
          - set self._samples_clusters with the labels produced by clustering
          - set self._sorted_cluster_counter with a dict containing cluter_id: #_elts sorted by #_elts, ascending
         """
-        pass
 
     def get_config(self, key, default=None):
         return self._configs.get(key, default)
