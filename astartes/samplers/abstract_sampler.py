@@ -3,10 +3,6 @@ from abc import ABC, abstractmethod
 
 import numpy as np
 
-from astartes.utils.exceptions import (
-    DatasetError,
-)
-
 
 class AbstractSampler(ABC):
     """

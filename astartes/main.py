@@ -42,7 +42,6 @@ def train_test_split(
         labels (np.array, optional): Labels for supervised sampling. Defaults to None.
 
     Raises:
-        InvalidAstartesConfigurationError: Raised when sampler is configured incorrectly.
         NotImplementedError: Raised when an invalid sampler name is used.
 
     Returns:
