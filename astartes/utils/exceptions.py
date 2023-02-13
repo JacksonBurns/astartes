@@ -1,16 +1,16 @@
 """Exceptions used by astartes"""
 
 
-class NotInitializedError(AttributeError):
-    """Used when a class is called without proper initialization."""
+class MoleculesNotInstalledError(RuntimeError):
+    """Used when attempting to featurize molecules without install."""
 
     def __init__(self, message=None):
         self.message = message
         super().__init__(message)
 
 
-class DatasetError(ValueError):
-    """Used when a sampler runs out of data."""
+class NotImplementedError(RuntimeError):
+    """Used when attempting to call a non-existent sampler."""
 
     def __init__(self, message=None):
         self.message = message

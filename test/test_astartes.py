@@ -5,6 +5,16 @@ import unittest
 import numpy as np
 
 from astartes import train_test_split
+from astartes.utils.warnings import (
+    ImperfectSplittingWarning,
+)
+from astartes.utils.exceptions import (
+    NotImplementedError,
+)
+from astartes.samplers import (
+    IMPLEMENTED_INTERPOLATION_SAMPLERS,
+    IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
+)
 
 
 class Test_astartes(unittest.TestCase):
@@ -16,23 +26,66 @@ class Test_astartes(unittest.TestCase):
     def setUpClass(self):
         return
 
+    def test_close_mispelling_sampler(self):
+        """Astartes should be helpful in the event of a typo."""
+        with self.assertRaises(NotImplementedError) as e:
+            train_test_split([], sampler="radnom")
+            self.assertEqual(
+                e.exception,
+                "Sampler radnom has not been implemented. Did you mean 'random'?",
+            )
+
+    def test_not_implemented_sampler(self):
+        """Astartes should suggest checking the docstring."""
+        with self.assertRaises(NotImplementedError) as e:
+            train_test_split([], sampler="MIT is overrated")
+            self.assertEqual(
+                e.exception,
+                "Sampler radnom has not been implemented. Try help(train_test_split).",
+            )
+
     def test_train_test_split(self):
-        """
-        """
-        X_train, X_test, y_train, y_test = train_test_split(
-            np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
-            np.array([10, 11, 12]),
-            test_size=0.2,
-            train_size=0.8,
-            splitter='random',
-            hopts={
-                'shuffle': True,
-                'random_state': 42,
-            }
-        )
-        for elt, ans in zip(X_train.flatten(), [4, 5, 6, 7, 8, 9]):
-            self.assertEqual(elt, ans)
+        """ """
+        with self.assertWarns(ImperfectSplittingWarning):
+            (
+                X_train,
+                X_test,
+                y_train,
+                y_test,
+                labels_train,
+                labels_test,
+            ) = train_test_split(
+                np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
+                np.array([10, 11, 12]),
+                labels=np.array(["apple", "banana", "apple"]),
+                test_size=0.3,
+                train_size=0.7,
+                sampler="random",
+                hopts={
+                    "random_state": 42,
+                },
+            )
+            for elt, ans in zip(X_train.flatten(), [4, 5, 6, 1, 2, 3]):
+                self.assertEqual(elt, ans)
+
+    def test_return_indices(self):
+        """ """
+        with self.assertWarns(ImperfectSplittingWarning):
+            (indices_train, indices_test,) = train_test_split(
+                np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
+                np.array([10, 11, 12]),
+                labels=np.array(["apple", "banana", "apple"]),
+                test_size=0.3,
+                train_size=0.7,
+                sampler="random",
+                hopts={
+                    "random_state": 42,
+                },
+                return_indices=True,
+            )
+            for elt, ans in zip(indices_train.flatten(), [1, 0]):
+                self.assertEqual(elt, ans)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

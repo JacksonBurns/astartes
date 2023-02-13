@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers import doptimal
+from astartes.samplers.interpolation import doptimal
 
 
 class Test_doptimal(unittest.TestCase):
@@ -17,10 +17,9 @@ class Test_doptimal(unittest.TestCase):
         return
 
     def test_doptimal(self):
-        """
-        """
+        """ """
         return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -50,6 +50,35 @@ Here is a list of all implement sampling algorithms:
 | Scaffold | 'scaffold' | Supervised | [`chemprop`'s `scaffold_split`](https://github.com/chemprop/chemprop/blob/959176dd0c6475bdca259b4ce71bab9b0a71ba4e/chemprop/data/scaffold.py#L53) | This sampler is  |
 |  |  |  |  |  |
 
+### Using the `astartes.molecules` Subpackage
+After installing with `pip install astartes[molecules]` one can import the new train/test splitting function like this: `from astartes.molecules import train_test_split_molecules`
+
+The usage of this function is identical to `train_test_split` but with the addition of new arguments to control how the molecules are featurized:
+
+```python
+train_test_split_molecules(
+    self.X,
+    self.y,
+    0.2,
+    fingerprint="daylight_fingerprint",
+    fprints_hopts={
+        "minPath": 2,
+        "maxPath": 5,
+        "fpSize": 200,
+        "bitsPerHash": 4,
+        "useHs": 1,
+        "tgtDensity": 0.4,
+        "minSize": 64,
+    },
+    splitter="random",
+    hopts={
+        "random_state": 42,
+        "shuffle": True,
+    },
+)
+```
+
+Configuraiton options for the featurization scheme can be found in the documentation for AIMSim.
 
 ## Online Documentation
 [Click here to read the documentation](https://JacksonBurns.github.io/astartes/)
@@ -78,7 +107,7 @@ While much machine learning is done with a random choice between training/test/v
 To install the most updated release of `astartes` for development purposes, use `pip install -e --target=. asartes[molecules]` or clone this repository. Pull requests are welcome!
 
 ### Adding New Samplers
-Adding a new sampler should extend the `sampler.py` abstract base class.
+Adding a new sampler should extend the `abstract_sampler.py` abstract base class.
 
 It can be as simple as a passthrough to a another `train_test_split`, or it can be an original implementation that results in X and y being split into two lists. Take a look at `astartes/samplers/random_split.py` for a basic example!
 

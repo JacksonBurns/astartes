@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers import sphere_exclusion
+from astartes.samplers.interpolation import sphere_exclusion
 
 
 class Test_sphere_exclusion(unittest.TestCase):
@@ -17,10 +17,9 @@ class Test_sphere_exclusion(unittest.TestCase):
         return
 
     def test_sphere_exclusion(self):
-        """
-        """
+        """ """
         return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

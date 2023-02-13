@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers import dbscan
+from astartes.samplers.interpolation import dbscan
 
 
 class Test_dbscan(unittest.TestCase):
@@ -17,10 +17,9 @@ class Test_dbscan(unittest.TestCase):
         return
 
     def test_dbscan(self):
-        """
-        """
+        """ """
         return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

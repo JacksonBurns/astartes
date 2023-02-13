@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers.interpolation import Random
+from astartes.samplers.extrapolation import scaffold
 
 
 class Test_random(unittest.TestCase):

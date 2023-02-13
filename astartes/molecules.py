@@ -1,6 +1,16 @@
 from typing import List
+
 import numpy as np
-from aimsim.chemical_datastructures import Molecule
+
+from astartes.utils.exceptions import MoleculesNotInstalledError
+
+try:
+    from aimsim.chemical_datastructures import Molecule
+except ImportError:
+    raise MoleculesNotInstalledError(
+        """To use molecule featurizer, install astartes with pip install astartes[molecules]."""
+    )
+
 
 from astartes import train_test_split
 
@@ -10,9 +20,9 @@ def train_test_split_molecules(
     y: np.array = None,
     test_size: float = 0.25,
     train_size: float = 0.75,
-    splitter: str = 'random',
-    fingerprint: str = 'morgan_fingerprint',
-    return_as: str = 'fprint',
+    sampler: str = "random",
+    fingerprint: str = "morgan_fingerprint",
+    return_as: str = "fprint",
     hopts: dict = {},
     fprints_hopts: dict = {},
 ):
@@ -26,12 +36,13 @@ def train_test_split_molecules(
             fingerprint_params=fprints_hopts,
         )
         X.append(mol.descriptor.to_numpy())
+    X = np.array(X)
     # call train test split with this input
     return train_test_split(
         X,
         y=y,
         test_size=test_size,
         train_size=train_size,
-        splitter=splitter,
+        sampler=sampler,
         hopts=hopts,
     )

@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers import KennardStone
+from astartes.samplers.interpolation import KennardStone
 
 
 class Test_kennard_stone(unittest.TestCase):
@@ -17,10 +17,9 @@ class Test_kennard_stone(unittest.TestCase):
         return
 
     def test_kennard_stone(self):
-        """
-        """
+        """ """
         return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

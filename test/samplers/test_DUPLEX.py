@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers import duplex
+from astartes.samplers.interpolation import duplex
 
 
 class Test_duplex(unittest.TestCase):
@@ -17,10 +17,9 @@ class Test_duplex(unittest.TestCase):
         return
 
     def test_duplex(self):
-        """
-        """
+        """ """
         return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
