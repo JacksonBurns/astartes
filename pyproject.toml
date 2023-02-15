@@ -25,6 +25,9 @@ dev = ["black", "isort"]
 file = "README.md"
 content-type = "text/markdown"
 
+[tool.isort]
+profile = "black"
+
 [tool.setuptools]
 include-package-data = true
 

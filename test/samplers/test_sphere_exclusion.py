@@ -130,7 +130,7 @@ class Test_sphere_exclusion(unittest.TestCase):
             },
         )
         self.assertIsInstance(
-            kmeans_sphere_exclusion_instanceinstance,
+            sphere_exclusion_instance,
             SphereExclusion,
             "Failed instantiation.",
         )

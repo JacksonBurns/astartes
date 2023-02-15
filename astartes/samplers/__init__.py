@@ -1,9 +1,9 @@
 # abstract base classes
 from .abstract_sampler import AbstractSampler
+
 # implementations
 from .extrapolation import KMeans, Scaffold, SphereExclusion
-from .interpolation import (DBSCAN, MTSD, DOptimal, Duplex, KennardStone,
-                            OptiSim, Random)
+from .interpolation import DBSCAN, MTSD, DOptimal, Duplex, KennardStone, OptiSim, Random
 
 IMPLEMENTED_INTERPOLATION_SAMPLERS = (
     "random",

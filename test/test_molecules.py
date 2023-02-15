@@ -6,8 +6,10 @@ import warnings
 import numpy as np
 
 from astartes.molecules import train_test_split_molecules
-from astartes.samplers import (IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
-                               IMPLEMENTED_INTERPOLATION_SAMPLERS)
+from astartes.samplers import (
+    IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
+    IMPLEMENTED_INTERPOLATION_SAMPLERS,
+)
 
 
 class Test_molecules(unittest.TestCase):
