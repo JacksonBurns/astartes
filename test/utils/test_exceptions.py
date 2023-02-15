@@ -5,11 +5,8 @@ import unittest
 import numpy as np
 
 from astartes import train_test_split
-
-from astartes.samplers import (
-    IMPLEMENTED_UNSUPERVISED_SAMPLERS,
-    IMPLEMENTED_SUPERVISED_SAMPLERS,
-)
+from astartes.samplers import (IMPLEMENTED_SUPERVISED_SAMPLERS,
+                               IMPLEMENTED_UNSUPERVISED_SAMPLERS)
 
 
 class Test_exceptions(unittest.TestCase):

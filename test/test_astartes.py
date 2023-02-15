@@ -5,16 +5,10 @@ import unittest
 import numpy as np
 
 from astartes import train_test_split
-from astartes.utils.warnings import (
-    ImperfectSplittingWarning,
-)
-from astartes.utils.exceptions import (
-    NotImplementedError,
-)
-from astartes.samplers import (
-    IMPLEMENTED_INTERPOLATION_SAMPLERS,
-    IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
-)
+from astartes.samplers import (IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
+                               IMPLEMENTED_INTERPOLATION_SAMPLERS)
+from astartes.utils.exceptions import NotImplementedError
+from astartes.utils.warnings import ImperfectSplittingWarning
 
 
 class Test_astartes(unittest.TestCase):
