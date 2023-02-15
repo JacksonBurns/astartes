@@ -16,6 +16,7 @@ class Test_kennard_stone(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
+        """ Save re-used arrays as class attributes."""
         self.X = np.array(
             [
                 [0, 0, 0],
