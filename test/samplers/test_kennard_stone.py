@@ -2,12 +2,9 @@ import unittest
 import warnings
 
 import numpy as np
-
-from astartes.samplers.interpolation import KennardStone
-from astartes.utils.warnings import (
-    ImperfectSplittingWarning,
-)
 from astartes import train_test_split
+from astartes.samplers.interpolation import KennardStone
+from astartes.utils.warnings import ImperfectSplittingWarning
 
 
 class Test_kennard_stone(unittest.TestCase):
