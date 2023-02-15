@@ -58,9 +58,10 @@ The usage of this function is identical to `train_test_split` but with the addit
 
 ```python
 train_test_split_molecules(
-    self.X,
-    self.y,
-    0.2,
+    smiles=smiles,
+    y=y,
+    test_size=0.2,
+    train_size=0.8,
     fingerprint="daylight_fingerprint",
     fprints_hopts={
         "minPath": 2,
