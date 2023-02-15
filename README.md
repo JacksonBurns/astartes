@@ -9,6 +9,7 @@
   <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/astartes">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/astartes">
   <img alt="PyPI - License" src="https://img.shields.io/github/license/JacksonBurns/astartes">
+  <img alt="Test Status" src="https://github.com/JacksonBurns/astartes/actions/workflows/run_tests.yml/badge.svg?branch=main&event=schedule">
 </p>
 
 ## Installing `astartes`
