@@ -16,7 +16,7 @@ class Test_kennard_stone(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        """ Save re-used arrays as class attributes."""
+        """Save re-used arrays as class attributes."""
         self.X = np.array(
             [
                 [0, 0, 0],
@@ -33,8 +33,34 @@ class Test_kennard_stone(unittest.TestCase):
             ]
         )
 
+    def test_kennard_stone(self):
+        """Directly instantiate and test KennardStone."""
+        ks_instance = KennardStone(
+            self.X,
+            self.y,
+            self.labels,
+            {},  # KS does not have hyperparameters
+        )
+        self.assertIsInstance(
+            ks_instance,
+            KennardStone,
+            "Failed instantiation.",
+        )
+        self.assertFalse(
+            len(ks_instance.get_clusters()),
+            "Clusters was set when it should not have been.",
+        )
+        self.assertFalse(
+            len(ks_instance.get_sorted_cluster_counter()),
+            "Sorted cluster Counter found when it should not be.",
+        )
+        self.assertTrue(
+            len(ks_instance._samples_idxs),
+            "Sample indices not set.",
+        )
+
     def test_kennard_stone_sample(self):
-        """Use kennard stone in tts and verify results """
+        """Use kennard stone in tts and verify results"""
         with self.assertWarns(ImperfectSplittingWarning):
             (
                 X_train,
@@ -93,32 +119,6 @@ class Test_kennard_stone(unittest.TestCase):
                 np.array(["two"]),
             ),
             "Test labels incorrect.",
-        )
-
-    def test_kennard_stone(self):
-        """Directly instantiate and test KennardStone."""
-        ks_instance = KennardStone(
-            self.X,
-            self.y,
-            self.labels,
-            {},  # KS does not have hyperparameters
-        )
-        self.assertIsInstance(
-            ks_instance,
-            KennardStone,
-            "Failed instantiation.",
-        )
-        self.assertFalse(
-            len(ks_instance.get_clusters()),
-            "Clusters was set when it should not have been.",
-        )
-        self.assertFalse(
-            len(ks_instance.get_sorted_cluster_counter()),
-            "Sorted cluster Counter found when it should not be.",
-        )
-        self.assertTrue(
-            len(ks_instance._samples_idxs),
-            "Sample indices not set.",
         )
 
 
