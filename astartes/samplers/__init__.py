@@ -23,7 +23,7 @@ IMPLEMENTED_INTERPOLATION_SAMPLERS = (
     # "dbscan",
     # "doptimal",
     # "duplex",
-    # "kennard_stone",
+    "kennard_stone",
     # "mtsd",
     # "optisim",
     # "sphere_exclusion",
