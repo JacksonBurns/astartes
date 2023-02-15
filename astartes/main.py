@@ -4,23 +4,12 @@ from warnings import warn
 
 import numpy as np
 
-from astartes.samplers import (
-    Random,
-    KennardStone,
-    KMeans,
-)
-from astartes.utils.warnings import (
-    ImperfectSplittingWarning,
-)
-from astartes.utils.exceptions import (
-    NotImplementedError,
-)
-
-from astartes.samplers import (
-    IMPLEMENTED_INTERPOLATION_SAMPLERS,
-    IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
-    ALL_SAMPLERS,
-)
+from astartes.samplers import (ALL_SAMPLERS,
+                               IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
+                               IMPLEMENTED_INTERPOLATION_SAMPLERS,
+                               KennardStone, KMeans, Random)
+from astartes.utils.exceptions import NotImplementedError
+from astartes.utils.warnings import ImperfectSplittingWarning
 
 
 def train_test_split(

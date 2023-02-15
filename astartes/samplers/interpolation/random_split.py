@@ -1,6 +1,8 @@
-from astartes.samplers import AbstractSampler
-import numpy as np
 import random
+
+import numpy as np
+
+from astartes.samplers import AbstractSampler
 
 
 class Random(AbstractSampler):

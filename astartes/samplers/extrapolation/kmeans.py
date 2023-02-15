@@ -1,10 +1,10 @@
-from astartes.samplers import AbstractSampler
-
-from math import floor
 from collections import Counter
+from math import floor
 
-from sklearn.cluster import KMeans as sk_KMeans
 import numpy as np
+from sklearn.cluster import KMeans as sk_KMeans
+
+from astartes.samplers import AbstractSampler
 
 
 class KMeans(AbstractSampler):
