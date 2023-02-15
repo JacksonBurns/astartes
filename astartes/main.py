@@ -51,6 +51,8 @@ def train_test_split(
         sampler_class = KennardStone
     elif sampler == "kmeans":
         sampler_class = KMeans
+    elif sampler == "sphere_exclusion":
+        sampler_class = SphereExclusion
     else:
         possiblity = get_close_matches(
             sampler,
