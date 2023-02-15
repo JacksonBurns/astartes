@@ -1,9 +1,9 @@
-from astartes.samplers import AbstractSampler
-
 # https://github.com/yu9824/kennard_stone
 from kennard_stone import train_test_split as ks_train_test_split
 
 import numpy as np
+
+from astartes.samplers import AbstractSampler
 
 
 class KennardStone(AbstractSampler):
