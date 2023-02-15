@@ -1,4 +1,5 @@
 import unittest
+import warnings
 
 import numpy as np
 
@@ -120,6 +121,36 @@ class Test_kennard_stone(unittest.TestCase):
             ),
             "Test labels incorrect.",
         )
+
+    def test_kennard_stone_sample_no_warning(self):
+        """Use kennard stone with a mathematically possible split requested"""
+        with warnings.catch_warnings(record=True) as w:
+            warnings.filterwarnings("always")
+            (
+                X_train,
+                X_test,
+                y_train,
+                y_test,
+                labels_train,
+                labels_test,
+            ) = train_test_split(
+                self.X,
+                self.y,
+                labels=self.labels,
+                test_size=0.33,
+                train_size=0.67,
+                sampler="kennard_stone",
+            )
+            self.assertFalse(
+                len(w),
+                "\nNo warnings should have been raised when requesting a mathematically possible split."
+                "\nReceived {:d} warnings instead: \n -> {:s}".format(
+                    len(w),
+                    "\n -> ".join(
+                        [str(i.category.__name__) + ": " + str(i.message) for i in w]
+                    ),
+                ),
+            )
 
 
 if __name__ == "__main__":
