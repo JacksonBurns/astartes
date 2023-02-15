@@ -4,10 +4,9 @@ import unittest
 
 import numpy as np
 
+from astartes import train_test_split
 from astartes.samplers import SphereExclusion
 from astartes.utils.warnings import ImperfectSplittingWarning
-
-from astartes import train_test_split
 
 
 class Test_sphere_exclusion(unittest.TestCase):
