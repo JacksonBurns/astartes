@@ -26,7 +26,7 @@ IMPLEMENTED_INTERPOLATION_SAMPLERS = (
     # "kennard_stone",
     # "mtsd",
     # "optisim",
-    # "sphere_exclusion",
+    "sphere_exclusion",
 )
 
 IMPLEMENTED_EXTRAPOLATION_SAMPLERS = (
