@@ -10,11 +10,11 @@ from .interpolation import (
     KennardStone,
     MTSD,
     OptiSim,
-    SphereExclusion,
 )
 from .extrapolation import (
     Scaffold,
     KMeans,
+    SphereExclusion,
 )
 
 
