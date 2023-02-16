@@ -1,19 +1,13 @@
-from difflib import get_close_matches
 from math import floor
 from warnings import warn
 
 import numpy as np
 
 from astartes.samplers import (
-    ALL_SAMPLERS,
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
-    KennardStone,
-    KMeans,
-    Random,
-    SphereExclusion,
+    SamplerFactory,
 )
-from astartes.utils.exceptions import NotImplementedError
 from astartes.utils.warnings import ImperfectSplittingWarning
 
 
@@ -44,29 +38,8 @@ def train_test_split(
     Returns:
         np.array: Training and test data split into arrays.
     """
-    sampler = sampler.lower()
-    if sampler == "random":
-        sampler_class = Random
-    elif sampler == "kennard_stone":
-        sampler_class = KennardStone
-    elif sampler == "kmeans":
-        sampler_class = KMeans
-    elif sampler == "sphere_exclusion":
-        sampler_class = SphereExclusion
-    else:
-        possiblity = get_close_matches(
-            sampler,
-            ALL_SAMPLERS,
-            n=1,
-        )
-        addendum = (
-            " Did you mean '{:s}'?".format(possiblity[0])
-            if possiblity
-            else " Try help(train_test_split)."
-        )
-        raise NotImplementedError(
-            "Sampler {:s} has not been implemented.".format(sampler) + addendum
-        )
+    sampler_factory = SamplerFactory(sampler)
+    sampler_class = sampler_factory.get_sampler()
 
     sampler_instance = sampler_class(X, y, labels, hopts)
 
