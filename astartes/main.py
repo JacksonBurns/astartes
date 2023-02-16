@@ -6,9 +6,9 @@ import numpy as np
 from astartes.samplers import (
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
-    SamplerFactory,
 )
 from astartes.utils.warnings import ImperfectSplittingWarning
+from astartes.utils.sampler_factory import SamplerFactory
 
 
 def train_test_split(

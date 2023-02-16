@@ -1,9 +1,6 @@
 # abstract base classes
 from .abstract_sampler import AbstractSampler
 
-# sampler factory
-from .sampler_factory import SamplerFactory
-
 # implementations
 from .extrapolation import KMeans, Scaffold, SphereExclusion
 from .interpolation import DBSCAN, MTSD, DOptimal, Duplex, KennardStone, OptiSim, Random

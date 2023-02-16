@@ -10,7 +10,7 @@ from astartes.samplers import (
 from astartes.utils.exceptions import NotImplementedError
 
 
-class SamplerFactory():
+class SamplerFactory:
     def __init__(self, sampler):
         self.sampler = sampler.lower()
 
