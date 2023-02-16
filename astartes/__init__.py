@@ -6,4 +6,4 @@ from .main import train_test_split
 # on installations without the optional molecules install, this would cause
 # an exception
 
-__version__ = "0.0.0"
+__version__ = "1.0.0a1"
