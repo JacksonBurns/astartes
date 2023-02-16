@@ -38,7 +38,7 @@ def get_version(rel_path):
     """
     """
     for line in read(rel_path).splitlines():
-        if line.startswith('__version__'):
+        if line.startswith('version'):
             delim = '"' if '"' in line else "'"
             return line.split(delim)[1]
     else:
@@ -55,7 +55,7 @@ def setup(app):
     app.connect("autodoc-skip-member", skip)
 
 
-release = get_version("../astartes/__init__.py")
+release = get_version("../pyproject.toml")
 
 
 # -- General configuration ---------------------------------------------------
