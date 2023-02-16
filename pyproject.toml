@@ -15,7 +15,7 @@ description = "Train:Test Algorithmic Sampling for Molecules, Images, and Arbitr
 classifiers = ["Programming Language :: Python :: 3"]
 urls = { Homepage = "https://github.com/JacksonBurns/astartes" }
 requires-python = ">=3.7"
-dependencies = ["kennard_stone", "scikit_learn", "numpy"]
+dependencies = ["kennard_stone", "scikit_learn", "numpy", "scipy"]
 
 [project.optional-dependencies]
 molecules = ["aimsim"]
