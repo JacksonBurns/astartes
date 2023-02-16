@@ -22,6 +22,14 @@ class Test_astartes(unittest.TestCase):
     def setUpClass(self):
         return
 
+    def test_insufficient_dataset(self):
+        """If the user requests a split that would result in rounding down the size of the
+        test set to zero, a helpful exception should be raised."""
+
+    def test_rounding_warning(self):
+        """astartes should warn when normalizing floats that do not add to 1 or ints that do
+        not add to len(X) when providing test_size and train_size in tts."""
+
     def test_close_mispelling_sampler(self):
         """Astartes should be helpful in the event of a typo."""
         with self.assertRaises(NotImplementedError) as e:
