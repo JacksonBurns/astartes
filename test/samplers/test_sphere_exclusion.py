@@ -36,7 +36,7 @@ class Test_sphere_exclusion(unittest.TestCase):
             ]
         )
 
-    def test_kmeans_sampling(self):
+    def test_sphereexclusion_sampling(self):
         """Use kmeans in the train_test_split and verify results."""
         with self.assertWarns(ImperfectSplittingWarning):
             (
@@ -52,11 +52,10 @@ class Test_sphere_exclusion(unittest.TestCase):
                 self.X,
                 self.y,
                 labels=self.labels,
-                test_size=0.75,
-                train_size=0.25,
-                sampler="kmeans",
+                test_size=0.3,
+                train_size=0.7,
+                sampler="sphere_exclusion",
                 hopts={
-                    "n_clusters": 2,
                     "random_state": 42,
                 },
             )
@@ -106,7 +105,7 @@ class Test_sphere_exclusion(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 clusters_train,
-                np.array([1, 1, 1]),
+                np.array([2, 1, 1]),
             ),
             "Train clusters incorrect.",
         )
@@ -118,15 +117,17 @@ class Test_sphere_exclusion(unittest.TestCase):
             "Test clusters incorrect.",
         )
 
-    def test_kmeans(self):
+    def test_sphereexclusion(self):
         """Directly instantiate and test KMeans."""
         sphere_exclusion_instance = SphereExclusion(
             self.X,
             self.y,
             self.labels,
             {
-                "n_clusters": 2,
+                # "n_clusters": 2,
                 "random_state": 42,
+                # "metric": "euclidian",
+                # "distance_cutoff": 0.25,
             },
         )
         self.assertIsInstance(
