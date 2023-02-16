@@ -7,8 +7,8 @@ from astartes.samplers import (
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
-from astartes.utils.warnings import ImperfectSplittingWarning
 from astartes.utils.sampler_factory import SamplerFactory
+from astartes.utils.warnings import ImperfectSplittingWarning
 
 
 def train_test_split(
