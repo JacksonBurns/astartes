@@ -1,2 +1,2 @@
-from .scaffold import Scaffold
 from .kmeans import KMeans
+from .scaffold import Scaffold
