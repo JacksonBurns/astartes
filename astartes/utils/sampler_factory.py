@@ -14,7 +14,7 @@ class SamplerFactory:
     def __init__(self, sampler):
         self.sampler = sampler.lower()
 
-    def get_sampler(self):
+    def get_sampler(self, X, y, labels, hopts):
         if self.sampler == "random":
             sampler_class = Random
         elif self.sampler == "kennard_stone":
@@ -37,4 +37,4 @@ class SamplerFactory:
             raise NotImplementedError(
                 "Sampler {:s} has not been implemented.".format(self.sampler) + addendum
             )
-        return sampler_class
+        return sampler_class(X, y, labels, hopts)

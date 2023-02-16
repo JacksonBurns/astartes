@@ -39,9 +39,7 @@ def train_test_split(
         np.array: Training and test data split into arrays.
     """
     sampler_factory = SamplerFactory(sampler)
-    sampler_class = sampler_factory.get_sampler()
-
-    sampler_instance = sampler_class(X, y, labels, hopts)
+    sampler_instance = sampler_factory.get_sampler(X, y, labels, hopts)
 
     if test_size is not None:
         train_size = 1.0 - test_size
