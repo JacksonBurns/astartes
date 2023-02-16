@@ -59,7 +59,7 @@ class Test_astartes(unittest.TestCase):
                     "random_state": 42,
                 },
             )
-            for elt, ans in zip(X_train.flatten(), [4, 5, 6, 1, 2, 3]):
+            for elt, ans in zip(X_train.flatten(), [4, 5, 6, 7, 8, 9]):
                 self.assertEqual(elt, ans)
 
     def test_return_indices(self):
@@ -77,7 +77,7 @@ class Test_astartes(unittest.TestCase):
                 },
                 return_indices=True,
             )
-            for elt, ans in zip(indices_train.flatten(), [1, 0]):
+            for elt, ans in zip(indices_train.flatten(), [1, 2]):
                 self.assertEqual(elt, ans)
 
 
