@@ -1,20 +1,20 @@
 name: Run Tests
 on:
   schedule:
-    - cron:  '0 8 * * 1-5'
+    - cron: "0 8 * * 1-5"
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
   workflow_dispatch:
 
 jobs:
   build:
-    strategy:      
+    strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     runs-on: ${{ matrix.os }}
@@ -34,7 +34,7 @@ jobs:
           python -m pip install coverage
       - name: Run Tests
         run: |
-          coverage run --source=. --omit=astartes/__init__.py,setup.py,test/*,astartes/samplers/sampler.py -m unittest discover -v
+          coverage run --source=. --omit=astartes/__init__.py,setup.py,test/* -m unittest discover -v
       - name: Show Coverage
         run: |
           coverage report -m

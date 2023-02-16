@@ -1,7 +1,7 @@
 """Exceptions used by astartes"""
 
 
-class MoleculesNotInstalledError(RuntimeError):
+class MoleculesNotInstalledError(RuntimeError):  # pragma: no cover
     """Used when attempting to featurize molecules without install."""
 
     def __init__(self, message=None):
