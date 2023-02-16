@@ -5,4 +5,3 @@ from .kennardstone import KennardStone
 from .mtsd import MTSD
 from .optisim import OptiSim
 from .random_split import Random
-from .sphere_exclusion import SphereExclusion

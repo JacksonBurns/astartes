@@ -4,10 +4,15 @@ from warnings import warn
 
 import numpy as np
 
-from astartes.samplers import (ALL_SAMPLERS,
-                               IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
-                               IMPLEMENTED_INTERPOLATION_SAMPLERS,
-                               KennardStone, KMeans, Random)
+from astartes.samplers import (
+    ALL_SAMPLERS,
+    IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
+    IMPLEMENTED_INTERPOLATION_SAMPLERS,
+    KennardStone,
+    KMeans,
+    Random,
+    SphereExclusion,
+)
 from astartes.utils.exceptions import NotImplementedError
 from astartes.utils.warnings import ImperfectSplittingWarning
 
@@ -46,6 +51,8 @@ def train_test_split(
         sampler_class = KennardStone
     elif sampler == "kmeans":
         sampler_class = KMeans
+    elif sampler == "sphere_exclusion":
+        sampler_class = SphereExclusion
     else:
         possiblity = get_close_matches(
             sampler,

@@ -1,5 +1,6 @@
 """Abstract Sampling class"""
 from abc import ABC, abstractmethod
+from collections import Counter
 
 import numpy as np
 
@@ -19,16 +20,18 @@ class AbstractSampler(ABC):
         self.labels = labels
         self._configs = configs
 
-        # this must be set by _sample
+        # this must be set by _sample for interpolation
         self._samples_idxs = np.array([], dtype=int)
 
-        # these must also be set if using a clustering algorithm
+        # this must be set if using a clustering algorithm
         self._samples_clusters = np.array([], dtype=int)
-        self._sorted_cluster_counter = {}
 
         # internal machinery
+        self._sorted_cluster_counter = {}
         self._current_sample_idx = 0
         self._sample()
+        if len(self._samples_clusters):
+            self._set_sorted_cluster_counter()
 
     @abstractmethod
     def _sample(self):
@@ -37,7 +40,6 @@ class AbstractSampler(ABC):
          - set self._samples_idxs with the order in which the algorithm dictates drawing samples
         and if using clustering:
          - set self._samples_clusters with the labels produced by clustering
-         - set self._sorted_cluster_counter with a dict containing cluter_id: #_elts sorted by #_elts, ascending
         """
 
     def get_config(self, key, default=None):
@@ -58,3 +60,38 @@ class AbstractSampler(ABC):
 
     def get_clusters(self):
         return self._samples_clusters
+
+    def _set_sorted_cluster_counter(self):
+        """Sets self._sorted_cluster_counter with a dict containing cluter_id:
+        #_elts sorted by #_elts, ascending"""
+        # need to sort labels and clusters in order of smallest cluster to largest
+        # start by counting the number of elements in each cluster
+        cluster_counter = Counter(self._samples_clusters)
+
+        # create an integer array that stores the indices as they are now, which we
+        # will sort alongside the labels based on the number of elements in each
+        # cluster (effectively tracking the mapping between unsorted and sorted)
+        samples_idxs = np.array(range(len(self.X)), dtype=int)
+
+        # workhorse - this and some lines above/below could be made into a private
+        # method in AbstractSampler
+        sorted_idxs = []
+        sorted_cluster_counter = {}
+        for label, sample_idx in sorted(
+            zip(
+                self._samples_clusters, samples_idxs
+            ),  # iterate indices and labels simultaneously
+            key=lambda pair: cluster_counter[
+                pair[0]
+            ],  # use the number of elements in the cluster for sorting
+        ):
+            sorted_idxs.append(sample_idx)
+            if label not in sorted_cluster_counter:
+                sorted_cluster_counter[label] = 1
+            else:
+                sorted_cluster_counter[label] += 1
+
+        # can't use np.argsort because it does not allow for a custom comparison key
+        # and will instead sort by the value of the cluster labels (wrong!)
+        self._samples_idxs = np.array(sorted_idxs, dtype=int)
+        self._sorted_cluster_counter = sorted_cluster_counter
