@@ -5,5 +5,3 @@ from .main import train_test_split
 # from .molecules import train_test_split_molecules
 # on installations without the optional molecules install, this would cause
 # an exception
-
-__version__ = "1.0.0a1"
