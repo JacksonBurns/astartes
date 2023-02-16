@@ -4,8 +4,8 @@ import unittest
 
 import numpy as np
 
-from astartes.utils.sampler_factory import SamplerFactory
 from astartes.samplers import ALL_SAMPLERS, AbstractSampler
+from astartes.utils.sampler_factory import SamplerFactory
 
 
 class Test_sampler_factory(unittest.TestCase):
