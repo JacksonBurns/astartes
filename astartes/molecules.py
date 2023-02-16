@@ -6,7 +6,7 @@ from astartes.utils.exceptions import MoleculesNotInstalledError
 
 try:
     from aimsim.chemical_datastructures import Molecule
-except ImportError:
+except ImportError:  # pragma: no cover
     raise MoleculesNotInstalledError(
         """To use molecule featurizer, install astartes with pip install astartes[molecules]."""
     )
