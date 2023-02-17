@@ -51,7 +51,7 @@ class Test_astartes(unittest.TestCase):
             ]
         )
 
-    def test_inconsitent_input_lengths(self):
+    def test_inconsistent_input_lengths(self):
         """Different length X, y, and labels should raise an exception at start."""
         with self.assertRaises(InvalidConfigurationError):
             train_val_test_split(
@@ -179,7 +179,7 @@ class Test_astartes(unittest.TestCase):
             )
         )
 
-    def test_insufficient_dataset(self):
+    def test_insufficient_dataset_train(self):
         """If the user requests a split that would result in rounding down the size of the
         test set to zero, a helpful exception should be raised."""
         with self.assertRaises(InvalidConfigurationError):
@@ -188,6 +188,28 @@ class Test_astartes(unittest.TestCase):
                 train_size=None,  # this will result in an empty train set due to rounding
                 val_size=0.4,
                 test_size=0.6,
+            )
+
+    def test_insufficient_dataset_val(self):
+        """If the user requests a split that would result in rounding down the size of the
+        test set to zero, a helpful exception should be raised."""
+        with self.assertRaises(InvalidConfigurationError):
+            train_val_test_split(
+                self.X,
+                train_size=0.45,
+                val_size=0.05,  # this will result in an empty val set due to rounding
+                test_size=0.5,
+            )
+
+    def test_insufficient_dataset_test(self):
+        """If the user requests a split that would result in rounding down the size of the
+        test set to zero, a helpful exception should be raised."""
+        with self.assertRaises(InvalidConfigurationError):
+            train_val_test_split(
+                self.X,
+                train_size=0.01,  # this will result in an empty train set due to rounding
+                val_size=0.98,
+                test_size=0.01,  # empty test due to rounding
             )
 
     def test_split_validation(self):
