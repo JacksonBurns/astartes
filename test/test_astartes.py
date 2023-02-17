@@ -187,12 +187,13 @@ class Test_astartes(unittest.TestCase):
                     test_size=None,
                 )
         with self.subTest("val_size w/ valid test_size"):
-            train_val_test_split(
-                self.X,
-                train_size=None,
-                val_size=0.4,
-                test_size=0.6,
-            )
+            with self.assertWarns(ImperfectSplittingWarning):
+                train_val_test_split(
+                    self.X,
+                    train_size=None,
+                    val_size=0.4,
+                    test_size=0.6,
+                )
         with self.subTest("val_size w/ invalid test_size"):
             with self.assertRaises(RuntimeError):
                 train_val_test_split(
@@ -202,12 +203,13 @@ class Test_astartes(unittest.TestCase):
                     test_size=2,
                 )
         with self.subTest("val_size w/ valid train_size"):
-            train_val_test_split(
-                self.X,
-                train_size=0.2,
-                val_size=0.4,
-                test_size=None,
-            )
+            with self.assertWarns(ImperfectSplittingWarning):
+                train_val_test_split(
+                    self.X,
+                    train_size=0.2,
+                    val_size=0.4,
+                    test_size=None,
+                )
         with self.subTest("val_size w/ invalid train_size"):
             with self.assertRaises(RuntimeError):
                 train_val_test_split(
