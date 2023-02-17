@@ -10,7 +10,7 @@ from astartes.samplers import (
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
-from astartes.utils.exceptions import NotImplementedError, InvalidConfigurationError
+from astartes.utils.exceptions import InvalidConfigurationError, NotImplementedError
 from astartes.utils.warnings import ImperfectSplittingWarning, NormalizationWarning
 
 

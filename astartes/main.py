@@ -7,9 +7,9 @@ from astartes.samplers import (
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
+from astartes.utils.exceptions import InvalidConfigurationError
 from astartes.utils.sampler_factory import SamplerFactory
 from astartes.utils.warnings import ImperfectSplittingWarning, NormalizationWarning
-from astartes.utils.exceptions import InvalidConfigurationError
 
 
 def train_val_test_split(
