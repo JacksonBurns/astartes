@@ -11,12 +11,46 @@ from astartes.utils.sampler_factory import SamplerFactory
 from astartes.utils.warnings import ImperfectSplittingWarning
 
 
+def train_val_test_split(
+    X: np.array,
+    y: np.array = None,
+    labels: np.array = None,
+    train_size: float = 0.8,
+    val_size: float = 0.1,
+    test_size: float = 0.1,
+    sampler: str = "random",
+    hopts: dict = {},
+    return_indices: bool = False,
+):
+    sampler_factory = SamplerFactory(sampler)
+    sampler_instance = sampler_factory.get_sampler(X, y, labels, hopts)
+
+    if test_size is not None:
+        train_size = 1.0 - test_size
+
+    if sampler in IMPLEMENTED_EXTRAPOLATION_SAMPLERS:
+        return _extrapolative_sampling(
+            sampler_instance,
+            test_size,
+            train_size,
+            return_indices,
+        )
+    else:
+        return _interpolative_sampling(
+            sampler_instance,
+            test_size,
+            train_size,
+            return_indices,
+        )
+
+
+
 def train_test_split(
     X: np.array,
     y: np.array = None,
     labels: np.array = None,
-    test_size: float = None,
     train_size: float = 0.75,
+    test_size: float = None,
     sampler: str = "random",
     hopts: dict = {},
     return_indices: bool = False,
@@ -38,26 +72,7 @@ def train_test_split(
     Returns:
         np.array: Training and test data split into arrays.
     """
-    sampler_factory = SamplerFactory(sampler)
-    sampler_instance = sampler_factory.get_sampler(X, y, labels, hopts)
-
-    if test_size is not None:
-        train_size = 1.0 - test_size
-
-    if sampler in IMPLEMENTED_EXTRAPOLATION_SAMPLERS:
-        return _extrapolative_sampling(
-            sampler_instance,
-            test_size,
-            train_size,
-            return_indices,
-        )
-    else:
-        return _interpolative_sampling(
-            sampler_instance,
-            test_size,
-            train_size,
-            return_indices,
-        )
+    return train_val_test_split(X, y, labels, train_size, 0, test_size, sampler, hopts, return_indices)
 
 
 def _extrapolative_sampling(
@@ -157,3 +172,8 @@ def _check_actual_split(train_idxs, test_idxs, train_size, test_size):
             "Actual train/test split differs from requested size. " + msg,
             ImperfectSplittingWarning,
         )
+
+
+def _normalize_split_sizes(train_size, val_size, test_size):
+    """Normalize requested inputs to between zero and one (summed)."""
+
