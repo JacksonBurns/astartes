@@ -1,10 +1,12 @@
 import os
 import sys
 import unittest
+import warnings
 
 import numpy as np
 
 from astartes import train_test_split
+from astartes import train_val_test_split
 from astartes.samplers import (
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
@@ -20,7 +22,125 @@ class Test_astartes(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        return
+        self.X = np.array(
+            [
+                [0, 0, 0, 0, 0],
+                [1, 0, 0, 0, 0],
+                [1, 1, 0, 0, 0],
+                [1, 1, 1, 0, 0],
+                [1, 1, 1, 1, 0],
+            ]
+        )
+        self.y = np.array([1, 2, 3, 4, 5])
+        self.labels = np.array(
+            [
+                "one",
+                "two",
+                "three",
+                "four",
+                "five",
+            ]
+        )
+
+    def test_train_val_test_split(self):
+        """Split data into training, validation, and test sets."""
+        with warnings.catch_warnings(record=True) as w:
+            warnings.filterwarnings("always")
+            (
+                X_train,
+                X_val,
+                X_test,
+                y_train,
+                y_val,
+                y_test,
+                labels_train,
+                labels_val,
+                labels_test,
+            ) = train_val_test_split(
+                self.X,
+                self.y,
+                labels=self.labels,
+                test_size=0.2,
+                val_size = 0.2,
+                train_size=0.6,
+                sampler="random",
+                hopts={
+                    "random_state": 42,
+                },
+            )
+            self.assertFalse(
+                len(w),
+                "\nNo warnings should have been raised when requesting a mathematically possible split."
+                "\nReceived {:d} warnings instead: \n -> {:s}".format(
+                    len(w),
+                    "\n -> ".join(
+                        [str(i.category.__name__) + ": " + str(i.message) for i in w]
+                    ),
+                ),
+            )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                X_train,
+                np.array([[0, 1, 0], [1, 1, 1]]),
+                "Train X incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                X_val,
+                np.array([[0, 0, 0]]),
+                "Validation X incorrect.",
+            )            
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                X_test,
+                np.array([[0, 0, 0]]),
+                "Test X incorrect.",
+            )            
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                y_train,
+                np.array([2, 3]),
+                "Train y incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                y_val,
+                np.array([1]),
+                "Validation y incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                y_test,
+                np.array([1]),
+                "Test y incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                labels_train,
+                np.array(["two", "three"]),
+                "Train labels incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                labels_val,
+                np.array(["one"]),
+                "Validation labels incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                labels_test,
+                np.array(["one"]),
+                "Test labels incorrect.",
+            )
+        )
 
     def test_insufficient_dataset(self):
         """If the user requests a split that would result in rounding down the size of the
