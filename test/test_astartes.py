@@ -12,7 +12,7 @@ from astartes.samplers import (
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
 from astartes.utils.exceptions import NotImplementedError
-from astartes.utils.warnings import ImperfectSplittingWarning
+from astartes.utils.warnings import ImperfectSplittingWarning, NormalizationWarning
 
 
 class Test_astartes(unittest.TestCase):
@@ -61,7 +61,7 @@ class Test_astartes(unittest.TestCase):
                 self.y,
                 labels=self.labels,
                 test_size=0.2,
-                val_size = 0.2,
+                val_size=0.2,
                 train_size=0.6,
                 sampler="random",
                 hopts={
@@ -90,14 +90,14 @@ class Test_astartes(unittest.TestCase):
                 X_val,
                 np.array([[0, 0, 0]]),
                 "Validation X incorrect.",
-            )            
+            )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_test,
                 np.array([[0, 0, 0]]),
                 "Test X incorrect.",
-            )            
+            )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
@@ -146,9 +146,108 @@ class Test_astartes(unittest.TestCase):
         """If the user requests a split that would result in rounding down the size of the
         test set to zero, a helpful exception should be raised."""
 
-    def test_rounding_warning(self):
-        """astartes should warn when normalizing floats that do not add to 1 or ints that do
-        not add to len(X) when providing test_size and train_size in tts."""
+    def test_split_validation(self):
+        """Tests of the input split validation."""
+        with self.subTest("no splits specified"):
+            with self.assertRaises(RuntimeError):
+                train_val_test_split(
+                    self.X,
+                    train_size=None,
+                    val_size=None,
+                    test_size=None,
+                )
+        with self.subTest("all splits specified"):
+            train_val_test_split(
+                self.X,
+                train_size=0.2,
+                val_size=0.4,
+                test_size=0.4,
+            )
+        with self.subTest("all specified imperfectly"):
+            with self.assertWarns(NormalizationWarning):
+                train_val_test_split(
+                    self.X,
+                    train_size=0.8,
+                    val_size=0.4,
+                    test_size=2,
+                )
+        with self.subTest("no val_size w/ test and train"):
+            with self.assertWarns(NormalizationWarning):
+                train_val_test_split(
+                    self.X,
+                    train_size=0.8,
+                    val_size=None,
+                    test_size=2,
+                )
+        with self.subTest("invalid val_size"):
+            with self.assertRaises(RuntimeError):
+                train_val_test_split(
+                    self.X,
+                    train_size=0.1,
+                    val_size=42,
+                    test_size=None,
+                )
+        with self.subTest("val_size w/ valid test_size"):
+            train_val_test_split(
+                self.X,
+                train_size=None,
+                val_size=0.4,
+                test_size=0.6,
+            )
+        with self.subTest("val_size w/ invalid test_size"):
+            with self.assertRaises(RuntimeError):
+                train_val_test_split(
+                    self.X,
+                    train_size=None,
+                    val_size=0.4,
+                    test_size=2,
+                )
+        with self.subTest("val_size w/ valid train_size"):
+            train_val_test_split(
+                self.X,
+                train_size=0.2,
+                val_size=0.4,
+                test_size=None,
+            )
+        with self.subTest("val_size w/ invalid train_size"):
+            with self.assertRaises(RuntimeError):
+                train_val_test_split(
+                    self.X,
+                    train_size=12,
+                    val_size=0.4,
+                    test_size=None,
+                )
+        with self.subTest("no val_size w/ valid test_size"):
+            with self.assertWarns(ImperfectSplittingWarning):
+                train_val_test_split(
+                    self.X,
+                    train_size=None,
+                    val_size=None,
+                    test_size=0.5,
+                )
+        with self.subTest("no val_size w/ invalid test_size"):
+            with self.assertRaises(RuntimeError):
+                train_val_test_split(
+                    self.X,
+                    train_size=None,
+                    val_size=None,
+                    test_size=-2,
+                )
+        with self.subTest("no val_size w/ valid train_size"):
+            train_val_test_split(
+                self.X,
+                train_size=0.8,
+                val_size=None,
+                test_size=None,
+            )
+        with self.subTest("no val_size w/ invalid train_size"):
+            with self.assertRaises(RuntimeError):
+                train_val_test_split(
+                    self.X,
+                    train_size=42,
+                    val_size=None,
+                    test_size=None,
+                )
 
     def test_close_mispelling_sampler(self):
         """Astartes should be helpful in the event of a typo."""

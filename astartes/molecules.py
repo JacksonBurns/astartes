@@ -18,8 +18,8 @@ from astartes import train_test_split
 def train_test_split_molecules(
     smiles: List[str],
     y: np.array = None,
-    test_size: float = 0.25,
     train_size: float = 0.75,
+    test_size: float = None,
     sampler: str = "random",
     fingerprint: str = "morgan_fingerprint",
     return_as: str = "fprint",

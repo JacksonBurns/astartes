@@ -10,6 +10,7 @@ from astartes.samplers import (
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
+from astartes.utils.warnings import ImperfectSplittingWarning
 
 
 class Test_molecules(unittest.TestCase):
@@ -37,14 +38,15 @@ class Test_molecules(unittest.TestCase):
 
     def test_molecules(self):
         """ """
-        for sampler in IMPLEMENTED_INTERPOLATION_SAMPLERS:
-            tts = train_test_split_molecules(
-                self.X,
-                self.y,
-                0.2,
-                sampler=sampler,
-                fprints_hopts={"n_bits": 100},
-            )
+        with self.assertWarns(ImperfectSplittingWarning):
+            for sampler in IMPLEMENTED_INTERPOLATION_SAMPLERS:
+                tts = train_test_split_molecules(
+                    self.X,
+                    self.y,
+                    0.2,
+                    sampler=sampler,
+                    fprints_hopts={"n_bits": 100},
+                )
 
     def test_fingerprints(self):
         for fprint in [
@@ -62,54 +64,67 @@ class Test_molecules(unittest.TestCase):
                 )
 
     def test_fprint_hopts(self):
-        tts = train_test_split_molecules(
-            self.X,
-            self.y,
-            0.2,
-            sampler="random",
-            fingerprint="topological_fingerprint",
-            fprints_hopts={
-                "minPath": 2,
-                "maxPath": 5,
-                "fpSize": 200,
-                "bitsPerHash": 4,
-                "useHs": 1,
-                "tgtDensity": 0.4,
-                "minSize": 64,
-            },
-        )
+        with self.assertWarns(ImperfectSplittingWarning):
+            tts = train_test_split_molecules(
+                self.X,
+                self.y,
+                0.2,
+                sampler="random",
+                fingerprint="topological_fingerprint",
+                fprints_hopts={
+                    "minPath": 2,
+                    "maxPath": 5,
+                    "fpSize": 200,
+                    "bitsPerHash": 4,
+                    "useHs": 1,
+                    "tgtDensity": 0.4,
+                    "minSize": 64,
+                },
+            )
 
     def test_sampler_hopts(self):
-        tts = train_test_split_molecules(
-            self.X,
-            self.y,
-            0.2,
-            sampler="random",
-            hopts={
-                "random_state": 42,
-            },
-        )
+        with warnings.catch_warnings(record=True) as w:
+            warnings.filterwarnings("always")
+            tts = train_test_split_molecules(
+                self.X,
+                self.y,
+                sampler="random",
+                hopts={
+                    "random_state": 42,
+                },
+            )
+            self.assertFalse(
+                len(w),
+                "\nNo warnings should have been raised when requesting a mathematically possible split."
+                "\nReceived {:d} warnings instead: \n -> {:s}".format(
+                    len(w),
+                    "\n -> ".join(
+                        [str(i.category.__name__) + ": " + str(i.message) for i in w]
+                    ),
+                ),
+            )
 
     def test_maximum_call(self):
-        tts = train_test_split_molecules(
-            self.X,
-            self.y,
-            0.2,
-            fingerprint="topological_fingerprint",
-            fprints_hopts={
-                "minPath": 2,
-                "maxPath": 5,
-                "fpSize": 200,
-                "bitsPerHash": 4,
-                "useHs": 1,
-                "tgtDensity": 0.4,
-                "minSize": 64,
-            },
-            sampler="random",
-            hopts={
-                "random_state": 42,
-            },
-        )
+        with self.assertWarns(ImperfectSplittingWarning):
+            tts = train_test_split_molecules(
+                self.X,
+                self.y,
+                0.2,
+                fingerprint="topological_fingerprint",
+                fprints_hopts={
+                    "minPath": 2,
+                    "maxPath": 5,
+                    "fpSize": 200,
+                    "bitsPerHash": 4,
+                    "useHs": 1,
+                    "tgtDensity": 0.4,
+                    "minSize": 64,
+                },
+                sampler="random",
+                hopts={
+                    "random_state": 42,
+                },
+            )
 
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ from astartes.samplers import (
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
 from astartes.utils.sampler_factory import SamplerFactory
-from astartes.utils.warnings import ImperfectSplittingWarning
+from astartes.utils.warnings import ImperfectSplittingWarning, NormalizationWarning
 
 
 def train_val_test_split(
@@ -22,6 +22,9 @@ def train_val_test_split(
     hopts: dict = {},
     return_indices: bool = False,
 ):
+    train_size, val_size, test_size = _normalize_split_sizes(
+        train_size, val_size, test_size
+    )
     sampler_factory = SamplerFactory(sampler)
     sampler_instance = sampler_factory.get_sampler(X, y, labels, hopts)
 
@@ -42,7 +45,6 @@ def train_val_test_split(
             train_size,
             return_indices,
         )
-
 
 
 def train_test_split(
@@ -72,7 +74,9 @@ def train_test_split(
     Returns:
         np.array: Training and test data split into arrays.
     """
-    return train_val_test_split(X, y, labels, train_size, 0, test_size, sampler, hopts, return_indices)
+    return train_val_test_split(
+        X, y, labels, train_size, 0, test_size, sampler, hopts, return_indices
+    )
 
 
 def _extrapolative_sampling(
@@ -176,4 +180,99 @@ def _check_actual_split(train_idxs, test_idxs, train_size, test_size):
 
 def _normalize_split_sizes(train_size, val_size, test_size):
     """Normalize requested inputs to between zero and one (summed)."""
+    if not train_size and not test_size:  # neither - error
+        raise RuntimeError(
+            "train_size or test_size must be nonzero (val_size will default to 0.0).\n"
+            "(got val_size={:s} test_size={:s} train_size={:s})".format(
+                repr(val_size),
+                repr(test_size),
+                repr(train_size),
+            )
+        )
+    out = []
+    if not val_size:  # doing train_test_split
+        if train_size and test_size:  # both - normalize
+            if train_size + test_size != 1.0:
+                out_train_size = train_size / (train_size + test_size)
+                out_test_size = 1.0 - out_train_size
+                warn(
+                    "Requested train/test split ({:.2f}, {:.2f}) do not sum to 1.0,"
+                    " normalizing to train={:.2f}, test={:.2f}.".format(
+                        train_size,
+                        test_size,
+                        out_train_size,
+                        out_test_size,
+                    ),
+                    NormalizationWarning,
+                )
+                out = [out_train_size, 0.0, out_test_size]
+            else:
+                out = [train_size, val_size, test_size]
+        else:  # one or the other - only allow floats [0, 1), then calculate
+            if train_size:
+                if train_size >= 1.0 or train_size <= 0:
+                    raise RuntimeError(
+                        "If specifying only train_size, must be float between (0, 1) (got {:.2f})".format(
+                            train_size
+                        )
+                    )
+                test_size = 1.0 - train_size
+                out = [train_size, 0, test_size]
+            else:
+                if test_size >= 1.0 or test_size <= 0:
+                    raise RuntimeError(
+                        "If specifying only test_size, must be float between (0, 1) (got {:.2f})".format(
+                            test_size
+                        )
+                    )
+                train_size = 1.0 - test_size
+                out = [train_size, 0, test_size]
+    else:
+        if train_size and test_size:  # all three - normalize
+            if train_size + test_size + val_size != 1.0:
+                normalization = train_size + test_size + val_size
+                out_train_size = train_size / normalization
+                out_test_size = test_size / normalization
+                out_val_size = val_size / normalization
+                warn(
+                    "Requested train/val/test split ({:.2f}, {:.2f}, {:.2f}) do not sum to 1.0,"
+                    " normalizing to train={:.2f}, val={:.2f}, test={:.2f}.".format(
+                        train_size,
+                        val_size,
+                        test_size,
+                        out_train_size,
+                        out_val_size,
+                        out_test_size,
+                    ),
+                    NormalizationWarning,
+                )
+                out = [out_train_size, val_size, out_test_size]
+            else:
+                out = [train_size, val_size, test_size]
+        else:  # one or the other - only allow floats [0, 1), then calculate
+            if val_size >= 1.0 or val_size <= 0.0:
+                raise RuntimeError(
+                    "val_size must be a float between (0, 1) (for {:.2f})".format(
+                        val_size
+                    )
+                )
+            if train_size:
+                if train_size >= 1.0 or train_size <= 0:
+                    raise RuntimeError(
+                        "If specifying val_size and only train_size, must be float between (0, 1) (got {:.2f})".format(
+                            train_size
+                        )
+                    )
+                test_size = 1.0 - (train_size + val_size)
+                out = [train_size, val_size, test_size]
+            else:
+                if test_size >= 1.0 or test_size <= 0:
+                    raise RuntimeError(
+                        "If specifying val_size and only test_size, must be float between (0, 1) (got {:.2f})".format(
+                            test_size
+                        )
+                    )
+                train_size = 1.0 - (test_size + val_size)
+                out = [train_size, val_size, test_size]
 
+    return (*out,)
