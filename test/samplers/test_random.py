@@ -64,8 +64,8 @@ class Test_random(unittest.TestCase):
                 self.X,
                 self.y,
                 labels=self.labels,
-                test_size=0.25,
-                train_size=0.75,
+                test_size=0.75,
+                train_size=0.25,
                 sampler="random",
                 hopts={
                     "random_state": 42,
@@ -75,44 +75,44 @@ class Test_random(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_train,
-                np.array([[0, 1, 0], [1, 1, 1]]),
+                np.array([[0, 0, 0]]),
+                "Train X incorrect.",
             ),
-            "Train X incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_test,
-                np.array([[0, 0, 0]]),
+                np.array([[0, 1, 0], [1, 1, 1]]),
+                "Test X incorrect.",
             ),
-            "Test X incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_train,
-                np.array([2, 3]),
+                np.array([1]),
+                "Train y incorrect.",
             ),
-            "Train y incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_test,
-                np.array([1]),
+                np.array([2, 3]),
+                "Test y incorrect.",
             ),
-            "Test y incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_train,
-                np.array(["two", "three"]),
+                np.array(["one"]),
+                "Train labels incorrect.",
             ),
-            "Train labels incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_test,
-                np.array(["one"]),
+                np.array(["two", "three"]),
+                "Test labels incorrect.",
             ),
-            "Test labels incorrect.",
         )
 
     def test_random_sample_no_warning(self):
@@ -130,8 +130,8 @@ class Test_random(unittest.TestCase):
                 self.X,
                 self.y,
                 labels=self.labels,
-                test_size=0.33,
-                train_size=0.67,
+                test_size=0.67,
+                train_size=0.33,
                 sampler="random",
                 hopts={
                     "random_state": 42,
