@@ -219,7 +219,7 @@ def _check_actual_split(
     if not len(test_idxs):
         msg += " testing set empty "
     if val_size and not len(val_idxs):
-        msg += "validation set empty "
+        msg += " validation set empty "
     if msg:
         raise InvalidConfigurationError(
             "Provided data and requested split resulted in an empty set. "

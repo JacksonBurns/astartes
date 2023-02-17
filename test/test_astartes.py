@@ -361,6 +361,25 @@ class Test_astartes(unittest.TestCase):
             for elt, ans in zip(indices_train.flatten(), [2, 0]):
                 self.assertEqual(elt, ans)
 
+    def test_return_indices_with_validation(self):
+        """ """
+        with self.assertWarns(ImperfectSplittingWarning):
+            (indices_train, indices_val, indices_test,) = train_val_test_split(
+                np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                labels=np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                test_size=0.33,
+                val_size=0.33,
+                train_size=0.33,
+                sampler="random",
+                hopts={
+                    "random_state": 42,
+                },
+                return_indices=True,
+            )
+            for elt, ans in zip(indices_val.flatten(), [8, 2]):
+                self.assertEqual(elt, ans)
+
 
 if __name__ == "__main__":
     unittest.main()
