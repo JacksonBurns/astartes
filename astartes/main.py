@@ -9,6 +9,7 @@ from astartes.samplers import (
 )
 from astartes.utils.sampler_factory import SamplerFactory
 from astartes.utils.warnings import ImperfectSplittingWarning, NormalizationWarning
+from astartes.utils.exceptions import InvalidConfigurationError
 
 
 def train_val_test_split(
@@ -22,6 +23,16 @@ def train_val_test_split(
     hopts: dict = {},
     return_indices: bool = False,
 ):
+    msg = ""
+    if y is not None and len(y) != len(X):
+        msg += "len(y)={:d} ".format(len(y))
+    if labels is not None and len(labels) != len(X):
+        msg += "len(labels)={:d} ".format(len(labels))
+    if msg:
+        raise InvalidConfigurationError(
+            "Lengths of input arrays do not match: len(X)={:d} ".format(len(X)) + msg
+        )
+
     train_size, val_size, test_size = _normalize_split_sizes(
         train_size, val_size, test_size
     )
@@ -85,9 +96,11 @@ def _extrapolative_sampling(
     train_size,
     return_indices,
 ):
-    # validation for extrapolative sampling
+    # calculate "goal" splitting sizes
     n_test_samples = floor(len(sampler_instance.X) * test_size)
     n_val_samples = floor(len(sampler_instance.X) * val_size)
+    # unlike interpolative, cannot calculate n_train_samples here
+    # since it will vary based on cluster_lengths
 
     # can't break up clusters
     cluster_counter = sampler_instance.get_sorted_cluster_counter()
@@ -150,14 +163,14 @@ def _return_helper(
     return_indices,
 ):
     if return_indices:
-        if val_idxs:
+        if val_idxs.any():
             return train_idxs, val_idxs, test_idxs
         else:
             return train_idxs, test_idxs
     out = []
     X_train = sampler_instance.X[train_idxs]
     out.append(X_train)
-    if val_idxs:
+    if val_idxs.any():
         X_val = sampler_instance.X[val_idxs]
         out.append(X_val)
     X_test = sampler_instance.X[test_idxs]
@@ -166,7 +179,7 @@ def _return_helper(
     if sampler_instance.y is not None:
         y_train = sampler_instance.y[train_idxs]
         out.append(y_train)
-        if val_idxs:
+        if val_idxs.any():
             y_val = sampler_instance.y[val_idxs]
             out.append(y_val)
         y_test = sampler_instance.y[test_idxs]
@@ -174,7 +187,7 @@ def _return_helper(
     if sampler_instance.labels is not None:
         labels_train = sampler_instance.labels[train_idxs]
         out.append(labels_train)
-        if val_idxs:
+        if val_idxs.any():
             labels_val = sampler_instance.labels[val_idxs]
             out.append(labels_val)
         labels_test = sampler_instance.labels[test_idxs]
@@ -182,7 +195,7 @@ def _return_helper(
     if len(sampler_instance.get_clusters()):  # true when the list has been filled
         clusters_train = sampler_instance.get_clusters()[train_idxs]
         out.append(clusters_train)
-        if val_idxs:
+        if val_idxs.any():
             clusters_val = sampler_instance.get_clusters()[val_idxs]
             out.append(clusters_val)
         clusters_test = sampler_instance.get_clusters()[test_idxs]
@@ -199,6 +212,21 @@ def _check_actual_split(
     val_size,
     test_size,
 ):
+    # split may have resulted in empty lists
+    msg = ""
+    if not len(train_idxs):
+        msg += " training set empty "
+    if not len(test_idxs):
+        msg += " testing set empty "
+    if val_size and not len(val_idxs):
+        msg += "validation set empty "
+    if msg:
+        raise InvalidConfigurationError(
+            "Provided data and requested split resulted in an empty set. "
+            "Dataset may be too small or requested splits may be too large. "
+            "(" + msg + ")"
+        )
+    # split may not match exactly what they asked for
     total_size = len(test_idxs) + len(val_idxs) + len(train_idxs)
 
     actual_train_size = round(len(train_idxs) / total_size, 2)
@@ -236,7 +264,7 @@ def _check_actual_split(
 def _normalize_split_sizes(train_size, val_size, test_size):
     """Normalize requested inputs to between zero and one (summed)."""
     if not train_size and not test_size:  # neither - error
-        raise RuntimeError(
+        raise InvalidConfigurationError(
             "train_size or test_size must be nonzero (val_size will default to 0.0).\n"
             "(got val_size={:s} test_size={:s} train_size={:s})".format(
                 repr(val_size),
@@ -266,7 +294,7 @@ def _normalize_split_sizes(train_size, val_size, test_size):
         else:  # one or the other - only allow floats [0, 1), then calculate
             if train_size:
                 if train_size >= 1.0 or train_size <= 0:
-                    raise RuntimeError(
+                    raise InvalidConfigurationError(
                         "If specifying only train_size, must be float between (0, 1) (got {:.2f})".format(
                             train_size
                         )
@@ -275,14 +303,18 @@ def _normalize_split_sizes(train_size, val_size, test_size):
                 out = [train_size, 0, test_size]
             else:
                 if test_size >= 1.0 or test_size <= 0:
-                    raise RuntimeError(
+                    raise InvalidConfigurationError(
                         "If specifying only test_size, must be float between (0, 1) (got {:.2f})".format(
                             test_size
                         )
                     )
                 train_size = 1.0 - test_size
                 out = [train_size, 0, test_size]
-    else:
+    else:  # there is a non-zero val_size
+        if val_size >= 1.0 or val_size <= 0.0:
+            raise InvalidConfigurationError(
+                "val_size must be a float between (0, 1) (got {:.2f})".format(val_size)
+            )
         if train_size and test_size:  # all three - normalize
             if train_size + test_size + val_size != 1.0:
                 normalization = train_size + test_size + val_size
@@ -305,15 +337,9 @@ def _normalize_split_sizes(train_size, val_size, test_size):
             else:
                 out = [train_size, val_size, test_size]
         else:  # one or the other - only allow floats [0, 1), then calculate
-            if val_size >= 1.0 or val_size <= 0.0:
-                raise RuntimeError(
-                    "val_size must be a float between (0, 1) (for {:.2f})".format(
-                        val_size
-                    )
-                )
             if train_size:
                 if train_size >= 1.0 or train_size <= 0:
-                    raise RuntimeError(
+                    raise InvalidConfigurationError(
                         "If specifying val_size and only train_size, must be float between (0, 1) (got {:.2f})".format(
                             train_size
                         )
@@ -322,7 +348,7 @@ def _normalize_split_sizes(train_size, val_size, test_size):
                 out = [train_size, val_size, test_size]
             else:
                 if test_size >= 1.0 or test_size <= 0:
-                    raise RuntimeError(
+                    raise InvalidConfigurationError(
                         "If specifying val_size and only test_size, must be float between (0, 1) (got {:.2f})".format(
                             test_size
                         )

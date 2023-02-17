@@ -9,6 +9,14 @@ class MoleculesNotInstalledError(RuntimeError):  # pragma: no cover
         super().__init__(message)
 
 
+class InvalidConfigurationError(RuntimeError):
+    """Used when user-requested split/data would not work."""
+
+    def __init__(self, message=None):
+        self.message = message
+        super().__init__(message)
+
+
 class NotImplementedError(RuntimeError):
     """Used when attempting to call a non-existent sampler."""
 
