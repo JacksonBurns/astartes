@@ -5,8 +5,7 @@ import warnings
 
 import numpy as np
 
-from astartes import train_test_split
-from astartes import train_val_test_split
+from astartes import train_test_split, train_val_test_split
 from astartes.samplers import (
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
