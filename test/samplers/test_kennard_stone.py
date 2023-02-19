@@ -72,52 +72,52 @@ class Test_kennard_stone(unittest.TestCase):
                 self.X,
                 self.y,
                 labels=self.labels,
-                test_size=0.25,
-                train_size=0.75,
+                test_size=0.7,
+                train_size=0.3,
                 sampler="kennard_stone",
             )
         # test that the known arrays equal the result from above
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_train,
-                np.array([[0, 0, 0], [1, 1, 1]]),
+                np.array([[0, 1, 0]]),
+                "Train X incorrect.",
             ),
-            "Train X incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_test,
-                np.array([[0, 1, 0]]),
+                np.array([[0, 0, 0], [1, 1, 1]]),
+                "Test X incorrect.",
             ),
-            "Test X incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_train,
-                np.array([1, 3]),
+                np.array([2]),
+                "Train y incorrect.",
             ),
-            "Train y incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_test,
-                np.array([2]),
+                np.array([1, 3]),
+                "Test y incorrect.",
             ),
-            "Test y incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_train,
-                np.array(["one", "three"]),
+                np.array(["two"]),
+                "Train labels incorrect.",
             ),
-            "Train labels incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_test,
-                np.array(["two"]),
+                np.array(["one", "three"]),
+                "Test labels incorrect.",
             ),
-            "Test labels incorrect.",
         )
 
     def test_kennard_stone_sample_no_warning(self):
@@ -135,8 +135,8 @@ class Test_kennard_stone(unittest.TestCase):
                 self.X,
                 self.y,
                 labels=self.labels,
-                test_size=0.33,
-                train_size=0.67,
+                test_size=0.67,
+                train_size=0.33,
                 sampler="kennard_stone",
             )
             self.assertFalse(

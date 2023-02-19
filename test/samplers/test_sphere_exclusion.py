@@ -63,58 +63,69 @@ class Test_sphere_exclusion(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_train,
-                np.array([[0, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 1, 0, 0, 0]]),
+                np.array(
+                    [
+                        [1, 0, 0, 0, 0],
+                        [1, 1, 0, 0, 0],
+                        [1, 1, 1, 0, 0],
+                        [1, 1, 1, 1, 0],
+                    ]
+                ),
+                "Train X incorrect.",
             ),
-            "Train X incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_test,
-                np.array([[1, 1, 1, 0, 0], [1, 1, 1, 1, 0]]),
+                np.array(
+                    [
+                        [0, 0, 0, 0, 0],
+                    ]
+                ),
+                "Test X incorrect.",
             ),
-            "Test X incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_train,
-                np.array([1, 2, 3]),
+                np.array([2, 3, 4, 5]),
+                "Train y incorrect.",
             ),
-            "Train y incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_test,
-                np.array([4, 5]),
+                np.array([1]),
+                "Test y incorrect.",
             ),
-            "Test y incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_train,
-                np.array(["one", "two", "three"]),
+                np.array(["two", "three", "four", "five"]),
+                "Train labels incorrect.",
             ),
-            "Train labels incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_test,
-                np.array(["four", "five"]),
+                np.array(["one"]),
+                "Test labels incorrect.",
             ),
-            "Test labels incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 clusters_train,
-                np.array([2, 1, 1]),
+                np.array([1, 1, 0, 0]),
+                "Train clusters incorrect.",
             ),
-            "Train clusters incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 clusters_test,
-                np.array([0, 0]),
+                np.array([2]),
+                "Test clusters incorrect.",
             ),
-            "Test clusters incorrect.",
         )
 
     def test_sphereexclusion(self):
