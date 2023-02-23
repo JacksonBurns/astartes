@@ -21,19 +21,15 @@ class Test_DBSCAN(unittest.TestCase):
                 [0.1, 0.2],
                 [0, 0],
                 [-0.1, -0.1],
-
                 [1.1, 1.3],
                 [1, 1],
                 [0.9, 0.8],
-
                 [-1.3, -1.1],
                 [-1, -1],
                 [-0.9, -0.8],
-
                 [-1.2, 1.1],
                 [-1, 1],
                 [-0.9, 0.8],
-
                 [1.1, -1.2],
                 [1, -1],
                 [0.9, -0.7],
@@ -41,80 +37,102 @@ class Test_DBSCAN(unittest.TestCase):
         )
 
         self.y = np.array(
-            [1, 1, 1,
-             2, 2, 2,
-             3, 3, 3,
-             4, 4, 4,
-             5, 5, 5,
+            [
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3,
+                4,
+                4,
+                4,
+                5,
+                5,
+                5,
             ]
         )
 
         self.labels = np.array(
             [
-                "one", "one", "one",
-                "two", "two", "two",
-                "three", "three", "three",
-                "four", "four", "four",
-                "five", "five", "five",
+                "one",
+                "one",
+                "one",
+                "two",
+                "two",
+                "two",
+                "three",
+                "three",
+                "three",
+                "four",
+                "four",
+                "four",
+                "five",
+                "five",
+                "five",
             ]
         )
 
     def test_dbscan_sampling(self):
         """Use dbscan in the train_test_split and verify results."""
         (
-                X_train,
-                X_test,
-                y_train,
-                y_test,
-                labels_train,
-                labels_test,
-                clusters_train,
-                clusters_test,
-            ) = train_test_split(
-                self.X,
-                self.y,
-                labels=self.labels,
-                test_size=0.2,
-                train_size=0.8,
-                sampler="dbscan",
-                hopts={
-                    "eps": 1,
-                    "min_samples": 3,
-                },
-            )
+            X_train,
+            X_test,
+            y_train,
+            y_test,
+            labels_train,
+            labels_test,
+            clusters_train,
+            clusters_test,
+        ) = train_test_split(
+            self.X,
+            self.y,
+            labels=self.labels,
+            test_size=0.2,
+            train_size=0.8,
+            sampler="dbscan",
+            hopts={
+                "eps": 1,
+                "min_samples": 3,
+            },
+        )
 
         # test that the known arrays equal the result from above
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_train,
-                np.array([
-                    [1.1, 1.3],
-                    [1, 1],
-                    [0.9, 0.8],
-
-                    [-1.3, -1.1],
-                    [-1, -1],
-                    [-0.9, -0.8],
-
-                    [-1.2, 1.1],
-                    [-1, 1],
-                    [-0.9, 0.8],
-
-                    [1.1, -1.2],
-                    [1, -1],
-                    [0.9, -0.7],
-                ]),
+                np.array(
+                    [
+                        [1.1, 1.3],
+                        [1, 1],
+                        [0.9, 0.8],
+                        [-1.3, -1.1],
+                        [-1, -1],
+                        [-0.9, -0.8],
+                        [-1.2, 1.1],
+                        [-1, 1],
+                        [-0.9, 0.8],
+                        [1.1, -1.2],
+                        [1, -1],
+                        [0.9, -0.7],
+                    ]
+                ),
             ),
             "Train X incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_test,
-                np.array([
-                    [0.1, 0.2],
-                    [0, 0],
-                    [-0.1, -0.1],
-                ]),
+                np.array(
+                    [
+                        [0.1, 0.2],
+                        [0, 0],
+                        [-0.1, -0.1],
+                    ]
+                ),
             ),
             "Test X incorrect.",
         )
@@ -122,10 +140,19 @@ class Test_DBSCAN(unittest.TestCase):
             np.testing.assert_array_equal(
                 y_train,
                 np.array(
-                    [2, 2, 2,
-                     3, 3, 3,
-                     4, 4, 4,
-                     5, 5, 5,
+                    [
+                        2,
+                        2,
+                        2,
+                        3,
+                        3,
+                        3,
+                        4,
+                        4,
+                        4,
+                        5,
+                        5,
+                        5,
                     ]
                 ),
             ),
@@ -142,11 +169,20 @@ class Test_DBSCAN(unittest.TestCase):
             np.testing.assert_array_equal(
                 labels_train,
                 np.array(
-                    ["two", "two", "two",
-                     "three", "three", "three",
-                     "four", "four", "four",
-                     "five", "five", "five"
-                     ]
+                    [
+                        "two",
+                        "two",
+                        "two",
+                        "three",
+                        "three",
+                        "three",
+                        "four",
+                        "four",
+                        "four",
+                        "five",
+                        "five",
+                        "five",
+                    ]
                 ),
             ),
             "Train labels incorrect.",
@@ -158,18 +194,25 @@ class Test_DBSCAN(unittest.TestCase):
             ),
             "Test labels incorrect.",
         )
-        print('clusters_train')
-        print(clusters_train)
         self.assertIsNone(
             np.testing.assert_array_equal(
                 clusters_train,
                 np.array(
-                    [1, 1, 1,
-                     2, 2, 2,
-                     3, 3, 3,
-                     4, 4, 4,
+                    [
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        3,
+                        3,
+                        3,
+                        4,
+                        4,
+                        4,
                     ]
-                )
+                ),
             ),
             "Train clusters incorrect.",
         )
