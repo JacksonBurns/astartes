@@ -28,7 +28,6 @@ jobs:
         with:
           environment-file: false
           environment-name: temp
-          auto-update-conda: true
           channels: defaults,conda-forge
           channel-priority: flexible
           extra-specs: |
