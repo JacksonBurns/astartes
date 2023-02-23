@@ -24,6 +24,7 @@ class SphereExclusion(AbstractSampler):
         super().__init__(*args)
 
     def _sample(self):
+        """Cluster X according to a Sphere Exclusion-like algorithm with arbitrary distance metrics."""
         # euclidian, cosine, or city block from get_configs
         # calculate pdist
         dist_array = pdist(self.X, metric=self.get_config("metric", "euclidean"))

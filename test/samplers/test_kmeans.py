@@ -14,6 +14,7 @@ class Test_kmeans(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
+        """Convenience attributes for later tests."""
         self.X = np.array(
             [
                 [0, 0, 0, 0, 0],

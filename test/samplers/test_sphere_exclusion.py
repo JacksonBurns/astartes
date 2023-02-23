@@ -16,6 +16,7 @@ class Test_sphere_exclusion(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
+        """Convenience attributes for later tests."""
         self.X = np.array(
             [
                 [0, 0, 0, 0, 0],

@@ -14,6 +14,7 @@ class Test_duplex(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
+        """Convenience attributes for later tests."""
         return
 
     def test_duplex(self):

@@ -21,6 +21,7 @@ class Test_astartes(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
+        """Convenience attributes for later tests."""
         self.X = np.array(
             [
                 [0, 0, 0, 0, 0],
@@ -342,7 +343,7 @@ class Test_astartes(unittest.TestCase):
             )
 
     def test_train_test_split(self):
-        """ """
+        """Funational test of train_test_split with imperfect splitting."""
         with self.assertWarns(ImperfectSplittingWarning):
             (
                 X_train,
@@ -366,7 +367,7 @@ class Test_astartes(unittest.TestCase):
                 self.assertEqual(elt, ans)
 
     def test_return_indices(self):
-        """ """
+        """Test the ability to return the indices and not the values."""
         with self.assertWarns(ImperfectSplittingWarning):
             (indices_train, indices_test,) = train_test_split(
                 np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
@@ -384,7 +385,7 @@ class Test_astartes(unittest.TestCase):
                 self.assertEqual(elt, ans)
 
     def test_return_indices_with_validation(self):
-        """ """
+        """Test the ability to return indices in train_val_test_split"""
         with self.assertWarns(ImperfectSplittingWarning):
             (indices_train, indices_val, indices_test,) = train_val_test_split(
                 np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),

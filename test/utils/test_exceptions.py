@@ -15,6 +15,7 @@ class Test_exceptions(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
+        """Convenience attributes for later tests."""
         return
 
     def test_train_test_split(self):
