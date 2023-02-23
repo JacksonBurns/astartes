@@ -2,6 +2,7 @@ from difflib import get_close_matches
 
 from astartes.samplers import (
     ALL_SAMPLERS,
+    DBSCAN,
     KennardStone,
     KMeans,
     Random,
@@ -19,6 +20,8 @@ class SamplerFactory:
             sampler_class = Random
         elif self.sampler == "kennard_stone":
             sampler_class = KennardStone
+        elif self.sampler == "dbscan":
+            sampler_class = DBSCAN
         elif self.sampler == "kmeans":
             sampler_class = KMeans
         elif self.sampler == "sphere_exclusion":
