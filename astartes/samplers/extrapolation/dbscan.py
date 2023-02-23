@@ -10,7 +10,7 @@ class DBSCAN(AbstractSampler):
     def _sample(self):
         """
         Implements the DBSCAN sampler to identify clusters.
-        Density-Based Spatial Clustering of Applications with Noise finds 
+        Density-Based Spatial Clustering of Applications with Noise finds
         core samples in regions of high density and expands clusters from them.
         This algorithm is good for data which contains clusters of similar density.
         """
