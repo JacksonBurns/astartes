@@ -23,6 +23,22 @@ def train_val_test_split(
     hopts: dict = {},
     return_indices: bool = False,
 ):
+    """Deterministic train_test_splitting of arbitrary arrays.
+
+    Args:
+        X (np.array): Numpy array of feature vectors.
+        y (np.array, optional): Targets corresponding to X, must be of same size. Defaults to None.
+        labels (np.array, optional): Labels corresponding to X, must be of same size. Defaults to None.
+        train_size (float, optional): Fraction of dataset to use in training set. Defaults to 0.8.
+        val_size (float, optional): Fraction of dataset to use in validation set. Defaults to 0.1.
+        test_size (float, optional): Fraction of dataset to use in test set. Defaults to 0.1.
+        sampler (str, optional): Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to "random".
+        hopts (dict, optional): Hyperparameters for the sampler used above. Defaults to {}.
+        return_indices (bool, optional): True to return indices of train/test instead of values. Defaults to False.
+
+    Returns:
+        np.array: X, y, and labels train/val/test data, or indices.
+    """
     msg = ""
     if y is not None and len(y) != len(X):
         msg += "len(y)={:d} ".format(len(y))
@@ -67,22 +83,20 @@ def train_test_split(
     hopts: dict = {},
     return_indices: bool = False,
 ):
-    """Deterministic train_test_splitting of arbitrary matrices.
+    """Deterministic train_test_splitting of arbitrary arrays.
 
     Args:
-        X (np.array): Features.
-        y (np.array, optional): Targets corresponding to features, must be of same size. Defaults to None.
+        X (np.array): Numpy array of feature vectors.
+        y (np.array, optional): Targets corresponding to X, must be of same size. Defaults to None.
+        labels (np.array, optional): Labels corresponding to X, must be of same size. Defaults to None.
+        train_size (float, optional): Fraction of dataset to use in training set. Defaults to 0.75.
         test_size (float, optional): Fraction of dataset to use in test set. Defaults to None.
-        train_size (float, optional): Fraction of dataset to use in training (test+train~1). Defaults to 0.75.
         sampler (str, optional): Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to "random".
         hopts (dict, optional): Hyperparameters for the sampler used above. Defaults to {}.
-        labels (np.array, optional): Labels for supervised sampling. Defaults to None.
-
-    Raises:
-        NotImplementedError: Raised when an invalid sampler name is used.
+        return_indices (bool, optional): True to return indices of train/test instead of values. Defaults to False.
 
     Returns:
-        np.array: Training and test data split into arrays.
+        np.array: X, y, and labels train/val/test data, or indices.
     """
     return train_val_test_split(
         X, y, labels, train_size, 0, test_size, sampler, hopts, return_indices
@@ -96,6 +110,22 @@ def _extrapolative_sampling(
     train_size,
     return_indices,
 ):
+    """Helper function to perform extrapolative sampling.
+
+    Attempts to fill train, val, and test without breaking up clusters. Prioiritizes underfilling
+    test and then val and then the balance goes into train (which is why the floats are given
+    in that order).
+
+    Args:
+        sampler_instance (sampler): The fit sampler instance.
+        test_size (float): Fraction of data to use in test.
+        val_size (float): Fraction of data to use in val.
+        train_size (float): Fraction of data to use in train.
+        return_indices (bool): Return indices or the arrays themselves.
+
+    Returns:
+        calls: _return_helper
+    """
     # calculate "goal" splitting sizes
     n_test_samples = floor(len(sampler_instance.X) * test_size)
     n_val_samples = floor(len(sampler_instance.X) * val_size)
@@ -138,6 +168,22 @@ def _interpolative_sampling(
     train_size,
     return_indices,
 ):
+    """Helper function to perform interpolative sampling.
+
+    Attempts to fill train, val, and test within rounding limits. Prioiritizes underfilling
+    test and then val and then the balance goes into train (which is why the floats are given
+    in that order).
+
+    Args:
+        sampler_instance (sampler): The fit sampler instance.
+        test_size (float): Fraction of data to use in test.
+        val_size (float): Fraction of data to use in val.
+        train_size (float): Fraction of data to use in train.
+        return_indices (bool): Return indices or the arrays themselves.
+
+    Returns:
+        calls: _return_helper
+    """
     # build test first
     n_test_samples = floor(len(sampler_instance.X) * test_size)
     n_val_samples = floor(len(sampler_instance.X) * val_size)
@@ -162,6 +208,18 @@ def _return_helper(
     test_idxs,
     return_indices,
 ):
+    """Convenience function to return the requested arrays appropriately.
+
+    Args:
+        sampler_instance (sampler): The fit sampler instance.
+        test_size (float): Fraction of data to use in test.
+        val_size (float): Fraction of data to use in val.
+        train_size (float): Fraction of data to use in train.
+        return_indices (bool): Return indices or the arrays themselves.
+
+    Returns:
+        np.array: Either many arrays or indices in arrays.
+    """
     if return_indices:
         if val_idxs.any():
             return train_idxs, val_idxs, test_idxs
@@ -212,6 +270,19 @@ def _check_actual_split(
     val_size,
     test_size,
 ):
+    """Check for empty sets and imperfect splits in the results.
+
+    Args:
+        train_idxs (np.array): The resulting training indices from sampling.
+        val_idxs (np.array): Validation indices.
+        test_idxs (np.array): Testing indices.
+        train_size (float): The user-requested (or normalized) training fraction.
+        val_size (float): The user-requested (or normalized) validation fraction.
+        test_size (float): The user-requested (or normalized) testing fraction.
+
+    Raises:
+        InvalidConfigurationError: Raised when a set turns out empty due to configuration.
+    """
     # split may have resulted in empty lists
     msg = ""
     if not len(train_idxs):
@@ -262,7 +333,7 @@ def _check_actual_split(
 
 
 def _normalize_split_sizes(train_size, val_size, test_size):
-    """Normalize requested inputs to between zero and one (summed)."""
+    """Normalize requested inputs to between zero and one (summed) with extensive validation."""
     if not train_size and not test_size:  # neither - error
         raise InvalidConfigurationError(
             "train_size or test_size must be nonzero (val_size will default to 0.0).\n"
