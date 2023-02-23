@@ -1,7 +1,7 @@
 name: Generate Docs
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
   workflow_dispatch:
 
@@ -16,24 +16,35 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           auto-update-conda: true
-          python-version: '3.10'
+          python-version: "3.10"
       - name: Install Dependencies
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           python -m pip install -e .[molecules]
           python -m pip install sphinx sphinx-rtd-theme m2r mistune==0.8.4
-          
+
       - uses: actions/checkout@v3
         with:
           ref: docs
-      - name: Update Docs to Main    
+      - name: Update Docs to Main
         run: |
           git fetch --all
           git reset --hard origin/main
-        
+
       - name: Generate Documentation
         run: |
+          mv docs/index.rst .
+          rm docs/*.rst || true
+          mv index.rst docs/
+          rm README.rst || true
+          rm docs/README.rst || true
+          rm sklearn_to_astartes.rst || true
+          rm docs/sklearn_to_astartes.rst || true
+          m2r README.md
+          m2r sklearn_to_astartes.md
+          mv README.rst docs
+          mv sklearn_to_astartes.rst docs
           cd docs
           rm *.html *.doctree || true
           sphinx-apidoc -f -o . ..
@@ -42,7 +53,7 @@ jobs:
           cp -r _build/html/* .
           cp -r _build/doctrees/* .
           echo "" > .nojekyll
-          
+
       - name: Push to Docs Branch
         run: |
           git add .
