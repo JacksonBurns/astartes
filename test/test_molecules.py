@@ -59,7 +59,8 @@ class Test_molecules(unittest.TestCase):
                     self.X,
                     self.y,
                     sampler=sampler,
-                    fprints_hopts={"n_bits": 100},
+                    hopts={"eps": 5},
+                    fprints_hopts={"n_bits": 1000},
                 )
 
     def test_fingerprints(self):
