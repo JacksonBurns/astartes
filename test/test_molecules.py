@@ -26,7 +26,7 @@ class Test_molecules(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-
+        """Convenience attributes for later tests."""
         with open(os.path.join("test", "data", "qm9_smiles.txt"), "r") as file:
             lines = file.readlines()
 
@@ -40,7 +40,7 @@ class Test_molecules(unittest.TestCase):
         self.y_long = np.array(list(range(len(qm9_smiles_full))))
 
     def test_molecules(self):
-        """ """
+        """Try train_test_split molecules with every interpolative sampler."""
         for sampler in IMPLEMENTED_INTERPOLATION_SAMPLERS:
             tts = train_test_split_molecules(
                 self.X,
@@ -51,7 +51,7 @@ class Test_molecules(unittest.TestCase):
             )
 
     def test_validation_split_molecules(self):
-        """ """
+        """Try train_val_test_split_molecule with every extrapolative sampler."""
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             for sampler in IMPLEMENTED_EXTRAPOLATION_SAMPLERS:
@@ -64,6 +64,7 @@ class Test_molecules(unittest.TestCase):
                 )
 
     def test_fingerprints(self):
+        """Test using different fingerprints with the molecular featurization."""
         for fprint in [
             "morgan_fingerprint",
             "topological_fingerprint",
@@ -79,6 +80,7 @@ class Test_molecules(unittest.TestCase):
                 )
 
     def test_fprint_hopts(self):
+        """Test specifying hyperparameters for the molecular featurization step."""
         tts = train_test_split_molecules(
             self.X,
             self.y,
@@ -97,6 +99,7 @@ class Test_molecules(unittest.TestCase):
         )
 
     def test_sampler_hopts(self):
+        """Test ability to pass through sampler hopts with molecules interface, expecting no warnings."""
         with warnings.catch_warnings(record=True) as w:
             warnings.filterwarnings("always")
             tts = train_test_split_molecules(
@@ -119,6 +122,7 @@ class Test_molecules(unittest.TestCase):
             )
 
     def test_maximum_call(self):
+        """Specify ALL the optional hyperparameters!"""
         tts = train_test_split_molecules(
             self.X,
             self.y,

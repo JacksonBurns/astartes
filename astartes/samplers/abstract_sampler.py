@@ -43,6 +43,15 @@ class AbstractSampler(ABC):
         """
 
     def get_config(self, key, default=None):
+        """Getter to sampler._configs
+
+        Args:
+            key (str): String parameter for the sampler.
+            default (any, optional): Default to return if key not present. Defaults to None.
+
+        Returns:
+            any: value at provided key, or else default.
+        """
         return self._configs.get(key, default)
 
     def get_sample_idxs(self, n_samples):
@@ -56,9 +65,19 @@ class AbstractSampler(ABC):
         return out
 
     def get_sorted_cluster_counter(self):
+        """Getter for self._sorted_cluster_counter, used by main
+
+        Returns:
+            dict: The dictionary of clusters and lengths, sorted by length.
+        """
         return self._sorted_cluster_counter
 
     def get_clusters(self):
+        """Getter for the cluster labels.
+
+        Returns:
+            np.array: Cluster labels.
+        """
         return self._samples_clusters
 
     def _set_sorted_cluster_counter(self):

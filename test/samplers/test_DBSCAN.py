@@ -15,6 +15,7 @@ class Test_DBSCAN(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
+        """Convenience attributes for later tests."""
         # create 5 clusters
         self.X = np.array(
             [

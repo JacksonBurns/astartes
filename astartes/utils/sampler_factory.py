@@ -13,9 +13,28 @@ from astartes.utils.exceptions import NotImplementedError
 
 class SamplerFactory:
     def __init__(self, sampler):
+        """Initialize SamplerFactory and copy a lowercased 'sampler' into an attribute.
+
+        Args:
+            sampler (string): The desired sampler.
+        """
         self.sampler = sampler.lower()
 
     def get_sampler(self, X, y, labels, hopts):
+        """Instantiate (which also performs fitting) and return the sampler.
+
+        Args:
+            X (np.array): Feature array.
+            y (np.array): Target array.
+            labels (np.array): Label array.
+            hopts (dict): Hyperparameters for the sampler.
+
+        Raises:
+            NotImplementedError: Raised when an non-existent or not yet implemented sampler is requested.
+
+        Returns:
+            astartes.sampler: The fit sampler instance.
+        """
         if self.sampler == "random":
             sampler_class = Random
         elif self.sampler == "kennard_stone":
