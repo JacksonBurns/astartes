@@ -1,7 +1,5 @@
-from collections import Counter
 from math import floor
 
-import numpy as np
 from sklearn.cluster import KMeans as sk_KMeans
 
 from astartes.samplers import AbstractSampler
