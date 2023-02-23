@@ -25,9 +25,27 @@ def train_val_test_split_molecules(
     sampler: str = "random",
     hopts: dict = {},
     fingerprint: str = "morgan_fingerprint",
-    return_as: str = "fprint",
     fprints_hopts: dict = {},
+    return_indices: bool = False,
 ):
+    """Deterministic train_test_splitting of SMILES strings.
+
+    Args:
+        smiles (List[str]): List of SMILES strings representing molecules or reactions.
+        y (np.array, optional): Targets corresponding to SMILES, must be of same size. Defaults to None.
+        labels (np.array, optional): Labels corresponding to SMILES, must be of same size. Defaults to None.
+        train_size (float, optional): Fraction of dataset to use in training set. Defaults to 0.8.
+        val_size (float, optional): Fraction of dataset to use in validation set. Defaults to 0.1.
+        test_size (float, optional): Fraction of dataset to use in test set. Defaults to 0.1.
+        sampler (str, optional): Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to "random".
+        hopts (dict, optional): Hyperparameters for the sampler used above. Defaults to {}.
+        fingerprint (str, optional): Molecular fingerprint to be used from AIMSim. Defaults to "morgan_fingerprint".
+        fprints_hopts (dict, optional): Hyperparameters for AIMSim featurization. Defaults to {}.
+        return_indices (bool, optional): True to return indices of train/test instead of values. Defaults to False.
+
+    Returns:
+        np.array: X, y, and labels train/val/test data, or indices.
+    """
     X = _featurize(smiles, fingerprint, fprints_hopts)
     return train_val_test_split(
         X,
@@ -38,6 +56,7 @@ def train_val_test_split_molecules(
         train_size=train_size,
         sampler=sampler,
         hopts=hopts,
+        return_indices=return_indices,
     )
 
 
@@ -50,9 +69,26 @@ def train_test_split_molecules(
     sampler: str = "random",
     hopts: dict = {},
     fingerprint: str = "morgan_fingerprint",
-    return_as: str = "fprint",
     fprints_hopts: dict = {},
+    return_indices: bool = False,
 ):
+    """Deterministic train/test splitting of SMILES strings.
+
+    Args:
+        smiles (List[str]): List of SMILES strings representing molecules or reactions.
+        y (np.array, optional): Targets corresponding to SMILES, must be of same size. Defaults to None.
+        labels (np.array, optional): Labels corresponding to SMILES, must be of same size. Defaults to None.
+        train_size (float, optional): Fraction of dataset to use in training (test+train~1). Defaults to 0.75.
+        test_size (float, optional): Fraction of dataset to use in test set. Defaults to None.
+        sampler (str, optional): Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to "random".
+        hopts (dict, optional): Hyperparameters for the sampler used above. Defaults to {}.
+        fingerprint (str, optional): Molecular fingerprint to be used from AIMSim. Defaults to "morgan_fingerprint".
+        fprints_hopts (dict, optional): Hyperparameters for AIMSim featurization. Defaults to {}.
+        return_indices (bool, optional): True to return indices of train/test instead of values. Defaults to False.
+
+    Returns:
+        np.array: X, y, and labels train/test data, or indices.
+    """
     # turn the smiles into an input X
     X = _featurize(smiles, fingerprint, fprints_hopts)
 
@@ -65,10 +101,21 @@ def train_test_split_molecules(
         train_size=train_size,
         sampler=sampler,
         hopts=hopts,
+        return_indices=return_indices,
     )
 
 
 def _featurize(smiles, fingerprint, fprints_hopts):
+    """Call AIMSim's Molecule to featurize the SMILES string according to the arguments.
+
+    Args:
+        smiles (str): SMILES string.
+        fingerprint (str): The molecular fingerprint to be used.
+        fprints_hopts (dict): Hyperparameters for AIMSim.
+
+    Returns:
+        np.array: X array (featurized SMILES)
+    """
     X = []
     for smile in smiles:
         mol = Molecule(mol_smiles=smile)
