@@ -7,6 +7,7 @@ from astartes.samplers import (
     KMeans,
     Random,
     SphereExclusion,
+    OptiSim,
 )
 from astartes.utils.exceptions import SamplerNotImplementedError
 
@@ -45,6 +46,8 @@ class SamplerFactory:
             sampler_class = KMeans
         elif self.sampler == "sphere_exclusion":
             sampler_class = SphereExclusion
+        elif self.sampler == "optisim":
+            sampler_class = OptiSim
         else:
             possiblity = get_close_matches(
                 self.sampler,
