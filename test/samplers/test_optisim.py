@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers.interpolation import optisim
+from astartes.samplers.extrapolation import optisim
 
 
 class Test_optisim(unittest.TestCase):
