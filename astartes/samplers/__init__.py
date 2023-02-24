@@ -2,7 +2,7 @@
 from .abstract_sampler import AbstractSampler
 
 # implementations
-from .extrapolation import DBSCAN, KMeans, Scaffold, SphereExclusion, OptiSim
+from .extrapolation import DBSCAN, KMeans, OptiSim, Scaffold, SphereExclusion
 from .interpolation import MTSD, DOptimal, Duplex, KennardStone, Random
 
 IMPLEMENTED_INTERPOLATION_SAMPLERS = (
