@@ -93,13 +93,11 @@ class OptiSim(AbstractSampler):
         # since it would require nested while loops. Thus, we will introduce an break counter
         # and use it as a backup (proboably good policy anyway).
         emergency_break = 0
-        # worst case, we try putting each sample into each cluster
+        # worst case, we try putting each sample into each cluster once
         _it_limit = M * n_samples
 
-        while (
-            len(selection_set) < M  # selection set not yet full
-            and emergency_break < _it_limit  # no infinite loops here
-        ):
+        # continue as long as selection set is not full (and avoid infinite loop)
+        while len(selection_set) < M and emergency_break < _it_limit:
             if len(subsample_set) == K:  # 3a
                 # pick subsample member most dissimilar to the selection set
                 # by adding the distance of each subsample member from
