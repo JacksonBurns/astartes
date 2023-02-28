@@ -5,9 +5,9 @@ from astartes.samplers import (
     DBSCAN,
     KennardStone,
     KMeans,
+    OptiSim,
     Random,
     SphereExclusion,
-    OptiSim,
 )
 from astartes.utils.exceptions import SamplerNotImplementedError
 
