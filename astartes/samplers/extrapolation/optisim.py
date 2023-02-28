@@ -13,7 +13,7 @@ The original algorithm:
  - Create an empty selection set.
 
 2. Remove a random point from the candidates.
- - if it has a similarity greater than a given cutoff to the members of the selection set,
+ - if it has a similarity greater than a given cutoff to any of the members of the selection set,
  recycle it (or conversely, if it is within a cutoff distance)
  - otherwise, add to subsample set
 
@@ -50,9 +50,124 @@ Likely just check for no more points being possible to fit into the subsample, a
 exit if that is the case.
 
 """
+from math import floor
+
+import numpy as np
+from scipy.spatial.distance import pdist
 
 from astartes.samplers import AbstractSampler
 
 
 class OptiSim(AbstractSampler):
-    pass
+    def __init__(self, *args):
+        super().__init__(*args)
+
+    def _sample(self):
+        """Implementes the OptiSim sampler"""
+        self._init_random(self.get_config("random_state", 42))
+        n_samples = len(self.X)
+
+        # pull out the user configs, named as they are in the original algorithm
+        # the max number of clusters to find
+        M = self.get_config("n_clusters", 10)
+        # use up to 5% of the data per iteration in sampler
+        K = self.get_config("max_subsample_size", 1 + floor(n_samples * 0.05))
+        # up to 10% distance is good enough for default
+        c = self.get_config("distance_cutoff", 0.10)
+
+        # all of the sets described in the paper will operate with indices
+        selection_set = set()
+        subsample_set = set()
+        recycling_bin = set()
+        candidate_set = set(range(n_samples))
+
+        # pick an arbitrary first member of the selection set
+        initial_selection = self.rchoose(candidate_set)
+        self.move_item(initial_selection, candidate_set, selection_set)
+
+        # pick an arbitrary starting point, add to subsample, remove from candidates
+        start_sample = self.rchoose(candidate_set)
+        self.move_item(start_sample, candidate_set, subsample_set)
+
+        # Step 5 in the process is rare and does not fit well with the below implementation
+        # since it would require nested while loops. Thus, we will introduce an break counter
+        # and use it as a backup (proboably good policy anyway).
+        emergency_break = 0
+        # worst case, we try putting each sample into each cluster
+        _it_limit = M * n_samples
+
+        while (
+            len(selection_set) < M  # selection set not yet full
+            and emergency_break < _it_limit  # no infinite loops here
+        ):
+            if len(subsample_set) == K:  # 3a
+                # pick subsample member most dissimilar to the selection set
+                # by adding the distance of each subsample member from
+                # the members of the selection set
+                distance_scores = {}
+                for sample in subsample_set:
+                    distance_scores[sample] = 0.0
+                    for selection_sample in selection_set:
+                        distance_scores[sample] += self.get_dist(
+                            sample, selection_sample
+                        )
+                furthest_sample = max(distance_scores, key=distance_scores.get)
+                self.move_item(furthest_sample, subsample_set, selection_set)
+                # move other subsampled items to recycling, clear subsample
+                recycling_bin.update(subsample_set)
+                subsample_set.clear()
+            elif not len(candidate_set):  # 3b
+                # move data from recycling to candidate list
+                candidate_set.update(recycling_bin)
+                recycling_bin.clear()
+            else:  # subsample not full, still more candidates, attempt to add
+                candidate_sample = self.rchoose(candidate_set)
+                if any(  # it is different from all the
+                    [self.get_dist(candidate_sample, i) < c for i in selection_set]
+                ):
+                    self.move_item(candidate_sample, candidate_set, recycling_bin)
+                else:
+                    self.move_item(candidate_sample, candidate_set, subsample_set)
+
+            emergency_break += 1
+
+        # now we assign the clusters based on which samples are closest to which members
+        # of the selection set
+        cluster_labels = dict(zip(selection_set, range(len(selection_set))))
+        labels = np.full(n_samples, fill_value=-1, dtype=int)
+        for sample in range(n_samples):
+            if sample in cluster_labels.keys():  # cluster center
+                labels[sample] = cluster_labels[sample]
+            else:  # find which cluster center is closest
+                distances = {
+                    i: self.get_dist(sample, i) for i in cluster_labels.values()
+                }
+                labels[sample] = min(distances, key=distances.get)
+
+        self._samples_clusters = labels
+
+    def _init_random(self, random_state):
+        """This uses a lot of random numbers, so make them convenient to reach."""
+        self._rng = np.random.default_rng(seed=random_state)
+        return
+
+    def rchoose(self, set):
+        """Choose a random element from a set with self._rng"""
+        return self._rng.choice(list(set))
+
+    def get_dist(self, i, j):
+        """Calculates pdist and returns distance between two samples"""
+        if not hasattr(self, "_pdist"):
+            # calculate the distance matrix, normalize it
+            dist_array = pdist(self.X, metric=self.get_config("metric", "euclidean"))
+            self._pdist = np.divide(
+                dist_array - np.amin(dist_array),
+                np.amax(dist_array) - np.amin(dist_array),
+            )
+        return self._pdist[len(self.X) * i + j - ((i + 2) * (i + 1)) // 2]
+
+    def move_item(self, item, source_set, destintation_set):
+        """Moves item from source_set to destination_set"""
+        destintation_set.add(item)
+        source_set.remove(item)
+        return
