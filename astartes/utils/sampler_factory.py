@@ -8,7 +8,7 @@ from astartes.samplers import (
     Random,
     SphereExclusion,
 )
-from astartes.utils.exceptions import NotImplementedError
+from astartes.utils.exceptions import SamplerNotImplementedError
 
 
 class SamplerFactory:
@@ -30,7 +30,7 @@ class SamplerFactory:
             hopts (dict): Hyperparameters for the sampler.
 
         Raises:
-            NotImplementedError: Raised when an non-existent or not yet implemented sampler is requested.
+            SamplerNotImplementedError: Raised when an non-existent or not yet implemented sampler is requested.
 
         Returns:
             astartes.sampler: The fit sampler instance.
@@ -56,7 +56,7 @@ class SamplerFactory:
                 if possiblity
                 else " Try help(train_test_split)."
             )
-            raise NotImplementedError(
+            raise SamplerNotImplementedError(
                 "Sampler {:s} has not been implemented.".format(self.sampler) + addendum
             )
         return sampler_class(X, y, labels, hopts)

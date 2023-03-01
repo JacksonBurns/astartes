@@ -17,7 +17,7 @@ class InvalidConfigurationError(RuntimeError):
         super().__init__(message)
 
 
-class NotImplementedError(RuntimeError):
+class SamplerNotImplementedError(RuntimeError):
     """Used when attempting to call a non-existent sampler."""
 
     def __init__(self, message=None):
