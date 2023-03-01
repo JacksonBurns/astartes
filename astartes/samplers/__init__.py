@@ -16,7 +16,7 @@ IMPLEMENTED_INTERPOLATION_SAMPLERS = (
 
 IMPLEMENTED_EXTRAPOLATION_SAMPLERS = (
     "dbscan",
-    # "scaffold",
+    "scaffold",
     "kmeans",
     "optisim",
     "sphere_exclusion",
