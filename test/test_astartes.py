@@ -10,7 +10,7 @@ from astartes.samplers import (
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
-from astartes.utils.exceptions import InvalidConfigurationError, NotImplementedError
+from astartes.utils.exceptions import InvalidConfigurationError, SamplerNotImplementedError
 from astartes.utils.warnings import ImperfectSplittingWarning, NormalizationWarning
 
 
@@ -326,7 +326,7 @@ class Test_astartes(unittest.TestCase):
 
     def test_close_mispelling_sampler(self):
         """Astartes should be helpful in the event of a typo."""
-        with self.assertRaises(NotImplementedError) as e:
+        with self.assertRaises(SamplerNotImplementedError) as e:
             train_test_split([], sampler="radnom")
             self.assertEqual(
                 e.exception,
@@ -335,7 +335,7 @@ class Test_astartes(unittest.TestCase):
 
     def test_not_implemented_sampler(self):
         """Astartes should suggest checking the docstring."""
-        with self.assertRaises(NotImplementedError) as e:
+        with self.assertRaises(SamplerNotImplementedError) as e:
             train_test_split([], sampler="MIT is overrated")
             self.assertEqual(
                 e.exception,
