@@ -1,3 +1,14 @@
+"""
+This sampler partitions the data based on the Bemis-Murcko scaffold function as implemented in RDKit.
+Bemis, G. W.; Murcko, M. A. The Properties of Known Drugs. 1. Molecular Frameworks. J. Med. Chem. 1996, 39, 2887−2893.
+Landrum, G. et al. RDKit: Open-Source Cheminformatics; 2006; https://www.rdkit.org.
+
+The goal is to cluster molecules that share the same scaffold.
+Later, these clusters will be assigned to training, validation, and testing split
+to create data splits that will measure extrapolation by testing on scaffolds
+that are not in the training set.
+
+"""
 from collections import defaultdict
 import warnings
 
