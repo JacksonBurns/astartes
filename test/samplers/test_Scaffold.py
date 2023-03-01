@@ -14,12 +14,14 @@ class Test_scaffold(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         """Convenience attributes for later tests."""
-        self.X = np.array([
-            'c1ccccc1',
-            'O=C1NCCO1',
-            'O=C1CCCCCN1',
-            'C1CCNCC1',
-        ])
+        self.X = np.array(
+            [
+                "c1ccccc1",
+                "O=C1NCCO1",
+                "O=C1CCCCCN1",
+                "C1CCNCC1",
+            ]
+        )
         self.y = np.array([0, 1, 2, 3])
         self.labels = np.array(
             [
@@ -50,14 +52,12 @@ class Test_scaffold(unittest.TestCase):
             sampler="scaffold",
             hopts={},
         )
-        
+
         # test that the known arrays equal the result from above
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_train,
-                np.array(
-                    ['O=C1NCCO1', 'O=C1CCCCCN1', 'C1CCNCC1']
-                ),
+                np.array(["O=C1NCCO1", "O=C1CCCCCN1", "C1CCNCC1"]),
             ),
             "Train X incorrect.",
         )

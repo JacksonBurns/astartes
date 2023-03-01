@@ -16,11 +16,13 @@ class NormalizationWarning(RuntimeWarning):
         self.message = message
         super().__init__(message)
 
+
 class NoMatchingScaffold(Warning):
     """
-    Used when an RDKit molecule does not match any 
+    Used when an RDKit molecule does not match any
     Bemis-Murcko scaffold and returns an empty string.
     """
+
     def __init__(self, message=None):
         self.message = message
         super().__init__(message)

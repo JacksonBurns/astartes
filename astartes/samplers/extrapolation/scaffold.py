@@ -25,8 +25,10 @@ class Scaffold(AbstractSampler):
     def __init__(self, *args):
         super().__init__(*args)
 
-        if not isinstance(self.X[0], str) and not isinstance(self.X[0], rdkit.Chem.rdchem.Mol):
-            msg = 'Scaffold class requires input X to be an iterable of SMILES strings'
+        if not isinstance(self.X[0], str) and not isinstance(
+            self.X[0], rdkit.Chem.rdchem.Mol
+        ):
+            msg = "Scaffold class requires input X to be an iterable of SMILES strings"
             raise TypeError(msg)
 
     def _sample(self):
@@ -36,9 +38,12 @@ class Scaffold(AbstractSampler):
         cluster_indices = np.zeros(len(self.X), dtype=np.int8)
         # give each cluster an arbitrary ID
         for cluster_id, (scaffold, indices) in enumerate(scaffold_to_indices.items()):
-            if scaffold == '':
-                warnings.warn(f'No matching scaffold was found for the {len(indices)} ' \
-                              f'molecules corresponding to indices {indices}', NoMatchingScaffold)
+            if scaffold == "":
+                warnings.warn(
+                    f"No matching scaffold was found for the {len(indices)} "
+                    f"molecules corresponding to indices {indices}",
+                    NoMatchingScaffold,
+                )
             for idx in indices:
                 cluster_indices[idx] = cluster_id
 
@@ -51,7 +56,7 @@ class Scaffold(AbstractSampler):
         Params:
             mols: A list of smiles strings or RDKit molecules.
 
-        Returns: 
+        Returns:
             A dictionary mapping each unique scaffold to all smiles (or smiles indices) which have that scaffold.
         """
         scaffolds = defaultdict(set)
@@ -60,7 +65,7 @@ class Scaffold(AbstractSampler):
             scaffolds[scaffold].add(i)
 
         return scaffolds
-    
+
     def str_to_mol(self, string, explicit_hydrogens=False):
         """
         Converts an InChI or SMILES string to an RDKit molecule.
@@ -73,7 +78,7 @@ class Scaffold(AbstractSampler):
             An RDKit molecule.
         """
         RDKIT_SMILES_PARSER_PARAMS = Chem.SmilesParserParams()
-        if string.startswith('InChI'):
+        if string.startswith("InChI"):
             mol = Chem.MolFromInchi(string, removeHs=not explicit_hydrogens)
         else:
             # Set params here so we don't remove hydrogens with atom mapping
@@ -85,7 +90,6 @@ class Scaffold(AbstractSampler):
         else:
             return Chem.RemoveHs(mol)
 
-
     def generate_bemis_murcko_scaffold(self, mol, include_chirality=False):
         """
         Compute the Bemis-Murcko scaffold for an RDKit molecule.
@@ -93,12 +97,13 @@ class Scaffold(AbstractSampler):
         Params:
             mol: A smiles string or an RDKit molecule.
             include_chirality: Whether to include chirality.
-        
+
         Returns:
             Bemis-Murcko scaffold
         """
         mol = self.str_to_mol(mol) if isinstance(mol, str) else mol
-        scaffold = MurckoScaffold.MurckoScaffoldSmiles(mol=mol, includeChirality=include_chirality)
+        scaffold = MurckoScaffold.MurckoScaffoldSmiles(
+            mol=mol, includeChirality=include_chirality
+        )
 
         return scaffold
-

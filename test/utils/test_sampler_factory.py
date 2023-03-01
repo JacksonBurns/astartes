@@ -29,7 +29,7 @@ class Test_sampler_factory(unittest.TestCase):
         """Call sampler factory on all inputs."""
         for sampler_name in ALL_SAMPLERS:
             if sampler_name == "scaffold":
-                continue    
+                continue
             test_factory = SamplerFactory(sampler_name)
             test_instance = test_factory.get_sampler(self.X, self.y, None, {})
             self.assertIsInstance(
