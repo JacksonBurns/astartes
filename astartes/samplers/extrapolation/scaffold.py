@@ -9,8 +9,8 @@ to create data splits that will measure extrapolation by testing on scaffolds
 that are not in the training set.
 
 """
-from collections import defaultdict
 import warnings
+from collections import defaultdict
 
 import numpy as np
 import rdkit
