@@ -5,6 +5,7 @@ from astartes.samplers import (
     DBSCAN,
     KennardStone,
     KMeans,
+    OptiSim,
     Random,
     SphereExclusion,
 )
@@ -45,6 +46,8 @@ class SamplerFactory:
             sampler_class = KMeans
         elif self.sampler == "sphere_exclusion":
             sampler_class = SphereExclusion
+        elif self.sampler == "optisim":
+            sampler_class = OptiSim
         else:
             possiblity = get_close_matches(
                 self.sampler,
