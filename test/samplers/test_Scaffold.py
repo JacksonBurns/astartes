@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 
 from astartes import train_test_split
-from astartes.samplers.extrapolation import Scaffold
+from astartes.samplers import Scaffold
 
 
 class Test_scaffold(unittest.TestCase):
@@ -136,6 +136,18 @@ class Test_scaffold(unittest.TestCase):
             len(scaffold_instance._samples_idxs),
             "Sample indices not set.",
         )
+
+    def test_incorrect_input(self):
+        """Calling with something other than SMILES should raise TypeError"""
+
+    def test_no_scaffold_found_warning(self):
+        """Molecules that cannot be scaffolded should raise a warning"""
+
+    def test_mol_from_inchi(self):
+        """Ability to load data from InChi inputs"""
+
+    def test_explicit_hydrogens(self):
+        """Include H in scaffold calculation"""
 
 
 if __name__ == "__main__":
