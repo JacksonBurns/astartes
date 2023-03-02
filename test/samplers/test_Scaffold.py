@@ -4,6 +4,8 @@ import numpy as np
 
 from astartes import train_test_split
 from astartes.samplers import Scaffold
+from astartes.utils.exceptions import InvalidConfigurationError
+from astartes.utils.warnings import NoMatchingScaffold
 
 
 class Test_scaffold(unittest.TestCase):
@@ -20,6 +22,12 @@ class Test_scaffold(unittest.TestCase):
                 "O=C1NCCO1",
                 "O=C1CCCCCN1",
                 "C1CCNCC1",
+            ]
+        )
+        self.X_inchi = np.array(
+            [
+                "InChI=1S/C6H6/c1-2-4-6-5-3-1/h1-6H",
+                "InChI=1S/C14H10/c1-2-6-12-10-14-8-4-3-7-13(14)9-11(12)5-1/h1-10H",
             ]
         )
         self.y = np.array([0, 1, 2, 3])
@@ -139,15 +147,39 @@ class Test_scaffold(unittest.TestCase):
 
     def test_incorrect_input(self):
         """Calling with something other than SMILES should raise TypeError"""
+        with self.assertRaises(TypeError):
+            train_test_split(
+                np.array([[1],[2]]),
+                sampler="scaffold",
+            )
 
     def test_no_scaffold_found_warning(self):
         """Molecules that cannot be scaffolded should raise a warning"""
+        with self.assertWarns(NoMatchingScaffold):
+            try:
+                train_test_split(
+                    np.array(['O','P']),
+                    sampler="scaffold",
+                )
+            except InvalidConfigurationError:
+                pass
 
     def test_mol_from_inchi(self):
         """Ability to load data from InChi inputs"""
+        Scaffold(
+            self.X_inchi,
+            None,
+            None,
+            {},
+        )
 
     def test_explicit_hydrogens(self):
         """Include H in scaffold calculation"""
+        self.fail("Related code inaccesible.")
+
+    def test_include_chirality(self):
+        """Include chirality in scaffold calculation"""
+        self.fail("Related code inaccesible.")
 
 
 if __name__ == "__main__":
