@@ -8,6 +8,7 @@ from astartes.samplers import (
     OptiSim,
     Random,
     SphereExclusion,
+    SPXY,
 )
 from astartes.utils.exceptions import SamplerNotImplementedError
 
@@ -48,6 +49,8 @@ class SamplerFactory:
             sampler_class = SphereExclusion
         elif self.sampler == "optisim":
             sampler_class = OptiSim
+        elif self.sampler == "spxy":
+            sampler_class = SPXY
         else:
             possiblity = get_close_matches(
                 self.sampler,
