@@ -34,5 +34,5 @@ jobs:
           python -m pip install notebook
       - name: Test Execution
         run: |
-          jupyter nbconvert --to script ${{ matrix.nb-file }}.ipynb
-          ipython ${{ matrix.nb-file }}.py
+          jupyter nbconvert --to script examples/${{ matrix.nb-file }}.ipynb
+          ipython examples/${{ matrix.nb-file }}.py
