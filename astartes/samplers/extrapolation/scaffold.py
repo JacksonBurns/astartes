@@ -60,7 +60,7 @@ class Scaffold(AbstractSampler):
         """
         scaffolds = defaultdict(set)
         for i, mol in enumerate(mols):
-            scaffold = self.generate_bemis_murcko_scaffold(mol)
+            scaffold = self.generate_bemis_murcko_scaffold(mol, self.get_config("include_chirality", False))
             scaffolds[scaffold].add(i)
 
         return scaffolds
@@ -100,7 +100,7 @@ class Scaffold(AbstractSampler):
         Returns:
             Bemis-Murcko scaffold
         """
-        mol = self.str_to_mol(mol) if isinstance(mol, str) else mol
+        mol = self.str_to_mol(mol, self.get_config("explicit_hydrogens", False)) if isinstance(mol, str) else mol
         scaffold = MurckoScaffold.MurckoScaffoldSmiles(
             mol=mol, includeChirality=include_chirality
         )
