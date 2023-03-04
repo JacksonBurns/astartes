@@ -6,6 +6,7 @@ import numpy as np
 
 from astartes import train_test_split
 from astartes.samplers import SPXY
+from astartes.utils.exceptions import InvalidConfigurationError
 from astartes.utils.warnings import ImperfectSplittingWarning
 
 
@@ -38,6 +39,15 @@ class Test_SPXY(unittest.TestCase):
                 "six",
             ]
         )
+
+    def test_missing_y(self):
+        """SPXY requires a y array and should complain when one is not provided."""
+        with self.assertRaises(InvalidConfigurationError):
+            train_test_split(
+                self.X,
+                y=None,
+                sampler="spxy",
+            )
 
     def test_spxy_sampling(self):
         """Use spxy in the train_test_split and verify results."""
