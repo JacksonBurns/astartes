@@ -13,7 +13,6 @@ import warnings
 from collections import defaultdict
 
 import numpy as np
-import rdkit
 from rdkit import Chem
 from rdkit.Chem.Scaffolds import MurckoScaffold
 
@@ -26,7 +25,7 @@ class Scaffold(AbstractSampler):
         super().__init__(*args)
 
         if not isinstance(self.X[0], str) and not isinstance(
-            self.X[0], rdkit.Chem.rdchem.Mol
+            self.X[0], Chem.rdchem.Mol
         ):
             msg = "Scaffold class requires input X to be an iterable of SMILES strings"
             raise TypeError(msg)
