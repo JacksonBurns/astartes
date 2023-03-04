@@ -3,7 +3,7 @@ from .abstract_sampler import AbstractSampler
 
 # implementations
 from .extrapolation import DBSCAN, KMeans, OptiSim, Scaffold, SphereExclusion
-from .interpolation import MTSD, DOptimal, Duplex, KennardStone, Random, SPXY
+from .interpolation import MTSD, SPXY, DOptimal, Duplex, KennardStone, Random
 
 IMPLEMENTED_INTERPOLATION_SAMPLERS = (
     "random",

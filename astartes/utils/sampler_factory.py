@@ -3,12 +3,12 @@ from difflib import get_close_matches
 from astartes.samplers import (
     ALL_SAMPLERS,
     DBSCAN,
+    SPXY,
     KennardStone,
     KMeans,
     OptiSim,
     Random,
     SphereExclusion,
-    SPXY,
 )
 from astartes.utils.exceptions import SamplerNotImplementedError
 
