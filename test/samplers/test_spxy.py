@@ -19,15 +19,15 @@ class Test_SPXY(unittest.TestCase):
         """Convenience attributes for later tests."""
         self.X = np.array(
             [
-                [1, 0, 0, 0, 0, 0, 0],
-                [1, 1, 0, 0, 0, 0, 0],
-                [1, 1, 1, 0, 0, 0, 0],
-                [1, 1, 1, 1, 0, 0, 0],
-                [1, 1, 1, 1, 1, 1, 0],
-                [1, 1, 1, 1, 1, 1, 1],
+                [4, 1, 9, 5, 5, 7],
+                [10, 9, 3, 3, 8, 2],
+                [8, 7, 2, 7, 2, 1],
+                [6, 8, 2, 2, 6, 10],
+                [2, 1, 4, 3, 6, 10],
+                [2, 10, 6, 4, 1, 9],
             ]
         )
-        self.y = np.array([1, 2, 3, 4, 5, 6])
+        self.y = np.array([4, 1, 7, 5, 2, 5])
         self.labels = np.array(
             [
                 "one",
@@ -49,14 +49,12 @@ class Test_SPXY(unittest.TestCase):
                 y_test,
                 labels_train,
                 labels_test,
-                clusters_train,
-                clusters_test,
             ) = train_test_split(
                 self.X,
                 self.y,
                 labels=self.labels,
-                test_size=0.7,
-                train_size=0.3,
+                test_size=0.4,
+                train_size=0.6,
                 sampler="spxy",
                 hopts={
                     "metric": "euclidean",
@@ -68,8 +66,8 @@ class Test_SPXY(unittest.TestCase):
                 X_train,
                 np.array(
                     [
-                        [1, 0, 0, 0, 0, 0, 0],
-                        [1, 1, 1, 1, 1, 1, 1],
+                        [8, 7, 2, 7, 2, 1],
+                        [2, 10, 6, 4, 1, 9],
                         [1, 1, 0, 0, 0, 0, 0],
                         [1, 1, 1, 0, 0, 0, 0],
                     ]
