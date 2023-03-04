@@ -171,8 +171,8 @@ def _interpolative_sampling(
     """Helper function to perform interpolative sampling.
 
     Attempts to fill train, val, and test within rounding limits. Prioiritizes underfilling
-    test and then val and then the balance goes into train (which is why the floats are given
-    in that order).
+    train and then val and then the balance goes into test (this is the opposite to extrapolative
+    because these samplers move outisde-in).
 
     Args:
         sampler_instance (sampler): The fit sampler instance.
@@ -184,14 +184,13 @@ def _interpolative_sampling(
     Returns:
         calls: _return_helper
     """
-    # build test first
-    n_test_samples = floor(len(sampler_instance.X) * test_size)
+    n_train_samples = floor(len(sampler_instance.X) * train_size)
     n_val_samples = floor(len(sampler_instance.X) * val_size)
-    n_train_samples = len(sampler_instance.X) - (n_test_samples + n_val_samples)
+    n_test_samples = len(sampler_instance.X) - (n_train_samples + n_val_samples)
 
-    test_idxs = sampler_instance.get_sample_idxs(n_test_samples)
-    val_idxs = sampler_instance.get_sample_idxs(n_val_samples)
     train_idxs = sampler_instance.get_sample_idxs(n_train_samples)
+    val_idxs = sampler_instance.get_sample_idxs(n_val_samples)
+    test_idxs = sampler_instance.get_sample_idxs(n_test_samples)
 
     _check_actual_split(
         train_idxs, val_idxs, test_idxs, train_size, val_size, test_size

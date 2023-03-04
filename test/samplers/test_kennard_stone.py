@@ -72,50 +72,50 @@ class Test_kennard_stone(unittest.TestCase):
                 self.X,
                 self.y,
                 labels=self.labels,
-                test_size=0.7,
-                train_size=0.3,
+                test_size=0.3,
+                train_size=0.7,
                 sampler="kennard_stone",
             )
         # test that the known arrays equal the result from above
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_train,
-                np.array([[0, 1, 0]]),
+                np.array([[0, 0, 0], [1, 1, 1]]),
                 "Train X incorrect.",
             ),
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_test,
-                np.array([[0, 0, 0], [1, 1, 1]]),
+                np.array([[0, 1, 0]]),
                 "Test X incorrect.",
             ),
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_train,
-                np.array([2]),
+                np.array([1, 3]),
                 "Train y incorrect.",
             ),
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_test,
-                np.array([1, 3]),
+                np.array([2]),
                 "Test y incorrect.",
             ),
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_train,
-                np.array(["two"]),
+                np.array(["one", "three"]),
                 "Train labels incorrect.",
             ),
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_test,
-                np.array(["one", "three"]),
+                np.array(["two"]),
                 "Test labels incorrect.",
             ),
         )
@@ -135,8 +135,8 @@ class Test_kennard_stone(unittest.TestCase):
                 self.X,
                 self.y,
                 labels=self.labels,
-                test_size=0.67,
-                train_size=0.33,
+                test_size=0.33,
+                train_size=0.67,
                 sampler="kennard_stone",
             )
             self.assertFalse(
