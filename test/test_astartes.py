@@ -100,19 +100,6 @@ class Test_astartes(unittest.TestCase):
                     ),
                 ),
             )
-            print(
-                (
-                    X_train,
-                    X_val,
-                    X_test,
-                    y_train,
-                    y_val,
-                    y_test,
-                    labels_train,
-                    labels_val,
-                    labels_test,
-                )
-            )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_train,
@@ -284,7 +271,7 @@ class Test_astartes(unittest.TestCase):
                     test_size=None,
                 )
         with self.subTest("val_size w/ valid test_size"):
-            with self.assertRaises(ImperfectSplittingWarning):
+            with self.assertWarns(ImperfectSplittingWarning):
                 train_val_test_split(
                     self.X,
                     train_size=None,
