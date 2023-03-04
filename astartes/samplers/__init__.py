@@ -11,7 +11,6 @@ IMPLEMENTED_INTERPOLATION_SAMPLERS = (
     # "duplex",
     "kennard_stone",
     # "mtsd",
-    "sphere_exclusion",
     "spxy",
 )
 
@@ -20,6 +19,7 @@ IMPLEMENTED_EXTRAPOLATION_SAMPLERS = (
     # "scaffold",
     "kmeans",
     "optisim",
+    "sphere_exclusion",
 )
 
 ALL_SAMPLERS = IMPLEMENTED_EXTRAPOLATION_SAMPLERS + IMPLEMENTED_INTERPOLATION_SAMPLERS
