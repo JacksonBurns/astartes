@@ -1,3 +1,4 @@
+import warnings
 from typing import List
 
 import numpy as np
@@ -5,7 +6,15 @@ import numpy as np
 from astartes.utils.exceptions import MoleculesNotInstalledError
 
 try:
-    from aimsim.chemical_datastructures import Molecule
+    """
+    aimsim depends on sklearn_extra, which uses a version checking technique that is due to
+    be deprecated in a version of Python after 3.11, so it is throwing a deprecation warning
+    We ignore this warning since we can't do anything about it (sklearn_extra seems to be
+    abandonware) and in the future it will become an error that we can deal with.
+    """
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=DeprecationWarning)
+        from aimsim.chemical_datastructures import Molecule
 except ImportError:  # pragma: no cover
     raise MoleculesNotInstalledError(
         """To use molecule featurizer, install astartes with pip install astartes[molecules]."""
