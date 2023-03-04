@@ -149,7 +149,7 @@ class Test_scaffold(unittest.TestCase):
         """Calling with something other than SMILES should raise TypeError"""
         with self.assertRaises(TypeError):
             train_test_split(
-                np.array([[1],[2]]),
+                np.array([[1], [2]]),
                 sampler="scaffold",
             )
 
@@ -158,7 +158,7 @@ class Test_scaffold(unittest.TestCase):
         with self.assertWarns(NoMatchingScaffold):
             try:
                 train_test_split(
-                    np.array(['O','P']),
+                    np.array(['O', 'P']),
                     sampler="scaffold",
                 )
             except InvalidConfigurationError:
