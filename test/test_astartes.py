@@ -201,9 +201,10 @@ class Test_astartes(unittest.TestCase):
         with self.assertRaises(InvalidConfigurationError):
             train_val_test_split(
                 self.X,
-                train_size=0.01,  # this will result in an empty train set due to rounding
-                val_size=0.98,
+                train_size=0.49,
+                val_size=0.5,
                 test_size=0.01,  # empty test due to rounding
+                sampler="kmeans",
             )
 
     def test_split_validation(self):
