@@ -53,8 +53,8 @@ class Test_SPXY(unittest.TestCase):
                 self.X,
                 self.y,
                 labels=self.labels,
-                test_size=0.4,
-                train_size=0.6,
+                test_size=0.3,
+                train_size=0.7,
                 sampler="spxy",
                 hopts={
                     "metric": "euclidean",
@@ -67,9 +67,9 @@ class Test_SPXY(unittest.TestCase):
                 np.array(
                     [
                         [8, 7, 2, 7, 2, 1],
+                        [2, 1, 4, 3, 6, 10],
+                        [10, 9, 3, 3, 8, 2],
                         [2, 10, 6, 4, 1, 9],
-                        [1, 1, 0, 0, 0, 0, 0],
-                        [1, 1, 1, 0, 0, 0, 0],
                     ]
                 ),
                 "Train X incorrect.",
@@ -80,8 +80,8 @@ class Test_SPXY(unittest.TestCase):
                 X_test,
                 np.array(
                     [
-                        [1, 1, 1, 1, 0, 0, 0],
-                        [1, 1, 1, 1, 1, 1, 0],
+                        [4, 1, 9, 5, 5, 7],
+                        [6, 8, 2, 2, 6, 10],
                     ]
                 ),
                 "Test X incorrect.",
@@ -90,7 +90,7 @@ class Test_SPXY(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_train,
-                np.array([1, 6, 3, 2]),
+                np.array([7, 2, 1, 5]),
                 "Train y incorrect.",
             ),
         )
@@ -104,14 +104,14 @@ class Test_SPXY(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_train,
-                np.array(["one", "six", "three", "two"]),
+                np.array(["three", "five", "two", "six"]),
                 "Train labels incorrect.",
             ),
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_test,
-                np.array(["four", "five"]),
+                np.array(["one", "four"]),
                 "Test labels incorrect.",
             ),
         )
