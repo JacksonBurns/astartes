@@ -8,6 +8,7 @@ from astartes.samplers import (
     KMeans,
     OptiSim,
     Random,
+    Scaffold,
     SphereExclusion,
 )
 from astartes.utils.exceptions import SamplerNotImplementedError
@@ -51,6 +52,8 @@ class SamplerFactory:
             sampler_class = OptiSim
         elif self.sampler == "spxy":
             sampler_class = SPXY
+        elif self.sampler == "scaffold":
+            sampler_class = Scaffold
         else:
             possiblity = get_close_matches(
                 self.sampler,

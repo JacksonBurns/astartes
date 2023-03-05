@@ -55,6 +55,8 @@ class Test_molecules(unittest.TestCase):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             for sampler in IMPLEMENTED_EXTRAPOLATION_SAMPLERS:
+                if sampler == "scaffold":
+                    continue
                 tts = train_val_test_split_molecules(
                     self.X,
                     self.y,

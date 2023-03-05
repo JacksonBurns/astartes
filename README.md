@@ -47,8 +47,8 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 | Sampler Name | Usage String | Type | Hyperparameters | Reference | Notes |
 |:---:|---|---|---|---|---|
-| Random | 'random' | Interpolative | random_state, shuffle | [sklearn `train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) | This sampler is a direct passthrough to sklearn's `train_test_split`. |
-| Scaffold | 'scaffold' | Extrapolative | Hyperparameters | [`chemprop`'s `scaffold_split`](https://github.com/chemprop/chemprop/blob/959176dd0c6475bdca259b4ce71bab9b0a71ba4e/chemprop/data/scaffold.py#L53) | This sampler is  |
+| Random | 'random' | Interpolative | random_state, shuffle | [sklearn `train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) | This sampler is a direct passthrough to sklearn's `train_test_split` |
+| Scaffold | 'scaffold' | Extrapolative | Hyperparameters | [Bemis-Murcko Scaffold](https://pubs.acs.org/doi/full/10.1021/jm9602928) as implemented in RDKit | This sampler requires SMILES strings as input  |
 | Sphere Exclusion | 'sphere_exclusion' | Hyperparameters | Extrapolative | _custom implementation_ | Variation on Sphere Exclusion for arbitrary-valued vectors |
 | Optimizable K-Dissimilarity Selection (OptiSim) | 'optisim' | Hyperparameters | Extrapolative | _custom implementation_ | Variation on [OptiSim](https://pubs.acs.org/doi/10.1021/ci025662h) for arbitrary-valued vectors. |
 

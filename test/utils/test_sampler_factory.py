@@ -28,6 +28,8 @@ class Test_sampler_factory(unittest.TestCase):
     def test_train_test_split(self):
         """Call sampler factory on all inputs."""
         for sampler_name in ALL_SAMPLERS:
+            if sampler_name == "scaffold":
+                continue
             test_factory = SamplerFactory(sampler_name)
             test_instance = test_factory.get_sampler(self.X, self.y, None, {})
             self.assertIsInstance(
