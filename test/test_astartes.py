@@ -105,12 +105,12 @@ class Test_astartes(unittest.TestCase):
                 X_train,
                 np.array(
                     [
-                        [1, 1, 0, 0, 0],
-                        [1, 1, 1, 1, 1],
-                        [1, 1, 1, 1, 0],
+                        [1, 0, 0, 0, 0],
+                        [1, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0],
                         [1, 1, 1, 0, 0],
                         [1, 1, 0, 0, 0],
-                        [1, 1, 1, 1, 0],
+                        [1, 1, 1, 1, 1],
                     ]
                 ),
                 "Train X incorrect.",
@@ -119,66 +119,56 @@ class Test_astartes(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_val,
-                np.array(
-                    [
-                        [0, 0, 0, 0, 0],
-                        [1, 1, 1, 0, 0],
-                    ]
-                ),
+                np.array([[1, 1, 1, 1, 0], [1, 1, 1, 0, 0]]),
                 "Validation X incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_test,
-                np.array(
-                    [
-                        [1, 0, 0, 0, 0],
-                        [1, 0, 0, 0, 0],
-                    ]
-                ),
+                np.array([[1, 1, 0, 0, 0], [1, 1, 1, 1, 0]]),
                 "Test X incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_train,
-                np.array([3, 10, 5, 4, 7, 9]),
+                np.array([2, 6, 1, 8, 3, 10]),
                 "Train y incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_val,
-                np.array([1, 8]),
+                np.array([5, 4]),
                 "Validation y incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_test,
-                np.array([2, 6]),
+                np.array([7, 9]),
                 "Test y incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_train,
-                np.array(["three", "ten", "five", "four", "seven", "nine"]),
+                np.array(["two", "six", "one", "eight", "three", "ten"]),
                 "Train labels incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_val,
-                np.array(["one", "eight"]),
+                np.array(["five", "four"]),
                 "Validation labels incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_test,
-                np.array(["two", "six"]),
+                np.array(["seven", "nine"]),
                 "Test labels incorrect.",
             )
         )
@@ -211,9 +201,10 @@ class Test_astartes(unittest.TestCase):
         with self.assertRaises(InvalidConfigurationError):
             train_val_test_split(
                 self.X,
-                train_size=0.01,  # this will result in an empty train set due to rounding
-                val_size=0.98,
+                train_size=0.49,
+                val_size=0.5,
                 test_size=0.01,  # empty test due to rounding
+                sampler="kmeans",
             )
 
     def test_split_validation(self):
@@ -234,13 +225,28 @@ class Test_astartes(unittest.TestCase):
                 test_size=0.6,
             )
         with self.subTest("all specified imperfectly"):
-            with self.assertWarns(NormalizationWarning):
+            with warnings.catch_warnings(record=True) as w:
+                warnings.filterwarnings("always")
                 train_val_test_split(
                     self.X,
                     train_size=20,
                     val_size=0.2,
                     test_size=60,
                 )
+                self.assertTrue(
+                    len(w) == 2,
+                    "\nTwo warnings should have been raised when requesting a mathematically impossible split."
+                    "\nReceived {:d} warnings instead: \n -> {:s}".format(
+                        len(w),
+                        "\n -> ".join(
+                            [
+                                str(i.category.__name__) + ": " + str(i.message)
+                                for i in w
+                            ]
+                        ),
+                    ),
+                )
+
         with self.subTest("invalid val_size"):
             with self.assertRaises(InvalidConfigurationError):
                 train_val_test_split(
@@ -253,9 +259,9 @@ class Test_astartes(unittest.TestCase):
             with self.assertWarns(NormalizationWarning):
                 train_val_test_split(
                     self.X,
-                    train_size=0.8,
+                    train_size=7,
                     val_size=None,
-                    test_size=0.3,
+                    test_size=3,
                 )
         with self.subTest("invalid val_size"):
             with self.assertRaises(RuntimeError):
@@ -266,12 +272,13 @@ class Test_astartes(unittest.TestCase):
                     test_size=None,
                 )
         with self.subTest("val_size w/ valid test_size"):
-            train_val_test_split(
-                self.X,
-                train_size=None,
-                val_size=0.4,
-                test_size=0.2,
-            )
+            with self.assertWarns(ImperfectSplittingWarning):
+                train_val_test_split(
+                    self.X,
+                    train_size=None,
+                    val_size=0.4,
+                    test_size=0.2,
+                )
         with self.subTest("val_size w/ invalid test_size"):
             with self.assertRaises(RuntimeError):
                 train_val_test_split(
@@ -281,13 +288,12 @@ class Test_astartes(unittest.TestCase):
                     test_size=2,
                 )
         with self.subTest("val_size w/ valid train_size"):
-            with self.assertWarns(ImperfectSplittingWarning):
-                train_val_test_split(
-                    self.X,
-                    train_size=0.2,
-                    val_size=0.4,
-                    test_size=None,
-                )
+            train_val_test_split(
+                self.X,
+                train_size=0.2,
+                val_size=0.4,
+                test_size=None,
+            )
         with self.subTest("val_size w/ invalid train_size"):
             with self.assertRaises(RuntimeError):
                 train_val_test_split(
@@ -366,8 +372,48 @@ class Test_astartes(unittest.TestCase):
                     "random_state": 42,
                 },
             )
-            for elt, ans in zip(X_train.flatten(), [7, 8, 9, 1, 2, 3]):
-                self.assertEqual(elt, ans)
+            self.assertIsNone(
+                np.testing.assert_array_equal(
+                    X_train,
+                    np.array([[4, 5, 6]]),
+                    "X_train incorrect.",
+                ),
+            )
+            self.assertIsNone(
+                np.testing.assert_array_equal(
+                    X_test,
+                    np.array([[7, 8, 9], [1, 2, 3]]),
+                    "X_test incorrect.",
+                ),
+            )
+            self.assertIsNone(
+                np.testing.assert_array_equal(
+                    y_train,
+                    np.array([11]),
+                    "y_train incorrect.",
+                ),
+            )
+            self.assertIsNone(
+                np.testing.assert_array_equal(
+                    y_test,
+                    np.array([12, 10]),
+                    "y_test incorrect.",
+                ),
+            )
+            self.assertIsNone(
+                np.testing.assert_array_equal(
+                    labels_train,
+                    np.array(["banana"]),
+                    "labels_train incorrect.",
+                ),
+            )
+            self.assertIsNone(
+                np.testing.assert_array_equal(
+                    labels_test,
+                    np.array(["apple", "apple"]),
+                    "labels_test incorrect.",
+                ),
+            )
 
     def test_return_indices(self):
         """Test the ability to return the indices and not the values."""
@@ -384,8 +430,13 @@ class Test_astartes(unittest.TestCase):
                 },
                 return_indices=True,
             )
-            for elt, ans in zip(indices_train.flatten(), [2, 0]):
-                self.assertEqual(elt, ans)
+            self.assertIsNone(
+                np.testing.assert_array_equal(
+                    indices_test,
+                    np.array([2, 0]),
+                    "Test indices incorrect.",
+                ),
+            )
 
     def test_return_indices_with_validation(self):
         """Test the ability to return indices in train_val_test_split"""
@@ -396,15 +447,20 @@ class Test_astartes(unittest.TestCase):
                 labels=np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
                 test_size=0.33,
                 val_size=0.33,
-                train_size=0.33,
+                train_size=0.34,
                 sampler="random",
                 hopts={
                     "random_state": 42,
                 },
                 return_indices=True,
             )
-            for elt, ans in zip(indices_val.flatten(), [8, 2]):
-                self.assertEqual(elt, ans)
+            self.assertIsNone(
+                np.testing.assert_array_equal(
+                    indices_val,
+                    np.array([8, 2]),
+                    "Validation indices incorrect.",
+                ),
+            )
 
 
 if __name__ == "__main__":

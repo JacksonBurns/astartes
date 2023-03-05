@@ -64,8 +64,8 @@ class Test_random(unittest.TestCase):
                 self.X,
                 self.y,
                 labels=self.labels,
-                test_size=0.75,
-                train_size=0.25,
+                test_size=0.5,
+                train_size=0.5,
                 sampler="random",
                 hopts={
                     "random_state": 42,
@@ -75,42 +75,42 @@ class Test_random(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_train,
-                np.array([[0, 0, 0]]),
+                np.array([[0, 1, 0]]),
                 "Train X incorrect.",
             ),
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_test,
-                np.array([[0, 1, 0], [1, 1, 1]]),
+                np.array([[1, 1, 1], [0, 0, 0]]),
                 "Test X incorrect.",
             ),
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_train,
-                np.array([1]),
+                np.array([2]),
                 "Train y incorrect.",
             ),
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_test,
-                np.array([2, 3]),
+                np.array([3, 1]),
                 "Test y incorrect.",
             ),
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_train,
-                np.array(["one"]),
+                np.array(["two"]),
                 "Train labels incorrect.",
             ),
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_test,
-                np.array(["two", "three"]),
+                np.array(["three", "one"]),
                 "Test labels incorrect.",
             ),
         )
@@ -130,8 +130,8 @@ class Test_random(unittest.TestCase):
                 self.X,
                 self.y,
                 labels=self.labels,
-                test_size=0.67,
-                train_size=0.33,
+                test_size=0.33,
+                train_size=0.67,
                 sampler="random",
                 hopts={
                     "random_state": 42,

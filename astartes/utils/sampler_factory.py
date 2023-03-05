@@ -3,6 +3,7 @@ from difflib import get_close_matches
 from astartes.samplers import (
     ALL_SAMPLERS,
     DBSCAN,
+    SPXY,
     KennardStone,
     KMeans,
     OptiSim,
@@ -48,6 +49,8 @@ class SamplerFactory:
             sampler_class = SphereExclusion
         elif self.sampler == "optisim":
             sampler_class = OptiSim
+        elif self.sampler == "spxy":
+            sampler_class = SPXY
         else:
             possiblity = get_close_matches(
                 self.sampler,
