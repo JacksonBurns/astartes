@@ -19,7 +19,7 @@ dependencies = ["kennard_stone", "scikit_learn", "numpy", "scipy"]
 
 [project.optional-dependencies]
 molecules = ["aimsim"]
-dev = ["black", "isort"]
+dev = ["black", "isort", "pytest"]
 
 [project.readme]
 file = "README.md"
