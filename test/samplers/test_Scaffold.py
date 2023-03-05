@@ -158,7 +158,7 @@ class Test_scaffold(unittest.TestCase):
         with self.assertWarns(NoMatchingScaffold):
             try:
                 train_test_split(
-                    np.array(['O', 'P']),
+                    np.array(["O", "P"]),
                     sampler="scaffold",
                 )
             except InvalidConfigurationError:
