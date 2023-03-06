@@ -21,5 +21,6 @@ class DBSCAN(AbstractSampler):
             metric=self.get_config("metric", "euclidean"),
             algorithm=self.get_config("algorithm", "auto"),
             leaf_size=self.get_config("leaf_size", 30),
+            p=self.get_config("p", None),
         ).fit(self.X)
         self._samples_clusters = dbscan.labels_
