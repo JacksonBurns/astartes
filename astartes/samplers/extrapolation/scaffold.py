@@ -34,7 +34,7 @@ class Scaffold(AbstractSampler):
         """Implements the Scaffold sampler to identify clusters via a molecule's Bemis-Murcko scaffold."""
         scaffold_to_indices = self.scaffold_to_smiles(self.X)
 
-        cluster_indices = np.zeros(len(self.X), dtype=np.int8)
+        cluster_indices = np.empty(len(self.X), dtype=object)
         # give each cluster an arbitrary ID
         for cluster_id, (scaffold, indices) in enumerate(scaffold_to_indices.items()):
             if scaffold == "":
@@ -44,7 +44,7 @@ class Scaffold(AbstractSampler):
                     NoMatchingScaffold,
                 )
             for idx in indices:
-                cluster_indices[idx] = cluster_id
+                cluster_indices[idx] = scaffold
 
         self._samples_clusters = cluster_indices
 

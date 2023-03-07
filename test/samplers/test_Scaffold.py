@@ -16,12 +16,13 @@ class Test_scaffold(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         """Convenience attributes for later tests."""
+        # scaffold only contains the ring structure, not the side chains
         self.X = np.array(
             [
-                "c1ccccc1",
-                "O=C1NCCO1",
-                "O=C1CCCCCN1",
-                "C1CCNCC1",
+                "c1ccccc1CC",       # scaffold is c1ccccc1
+                "O=C1NCCO1",        # scaffold is O=C1NCCO1
+                "O=C1CCC(CC)CCN1",  # scaffold is O=C1CCCCCN1
+                "C1CCNCC1CC",       # scaffold is C1CCNCC1
             ]
         )
         self.X_inchi = np.array(
@@ -65,14 +66,14 @@ class Test_scaffold(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_train,
-                np.array(["O=C1NCCO1", "O=C1CCCCCN1", "C1CCNCC1"]),
+                np.array(["O=C1NCCO1", "O=C1CCC(CC)CCN1", "C1CCNCC1CC"]),
             ),
             "Train X incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_test,
-                np.array(["c1ccccc1"]),
+                np.array(["c1ccccc1CC"]),
             ),
             "Test X incorrect.",
         )
@@ -107,14 +108,14 @@ class Test_scaffold(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 clusters_train,
-                np.array([1, 2, 3]),
+                np.array(['O=C1NCCO1', 'O=C1CCCCCN1', 'C1CCNCC1']),
             ),
             "Train clusters incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 clusters_test,
-                np.array([0]),
+                np.array(['c1ccccc1']),
             ),
             "Test clusters incorrect.",
         )
