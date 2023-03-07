@@ -12,7 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        nb-file: ["astartes_example", "train_val_test_split_example"]
+        nb-file:
+          ["RDB7_barrier_prediction_example", "train_val_test_split_example"]
     runs-on: ubuntu-latest
     defaults:
       run:
