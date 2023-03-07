@@ -23,7 +23,7 @@ We reccomend installing `astartes` within a virtual environment, using either `v
 __Note for Windows Powershell or MacOS Catalina or newer__: On these systems the command line will complain about square brackets, so you will need to double quote the `molecules` command (i.e. `pip install "astartes[molecules]"`)
 
 ## Using `astartes`
-`astartes` is designed as a drop-in replacement for `sklearn`'s `train_test_split` function. To switch to `astartes`, change `from sklearn.model_selection import train_test_split` to 'from astartes import train_test_split`.
+`astartes` is designed as a drop-in replacement for `sklearn`'s `train_test_split` function. To switch to `astartes`, change `from sklearn.model_selection import train_test_split` to `from astartes import train_test_split`.
 
 By default, `astartes` will use a random splitting approach identical to that which is implemented in `sklearn`, and a variety of deterministic sampling approaches can be used by specifying one additional argument ot the function:
 
@@ -44,18 +44,16 @@ There are two broad categories of sampling algorithms implemented in `astartes`:
 
 | Sampler Name | Usage String | Type | Hyperparameters | Reference | Notes |
 |:---:|---|---|---|---|---|
-| Random | 'random' | Interpolative | `random_state`, `shuffle` | [`sklearn train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) | This sampler is a direct passthrough to `sklearn`'s `train_test_split`. |
+| Random | 'random' | Interpolative | `random_state`, `shuffle` | [`sklearn train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) | This sampler is a direct passthrough to `sklearn`'s `train_test_split`, though it does not currently reproduce splits identically. |
 | Kennard-Stone | 'kennard_stone' | Interpolative | _none_ | [yu9824's `kennard_stone`](https://github.com/yu9824/kennard_stone) | Fully deterministic, no hyperparameters accepted. |
+| Sample set Partitioning based on join X-Y distances (SPXY) | 'spxy' | Interpolative | `distance_metric` | Saldhana et. al [original paper](https://www.sciencedirect.com/science/article/abs/pii/S003991400500192X) | Extension of Kennard Stone that also includes the response when sampling distances. |
 | Scaffold | 'scaffold' | Extrapolative | `explicit_hydrogens`, `include_chirality` | [Bemis-Murcko Scaffold](https://pubs.acs.org/doi/full/10.1021/jm9602928) as implemented in RDKit | This sampler requires SMILES strings as input (use the `molecules` subpackage) |
 | Sphere Exclusion | 'sphere_exclusion' | Extrapolative | `metric`, `random_state`, `distance_cutoff` | _custom implementation_ | Variation on Sphere Exclusion for arbitrary-valued vectors. |
 | Optimizable K-Dissimilarity Selection (OptiSim) | 'optisim' | Extrapolative | `random_state`, `n_clusters`, `max_subsample_size`, `distance_cutoff` | _custom implementation_ | Variation on [OptiSim](https://pubs.acs.org/doi/10.1021/ci025662h) for arbitrary-valued vectors. |
 | K-Means | 'kmeans' | Extrapolative | `random_state`, `n_clusters`, `n_init` | [`sklearn KMeans`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) | Passthrough to `sklearn`'s `KMeans`. |
 | Density-Based Spatial Clustering of Applications with Noise (DBSCAN) | 'dbscan' | Extrapolative | `eps`, `min_samples`, `algorithm`, `metric`, `leaf_size` | [`sklearn DBSCAN`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html) | Passthrough to `sklearn`'s `DBSCAN`. |
-| D-Optimal |  |  |  |  |  |
-| Duplex |  |  |  |  |  |
-| Mimimm Test Set Dissimilarity |  |  |  |  |  |
-| SPXY |  |  |  |  |  |
-| RBM Sampler |  |  |  |  |  |
+| Mimimm Test Set Dissimilarity | ~ | ~ | _will be released with_ `astartes` _v1.0.0_ | ~ | ~ |
+| RBM Sampler | ~ | ~ | _will be released with_ `astartes` _v1.0.0_ | ~ | ~ |
 
 ### Using the `astartes.molecules` Subpackage
 After installing with `pip install astartes[molecules]` one can import the new train/test splitting function like this: `from astartes.molecules import train_test_split_molecules`
@@ -113,6 +111,15 @@ Adding a new sampler should extend the `abstract_sampler.py` abstract base class
 It can be as simple as a passthrough to a another `train_test_split`, or it can be an original implementation that results in X and y being split into two lists. Take a look at `astartes/samplers/random_split.py` for a basic example!
 
 After the sampler has been implemented, add it to `__init__.py` in in `astartes/samplers` and it will automatically be unit tested. Additional unit tests to verify that hyperparameters can be properly passed, etc. are also reccomended.
+
+For historical reasons, and as a guide for any developers who would like add new samplers, below is a running list of samplers which have been _considered_ for addition to `asartes` but ultimately not added for various reasons.
+
+#### Not Implemented Sampling Algorithms
+
+| Sampler Name | Reasoning |
+|:---:|---|
+| D-Optimal | Requires _a-priori_ knowledge of the test and train size which does not fit in the `astartes` framework (samplers are all agnostic to the size of the sets) and it is questionable if the use of the Fischer information matrix is actually meaningful in the context of sampling existing data rather than tuning for ideal data. |
+| Duplex | Requires knowing test and train size before execution, and can only partition data into two sets which owuld make it incompatible with `train_val_test_split`. |
 
 ### Adding New Featurization Schemes
 All of the sampling methods implemented in `astartes` accept arbitrary arrays of numbers and return the sampled groups (with the exception of `Scaffold.py`). If you have an existing featurization scheme (i.e. take an arbitrary input and turn it into an array of numbers), we would be thrilled to include it in `astartes`.
