@@ -35,10 +35,19 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 ```
 
-### Rational Splitting Algorithms
-While much machine learning is done with a random choice between training/test/validation data, an alternative is the use of so-called "rational" splitting algorithms. These approaches use some similarity-based algorithm to divide data into sets. Some of these algorithms include Kennard-Stone, minimal test set dissimilarity, and sphere exclusion algorithms [as discussed by Tropsha et. al](https://pubs.acs.org/doi/pdf/10.1021/ci300338w) as well as the DUPLEX, OptiSim, D-optimal, as discussed in [Applied Chemoinformatics: Achievements and Future Opportunities](https://www.wiley.com/en-us/Applied+Chemoinformatics%3A+Achievements+and+Future+Opportunities-p-9783527806546). Some clustering-based splitting techniques have also been introduced, such as [DBSCAN](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1016.890&rep=rep1&type=pdf).
+### Example Notebooks
 
-There are two broad categories of sampling algorithms implemented in `astartes`: extrapolative and interpolative. The former will force your model to predict on out-of-smaple data, effectively asking a 'harder question' than interpolative sampling.
+Click the badges in the table below to be taken to a live, interactive demo of `astartes`:
+
+| Demo | Link |
+|:---:|---|
+| Using `train_val_test_split` with the `sklearn` example datasets | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2Ftrain_val_test_split_example.ipynb) |
+| Cheminformatics sample set partitioning with `astartes` | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2FRDB7_barrier_prediction_example.ipynb) |
+
+### Rational Splitting Algorithms
+While much machine learning is done with a random choice between training/test/validation data, an alternative is the use of so-called "rational" splitting algorithms. These approaches use some similarity-based algorithm to divide data into sets. Some of these algorithms include Kennard-Stone, minimal test set dissimilarity, and sphere exclusion algorithms [as discussed by Tropsha et. al](https://pubs.acs.org/doi/pdf/10.1021/ci300338w) as well as the OptiSim as discussed in [Applied Chemoinformatics: Achievements and Future Opportunities](https://www.wiley.com/en-us/Applied+Chemoinformatics%3A+Achievements+and+Future+Opportunities-p-9783527806546). Some clustering-based splitting techniques have also been introduced, such as [DBSCAN](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1016.890&rep=rep1&type=pdf).
+
+There are two broad categories of sampling algorithms implemented in `astartes`: extrapolative and interpolative. The former will force your model to predict on out-of-smaple data, effectively asking a 'harder question' than interpolative sampling. See the table below for all of the sampling approaches currently implemented in `astartes`.
 
 #### Implemented Sampling Algorithms
 
