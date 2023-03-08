@@ -1,0 +1,40 @@
+name: Check Jupyer Notebook Execution
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        nb-file:
+          ["RDB7_barrier_prediction_example", "train_val_test_split_example"]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    name: Check ${{ matrix.nb-file }} Notebook Execution
+    steps:
+      - uses: actions/checkout@v3
+      - uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: false
+          environment-name: temp
+          channels: defaults,conda-forge
+          channel-priority: flexible
+          extra-specs: |
+            python=3.11
+      - name: Install dependencies
+        run: |
+          python -m pip install -e .[molecules]
+          python -m pip install notebook
+      - name: Test Execution
+        run: |
+          cd examples
+          jupyter nbconvert --to script ${{ matrix.nb-file }}.ipynb
+          ipython ${{ matrix.nb-file }}.py
