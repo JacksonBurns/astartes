@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "astartes"
-version = "1.0.0b0"
+version = "1.0.0b2"
 authors = [
     { name = "Jackson Burns", email = "jwburns@mit.edu" },
     { name = "Himaghna Bhattacharjee", email = "himaghna@udel.edu" },
@@ -30,4 +30,8 @@ profile = "black"
 
 [tool.setuptools]
 include-package-data = true
-packages = ["astartes"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["astartes*"]
+exclude = ["docs*", "examples*", "test*"]

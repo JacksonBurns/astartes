@@ -13,8 +13,14 @@ import warnings
 from collections import defaultdict
 
 import numpy as np
-from rdkit import Chem
-from rdkit.Chem.Scaffolds import MurckoScaffold
+
+try:
+    from rdkit import Chem
+    from rdkit.Chem.Scaffolds import MurckoScaffold
+except ImportError:
+    # this is in place so that the import of this from parent directory will work
+    # if it fails, it is caught in molecules instead and the error is more helpful
+    NO_MOLECULES = True
 
 from astartes.samplers import AbstractSampler
 from astartes.utils.warnings import NoMatchingScaffold
