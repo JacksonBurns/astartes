@@ -51,12 +51,12 @@ This publication focuses on use-cases within cheminformatics, but `astartes` ope
 # Statement of need
 
 Machine learning has sparked an explosion of progress in chemical kinetics [@komp2022progress; @spiekermann2022fast], drug discovery [@yang2019concepts; @bannigan2021machine], materials science [@wei2019machine], and energy storage [@jha2023learning] as researchers use data-driven methods to accelerate steps in traditional workflows within some acceptable error tolerance.
-To facilitate adoption of these models, researchers must critically think about several topics, such as comparing model performance to relevant baseline, operating on user-friendly inputs, and reporting performance on both interpolative and extrapolative tasks \textcolor{blue}{cite Kevin's comment article}. 
+To facilitate adoption of these models, researchers must critically think about several topics, such as comparing model performance to relevant baseline, operating on user-friendly inputs, and reporting performance on both interpolative and extrapolative tasks <!-- cite Kevin's comment article-->. 
 `astartes` aims to make it straightforward for machine learning scientists and researchers to focus on two of the most critical points: rigorous hyperparameter optimization and accurate performance evaluation.
 
-First, `astartes` key function \lstinline{train_val_test_split} returns splits for training, validation, and testing sets using an sklearn-like interface. This partitioning is crucial since best practices in data science dictate that, in order to minimize the risk of hyperparameter overfitting, one must only optimize hyperparameters with a validation set and use a held-out test set to accurately measure performance on unseen data [@ramsundar2019deep; @geron2019hands; @lakshmanan2020machine; @huyen2022designing; @wang2020machine]. 
+First, `astartes` key function `train_val_test_split` returns splits for training, validation, and testing sets using an sklearn-like interface. This partitioning is crucial since best practices in data science dictate that, in order to minimize the risk of hyperparameter overfitting, one must only optimize hyperparameters with a validation set and use a held-out test set to accurately measure performance on unseen data [@ramsundar2019deep; @geron2019hands; @lakshmanan2020machine; @huyen2022designing; @wang2020machine]. 
 Unfortunately, many papers only mention training and testing sets but do not mention validation sets, implying that they optimize the hyperparameters to the test set, which is blatant data leakage that leads to overly optimistic results [@li2020predicting; @van2022physics; @ismail2022successes; @liu2023predict]. 
-For researchers who are interested in critical evaluation of model performance or non-random sampling but not yet ready to make the transition to using validation sets, `astartes` also implements an sklearn-compatible \lstinline{train_test_split} function.
+For researchers who are interested in critical evaluation of model performance or non-random sampling but not yet ready to make the transition to using validation sets, `astartes` also implements an sklearn-compatible `train_test_split` function.
 
 
 Second, it is crucial to evaluate model performance in both interpolation and extrapolation settings so future users are informed of any potential limitations.
@@ -69,7 +69,7 @@ Although measuring performance on chemically dissimilar compounds/clusters is no
 # Example Use-Case
 
 To demonstrate the impact of data splits based on interpolation vs. extrapolation, we apply our software to two popular datasets.
-We first study property prediction using QM9 [@ramakrishnan2014quantum], which contains $\sim$133,000 organic molecules with up to 9 heavy atoms. We train a multi-task model to predict all 12 regression properties; we report the arithmetic mean of all predictions in Table \ref{tab:QM9}. % "mu", "alpha", "homo", "lumo", "gap", "r2", "zpve", "cv", "u0", "u298", "h298", "g298" with units of https://schnetpack.readthedocs.io/en/stable/_modules/schnetpack/datasets/qm9.html
+We first study property prediction using QM9 [@ramakrishnan2014quantum], which contains $\sim$133,000 organic molecules with up to 9 heavy atoms. We train a multi-task model to predict all 12 regression properties; we report the arithmetic mean of all predictions in Table QM9. % "mu", "alpha", "homo", "lumo", "gap", "r2", "zpve", "cv", "u0", "u298", "h298", "g298" with units of https://schnetpack.readthedocs.io/en/stable/_modules/schnetpack/datasets/qm9.html
 We also train a single-task model to predict a reaction's barrier height using RDB7 [@spiekermann2022high; @spiekermann_zenodo_database]. This reaction database contains $\sim$12,000 diverse, organic reactions with up to 7 heavy atoms calculated at CCSD(T)-F12a/cc-pVDZ-F12//$\omega$B97X-D3/def2-TZVP.
 
 For each dataset, we create three data splits.
@@ -135,7 +135,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, sample
 
 With this small change, an extrapoative sampler based on k-means clustering will be used.
 
-Inside cheminformatics, `astartes` makes use of all molecular featurization options implemented in \texttt{AIMSim}, which includes those from virtually all popular descriptor generation tools.
+Inside cheminformatics, `astartes` makes use of all molecular featurization options implemented in `AIMSim`, which includes those from virtually all popular descriptor generation tools.
 
 The codebase itself has a clearly defined contribution guideline and thorough, easily accesible documentation. The functionality is checked nightly via GitHub actions Constant Integration testing. Test coverage currently sits at >99%, and all pull requests are automatically subject to a coverage check and merged only if they cover all existing and new lines added.
 
