@@ -30,10 +30,8 @@ profile = "black"
 
 [tool.setuptools]
 include-package-data = true
-packages = [
-    "astartes",
-    "astartes.samplers",
-    "astartes.utils.exceptions",
-    "astartes.utils.warnings",
-    "astartes.utils.sampler_factory",
-]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["astartes*"]
+exclude = ["docs*", "examples*", "test*"]
