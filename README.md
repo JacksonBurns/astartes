@@ -85,7 +85,7 @@ train_test_split_molecules(
         "tgtDensity": 0.4,
         "minSize": 64,
     },
-    splitter="random",
+    sampler="random",
     hopts={
         "random_state": 42,
         "shuffle": True,
