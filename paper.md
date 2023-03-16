@@ -110,7 +110,7 @@ Finally, we do not co-train with the reaction enthalpy, which often improves mod
 
 # Related Software
 
-In the machine learning space, `astartes` functions as a drop-in replacement for the ubiquitous `train_test_split` from scikit-learn [@scikit-learn], meaning that transitioning existing code to use this new methodology is as simple as modifying an `import` statement at the top of the file and then specifying an additional keyword parameter. In doing so, users can instantly become more rigorous in their ML modeling approach.
+In the machine learning space, `astartes` functions as a drop-in replacement for the ubiquitous `train_test_split` from scikit-learn [@scikit-learn], meaning that transitioning existing code to use this new methodology is as simple as modifying an `import` statement at the top of the file and then specifying an additional keyword parameter. In doing so, users can instantly become more rigorous in their ML modeling approach. Specific tutorials on this transition are provided in the online documentation for `astartes`, which is available on [GitHub](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
 
 Here is an example workflow using `train_test_split` taken from the `scikit-learn` documentation [@scikit-learn]:
 ```python
@@ -143,12 +143,13 @@ The codebase itself has a clearly defined contribution guideline and thorough, e
 # Acknowledgements
 The authors acknowledge the MIT SuperCloud and Lincoln Laboratory Supercomputing Center for providing computing resources that have contributed to the research results reported within this paper [@reuther2018interactive].
 
-The authors thank all users who participated in Beta testing throughout the development of `astartes`: (ask them if they are ok with being namedropped (?), otherwise leave as is).
+The authors thank all users who participated in beta testing and release candidate testing throughout the development of `astartes`.
 
-Jackson put the CSGF DOE grant number here (or below?). I actually think there is something to put in both places.
+This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, Department of Energy Computational Science Graduate Fellowship under Award Number DE-SC0023112.
 
-
-# Funding statement
+<!-- The below section and text are required by Jackson Burns' funding agency, the DOE CSGF. -->
+# Disclaimer
+This report was prepared as an account of work sponsored by an agency of the United States Government. Neither the United States Government nor any agency thereof, nor any of their employees, makes any warranty, express or implied, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness of any information, apparatus, product, or process disclosed, or represents that its use would not infringe privately owned rights. Reference herein to any specific commercial product, process, or service by trade name, trademark, manufacturer, or otherwise does not necessarily constitute or imply its endorsement, recommendation, or favoring by the United States Government or any agency thereof. The views and opinions of authors expressed herein do not necessarily state or reflect those of the United States Government or any agency thereof.
 
 <!--
 # Figures
