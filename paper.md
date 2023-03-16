@@ -15,17 +15,17 @@ authors:
     corresponding: true
     affiliation: "1, 2"
   - name: Kevin A. Spiekermann
-    orcid: 9999-9999-9999-9999
+    orcid: 0000-0002-9484-9253
     equal-contrib: true
     affiliation: 2
   - name: Himaghna Bhattacharjee
-    orcid: 9999-9999-9999-9999
+    orcid: 0000-0002-6598-3939
     affiliation: 3
   - name: Dionisios G. Vlachos
-    orcid: 9999-9999-9999-9999
+    orcid: 0000-0002-6795-8403
     affiliation: 3
   - name: William H. Green
-    orcid: 9999-9999-9999-9999
+    orcid: 0000-0003-2603-9694
     affiliation: 2
 affiliations:
  - name: Center for Computational Science and Engineering, Massachusetts Institute of Technology
