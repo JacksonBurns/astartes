@@ -67,47 +67,47 @@ Thus, to encourage adoption of these models, it is crucial to measure performanc
 The general workflow is: (1) Convert each molecule into a vector representation (2) Cluster the molecules based on similarity (3) Train the model on some clusters then evaluate performance on unseen clusters that should be dissimilar to the clusters used for training.
 Although measuring performance on chemically dissimilar compounds/clusters is not a new concept [@meredig2018can; @durdy2022random; @stuyver2022quantum; @tricarico2022construction; @terrones2023low], there are a myriad of choices for the first two steps; our software incorporates many popular representations and similarity metrics to give users freedom to easily explore which combination is suitable for their needs.
 
-# Example Use-Case
+# Example Use-Case in Cheminformatics
 
-To demonstrate the impact of data splits based on interpolation vs. extrapolation, we apply our software to two popular datasets.
-We first study property prediction using QM9 [@ramakrishnan2014quantum], which contains $\sim$133,000 organic molecules with up to 9 heavy atoms. We train a multi-task model to predict all 12 regression properties; we report the arithmetic mean of all predictions in Table QM9. % "mu", "alpha", "homo", "lumo", "gap", "r2", "zpve", "cv", "u0", "u298", "h298", "g298" with units of https://schnetpack.readthedocs.io/en/stable/_modules/schnetpack/datasets/qm9.html
-We also train a single-task model to predict a reaction's barrier height using RDB7 [@spiekermann2022high; @spiekermann_zenodo_database]. This reaction database contains $\sim$12,000 diverse, organic reactions with up to 7 heavy atoms calculated at CCSD(T)-F12a/cc-pVDZ-F12//$\omega$B97X-D3/def2-TZVP.
+To demonstrate the difference in performance between interpolation and extrapolation, we apply `astartes` to two relevant cheminformatics datasets and their corresponding tasks.
+For each dataset, a typical interpolative split is generated using a Random sampler and two unique extrapolative splits are generated for comparison. The first uses the cheminformatics-specific Bemis-Murcko scaffold [@bemis1996properties] as calculated by RDKit [@landrum2006rdkit]. <!-- Scaffold splits are a better measure of generalizability compared to random splits [@yang2019analyzing; @wang2020machine; @heid2021machine; @guan2021regio; @artrith2021best; @greenman2022multi]. -->
+The second uses the more general-purpose K-means clustering based on the Euclidean distance of Morgan (ECFP4) fingerprints using 2048 bit hashing and radius of 2 [@morgan1965generation; @rogers2010extended]. For each split, we create 5 different folds (by changing the random seed). The values in Table QM9 and Table RDB7 correspond to the mean $\pm$ one standard deviation calculated across folds.
 
-For each dataset, we create three data splits.
-(1) Randomly split the data.
-(2) Split based on Bemis-Murcko scaffolds [@bemis1996properties] as calculated by RDKit [@landrum2006rdkit].
-<!-- Scaffold splits are a better measure of generalizability compared to random splits [@yang2019analyzing; @wang2020machine; @heid2021machine; @guan2021regio; @artrith2021best; @greenman2022multi]. -->
-(3) Use K-means clustering based on the Euclidean distance of Morgan (ECFP4) fingerprints using 2048 bit hashing and radius of 2 [@morgan1965generation; @rogers2010extended]. We use 100 clusters for QM9 and 10 clusters for RDB7.
-For each split, we create 5 different folds (by changing the random seed). The values in Table QM9 and Table RDB7 correspond to the mean $\pm$ one standard deviation calculated across folds.
-
-We use a forked version of Chemprop [@yang2019analyzing] to train a deep message passing neural network to predict the regression targets of interest. 
-We use the hyperparameters reported by ref. [@spiekermann2022fast], and the `barrier_prediction` branch is publicly available on [GitHub](https://github.com/kspieks/chemprop/tree/barrier_prediction) [@spiekermann_forked_chemprop].
-<!-- We use the `barrier_prediction` branch from a forked version of Chemprop [@yang2019analyzing; @spiekermann_forked_chemprop] to train a deep message passing neural network using the hyperparameters reported by ref. [@spiekermann2022fast]. -->
-The results tabulated below show an expected trend that average model performance is worse when faced with more challenging extrapolation tasks.
+First is property prediction with QM9 [@ramakrishnan2014quantum], a dataset containing $\sim$133,000 small organic molecules and 12 relevant chemical properties for each. We train a multi-task model to predict all properties, with the arithmetic mean of all predictions tabulated below. <!-- the actual properties are: "mu", "alpha", "homo", "lumo", "gap", "r2", "zpve", "cv", "u0", "u298", "h298", "g298" with units of https://schnetpack.readthedocs.io/en/stable/_modules/schnetpack/datasets/qm9.html -->
+Second is a single-task model to predict a reaction's barrier height using the RDB7 dataset [@spiekermann2022high; @spiekermann_zenodo_database]. This reaction database contains a diverse set of $\sim$12,000 organic reactions relevant to the field of chemical kinetics.
+Models were generated using a modified version of Chemprop [@yang2019analyzing] to train a deep message passing neural network to predict the regression targets of interest. 
+We use the hyperparameters reported by ref. [@spiekermann2022fast] as implemented in the `barrier_prediction` branch publicly available on [GitHub](https://github.com/kspieks/chemprop/tree/barrier_prediction) [@spiekermann_forked_chemprop]. <!-- We use the `barrier_prediction` branch from a forked version of Chemprop [@yang2019analyzing; @spiekermann_forked_chemprop] to train a deep message passing neural network using the hyperparameters reported by ref. [@spiekermann2022fast]. -->
+The QM9 dataset and RDB7 datasets were organized into 100 and 10 clusters, respectively.
+The results tabulated below show an expected trend that average model performance is worse (MAE and RMSE are higher) when faced with more challenging extrapolation tasks.
 
 ### Average testing errors for predicting the 12 regression targets from QM9 [@ramakrishnan2014quantum].
 
-| Split                           | MAE              | RMSE            |
-|---------------------------------|------------------|-----------------|
-| random                          | 2.02 $\pm$ 0.06  | 3.63 $\pm$ 0.21 |
-| scaffold [@bemis1996properties] | 2.XX $\pm$ 0.XX  | 3.XX $\pm$ 0.XX |
-| K-means                         | 2.XX  $\pm$ 0.XX | 4.XX $\pm$ 0.XX |
+| Split     | MAE              | RMSE            |
+|-----------|------------------|-----------------|
+| random    | 2.02 $\pm$ 0.06  | 3.63 $\pm$ 0.21 |
+| scaffold  | 2.XX $\pm$ 0.XX  | 3.XX $\pm$ 0.XX |
+| K-means   | 2.XX  $\pm$ 0.XX | 4.XX $\pm$ 0.XX |
 
 
-###  Testing errors in kcal mol$^{-1}$ for predicting a reaction's barrier height from RDB7 [@spiekermann2022high}.
+###  Testing errors in kcal/mol for predicting a reaction's barrier height from RDB7 [@spiekermann2022high}.
 
-| Split                           | MAE             | RMSE            |
-|---------------------------------|-----------------|-----------------|
-| random                          | 3.94 $\pm$ 0.03 | 6.89 $\pm$ 0.24 |
-| scaffold [@bemis1996properties] | 4.YY $\pm$ 0.YY | 7.YY $\pm$ 0.YY |
-| K-means                         | 5.YY $\pm$ 1.YY | 7.YY $\pm$ 2.YY |
+| Split     | MAE             | RMSE            |
+|-----------|-----------------|-----------------|
+| random    | 3.94 $\pm$ 0.03 | 6.89 $\pm$ 0.24 |
+| scaffold  | 4.YY $\pm$ 0.YY | 7.YY $\pm$ 0.YY |
+| K-means   | 5.YY $\pm$ 1.YY | 7.YY $\pm$ 2.YY |
 
+In each case, the performance of the model is diminished when training and testing using extrapolative sampling algorithms.
+This is to be expected, since this effectively asks the model a 'harder' question when testing.
+This harder question, though, is potentially more respresentatve of real world tasks.
+After successful model training, the user would expect to use their model to make predictions on new, real-world data.
+In the case that this new data is not within the space of the training data (which is likely not something being verified), errors could be significant.
+It is critical then to know what to expect when predicting on out-of-sample data, which could indicate hyperparameter overfitting and a potential remidiation pathway for the developer.
 
-Note that the scaffold errors presented above are higher than what is reported in Spiekermann et al. [@spiekermann2022fast] for three reasons.
-First, here we do not pretrain on the B97-D3 or $\omega$B97X-D3 datasets as was done in the earlier study [@spiekermann2022fast]. 
-If suitable pretraining data is available, transfer learning is an established technique to improve model performance [@pan2010survey].
-Second, we do not use ensembling here; however, this is another established method to improve model predictions [@yang2019analyzing; @dietterich2000ensemble].
-Finally, we do not co-train with the reaction enthalpy, which often improves model performance and is not an unexpected observation given that a reaction’s enthalpy is often correlated to its barrier height (e.g. Evans-Polanyi relationships [@evans1938inertia]). % Bell-Evans- Polanyi (BEP)-type correlations.14,20,21  from https://pubs.acs.org/doi/pdf/10.1021/acs.jcim.2c01502
+Note that the scaffold errors presented above are higher than what is reported in the original study [@spiekermann2022fast] for two reasons: pretraining on the B97-D3 or $\omega$B97X-D3 datasets was done in the earlier study [@spiekermann2022fast] but neglected here for simplicity, and co-training with the reaction enthalpy was left off for similar reasons. <!--, which often improves model performance and is not an unexpected observation given that a reaction’s enthalpy is often correlated to its barrier height (e.g. Evans-Polanyi relationships [@evans1938inertia]). -->
+<!-- If suitable pretraining data is available, transfer learning is an established technique to improve model performance [@pan2010survey]. -->
+<!-- Second, we do not use ensembling here; however, this is another established method to improve model predictions [@yang2019analyzing; @dietterich2000ensemble]. -->
+ <!-- Bell-Evans- Polanyi (BEP)-type correlations.14,20,21  from https://pubs.acs.org/doi/pdf/10.1021/acs.jcim.2c01502 -->
 
 # Related Software and Code Availability
 
