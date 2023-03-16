@@ -45,10 +45,11 @@ Machine Learning (ML) has become an increasingly popular tool to accelerate trad
 Critical to the use of ML is the process of splitting datasets into training and testing subsets used to develop and evaluate models, respectively.
 It is common practice in the literature to assign these subsets randomly, which is both fast and efficient.
 However, this only measures a model's capacity to interpolate, which is unrealistic in certain applications and can result in misleading test set accuracy.
-To address this issue, we report `astartes`, a Python package that implements many existing similarity- and distance-based algorithms to partition data into more challenging training, validation, and testing splits.
-This publication focuses on use-cases within cheminformatics, but `astartes` operates on arbitrary vector inputs and the principals and workflow are generalize to any ML field.
+To address this issue, we report `astartes`, an open-source Python package that implements many existing similarity- and distance-based algorithms to partition data into more challenging training, validation, and testing splits.
+This publication focuses on use-cases within cheminformatics, but `astartes` operates on arbitrary vector inputs and the principals and workflow are generalizable to any ML field.
+`astartes` is available via the Python package manager `pip` and is publicly hosted on GitHub ([github.com/JacksonBurns/astartes](https://github.com/JacksonBurns/astartes)).
 
-# Statement of need
+# Statement of Need
 
 Machine learning has sparked an explosion of progress in chemical kinetics [@komp2022progress; @spiekermann2022fast], drug discovery [@yang2019concepts; @bannigan2021machine], materials science [@wei2019machine], and energy storage [@jha2023learning] as researchers use data-driven methods to accelerate steps in traditional workflows within some acceptable error tolerance.
 To facilitate adoption of these models, researchers must critically think about several topics, such as comparing model performance to relevant baseline, operating on user-friendly inputs, and reporting performance on both interpolative and extrapolative tasks <!-- cite Kevin's comment article-->. 
@@ -108,9 +109,12 @@ If suitable pretraining data is available, transfer learning is an established t
 Second, we do not use ensembling here; however, this is another established method to improve model predictions [@yang2019analyzing; @dietterich2000ensemble].
 Finally, we do not co-train with the reaction enthalpy, which often improves model performance and is not an unexpected observation given that a reaction’s enthalpy is often correlated to its barrier height (e.g. Evans-Polanyi relationships [@evans1938inertia]). % Bell-Evans- Polanyi (BEP)-type correlations.14,20,21  from https://pubs.acs.org/doi/pdf/10.1021/acs.jcim.2c01502
 
-# Related Software
+# Related Software and Code Availability
 
-In the machine learning space, `astartes` functions as a drop-in replacement for the ubiquitous `train_test_split` from scikit-learn [@scikit-learn], meaning that transitioning existing code to use this new methodology is as simple as modifying an `import` statement at the top of the file and then specifying an additional keyword parameter. In doing so, users can instantly become more rigorous in their ML modeling approach. Specific tutorials on this transition are provided in the online documentation for `astartes`, which is available on [GitHub](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
+In the machine learning space, `astartes` functions as a drop-in replacement for the ubiquitous `train_test_split` from scikit-learn [@scikit-learn].
+Transitioning existing code to use this new methodology is as simple as running `pip install astartes`, modifying an `import` statement at the top of the file, and then specifying an additional keyword parameter.
+`astartes` has been especially designed to allow for maximum interoperability with other packages, using few depdencies, supporting all platforms, and continuous integration testing for Python 3.7 through 3.11.
+Specific tutorials on this transition are provided in the online documentation for `astartes`, which is available on [GitHub](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
 
 Here is an example workflow using `train_test_split` taken from the `scikit-learn` documentation [@scikit-learn]:
 ```python
