@@ -108,11 +108,11 @@ If suitable pretraining data is available, transfer learning is an established t
 Second, we do not use ensembling here; however, this is another established method to improve model predictions [@yang2019analyzing; @dietterich2000ensemble].
 Finally, we do not co-train with the reaction enthalpy, which often improves model performance and is not an unexpected observation given that a reaction’s enthalpy is often correlated to its barrier height (e.g. Evans-Polanyi relationships [@evans1938inertia]). % Bell-Evans- Polanyi (BEP)-type correlations.14,20,21  from https://pubs.acs.org/doi/pdf/10.1021/acs.jcim.2c01502
 
-# Resusability
+# Related Software
 
-In the machine learning space, `astartes` functions as a drop-in replacement for the ubiquitous `train_test_split` from scikit-learn [@scikit-learn], meaning that transitioning existing code to use this new methodology is as simple as modifying an `import` statement at the top of the file and then specifying an additional keyword parameter.
+In the machine learning space, `astartes` functions as a drop-in replacement for the ubiquitous `train_test_split` from scikit-learn [@scikit-learn], meaning that transitioning existing code to use this new methodology is as simple as modifying an `import` statement at the top of the file and then specifying an additional keyword parameter. In doing so, users can instantly become more rigorous in their ML modeling approach.
 
-Here is an example workflow using `train_test_split` taken from the `scikit-learn` documentation:
+Here is an example workflow using `train_test_split` taken from the `scikit-learn` documentation [@scikit-learn]:
 ```python
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -135,7 +135,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, sample
 
 With this small change, an extrapoative sampler based on k-means clustering will be used.
 
-Inside cheminformatics, `astartes` makes use of all molecular featurization options implemented in `AIMSim`, which includes those from virtually all popular descriptor generation tools.
+Inside cheminformatics, `astartes` makes use of all molecular featurization options implemented in `AIMSim` [@aimsim_cpc], which includes those from virtually all popular descriptor generation tools used in the cheminformatics field.
 
 The codebase itself has a clearly defined contribution guideline and thorough, easily accesible documentation. The functionality is checked nightly via GitHub actions Constant Integration testing. Test coverage currently sits at >99%, and all pull requests are automatically subject to a coverage check and merged only if they cover all existing and new lines added.
 
