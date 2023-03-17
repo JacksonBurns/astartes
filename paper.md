@@ -85,20 +85,21 @@ The QM9 dataset and RDB7 datasets were organized into 100 and 10 clusters, respe
 The results tabulated below show an expected trend that average model performance is worse (MAE and RMSE are higher) when faced with more challenging extrapolation tasks.
 
 ### Average testing errors for predicting the 12 regression targets from QM9 [@ramakrishnan2014quantum].
+### Table 1: Average testing errors for predicting the 12 regression targets from QM9 [@ramakrishnan2014quantum].
 
 | Split     | MAE              | RMSE            |
 |-----------|------------------|-----------------|
-| random    | 2.02 $\pm$ 0.06  | 3.63 $\pm$ 0.21 |
-| scaffold  | 2.XX $\pm$ 0.XX  | 3.XX $\pm$ 0.XX |
+| Random    | 2.02 $\pm$ 0.06  | 3.63 $\pm$ 0.21 |
+| Scaffold  | 2.XX $\pm$ 0.XX  | 3.XX $\pm$ 0.XX |
 | K-means   | 2.XX  $\pm$ 0.XX | 4.XX $\pm$ 0.XX |
 
 
-###  Testing errors in kcal/mol for predicting a reaction's barrier height from RDB7 [@spiekermann2022high].
+### Table 2: Testing errors in kcal/mol for predicting a reaction's barrier height from RDB7 [@spiekermann2022high].
 
 | Split     | MAE             | RMSE            |
 |-----------|-----------------|-----------------|
-| random    | 3.94 $\pm$ 0.03 | 6.89 $\pm$ 0.24 |
-| scaffold  | 4.YY $\pm$ 0.YY | 7.YY $\pm$ 0.YY |
+| Random    | 3.94 $\pm$ 0.03 | 6.89 $\pm$ 0.24 |
+| Scaffold  | 4.YY $\pm$ 0.YY | 7.YY $\pm$ 0.YY |
 | K-means   | 5.YY $\pm$ 1.YY | 7.YY $\pm$ 2.YY |
 
 In each case, the performance of the model is diminished when training and testing using extrapolative sampling algorithms.
