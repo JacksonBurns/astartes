@@ -75,16 +75,22 @@ Although measuring performance on chemically dissimilar compounds/clusters is no
 
 To demonstrate the difference in performance between interpolation and extrapolation, we apply `astartes` to two relevant cheminformatics datasets and their corresponding tasks.
 For each dataset, a typical interpolative split is generated using random sampling. We also create two extrapolative splits are generated for comparison. The first uses the cheminformatics-specific Bemis-Murcko scaffold [@bemis1996properties] as calculated by RDKit [@landrum2006rdkit]. <!-- Scaffold splits are a better measure of generalizability compared to random splits [@yang2019analyzing; @wang2020machine; @heid2021machine; @guan2021regio; @artrith2021best; @greenman2022multi]. -->
-The second uses the more general-purpose K-means clustering based on the Euclidean distance of Morgan (ECFP4) fingerprints using 2048 bit hashing and radius of 2 [@morgan1965generation; @rogers2010extended]. For each split, we create 5 different folds (by changing the random seed). The values in Table QM9 and Table RDB7 correspond to the mean $\pm$ one standard deviation calculated across folds.
+The second uses the more general-purpose K-means clustering based on the Euclidean distance of Morgan (ECFP4) fingerprints using 2048 bit hashing and radius of 2 [@morgan1965generation; @rogers2010extended]. 
+For each split, we create 5 different folds (by changing the random seed) and report the mean absolute error (MAE) and root-mean-squared error (RMSE).
+The values in Table 1 and Table 2 correspond to the mean $\pm$ one standard deviation calculated across folds.
 
 First is property prediction with QM9 [@ramakrishnan2014quantum], a dataset containing approximately 133,000 small organic molecules and 12 relevant chemical properties for each. We train a multi-task model to predict all properties, with the arithmetic mean of all predictions tabulated below. <!-- the actual properties are: "mu", "alpha", "homo", "lumo", "gap", "r2", "zpve", "cv", "u0", "u298", "h298", "g298" with units of https://schnetpack.readthedocs.io/en/stable/_modules/schnetpack/datasets/qm9.html -->
 Second is a single-task model to predict a reaction's barrier height using the RDB7 dataset [@spiekermann2022high; @spiekermann_zenodo_database]. This reaction database contains a diverse set of around 12,000 organic reactions relevant to the field of chemical kinetics.
 Models were generated using a modified version of Chemprop [@yang2019analyzing] to train a deep message passing neural network to predict the regression targets of interest. 
 We use the hyperparameters reported by ref. [@spiekermann2022fast] as implemented in the `barrier_prediction` branch publicly available on [GitHub](https://github.com/kspieks/chemprop/tree/barrier_prediction) [@spiekermann_forked_chemprop]. <!-- We use the `barrier_prediction` branch from a forked version of Chemprop [@yang2019analyzing; @spiekermann_forked_chemprop] to train a deep message passing neural network using the hyperparameters reported by ref. [@spiekermann2022fast]. -->
 The QM9 dataset and RDB7 datasets were organized into 100 and 10 clusters, respectively.
-The results tabulated below show an expected trend that average model performance is worse (MAE and RMSE are higher) when faced with more challenging extrapolation tasks.
 
-### Average testing errors for predicting the 12 regression targets from QM9 [@ramakrishnan2014quantum].
+Table 1 and Table 2 show the expected trend in which the average testing errors are higher for the extrapolation tasks than they are for the interpolation tasks.
+The results from random splitting are informative if the model will be primarily used in interpolation settings. 
+However, these errors are unrealistically low if the model is intended to make predictions on new molecules. 
+Performance is worse on the extrapolative data splits, which present a more challenging task, but these errors should be more representative of evaluating a new sample.
+Together, these tables demonstrate the utility of `astartes` in allowing users to better understand the likely performance of their model in different settings.
+
 ### Table 1: Average testing errors for predicting the 12 regression targets from QM9 [@ramakrishnan2014quantum].
 
 | Split     | MAE              | RMSE            |
@@ -102,14 +108,8 @@ The results tabulated below show an expected trend that average model performanc
 | Scaffold  | 4.YY $\pm$ 0.YY | 7.YY $\pm$ 0.YY |
 | K-means   | 5.YY $\pm$ 1.YY | 7.YY $\pm$ 2.YY |
 
-In each case, the performance of the model is diminished when training and testing using extrapolative sampling algorithms.
-This is to be expected, since this effectively asks the model a 'harder' question when testing.
-This harder question, though, is potentially more respresentatve of real world tasks.
-After successful model training, the user would expect to use their model to make predictions on new, real-world data.
-In the case that this new data is not within the space of the training data (which is likely not something being verified), errors could be significant.
-It is critical then to know what to expect when predicting on out-of-sample data, which could indicate hyperparameter overfitting and a potential remidiation pathway for the developer.
 
-Note that the scaffold errors presented above are higher than what is reported in the original study [@spiekermann2022fast] for three reasons.
+Note that the scaffold errors presented above are higher than what is reported in the original study [@spiekermann2022fast] for several reasons.
 First, pretraining on the B97-D3 and $\omega$B97X-D3 datasets was done in the prior study, but neglected here for simplicity.
 We also do not use ensembling here nor do we co-train the model with the reaction enthalpy.
 <!--, which often improves model performance and is not an unexpected observation given that a reaction’s enthalpy is often correlated to its barrier height (e.g. Evans-Polanyi relationships [@evans1938inertia]). -->
