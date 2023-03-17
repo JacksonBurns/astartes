@@ -76,6 +76,7 @@ Although measuring performance on chemically dissimilar compounds/clusters is no
 To demonstrate the difference in performance between interpolation and extrapolation, we apply `astartes` to two relevant cheminformatics datasets and their corresponding tasks.
 For each dataset, a typical interpolative split is generated using random sampling. We also create two extrapolative splits are generated for comparison. The first uses the cheminformatics-specific Bemis-Murcko scaffold [@bemis1996properties] as calculated by RDKit [@landrum2006rdkit]. <!-- Scaffold splits are a better measure of generalizability compared to random splits [@yang2019analyzing; @wang2020machine; @heid2021machine; @guan2021regio; @artrith2021best; @greenman2022multi]. -->
 The second uses the more general-purpose K-means clustering based on the Euclidean distance of Morgan (ECFP4) fingerprints using 2048 bit hashing and radius of 2 [@morgan1965generation; @rogers2010extended]. 
+The QM9 dataset and RDB7 datasets were organized into 100 and 10 clusters, respectively.
 For each split, we create 5 different folds (by changing the random seed) and report the mean absolute error (MAE) and root-mean-squared error (RMSE).
 The values in Table 1 and Table 2 correspond to the mean $\pm$ one standard deviation calculated across folds.
 
@@ -83,7 +84,7 @@ First is property prediction with QM9 [@ramakrishnan2014quantum], a dataset cont
 Second is a single-task model to predict a reaction's barrier height using the RDB7 dataset [@spiekermann2022high; @spiekermann_zenodo_database]. This reaction database contains a diverse set of around 12,000 organic reactions relevant to the field of chemical kinetics.
 Models were generated using a modified version of Chemprop [@yang2019analyzing] to train a deep message passing neural network to predict the regression targets of interest. 
 We use the hyperparameters reported by @spiekermann2022fast as implemented in the `barrier_prediction` branch, which is publicly available on [GitHub](https://github.com/kspieks/chemprop/tree/barrier_prediction) [@spiekermann_forked_chemprop]. <!-- We use the `barrier_prediction` branch from a forked version of Chemprop [@yang2019analyzing; @spiekermann_forked_chemprop] to train a deep message passing neural network using the hyperparameters reported by ref. [@spiekermann2022fast]. -->
-The QM9 dataset and RDB7 datasets were organized into 100 and 10 clusters, respectively.
+
 
 Table 1 and Table 2 show the expected trend in which the average testing errors are higher for the extrapolation tasks than they are for the interpolation tasks.
 The results from random splitting are informative if the model will be primarily used in interpolation settings. 
