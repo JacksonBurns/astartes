@@ -65,7 +65,10 @@ Second, it is crucial to evaluate model performance in both interpolation and ex
 Although random splits are frequently used in the literature, this simply measures interpolation performance.
 However, given the vastness of chemical space [@ruddigkeit_GDB-17_2012] and its often unsmooth nature (e.g. activity cliffs), it seems unlikely that users will want to be restricted to exclusively operate in an interpolation regime.
 Thus, to encourage adoption of these models, it is crucial to measure performance on more challenging splits as well.
-The general workflow is: (1) Convert each molecule into a vector representation (2) Cluster the molecules based on similarity (3) Train the model on some clusters then evaluate performance on unseen clusters that should be dissimilar to the clusters used for training.
+The general workflow is:
+1. Convert each molecule into a vector representation.
+2. Cluster the molecules based on similarity.
+3. Train the model on some clusters and then evaluate performance on unseen clusters that should be dissimilar to the clusters used for training.
 Although measuring performance on chemically dissimilar compounds/clusters is not a new concept [@meredig2018can; @durdy2022random; @stuyver2022quantum; @tricarico2022construction; @terrones2023low], there are a myriad of choices for the first two steps; our software incorporates many popular representations and similarity metrics to give users freedom to easily explore which combination is suitable for their needs.
 
 # Example Use-Case in Cheminformatics
