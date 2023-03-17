@@ -93,7 +93,7 @@ The results tabulated below show an expected trend that average model performanc
 | K-means   | 2.XX  $\pm$ 0.XX | 4.XX $\pm$ 0.XX |
 
 
-###  Testing errors in kcal/mol for predicting a reaction's barrier height from RDB7 [@spiekermann2022high}.
+###  Testing errors in kcal/mol for predicting a reaction's barrier height from RDB7 [@spiekermann2022high].
 
 | Split     | MAE             | RMSE            |
 |-----------|-----------------|-----------------|
