@@ -149,8 +149,6 @@ The codebase itself has a clearly defined contribution guideline and thorough, e
 
 
 # Acknowledgements
-The authors acknowledge the MIT SuperCloud and Lincoln Laboratory Supercomputing Center for providing computing resources that have contributed to the research results reported within this paper [@reuther2018interactive].
-
 The authors thank all users who participated in beta testing and release candidate testing throughout the development of `astartes`.
 
 This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, Department of Energy Computational Science Graduate Fellowship under Award Number DE-SC0023112.
