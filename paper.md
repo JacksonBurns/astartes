@@ -108,7 +108,10 @@ After successful model training, the user would expect to use their model to mak
 In the case that this new data is not within the space of the training data (which is likely not something being verified), errors could be significant.
 It is critical then to know what to expect when predicting on out-of-sample data, which could indicate hyperparameter overfitting and a potential remidiation pathway for the developer.
 
-Note that the scaffold errors presented above are higher than what is reported in the original study [@spiekermann2022fast] for two reasons: pretraining on the B97-D3 or $\omega$B97X-D3 datasets was done in the earlier study [@spiekermann2022fast] but neglected here for simplicity, and co-training with the reaction enthalpy was left off for similar reasons. <!--, which often improves model performance and is not an unexpected observation given that a reaction’s enthalpy is often correlated to its barrier height (e.g. Evans-Polanyi relationships [@evans1938inertia]). -->
+Note that the scaffold errors presented above are higher than what is reported in the original study [@spiekermann2022fast] for three reasons.
+First, pretraining on the B97-D3 and $\omega$B97X-D3 datasets was done in the prior study, but neglected here for simplicity.
+We also do not use ensembling here nor do we co-train the model with the reaction enthalpy.
+<!--, which often improves model performance and is not an unexpected observation given that a reaction’s enthalpy is often correlated to its barrier height (e.g. Evans-Polanyi relationships [@evans1938inertia]). -->
 <!-- If suitable pretraining data is available, transfer learning is an established technique to improve model performance [@pan2010survey]. -->
 <!-- Second, we do not use ensembling here; however, this is another established method to improve model predictions [@yang2019analyzing; @dietterich2000ensemble]. -->
  <!-- Bell-Evans- Polanyi (BEP)-type correlations.14,20,21  from https://pubs.acs.org/doi/pdf/10.1021/acs.jcim.2c01502 -->
