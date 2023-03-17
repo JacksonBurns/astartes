@@ -42,11 +42,12 @@ bibliography: paper.bib
 # Summary
 
 Machine Learning (ML) has become an increasingly popular tool to accelerate traditional workflows.
-Critical to the use of ML is the process of splitting datasets into training and testing subsets used to develop and evaluate models, respectively.
-It is common practice in the literature to assign these subsets randomly, which is both fast and efficient.
-However, this only measures a model's capacity to interpolate, which is unrealistic in certain applications and can result in misleading test set accuracy.
-To address this issue, we report `astartes`, an open-source Python package that implements many existing similarity- and distance-based algorithms to partition data into more challenging training, validation, and testing splits.
-This publication focuses on use-cases within cheminformatics, but `astartes` operates on arbitrary vector inputs and the principals and workflow are generalizable to any ML field.
+Critical to the use of ML is the process of splitting datasets into training, validation, and testing subsets that are used to develop and evaluate models.
+Common practice in the literature to assign these subsets randomly.
+Although this approach is fast and efficient, it only measures a model's capacity to interpolate, which is unrealistic in certain applications and can result in overly optimistic performance on the test set.
+To address this issue, we report `astartes`, an open-source Python package that implements many existing similarity- and distance-based algorithms to partition data into more challenging splits that can better assess out-of-sample performance.
+This publication focuses on use-cases within cheminformatics. 
+However, `astartes` operates on arbitrary vector inputs, so its principals and workflow are generalizable to other ML domains as well.
 `astartes` is available via the Python package manager `pip` and is publicly hosted on GitHub ([github.com/JacksonBurns/astartes](https://github.com/JacksonBurns/astartes)).
 
 # Statement of Need
