@@ -56,9 +56,7 @@ class Test_sphere_exclusion(unittest.TestCase):
                 test_size=0.3,
                 train_size=0.7,
                 sampler="sphere_exclusion",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
             )
         # test that the known arrays equal the result from above
         self.assertIsNone(

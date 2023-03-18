@@ -54,9 +54,9 @@ class Test_kmeans(unittest.TestCase):
                 test_size=0.75,
                 train_size=0.25,
                 sampler="kmeans",
+                random_state=42,
                 hopts={
                     "n_clusters": 2,
-                    "random_state": 42,
                 },
             )
         # test that the known arrays equal the result from above

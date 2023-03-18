@@ -86,9 +86,7 @@ class Test_astartes(unittest.TestCase):
                 val_size=0.2,
                 train_size=0.6,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
             )
             self.assertFalse(
                 len(w),
@@ -368,9 +366,7 @@ class Test_astartes(unittest.TestCase):
                 test_size=0.5,
                 train_size=0.5,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
             )
             self.assertIsNone(
                 np.testing.assert_array_equal(
@@ -425,9 +421,7 @@ class Test_astartes(unittest.TestCase):
                 test_size=0.5,
                 train_size=0.5,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
                 return_indices=True,
             )
             self.assertIsNone(
@@ -449,9 +443,7 @@ class Test_astartes(unittest.TestCase):
                 val_size=0.33,
                 train_size=0.34,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
                 return_indices=True,
             )
             self.assertIsNone(

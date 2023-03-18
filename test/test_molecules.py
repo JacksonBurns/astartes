@@ -108,9 +108,7 @@ class Test_molecules(unittest.TestCase):
                 self.X,
                 self.y,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
             )
             self.assertFalse(
                 len(w),
@@ -140,9 +138,7 @@ class Test_molecules(unittest.TestCase):
                 "minSize": 64,
             },
             sampler="random",
-            hopts={
-                "random_state": 42,
-            },
+            random_state=42,
         )
 
 
