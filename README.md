@@ -86,8 +86,8 @@ train_test_split_molecules(
         "minSize": 64,
     },
     sampler="random",
+    random_state=42,
     hopts={
-        "random_state": 42,
         "shuffle": True,
     },
 )
