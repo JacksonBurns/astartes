@@ -134,10 +134,7 @@ class Test_sphere_exclusion(unittest.TestCase):
             self.y,
             self.labels,
             {
-                # "n_clusters": 2,
                 "random_state": 42,
-                # "metric": "euclidian",
-                # "distance_cutoff": 0.25,
             },
         )
         self.assertIsInstance(
