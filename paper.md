@@ -43,7 +43,7 @@ bibliography: paper.bib
 
 Machine Learning (ML) has become an increasingly popular tool to accelerate traditional workflows.
 Critical to the use of ML is the process of splitting datasets into training, validation, and testing subsets that are used to develop and evaluate models.
-Common practice in the literature to assign these subsets randomly.
+Common practice in the literature is to assign these subsets randomly.
 Although this approach is fast and efficient, it only measures a model's capacity to interpolate, which is unrealistic in certain applications and can result in overly optimistic performance on the test set.
 To address this issue, we report `astartes`, an open-source Python package that implements many existing similarity- and distance-based algorithms to partition data into more challenging splits that can better assess out-of-sample performance.
 This publication focuses on use-cases within cheminformatics. 
@@ -74,7 +74,9 @@ Although measuring performance on chemically dissimilar compounds/clusters is no
 # Example Use-Case in Cheminformatics
 
 To demonstrate the difference in performance between interpolation and extrapolation, we apply `astartes` to two relevant cheminformatics datasets and their corresponding tasks.
-For each dataset, a typical interpolative split is generated using random sampling. We also create two extrapolative splits are generated for comparison. The first uses the cheminformatics-specific Bemis-Murcko scaffold [@bemis1996properties] as calculated by RDKit [@landrum2006rdkit]. <!-- Scaffold splits are a better measure of generalizability compared to random splits [@yang2019analyzing; @wang2020machine; @heid2021machine; @guan2021regio; @artrith2021best; @greenman2022multi]. -->
+For each dataset, a typical interpolative split is generated using random sampling.
+We also create two extrapolative splits for comparison.
+The first uses the cheminformatics-specific Bemis-Murcko scaffold [@bemis1996properties] as calculated by RDKit [@landrum2006rdkit]. <!-- Scaffold splits are a better measure of generalizability compared to random splits [@yang2019analyzing; @wang2020machine; @heid2021machine; @guan2021regio; @artrith2021best; @greenman2022multi]. -->
 The second uses the more general-purpose K-means clustering based on the Euclidean distance of Morgan (ECFP4) fingerprints using 2048 bit hashing and radius of 2 [@morgan1965generation; @rogers2010extended]. 
 The QM9 dataset and RDB7 datasets were organized into 100 and 10 clusters, respectively.
 For each split, we create 5 different folds (by changing the random seed) and report the mean absolute error (MAE) and root-mean-squared error (RMSE).
