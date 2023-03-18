@@ -44,7 +44,8 @@ bibliography: paper.bib
 Machine Learning (ML) has become an increasingly popular tool to accelerate traditional workflows.
 Critical to the use of ML is the process of splitting datasets into training, validation, and testing subsets that are used to develop and evaluate models.
 Common practice in the literature is to assign these subsets randomly.
-Although this approach is fast and efficient, it only measures a model's capacity to interpolate, which is unrealistic in certain applications and can result in overly optimistic performance on the test set.
+Although this approach is fast and efficient, it only measures a model's capacity to interpolate.
+Testing errors from random splits may be overly optimistic if given new data that is dissimilar to the scope of the training set; thus, there is a growing need to easily measure performance for extrapolation tasks.
 To address this issue, we report `astartes`, an open-source Python package that implements many existing similarity- and distance-based algorithms to partition data into more challenging splits that can better assess out-of-sample performance.
 This publication focuses on use-cases within cheminformatics. 
 However, `astartes` operates on arbitrary vector inputs, so its principals and workflow are generalizable to other ML domains as well.
@@ -88,10 +89,10 @@ Models were generated using a modified version of Chemprop [@yang2019analyzing] 
 We use the hyperparameters reported by @spiekermann2022fast as implemented in the `barrier_prediction` branch, which is publicly available on [GitHub](https://github.com/kspieks/chemprop/tree/barrier_prediction) [@spiekermann_forked_chemprop]. <!-- We use the `barrier_prediction` branch from a forked version of Chemprop [@yang2019analyzing; @spiekermann_forked_chemprop] to train a deep message passing neural network using the hyperparameters reported by ref. [@spiekermann2022fast]. -->
 
 
-Table 1 and Table 2 show the expected trend in which the average testing errors are higher for the extrapolation tasks than they are for the interpolation tasks.
+Table 1 and Table 2 show the expected trend in which the average testing errors are higher for the extrapolation tasks than they are for the interpolation task.
 The results from random splitting are informative if the model will be primarily used in interpolation settings. 
-However, these errors are unrealistically low if the model is intended to make predictions on new molecules. 
-Performance is worse on the extrapolative data splits, which present a more challenging task, but these errors should be more representative of evaluating a new sample.
+However, these errors are likely unrealistically low if the model is intended to make predictions on new molecules that are chemically dissimilar to those in the training set.
+Performance is worse on the extrapolative data splits, which present a more challenging task, but these errors should be more representative of evaluating a new sample that is out-of-scope.
 Together, these tables demonstrate the utility of `astartes` in allowing users to better understand the likely performance of their model in different settings.
 
 ### Table 1: Average testing errors for predicting the 12 regression targets from QM9 [@ramakrishnan2014quantum].
