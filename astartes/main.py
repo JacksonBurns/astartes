@@ -14,6 +14,7 @@ from astartes.utils.warnings import ImperfectSplittingWarning, NormalizationWarn
 # define random seed
 DEFAULT_RANDOM_STATE = 42
 
+
 def train_val_test_split(
     X: np.array,
     y: np.array = None,
