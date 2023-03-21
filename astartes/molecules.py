@@ -23,6 +23,8 @@ except ImportError:  # pragma: no cover
 
 from astartes import train_test_split, train_val_test_split
 
+from astartes.main import DEFAULT_RANDOM_STATE
+
 
 def train_val_test_split_molecules(
     smiles: List[str],
@@ -32,7 +34,7 @@ def train_val_test_split_molecules(
     val_size: float = 0.1,
     test_size: float = 0.1,
     sampler: str = "random",
-    random_state=42,
+    random_state: int = DEFAULT_RANDOM_STATE,
     hopts: dict = {},
     fingerprint: str = "morgan_fingerprint",
     fprints_hopts: dict = {},
@@ -79,7 +81,7 @@ def train_test_split_molecules(
     train_size: float = 0.75,
     test_size: float = None,
     sampler: str = "random",
-    random_state=42,
+    random_state: int = DEFAULT_RANDOM_STATE,
     hopts: dict = {},
     fingerprint: str = "morgan_fingerprint",
     fprints_hopts: dict = {},

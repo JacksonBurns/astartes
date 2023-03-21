@@ -23,7 +23,7 @@ def train_val_test_split(
     val_size: float = 0.1,
     test_size: float = 0.1,
     sampler: str = "random",
-    random_state=DEFAULT_RANDOM_STATE,
+    random_state: int = DEFAULT_RANDOM_STATE,
     hopts: dict = {},
     return_indices: bool = False,
 ):
@@ -57,7 +57,7 @@ def train_val_test_split(
     train_size, val_size, test_size = _normalize_split_sizes(
         train_size, val_size, test_size
     )
-    hopts['random_state'] = random_state
+    hopts["random_state"] = random_state
     sampler_factory = SamplerFactory(sampler)
     sampler_instance = sampler_factory.get_sampler(X, y, labels, hopts)
 
@@ -86,7 +86,7 @@ def train_test_split(
     train_size: float = 0.75,
     test_size: float = None,
     sampler: str = "random",
-    random_state=DEFAULT_RANDOM_STATE,
+    random_state: int = DEFAULT_RANDOM_STATE,
     hopts: dict = {},
     return_indices: bool = False,
 ):
@@ -107,7 +107,16 @@ def train_test_split(
         np.array: X, y, and labels train/val/test data, or indices.
     """
     return train_val_test_split(
-        X, y, labels, train_size, 0, test_size, sampler, random_state, hopts, return_indices
+        X,
+        y,
+        labels,
+        train_size,
+        0,
+        test_size,
+        sampler,
+        random_state,
+        hopts,
+        return_indices,
     )
 
 
