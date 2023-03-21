@@ -114,3 +114,6 @@ class AbstractSampler(ABC):
         # and will instead sort by the value of the cluster labels (wrong!)
         self._samples_idxs = np.array(sorted_idxs, dtype=int)
         self._sorted_cluster_counter = sorted_cluster_counter
+
+    def get_semi_sorted_cluster_counter(self, max_shufflable_size):
+        pass
