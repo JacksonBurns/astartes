@@ -5,5 +5,4 @@
 # the environment unless we manually specify it here
 
 set -e
-# Work-around until pip stops making this broken in requirement.txt
 pip install -e .[molecules]

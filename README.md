@@ -8,12 +8,13 @@
   <img alt="GitHub Repo Stars" src="https://img.shields.io/github/stars/JacksonBurns/astartes?style=social">
   <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/astartes">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/astartes">
+  <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/astartes?style=plastic">
   <img alt="PyPI - License" src="https://img.shields.io/github/license/JacksonBurns/astartes">
   <img alt="Test Status" src="https://github.com/JacksonBurns/astartes/actions/workflows/run_tests.yml/badge.svg?branch=main&event=schedule">
 </p>
 
 ## Installing `astartes`
-We reccomend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management.
+We reccomend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management. Python versions 3.7, 3.8, 3.9, 3.10, and 3.11 are supported on all platforms.
 
 `astartes` is availble on `PyPI` and can be installed using `pip`:
 
