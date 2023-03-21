@@ -22,7 +22,6 @@ except ImportError:  # pragma: no cover
 
 
 from astartes import train_test_split, train_val_test_split
-
 from astartes.main import DEFAULT_RANDOM_STATE
 
 
