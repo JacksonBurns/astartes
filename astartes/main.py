@@ -39,7 +39,7 @@ def train_val_test_split(
         sampler (str, optional): Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to "random".
         random_state (int, optional): The random seed used throughout astartes.
         hopts (dict, optional): Hyperparameters for the sampler used above. Defaults to {}.
-        return_indices (bool, optional): True to return indices of train/test instead of values. Defaults to False.
+        return_indices (bool, optional): True to return indices of train/test after values. Defaults to False.
 
     Returns:
         np.array: X, y, and labels train/val/test data, or indices.
@@ -231,16 +231,11 @@ def _return_helper(
         test_size (float): Fraction of data to use in test.
         val_size (float): Fraction of data to use in val.
         train_size (float): Fraction of data to use in train.
-        return_indices (bool): Return indices or the arrays themselves.
+        return_indices (bool): Return indices after the value arrays.
 
     Returns:
         np.array: Either many arrays or indices in arrays.
     """
-    if return_indices:
-        if val_idxs.any():
-            return train_idxs, val_idxs, test_idxs
-        else:
-            return train_idxs, test_idxs
     out = []
     X_train = sampler_instance.X[train_idxs]
     out.append(X_train)
@@ -274,7 +269,11 @@ def _return_helper(
             out.append(clusters_val)
         clusters_test = sampler_instance.get_clusters()[test_idxs]
         out.append(clusters_test)
-
+    if return_indices:
+        out.append(train_idxs)
+        if val_idxs.any():
+            out.append(val_idxs)
+        out.append(test_idxs)
     return (*out,)
 
 
