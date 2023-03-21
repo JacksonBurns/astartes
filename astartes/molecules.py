@@ -53,7 +53,7 @@ def train_val_test_split_molecules(
         hopts (dict, optional): Hyperparameters for the sampler used above. Defaults to {}.
         fingerprint (str, optional): Molecular fingerprint to be used from AIMSim. Defaults to "morgan_fingerprint".
         fprints_hopts (dict, optional): Hyperparameters for AIMSim featurization. Defaults to {}.
-        return_indices (bool, optional): True to return indices of train/test instead of values. Defaults to False.
+        return_indices (bool, optional): True to return indices of train/test after the values. Defaults to False.
 
     Returns:
         np.array: X, y, and labels train/val/test data, or indices.
@@ -99,7 +99,7 @@ def train_test_split_molecules(
         hopts (dict, optional): Hyperparameters for the sampler used above. Defaults to {}.
         fingerprint (str, optional): Molecular fingerprint to be used from AIMSim. Defaults to "morgan_fingerprint".
         fprints_hopts (dict, optional): Hyperparameters for AIMSim featurization. Defaults to {}.
-        return_indices (bool, optional): True to return indices of train/test instead of values. Defaults to False.
+        return_indices (bool, optional): True to return indices of train/test after the values. Defaults to False.
 
     Returns:
         np.array: X, y, and labels train/test data, or indices.
