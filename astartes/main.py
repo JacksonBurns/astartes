@@ -149,16 +149,30 @@ def _extrapolative_sampling(
     # unlike interpolative, cannot calculate n_train_samples here
     # since it will vary based on cluster_lengths
 
-    # can't break up clusters
+    # largest clusters must go into largest set, but smaller ones can optionally
+    # be shuffled
     cluster_counter = sampler_instance.get_sorted_cluster_counter()
+    shuffle_clusters = False
+    max_shufflable_size = 0
+    rng = None
+    if sampler_instance.get_config("random_state") is not DEFAULT_RANDOM_STATE:
+        shuffle_clusters = True
+        # only shuffle clusters that can comfortably fit in either test or validation
+        max_shufflable_size = min(n_test_samples, n_val_samples)
+        rng = np.random.default_rng(seed=sampler_instance.get_config("random_state"))
+
     test_idxs, val_idxs, train_idxs = (
         np.array([], dtype=int),
         np.array([], dtype=int),
         np.array([], dtype=int),
     )
     for cluster_idx, cluster_length in cluster_counter.items():
-        # assemble test first
-        if (len(test_idxs) + cluster_length) <= n_test_samples:  # will not overfill
+        can_shuffle = shuffle_clusters and cluster_length < max_shufflable_size
+        print()
+        # assemble test first, avoid overfilling
+        if (len(test_idxs) + cluster_length) <= n_test_samples and (
+            not can_shuffle or rng.random() < 0.5
+        ):
             test_idxs = np.append(
                 test_idxs, sampler_instance.get_sample_idxs(cluster_length)
             )
@@ -170,9 +184,11 @@ def _extrapolative_sampling(
             train_idxs = np.append(
                 train_idxs, sampler_instance.get_sample_idxs(cluster_length)
             )
+    print(train_idxs, test_idxs, val_idxs)
     _check_actual_split(
         train_idxs, val_idxs, test_idxs, train_size, val_size, test_size
     )
+    print("umm")
     return _return_helper(
         sampler_instance, train_idxs, val_idxs, test_idxs, return_indices
     )
