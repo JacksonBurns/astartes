@@ -29,9 +29,9 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=42,
 )
 ```
-But we encourage you to try out a non-random sampler (see below)!
+But we encourage you to try one of our many other samplers (see below)!
 
-## Step 3. Specifying a Non-Random Sampler
+## Step 3. Specifying an Algorithmic Sampler
 By default (for interoperability), `astartes` will use a random sampler to produce train/test splits - but the real value of `astartes` is in the algorithmic sampling algorithms it implements. Check out the [README for a complete list of available algorithms](https://github.com/JacksonBurns/astartes#implemented-sampling-algorithms) and how to call and customize them.
 
 If you existing call to `train_test_split` looks like this:
