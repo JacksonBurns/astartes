@@ -193,10 +193,10 @@ class Test_astartes(unittest.TestCase):
                 self.y,
                 labels=self.labels,
                 test_size=0.1,
-                val_size=0.2,
-                train_size=0.7,
+                val_size=0.1,
+                train_size=0.8,
                 sampler="sphere_exclusion",
-                random_state=8_675_309,
+                random_state=1234,
             )
             self.assertFalse(
                 len(w),
@@ -208,31 +208,19 @@ class Test_astartes(unittest.TestCase):
                     ),
                 ),
             )
-        print(
-            X_train,
-            X_val,
-            X_test,
-            y_train,
-            y_val,
-            y_test,
-            labels_train,
-            labels_val,
-            labels_test,
-            clusters_train,
-            clusters_val,
-            clusters_test,
-        )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_train,
                 np.array(
                     [
                         [1, 0, 0, 0, 0],
-                        [1, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [1, 1, 1, 0, 0],
                         [1, 1, 0, 0, 0],
-                        [1, 1, 1, 1, 1],
+                        [1, 1, 1, 0, 0],
+                        [1, 1, 1, 1, 0],
+                        [1, 0, 0, 0, 0],
+                        [1, 1, 0, 0, 0],
+                        [1, 1, 1, 0, 0],
+                        [1, 1, 1, 1, 0],
                     ]
                 ),
                 "Train X incorrect.",
@@ -241,56 +229,56 @@ class Test_astartes(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_val,
-                np.array([[1, 1, 1, 1, 0], [1, 1, 1, 0, 0]]),
+                np.array([[0, 0, 0, 0, 0]]),
                 "Validation X incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_test,
-                np.array([[1, 1, 0, 0, 0], [1, 1, 1, 1, 0]]),
+                np.array([[1, 1, 1, 1, 1]]),
                 "Test X incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_train,
-                np.array([2, 6, 1, 8, 3, 10]),
+                np.array([2, 3, 4, 5, 6, 7, 8, 9]),
                 "Train y incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_val,
-                np.array([5, 4]),
+                np.array([1]),
                 "Validation y incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_test,
-                np.array([7, 9]),
+                np.array([10]),
                 "Test y incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_train,
-                np.array(["two", "six", "one", "eight", "three", "ten"]),
+                np.array(["two" "three" "four" "five" "six" "seven" "eight" "nine"]),
                 "Train labels incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_val,
-                np.array(["five", "four"]),
+                np.array(["one"]),
                 "Validation labels incorrect.",
             )
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_test,
-                np.array(["seven", "nine"]),
+                np.array(["ten"]),
                 "Test labels incorrect.",
             )
         )

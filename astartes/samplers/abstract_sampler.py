@@ -81,7 +81,7 @@ class AbstractSampler(ABC):
         return self._samples_clusters
 
     def _set_sorted_cluster_counter(self):
-        """Sets self._sorted_cluster_counter with a dict containing cluter_id:
+        """Sets self._sorted_cluster_counter with a dict containing cluster_id:
         #_elts sorted by #_elts, ascending"""
         # need to sort labels and clusters in order of smallest cluster to largest
         # start by counting the number of elements in each cluster
@@ -92,8 +92,6 @@ class AbstractSampler(ABC):
         # cluster (effectively tracking the mapping between unsorted and sorted)
         samples_idxs = np.array(range(len(self.X)), dtype=int)
 
-        # workhorse - this and some lines above/below could be made into a private
-        # method in AbstractSampler
         sorted_idxs = []
         sorted_cluster_counter = {}
         for label, sample_idx in sorted(
@@ -116,4 +114,36 @@ class AbstractSampler(ABC):
         self._sorted_cluster_counter = sorted_cluster_counter
 
     def get_semi_sorted_cluster_counter(self, max_shufflable_size):
-        pass
+        """Similar to sorted cluster counter, except that cluster with fewer elements
+        than max_shufflable_size will have their order shuffled."""
+        cc = self.get_sorted_cluster_counter()
+        small_clusters = [
+            cluster_label
+            for cluster_label, length in cc.items()
+            if length <= max_shufflable_size
+        ]
+        large_clusters = [i for i in cc.keys() if i not in small_clusters]
+        # add the indices of the cluster members to make things easy for shuffling
+        cc_with_idxs = {
+            cluster_label: np.where(self._samples_clusters == cluster_label)[0]
+            for cluster_label, length in cc.items()
+        }
+
+        rng = np.random.default_rng(seed=self.get_config("random_state"))
+        print(small_clusters)
+        rng.shuffle(small_clusters)
+        print(small_clusters)
+        # udpate the dictionary using the current one as a lookup
+        new_dict = {}
+        new_label_order = np.array([], dtype=int)
+        for small_cluster in small_clusters:
+            new_dict[small_cluster] = cc[small_cluster]
+            new_label_order = np.hstack((new_label_order, cc_with_idxs[small_cluster]))
+
+        for large_cluster in large_clusters:
+            new_dict[large_cluster] = cc[large_cluster]
+            new_label_order = np.hstack((new_label_order, cc_with_idxs[large_cluster]))
+
+        self._samples_clusters = new_label_order
+        print(cc, new_dict)
+        return new_dict
