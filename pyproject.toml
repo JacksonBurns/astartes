@@ -11,7 +11,7 @@ authors = [
     { name = "Kevin Spiekermann", email = "kspieker@mit.edu" },
 ]
 license = { text = "MIT" }
-description = "Train:Test Algorithmic Sampling for Molecules, Images, and Arbitrary Arrays"
+description = "Train:Test Algorithmic Sampling for Molecules and Arbitrary Arrays"
 classifiers = ["Programming Language :: Python :: 3"]
 urls = { Homepage = "https://github.com/JacksonBurns/astartes" }
 requires-python = ">=3.7"
