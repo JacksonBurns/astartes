@@ -12,7 +12,7 @@ In one of the first few lines of your Python script, you have the line `from skl
 
 That's it! You are now using `astartes`.
 
-If you were just calling `train_test_split(X, y)`, your script should now work in the exact same way as `sklearn` with no changes required. If you were specifying a `random_state`, you will need to change the syntax slightly:
+If you were just calling `train_test_split(X, y)`, your script should now work in the exact same way as `sklearn` with no changes required. 
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(
@@ -26,9 +26,7 @@ _becomes_
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
-    hopts={
-        "random_state": 42,
-    },
+    random_state=42,
 )
 ```
 But we encourage you to try out a non-random sampler (see below)!
@@ -55,7 +53,7 @@ That's it!
 
 ## Step 4. Passing Keyword Arguments
 
-All of the arguments to the `sklearn`'s `train_test_split` (except `random_state`, which is instead in `hopts`) can still be passed to `astartes`' `train_test_split`:
+All of the arguments to the `sklearn`'s `train_test_split` can still be passed to `astartes`' `train_test_split`:
 ```python
 X_train, X_test, y_train, y_test, labels_train, labels_test = train_test_split(
     X,

@@ -67,9 +67,7 @@ class Test_random(unittest.TestCase):
                 test_size=0.5,
                 train_size=0.5,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
             )
         # test that the known arrays equal the result from above
         self.assertIsNone(
@@ -133,9 +131,7 @@ class Test_random(unittest.TestCase):
                 test_size=0.33,
                 train_size=0.67,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
             )
             self.assertFalse(
                 len(w),

@@ -22,6 +22,7 @@ except ImportError:  # pragma: no cover
 
 
 from astartes import train_test_split, train_val_test_split
+from astartes.main import DEFAULT_RANDOM_STATE
 
 
 def train_val_test_split_molecules(
@@ -32,6 +33,7 @@ def train_val_test_split_molecules(
     val_size: float = 0.1,
     test_size: float = 0.1,
     sampler: str = "random",
+    random_state: int = DEFAULT_RANDOM_STATE,
     hopts: dict = {},
     fingerprint: str = "morgan_fingerprint",
     fprints_hopts: dict = {},
@@ -47,6 +49,7 @@ def train_val_test_split_molecules(
         val_size (float, optional): Fraction of dataset to use in validation set. Defaults to 0.1.
         test_size (float, optional): Fraction of dataset to use in test set. Defaults to 0.1.
         sampler (str, optional): Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to "random".
+        random_state (int, optional): The random seed used throughout astartes.
         hopts (dict, optional): Hyperparameters for the sampler used above. Defaults to {}.
         fingerprint (str, optional): Molecular fingerprint to be used from AIMSim. Defaults to "morgan_fingerprint".
         fprints_hopts (dict, optional): Hyperparameters for AIMSim featurization. Defaults to {}.
@@ -64,6 +67,7 @@ def train_val_test_split_molecules(
         val_size=val_size,
         train_size=train_size,
         sampler=sampler,
+        random_state=random_state,
         hopts=hopts,
         return_indices=return_indices,
     )
@@ -76,6 +80,7 @@ def train_test_split_molecules(
     train_size: float = 0.75,
     test_size: float = None,
     sampler: str = "random",
+    random_state: int = DEFAULT_RANDOM_STATE,
     hopts: dict = {},
     fingerprint: str = "morgan_fingerprint",
     fprints_hopts: dict = {},
@@ -90,6 +95,7 @@ def train_test_split_molecules(
         train_size (float, optional): Fraction of dataset to use in training (test+train~1). Defaults to 0.75.
         test_size (float, optional): Fraction of dataset to use in test set. Defaults to None.
         sampler (str, optional): Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to "random".
+        random_state (int, optional): The random seed used throughout astartes.
         hopts (dict, optional): Hyperparameters for the sampler used above. Defaults to {}.
         fingerprint (str, optional): Molecular fingerprint to be used from AIMSim. Defaults to "morgan_fingerprint".
         fprints_hopts (dict, optional): Hyperparameters for AIMSim featurization. Defaults to {}.
@@ -109,6 +115,7 @@ def train_test_split_molecules(
         test_size=test_size,
         train_size=train_size,
         sampler=sampler,
+        random_state=random_state,
         hopts=hopts,
         return_indices=return_indices,
     )

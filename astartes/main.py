@@ -11,6 +11,9 @@ from astartes.utils.exceptions import InvalidConfigurationError
 from astartes.utils.sampler_factory import SamplerFactory
 from astartes.utils.warnings import ImperfectSplittingWarning, NormalizationWarning
 
+# define random seed
+DEFAULT_RANDOM_STATE = 42
+
 
 def train_val_test_split(
     X: np.array,
@@ -20,6 +23,7 @@ def train_val_test_split(
     val_size: float = 0.1,
     test_size: float = 0.1,
     sampler: str = "random",
+    random_state: int = DEFAULT_RANDOM_STATE,
     hopts: dict = {},
     return_indices: bool = False,
 ):
@@ -33,6 +37,7 @@ def train_val_test_split(
         val_size (float, optional): Fraction of dataset to use in validation set. Defaults to 0.1.
         test_size (float, optional): Fraction of dataset to use in test set. Defaults to 0.1.
         sampler (str, optional): Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to "random".
+        random_state (int, optional): The random seed used throughout astartes.
         hopts (dict, optional): Hyperparameters for the sampler used above. Defaults to {}.
         return_indices (bool, optional): True to return indices of train/test instead of values. Defaults to False.
 
@@ -52,6 +57,7 @@ def train_val_test_split(
     train_size, val_size, test_size = _normalize_split_sizes(
         train_size, val_size, test_size
     )
+    hopts["random_state"] = random_state
     sampler_factory = SamplerFactory(sampler)
     sampler_instance = sampler_factory.get_sampler(X, y, labels, hopts)
 
@@ -80,6 +86,7 @@ def train_test_split(
     train_size: float = 0.75,
     test_size: float = None,
     sampler: str = "random",
+    random_state: int = DEFAULT_RANDOM_STATE,
     hopts: dict = {},
     return_indices: bool = False,
 ):
@@ -92,6 +99,7 @@ def train_test_split(
         train_size (float, optional): Fraction of dataset to use in training set. Defaults to 0.75.
         test_size (float, optional): Fraction of dataset to use in test set. Defaults to None.
         sampler (str, optional): Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to "random".
+        random_state (int, optional): The random seed used throughout astartes.
         hopts (dict, optional): Hyperparameters for the sampler used above. Defaults to {}.
         return_indices (bool, optional): True to return indices of train/test instead of values. Defaults to False.
 
@@ -99,7 +107,16 @@ def train_test_split(
         np.array: X, y, and labels train/val/test data, or indices.
     """
     return train_val_test_split(
-        X, y, labels, train_size, 0, test_size, sampler, hopts, return_indices
+        X,
+        y,
+        labels,
+        train_size,
+        0,
+        test_size,
+        sampler,
+        random_state,
+        hopts,
+        return_indices,
     )
 
 
