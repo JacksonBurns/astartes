@@ -421,8 +421,8 @@ class Test_astartes(unittest.TestCase):
                 test_y,
                 train_labels,
                 test_labels,
-                indices_train,
-                indices_test,
+                train_indices,
+                test_indices,
             ) = train_test_split(
                 np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
                 np.array([10, 11, 12]),
@@ -435,7 +435,7 @@ class Test_astartes(unittest.TestCase):
             )
             self.assertIsNone(
                 np.testing.assert_array_equal(
-                    indices_test,
+                    test_indices,
                     np.array([2, 0]),
                     "Test indices incorrect.",
                 ),
@@ -454,9 +454,9 @@ class Test_astartes(unittest.TestCase):
                 train_labels,
                 val_labels,
                 test_labels,
-                indices_train,
-                indices_val,
-                indices_test,
+                train_indices,
+                val_indices,
+                test_indices,
             ) = train_val_test_split(
                 np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
                 np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
@@ -470,7 +470,7 @@ class Test_astartes(unittest.TestCase):
             )
             self.assertIsNone(
                 np.testing.assert_array_equal(
-                    indices_val,
+                    val_indices,
                     np.array([8, 2]),
                     "Validation indices incorrect.",
                 ),
