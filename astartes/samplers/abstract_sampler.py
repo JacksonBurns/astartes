@@ -140,12 +140,12 @@ class AbstractSampler(ABC):
         }
         # loop through all clusters, update the semi-sorted dictionary and
         # concatenate the lists of indices to arrive at a final sorted list
-        new_dict = {}
+        semi_sorted_cc = {}
         new_samples_idxs = np.array([], dtype=int)
         for cluster_label in all_clusters:
-            new_dict[cluster_label] = cc[cluster_label]
+            semi_sorted_cc[cluster_label] = cc[cluster_label]
             new_samples_idxs = np.hstack(
                 (new_samples_idxs, cc_with_idxs[cluster_label])
             )
         self._samples_idxs = new_samples_idxs
-        return new_dict
+        return semi_sorted_cc
