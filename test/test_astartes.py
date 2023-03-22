@@ -196,7 +196,7 @@ class Test_astartes(unittest.TestCase):
                 val_size=0.1,
                 train_size=0.8,
                 sampler="sphere_exclusion",
-                random_state=1234,
+                random_state=867_5309,
             )
             self.assertFalse(
                 len(w),
@@ -214,12 +214,12 @@ class Test_astartes(unittest.TestCase):
                 np.array(
                     [
                         [1, 0, 0, 0, 0],
-                        [1, 1, 0, 0, 0],
-                        [1, 1, 1, 0, 0],
-                        [1, 1, 1, 1, 0],
                         [1, 0, 0, 0, 0],
                         [1, 1, 0, 0, 0],
+                        [1, 1, 0, 0, 0],
                         [1, 1, 1, 0, 0],
+                        [1, 1, 1, 0, 0],
+                        [1, 1, 1, 1, 0],
                         [1, 1, 1, 1, 0],
                     ]
                 ),
@@ -243,7 +243,7 @@ class Test_astartes(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 y_train,
-                np.array([2, 3, 4, 5, 6, 7, 8, 9]),
+                np.array([2, 6, 3, 7, 4, 8, 5, 9]),
                 "Train y incorrect.",
             )
         )
@@ -264,7 +264,9 @@ class Test_astartes(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_train,
-                np.array(["two" "three" "four" "five" "six" "seven" "eight" "nine"]),
+                np.array(
+                    ["two", "six", "three", "seven", "four", "eight", "five", "nine"]
+                ),
                 "Train labels incorrect.",
             )
         )
@@ -280,6 +282,27 @@ class Test_astartes(unittest.TestCase):
                 labels_test,
                 np.array(["ten"]),
                 "Test labels incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                clusters_train,
+                np.array([4, 4, 0, 0, 1, 1, 5, 5]),
+                "Train cluster assignments incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                clusters_val,
+                np.array([2]),
+                "Validation cluster assignments incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                clusters_test,
+                np.array([3]),
+                "Test cluster assignments incorrect.",
             )
         )
 
