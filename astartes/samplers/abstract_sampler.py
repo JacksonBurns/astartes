@@ -132,7 +132,7 @@ class AbstractSampler(ABC):
         rng.shuffle(small_clusters)
         # recombine the clusters
         all_clusters = small_clusters + large_clusters
-        # track the indices of the cluster membersso that we can easily
+        # track the indices of the cluster membership that we can easily
         # keep track of the new order after the clusters are sorted
         cc_with_idxs = {
             cluster_label: np.where(self._samples_clusters == cluster_label)[0]
