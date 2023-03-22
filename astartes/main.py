@@ -245,14 +245,14 @@ def _return_helper(
         np.array: Either many arrays or indices in arrays.
     """
     if return_indices:
-        if val_idxs.any():
+        if len(val_idxs):
             return train_idxs, val_idxs, test_idxs
         else:
             return train_idxs, test_idxs
     out = []
     X_train = sampler_instance.X[train_idxs]
     out.append(X_train)
-    if val_idxs.any():
+    if len(val_idxs):
         X_val = sampler_instance.X[val_idxs]
         out.append(X_val)
     X_test = sampler_instance.X[test_idxs]
@@ -261,7 +261,7 @@ def _return_helper(
     if sampler_instance.y is not None:
         y_train = sampler_instance.y[train_idxs]
         out.append(y_train)
-        if val_idxs.any():
+        if len(val_idxs):
             y_val = sampler_instance.y[val_idxs]
             out.append(y_val)
         y_test = sampler_instance.y[test_idxs]
@@ -269,7 +269,7 @@ def _return_helper(
     if sampler_instance.labels is not None:
         labels_train = sampler_instance.labels[train_idxs]
         out.append(labels_train)
-        if val_idxs.any():
+        if len(val_idxs):
             labels_val = sampler_instance.labels[val_idxs]
             out.append(labels_val)
         labels_test = sampler_instance.labels[test_idxs]
@@ -277,7 +277,7 @@ def _return_helper(
     if len(sampler_instance.get_clusters()):  # true when the list has been filled
         clusters_train = sampler_instance.get_clusters()[train_idxs]
         out.append(clusters_train)
-        if val_idxs.any():
+        if len(val_idxs):
             clusters_val = sampler_instance.get_clusters()[val_idxs]
             out.append(clusters_val)
         clusters_test = sampler_instance.get_clusters()[test_idxs]
