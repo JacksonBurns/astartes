@@ -23,7 +23,7 @@ def train_val_test_split(
     val_size: float = 0.1,
     test_size: float = 0.1,
     sampler: str = "random",
-    random_state: int = DEFAULT_RANDOM_STATE,
+    random_state: int = None,
     hopts: dict = {},
     return_indices: bool = False,
 ):
@@ -57,7 +57,9 @@ def train_val_test_split(
     train_size, val_size, test_size = _normalize_split_sizes(
         train_size, val_size, test_size
     )
-    hopts["random_state"] = random_state
+    hopts["random_state"] = (
+        random_state if random_state is not None else DEFAULT_RANDOM_STATE
+    )
     sampler_factory = SamplerFactory(sampler)
     sampler_instance = sampler_factory.get_sampler(X, y, labels, hopts)
 
@@ -68,6 +70,7 @@ def train_val_test_split(
             val_size,
             train_size,
             return_indices,
+            random_state,
         )
     else:
         return _interpolative_sampling(
@@ -86,7 +89,7 @@ def train_test_split(
     train_size: float = 0.75,
     test_size: float = None,
     sampler: str = "random",
-    random_state: int = DEFAULT_RANDOM_STATE,
+    random_state: int = None,
     hopts: dict = {},
     return_indices: bool = False,
 ):
@@ -126,6 +129,7 @@ def _extrapolative_sampling(
     val_size,
     train_size,
     return_indices,
+    random_state,
 ):
     """Helper function to perform extrapolative sampling.
 
@@ -139,6 +143,7 @@ def _extrapolative_sampling(
         val_size (float): Fraction of data to use in val.
         train_size (float): Fraction of data to use in train.
         return_indices (bool): Return indices or the arrays themselves.
+        random_state (int, optional): The random state used to shuffle small clusters. Default to no shuffle.
 
     Returns:
         calls: _return_helper
@@ -152,12 +157,12 @@ def _extrapolative_sampling(
     # largest clusters must go into largest set, but smaller ones can optionally
     # be shuffled
     cluster_counter = None
-    if sampler_instance.get_config("random_state") is not DEFAULT_RANDOM_STATE:
+    if random_state is None:
+        cluster_counter = sampler_instance.get_sorted_cluster_counter()
+    else:
         cluster_counter = sampler_instance.get_semi_sorted_cluster_counter(
             max_shufflable_size=min(n_test_samples, n_val_samples)
         )
-    else:
-        cluster_counter = sampler_instance.get_sorted_cluster_counter()
 
     test_idxs, val_idxs, train_idxs = (
         np.array([], dtype=int),
