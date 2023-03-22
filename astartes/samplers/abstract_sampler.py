@@ -116,9 +116,10 @@ class AbstractSampler(ABC):
     def get_semi_sorted_cluster_counter(self, max_shufflable_size):
         """Similar to sorted cluster counter, except that cluster with fewer elements
         than max_shufflable_size will have their order shuffled."""
-        # start from the sorted cluster counter from above
+        # start with the sorted cluster counter from above
         cc = self.get_sorted_cluster_counter()
-        # pull out a list of cluster labels where the cluster is small
+        # create a list of cluster labels where the cluster is not longer than
+        # than max_shufflable_size
         small_clusters = [
             cluster_label
             for cluster_label, length in cc.items()
