@@ -23,7 +23,7 @@ def train_val_test_split(
     val_size: float = 0.1,
     test_size: float = 0.1,
     sampler: str = "random",
-    random_state: int = DEFAULT_RANDOM_STATE,
+    random_state: int = None,
     hopts: dict = {},
     return_indices: bool = False,
 ):
@@ -57,7 +57,9 @@ def train_val_test_split(
     train_size, val_size, test_size = _normalize_split_sizes(
         train_size, val_size, test_size
     )
-    hopts["random_state"] = random_state
+    hopts["random_state"] = (
+        random_state if random_state is not None else DEFAULT_RANDOM_STATE
+    )
     sampler_factory = SamplerFactory(sampler)
     sampler_instance = sampler_factory.get_sampler(X, y, labels, hopts)
 
@@ -68,6 +70,7 @@ def train_val_test_split(
             val_size,
             train_size,
             return_indices,
+            random_state,
         )
     else:
         return _interpolative_sampling(
@@ -86,7 +89,7 @@ def train_test_split(
     train_size: float = 0.75,
     test_size: float = None,
     sampler: str = "random",
-    random_state: int = DEFAULT_RANDOM_STATE,
+    random_state: int = None,
     hopts: dict = {},
     return_indices: bool = False,
 ):
@@ -126,6 +129,7 @@ def _extrapolative_sampling(
     val_size,
     train_size,
     return_indices,
+    random_state,
 ):
     """Helper function to perform extrapolative sampling.
 
@@ -139,6 +143,7 @@ def _extrapolative_sampling(
         val_size (float): Fraction of data to use in val.
         train_size (float): Fraction of data to use in train.
         return_indices (bool): Return indices or the arrays themselves.
+        random_state (int, optional): The random state used to shuffle small clusters. Default to no shuffle.
 
     Returns:
         calls: _return_helper
@@ -149,16 +154,24 @@ def _extrapolative_sampling(
     # unlike interpolative, cannot calculate n_train_samples here
     # since it will vary based on cluster_lengths
 
-    # can't break up clusters
-    cluster_counter = sampler_instance.get_sorted_cluster_counter()
+    # largest clusters must go into largest set, but smaller ones can optionally
+    # be shuffled
+    cluster_counter = None
+    if random_state is None:
+        cluster_counter = sampler_instance.get_sorted_cluster_counter()
+    else:
+        cluster_counter = sampler_instance.get_semi_sorted_cluster_counter(
+            max_shufflable_size=min(n_test_samples, n_val_samples)
+        )
+
     test_idxs, val_idxs, train_idxs = (
         np.array([], dtype=int),
         np.array([], dtype=int),
         np.array([], dtype=int),
     )
     for cluster_idx, cluster_length in cluster_counter.items():
-        # assemble test first
-        if (len(test_idxs) + cluster_length) <= n_test_samples:  # will not overfill
+        # assemble test first, avoid overfilling
+        if (len(test_idxs) + cluster_length) <= n_test_samples:
             test_idxs = np.append(
                 test_idxs, sampler_instance.get_sample_idxs(cluster_length)
             )
@@ -239,7 +252,7 @@ def _return_helper(
     out = []
     X_train = sampler_instance.X[train_idxs]
     out.append(X_train)
-    if val_idxs.any():
+    if len(val_idxs):
         X_val = sampler_instance.X[val_idxs]
         out.append(X_val)
     X_test = sampler_instance.X[test_idxs]
@@ -248,7 +261,7 @@ def _return_helper(
     if sampler_instance.y is not None:
         y_train = sampler_instance.y[train_idxs]
         out.append(y_train)
-        if val_idxs.any():
+        if len(val_idxs):
             y_val = sampler_instance.y[val_idxs]
             out.append(y_val)
         y_test = sampler_instance.y[test_idxs]
@@ -256,7 +269,7 @@ def _return_helper(
     if sampler_instance.labels is not None:
         labels_train = sampler_instance.labels[train_idxs]
         out.append(labels_train)
-        if val_idxs.any():
+        if len(val_idxs):
             labels_val = sampler_instance.labels[val_idxs]
             out.append(labels_val)
         labels_test = sampler_instance.labels[test_idxs]
@@ -264,7 +277,7 @@ def _return_helper(
     if len(sampler_instance.get_clusters()):  # true when the list has been filled
         clusters_train = sampler_instance.get_clusters()[train_idxs]
         out.append(clusters_train)
-        if val_idxs.any():
+        if len(val_idxs):
             clusters_val = sampler_instance.get_clusters()[val_idxs]
             out.append(clusters_val)
         clusters_test = sampler_instance.get_clusters()[test_idxs]

@@ -81,7 +81,7 @@ class AbstractSampler(ABC):
         return self._samples_clusters
 
     def _set_sorted_cluster_counter(self):
-        """Sets self._sorted_cluster_counter with a dict containing cluter_id:
+        """Sets self._sorted_cluster_counter with a dict containing cluster_id:
         #_elts sorted by #_elts, ascending"""
         # need to sort labels and clusters in order of smallest cluster to largest
         # start by counting the number of elements in each cluster
@@ -92,8 +92,6 @@ class AbstractSampler(ABC):
         # cluster (effectively tracking the mapping between unsorted and sorted)
         samples_idxs = np.array(range(len(self.X)), dtype=int)
 
-        # workhorse - this and some lines above/below could be made into a private
-        # method in AbstractSampler
         sorted_idxs = []
         sorted_cluster_counter = {}
         for label, sample_idx in sorted(
@@ -114,3 +112,40 @@ class AbstractSampler(ABC):
         # and will instead sort by the value of the cluster labels (wrong!)
         self._samples_idxs = np.array(sorted_idxs, dtype=int)
         self._sorted_cluster_counter = sorted_cluster_counter
+
+    def get_semi_sorted_cluster_counter(self, max_shufflable_size):
+        """Similar to sorted cluster counter, except that cluster with fewer elements
+        than max_shufflable_size will have their order shuffled."""
+        # start with the sorted cluster counter from above
+        cc = self.get_sorted_cluster_counter()
+        # create a list of cluster labels where the cluster is not longer than
+        # than max_shufflable_size
+        small_clusters = [
+            cluster_label
+            for cluster_label, length in cc.items()
+            if length <= max_shufflable_size
+        ]
+        # the remaining clusters go here
+        large_clusters = [i for i in cc.keys() if i not in small_clusters]
+        # shuffle the small clusters according to the random state
+        rng = np.random.default_rng(seed=self.get_config("random_state"))
+        rng.shuffle(small_clusters)
+        # recombine the clusters
+        all_clusters = small_clusters + large_clusters
+        # track the indices of the cluster membership that we can easily
+        # keep track of the new order after the clusters are sorted
+        cc_with_idxs = {
+            cluster_label: np.where(self._samples_clusters == cluster_label)[0]
+            for cluster_label, length in cc.items()
+        }
+        # loop through all clusters, update the semi-sorted dictionary and
+        # concatenate the lists of indices to arrive at a final sorted list
+        semi_sorted_cc = {}
+        new_samples_idxs = np.array([], dtype=int)
+        for cluster_label in all_clusters:
+            semi_sorted_cc[cluster_label] = cc[cluster_label]
+            new_samples_idxs = np.hstack(
+                (new_samples_idxs, cc_with_idxs[cluster_label])
+            )
+        self._samples_idxs = new_samples_idxs
+        return semi_sorted_cc

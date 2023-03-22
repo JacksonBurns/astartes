@@ -171,6 +171,141 @@ class Test_astartes(unittest.TestCase):
             )
         )
 
+    def test_train_val_test_split_extrpolation_shuffling(self):
+        """Split data into training, validation, and test sets with shuffling."""
+        with warnings.catch_warnings(record=True) as w:
+            warnings.filterwarnings("always")
+            (
+                X_train,
+                X_val,
+                X_test,
+                y_train,
+                y_val,
+                y_test,
+                labels_train,
+                labels_val,
+                labels_test,
+                clusters_train,
+                clusters_val,
+                clusters_test,
+            ) = train_val_test_split(
+                self.X,
+                self.y,
+                labels=self.labels,
+                test_size=0.1,
+                val_size=0.1,
+                train_size=0.8,
+                sampler="sphere_exclusion",
+                random_state=867_5309,
+            )
+            self.assertFalse(
+                len(w),
+                "\nNo warnings should have been raised when requesting a mathematically possible split."
+                "\nReceived {:d} warnings instead: \n -> {:s}".format(
+                    len(w),
+                    "\n -> ".join(
+                        [str(i.category.__name__) + ": " + str(i.message) for i in w]
+                    ),
+                ),
+            )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                X_train,
+                np.array(
+                    [
+                        [1, 0, 0, 0, 0],
+                        [1, 0, 0, 0, 0],
+                        [1, 1, 0, 0, 0],
+                        [1, 1, 0, 0, 0],
+                        [1, 1, 1, 0, 0],
+                        [1, 1, 1, 0, 0],
+                        [1, 1, 1, 1, 0],
+                        [1, 1, 1, 1, 0],
+                    ]
+                ),
+                "Train X incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                X_val,
+                np.array([[0, 0, 0, 0, 0]]),
+                "Validation X incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                X_test,
+                np.array([[1, 1, 1, 1, 1]]),
+                "Test X incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                y_train,
+                np.array([2, 6, 3, 7, 4, 8, 5, 9]),
+                "Train y incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                y_val,
+                np.array([1]),
+                "Validation y incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                y_test,
+                np.array([10]),
+                "Test y incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                labels_train,
+                np.array(
+                    ["two", "six", "three", "seven", "four", "eight", "five", "nine"]
+                ),
+                "Train labels incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                labels_val,
+                np.array(["one"]),
+                "Validation labels incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                labels_test,
+                np.array(["ten"]),
+                "Test labels incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                clusters_train,
+                np.array([4, 4, 0, 0, 1, 1, 5, 5]),
+                "Train cluster assignments incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                clusters_val,
+                np.array([2]),
+                "Validation cluster assignments incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                clusters_test,
+                np.array([3]),
+                "Test cluster assignments incorrect.",
+            )
+        )
+
     def test_insufficient_dataset_train(self):
         """If the user requests a split that would result in rounding down the size of the
         test set to zero, a helpful exception should be raised."""
