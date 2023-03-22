@@ -79,7 +79,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 ## Step 5. Useful `astartes` Features
 
 ### `return_indices`: Improve Code Clarity
-When providing `X`, `y`, and `labels` it can become cumbersome to unpack all of arrays, and there are cirumstances where the indices of the train/test data can be useful (for example, if `y` or `labels` are large, memory-intense objects). By default, `astartes` will return the arrays themselves, but it can also return just the indices for the user to manipulate according to their needs:
+There are circumstances where the indices of the train/test data can be useful (for example, if `y` or `labels` are large, memory-intense objects), and there is no way to directly return these indices in `sklearn`. `astartes` will return the sampling splits themselves by default, but it can also return the indices for the user to manipulate according to their needs:
 ```python
 X_train, X_test, y_train, y_test, labels_train, labels_test = train_test_split(
     X,
@@ -90,13 +90,15 @@ X_train, X_test, y_train, y_test, labels_train, labels_test = train_test_split(
 ```
 _could instead be_
 ```python
-indices_train, indices_test = train_test_split(
+X_train, X_test, y_train, y_test, labels_train, labels_test, indices_train, indices_test = train_test_split(
     X,
     y,
     labels,
     return_indices = True,
 )
 ```
+If `y` or `labels` were large, memory-intense objects it could be beneficial to _not_ pass them in to `train_test_split` and instead separate the existing lists later using the returned indices.
+
 ### `train_val_test_split`: More Rigorous ML
 Behind the scenes, `train_test_split` is actually just a one-line function that calls the real workhorse of `astartes` - `train_val_test_split`:
 ```python

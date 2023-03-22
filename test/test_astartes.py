@@ -547,9 +547,18 @@ class Test_astartes(unittest.TestCase):
             )
 
     def test_return_indices(self):
-        """Test the ability to return the indices and not the values."""
+        """Test the ability to return the indices and the values."""
         with self.assertWarns(ImperfectSplittingWarning):
-            (indices_train, indices_test,) = train_test_split(
+            (
+                train_X,
+                test_X,
+                train_y,
+                test_y,
+                train_labels,
+                test_labels,
+                train_indices,
+                test_indices,
+            ) = train_test_split(
                 np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
                 np.array([10, 11, 12]),
                 labels=np.array(["apple", "banana", "apple"]),
@@ -561,7 +570,7 @@ class Test_astartes(unittest.TestCase):
             )
             self.assertIsNone(
                 np.testing.assert_array_equal(
-                    indices_test,
+                    test_indices,
                     np.array([2, 0]),
                     "Test indices incorrect.",
                 ),
@@ -570,7 +579,20 @@ class Test_astartes(unittest.TestCase):
     def test_return_indices_with_validation(self):
         """Test the ability to return indices in train_val_test_split"""
         with self.assertWarns(ImperfectSplittingWarning):
-            (indices_train, indices_val, indices_test,) = train_val_test_split(
+            (
+                train_X,
+                val_X,
+                test_X,
+                train_y,
+                val_y,
+                test_y,
+                train_labels,
+                val_labels,
+                test_labels,
+                train_indices,
+                val_indices,
+                test_indices,
+            ) = train_val_test_split(
                 np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
                 np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
                 labels=np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
@@ -583,7 +605,7 @@ class Test_astartes(unittest.TestCase):
             )
             self.assertIsNone(
                 np.testing.assert_array_equal(
-                    indices_val,
+                    val_indices,
                     np.array([8, 2]),
                     "Validation indices incorrect.",
                 ),
