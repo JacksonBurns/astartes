@@ -1,5 +1,5 @@
 <h1 align="center">astartes</h1> 
-<h3 align="center">Train:Test Algorithmic Sampling for Molecules, Images, and Arbitrary Arrays</h3>
+<h3 align="center">Train:Validation:Test Algorithmic Sampling for Molecules and Arbitrary Arrays</h3>
 
 <p align="center">  
   <img alt="astarteslogo" src="https://github.com/JacksonBurns/astartes/blob/main/astartes_logo.png">
@@ -72,7 +72,7 @@ The usage of this function is identical to `train_test_split` but with the addit
 
 ```python
 train_test_split_molecules(
-    smiles=smiles,
+    molecules=smiles,
     y=y,
     test_size=0.2,
     train_size=0.8,
