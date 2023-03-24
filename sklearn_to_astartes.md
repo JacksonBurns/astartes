@@ -41,7 +41,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     y,
 )
 ```
-and you want to try out using Kennard Stone sampling, switch it to this:
+and you want to try out using Kennard-Stone sampling, switch it to this:
 ```python
 X_train, X_test, y_train, y_test = train_test_split(
     X,
@@ -138,5 +138,5 @@ X_train, X_val, X_test, y_train, y_val, y_test = train_val_test_split(
 For truly rigorous ML modeling, the validation set should be used for hyperparameter tuning and the test set held out until the _very final_ change has been made to the model to get a true sense of its performance. For better or for worse, this is _not_ the current standard for ML modeling, but the authors believe it should be.
 
 ### Custom Warnings: `ImperfectSplittingWarning` and `NormalizationWarning`
-In the event that your requested train/validation/test split is not mathematically possible given the dimensions of the input data (i.e. you request 50/25/25 but have 101 data points), `astartes` will warn you during runtime that it has occured. `sklearn` simply moves on quietly, and while this is fine _most_ of the time, the authors felt it prudent to warn the user.
+In the event that your requested train/validation/test split is not mathematically possible given the dimensions of the input data (i.e. you request 50/25/25 but have 101 data points), `astartes` will warn you during runtime that it has occurred. `sklearn` simply moves on quietly, and while this is fine _most_ of the time, the authors felt it prudent to warn the user.
 When entering a train/validation/test split, `astartes` will check that it is normalized and make it so if not, warning the user during runtime. This will hopefully help prevent head-scratching hours of debugging.

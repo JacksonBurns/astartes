@@ -1,4 +1,4 @@
-name: Update JORS Branch
+name: Update JOSS Branch
 on:
   workflow_dispatch:
 
@@ -13,5 +13,5 @@ jobs:
         with:
           type: now
           from_branch: main
-          target_branch: jors-paper
+          target_branch: joss-paper
           github_token: ${{ github.token }}
