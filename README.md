@@ -14,12 +14,12 @@
 </p>
 
 ## Installing `astartes`
-We reccomend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management. Python versions 3.7, 3.8, 3.9, 3.10, and 3.11 are supported on all platforms.
+We recommend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management. Python versions 3.7, 3.8, 3.9, 3.10, and 3.11 are supported on all platforms.
 
-`astartes` is availble on `PyPI` and can be installed using `pip`:
+`astartes` is available on `PyPI` and can be installed using `pip`:
 
  - To include the featurization options for chemical data, use `pip install astartes[molecules]`.
- - To install only the sampling algorithms, use `pip install astartes` (this install will have fewer depdencies and may be more readily compatible in environments with existing workflows).
+ - To install only the sampling algorithms, use `pip install astartes` (this install will have fewer dependencies and may be more readily compatible in environments with existing workflows).
 
 __Note for Windows Powershell or MacOS Catalina or newer__: On these systems the command line will complain about square brackets, so you will need to double quote the `molecules` command (i.e. `pip install "astartes[molecules]"`)
 
@@ -62,7 +62,7 @@ There are two broad categories of sampling algorithms implemented in `astartes`:
 | Optimizable K-Dissimilarity Selection (OptiSim) | 'optisim' | Extrapolative | `n_clusters`, `max_subsample_size`, `distance_cutoff` | _custom implementation_ | Variation on [OptiSim](https://pubs.acs.org/doi/10.1021/ci025662h) for arbitrary-valued vectors. |
 | K-Means | 'kmeans' | Extrapolative | `n_clusters`, `n_init` | [`sklearn KMeans`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) | Passthrough to `sklearn`'s `KMeans`. |
 | Density-Based Spatial Clustering of Applications with Noise (DBSCAN) | 'dbscan' | Extrapolative | `eps`, `min_samples`, `algorithm`, `metric`, `leaf_size` | [`sklearn DBSCAN`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html) | Passthrough to `sklearn`'s `DBSCAN`. |
-| Mimimm Test Set Dissimilarity | ~ | ~ | _will be released with_ `astartes` _v1.0.0_ | ~ | ~ |
+| Minimum Test Set Dissimilarity | ~ | ~ | _will be released with_ `astartes` _v1.0.0_ | ~ | ~ |
 | RBM Sampler | ~ | ~ | _will be released with_ `astartes` _v1.0.0_ | ~ | ~ |
 
 ### Using the `astartes.molecules` Subpackage
@@ -113,14 +113,14 @@ To contribute to the `astartes` source code, start by cloning the repository (i.
 __Note for Windows Powershell or MacOS Catalina or newer__: On these systems the command line will complain about square brackets, so you will need to double quote the `molecules` command (i.e. `pip install -e ".[molecules,dev]"`)
 
 ### Unit Testing
-All of the tests in `astartes` are written using the built-in python `unittest` module (to allow running without `pytest`) but we _highly_ reccomend using `pytest`. To execute the tests from the `astartes` repository, simply type `pytest` after running the developer install (or alternately, `pytest -v` for a more helpful output).
+All of the tests in `astartes` are written using the built-in python `unittest` module (to allow running without `pytest`) but we _highly_ recommend using `pytest`. To execute the tests from the `astartes` repository, simply type `pytest` after running the developer install (or alternately, `pytest -v` for a more helpful output).
 
 ### Adding New Samplers
 Adding a new sampler should extend the `abstract_sampler.py` abstract base class.
 
 It can be as simple as a passthrough to a another `train_test_split`, or it can be an original implementation that results in X and y being split into two lists. Take a look at `astartes/samplers/random_split.py` for a basic example!
 
-After the sampler has been implemented, add it to `__init__.py` in in `astartes/samplers` and it will automatically be unit tested. Additional unit tests to verify that hyperparameters can be properly passed, etc. are also reccomended.
+After the sampler has been implemented, add it to `__init__.py` in in `astartes/samplers` and it will automatically be unit tested. Additional unit tests to verify that hyperparameters can be properly passed, etc. are also recommended.
 
 For historical reasons, and as a guide for any developers who would like add new samplers, below is a running list of samplers which have been _considered_ for addition to `asartes` but ultimately not added for various reasons.
 
@@ -129,7 +129,7 @@ For historical reasons, and as a guide for any developers who would like add new
 | Sampler Name | Reasoning |
 |:---:|---|
 | D-Optimal | Requires _a-priori_ knowledge of the test and train size which does not fit in the `astartes` framework (samplers are all agnostic to the size of the sets) and it is questionable if the use of the Fischer information matrix is actually meaningful in the context of sampling existing data rather than tuning for ideal data. |
-| Duplex | Requires knowing test and train size before execution, and can only partition data into two sets which owuld make it incompatible with `train_val_test_split`. |
+| Duplex | Requires knowing test and train size before execution, and can only partition data into two sets which would make it incompatible with `train_val_test_split`. |
 
 ### Adding New Featurization Schemes
 All of the sampling methods implemented in `astartes` accept arbitrary arrays of numbers and return the sampled groups (with the exception of `Scaffold.py`). If you have an existing featurization scheme (i.e. take an arbitrary input and turn it into an array of numbers), we would be thrilled to include it in `astartes`.
@@ -169,11 +169,11 @@ def train_test_split_INTERFACE(
 
 If possible, we would like to also add an example Jupyter Notebook with any new interface to demonstrate to new users how it functions. See our other examples in the `examples` directory.
 
-Contact @JacksonBurns if you need assistance adding an existing workflow to `astartes`. If this featurization scheme requires additional dependencies to function, we may add it as an additional _extra_ package in the same way that `molecules` in installed.
+Contact [@JacksonBurns](https://github.com/JacksonBurns) if you need assistance adding an existing workflow to `astartes`. If this featurization scheme requires additional dependencies to function, we may add it as an additional _extra_ package in the same way that `molecules` in installed.
 
-## JORS Branch
+## JOSS Branch
 
-`astartes` corresponding JORS paper is stored in this repository on a separate branch. You can find `paper.tex` on the aptly named `jors-paper` paper. 
+`astartes` corresponding JOSS paper is stored in this repository on a separate branch. You can find `paper.md` on the aptly named `joss-paper` branch. 
 
-_Note for Maintainers_: To push changes from the `main` branch into the `jors-paper` branch, run the `Update JORS Branch` workflow.
+_Note for Maintainers_: To push changes from the `main` branch into the `joss-paper` branch, run the `Update JOSS Branch` workflow.
 
