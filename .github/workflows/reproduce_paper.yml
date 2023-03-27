@@ -1,0 +1,59 @@
+name: Reproduce Paper
+# This action runs a Jupyter notebook in the examples folder that uses astartes to generate
+# train/val/test splits on two datasets (RDB7 and QM9). These dynamically generated splits
+# are then compared to the splits which were created at the time of paper writing, to ensure
+# that subsequent releases of astartes have backwards compatibility.
+on:
+  schedule:
+    - cron: "0 8 * * 1-5"
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: actions-id-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    name: Reproduce Paper Data Splits
+    steps:
+      - uses: actions/checkout@v3
+      - uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: false
+          environment-name: temp
+          channels: defaults,conda-forge
+          channel-priority: flexible
+          extra-specs: |
+            python=3.11
+      - name: Install Dependencies
+        run: |
+          python -m pip install -e .[molecules]
+          python -m pip install notebook
+      - name: Convert Notebooks to Scripts
+        run: |
+          cd examples
+          jupyter nbconvert --to script QM9_make_splits.ipynb
+          jupyter nbconvert --to script RDB7_make_splits.ipynb
+      - name: Backup Reference Splits
+        run: |
+          cp QM9_splits/QM9_splits_kmeans.pkl REFERENCE_QM9_splits_kmeans.pkl
+          cp QM9_splits/QM9_splits_random.pkl REFERENCE_QM9_splits_random.pkl
+          cp QM9_splits/QM9_splits_scaffold.pkl REFERENCE_QM9_splits_scaffold.pkl
+          cp RDB7_splits/RDB7_splits_kmeans.pkl REFERENCE_RDB7_splits_kmeans.pkl
+          cp RDB7_splits/RDB7_splits_random.pkl REFERENCE_RDB7_splits_random.pkl
+          cp RDB7_splits/RDB7_splits_scaffold.pkl REFERENCE_RDB7_splits_scaffold.pkl
+      - name: Execute Splitting Notebooks
+        run: |
+          ipython QM9_make_splits.ipynb
+          ipython RDB7_make_splits.ipynb
+      - name: Compare Reference to Current
+        run: |
+          python validate_splits.py
