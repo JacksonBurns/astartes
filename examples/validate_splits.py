@@ -16,12 +16,12 @@ import pickle as pkl
 import numpy as np
 
 tests_dict = {
-    "REFERERNCE_RDB7_splits_kmeans.pkl": "RDB7_splits/RDB7_splits_kmeans.pkl",
-    "REFERERNCE_RDB7_splits_random.pkl": "RDB7_splits/RDB7_splits_random.pkl",
-    "REFERERNCE_RDB7_splits_scaffold.pkl": "RDB7_splits/RDB7_splits_scaffold.pkl",
-    "REFERERNCE_QM9_splits_kmeans.pkl": "QM9_splits/QM9_splits_kmeans.pkl",
-    "REFERERNCE_QM9_splits_random.pkl": "QM9_splits/QM9_splits_random.pkl",
-    "REFERERNCE_QM9_splits_scaffold.pkl": "QM9_splits/QM9_splits_scaffold.pkl",
+    "REFERENCE_RDB7_splits_kmeans.pkl": "RDB7_splits/RDB7_splits_kmeans.pkl",
+    "REFERENCE_RDB7_splits_random.pkl": "RDB7_splits/RDB7_splits_random.pkl",
+    "REFERENCE_RDB7_splits_scaffold.pkl": "RDB7_splits/RDB7_splits_scaffold.pkl",
+    "REFERENCE_QM9_splits_kmeans.pkl": "QM9_splits/QM9_splits_kmeans.pkl",
+    "REFERENCE_QM9_splits_random.pkl": "QM9_splits/QM9_splits_random.pkl",
+    "REFERENCE_QM9_splits_scaffold.pkl": "QM9_splits/QM9_splits_scaffold.pkl",
 }
 
 for reference, new in tests_dict.items():
