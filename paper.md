@@ -79,7 +79,7 @@ For each dataset, a typical interpolative split is generated using random sampli
 We also create two extrapolative splits for comparison.
 The first uses the cheminformatics-specific Bemis-Murcko scaffold [@bemis1996properties] as calculated by RDKit [@landrum2006rdkit]. <!-- Scaffold splits are a better measure of generalizability compared to random splits [@yang2019analyzing; @wang2020machine; @heid2021machine; @guan2021regio; @artrith2021best; @greenman2022multi]. -->
 The second uses the more general-purpose K-means clustering based on the Euclidean distance of Morgan (ECFP4) fingerprints using 2048 bit hashing and radius of 2 [@morgan1965generation; @rogers2010extended]. 
-The QM9 dataset and RDB7 datasets were organized into 100 and 10 clusters, respectively.
+The QM9 dataset and RDB7 datasets were organized into 100 and 20 clusters, respectively.
 For each split, we create 5 different folds (by changing the random seed) and report the mean absolute error (MAE) and root-mean-squared error (RMSE).
 The values in Table 1 and Table 2 correspond to the mean $\pm$ one standard deviation calculated across folds.
 
@@ -100,17 +100,17 @@ Together, these tables demonstrate the utility of `astartes` in allowing users t
 | Split     | MAE              | RMSE            |
 |-----------|------------------|-----------------|
 | Random    | 2.02 $\pm$ 0.06  | 3.63 $\pm$ 0.21 |
-| Scaffold  | 2.XX $\pm$ 0.XX  | 3.XX $\pm$ 0.XX |
-| K-means   | 2.XX  $\pm$ 0.XX | 4.XX $\pm$ 0.XX |
+| Scaffold  | 2.20 $\pm$ 0.16  | 3.60 $\pm$ 0.31 |
+| K-means   | 2.55 $\pm$ 0.28  | 4.74 $\pm$ 0.86 |
 
 
 ### Table 2: Testing errors in kcal/mol for predicting a reaction's barrier height from RDB7 [@spiekermann2022high].
 
 | Split     | MAE             | RMSE            |
 |-----------|-----------------|-----------------|
-| Random    | 3.94 $\pm$ 0.03 | 6.89 $\pm$ 0.24 |
-| Scaffold  | 4.YY $\pm$ 0.YY | 7.YY $\pm$ 0.YY |
-| K-means   | 5.YY $\pm$ 1.YY | 7.YY $\pm$ 2.YY |
+| Random    | 3.87 $\pm$ 0.05 | 6.81 $\pm$ 0.28 |
+| Scaffold  | 4.12 $\pm$ 0.13 | 7.09 $\pm$ 0.22 |
+| K-means   | 4.37 $\pm$ 0.76 | 7.43 $\pm$ 1.45 |
 
 
 Note that the scaffold errors presented above are higher than what is reported in the original study [@spiekermann2022fast] for several reasons.
