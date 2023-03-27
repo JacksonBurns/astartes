@@ -29,9 +29,18 @@ for reference, new in tests_dict.items():
         reference_splits = pkl.load(f)
     with open(new, "rb") as f:
         new_splits = pkl.load(f)
-
     np.testing.assert_array_equal(
-        reference_splits,
-        new_splits,
-        "Failed to reproduce {:s}.".format(new),
+        reference_splits[0],
+        new_splits[0],
+        "Failed to reproduce {:s} training.".format(new),
+    )
+    np.testing.assert_array_equal(
+        reference_splits[1],
+        new_splits[1],
+        "Failed to reproduce {:s} validation.".format(new),
+    )
+    np.testing.assert_array_equal(
+        reference_splits[2],
+        new_splits[2],
+        "Failed to reproduce {:s} testing.".format(new),
     )
