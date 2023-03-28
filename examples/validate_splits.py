@@ -40,7 +40,7 @@ for reference, new in tests_dict.items():
                     "Failed to reproduce {:s} split {:d} on {:s} set.".format(
                         new,
                         split_idx,
-                        split_names[split_idx],
+                        split_names[set_idx],
                     ),
                 )
             except AssertionError as ae:
