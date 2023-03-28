@@ -25,7 +25,7 @@ tests_dict = {
 }
 
 split_names = ["train", "val", "test"]
-
+failures = []
 for reference, new in tests_dict.items():
     with open(reference, "rb") as f:
         reference_splits = pkl.load(f)
@@ -33,12 +33,19 @@ for reference, new in tests_dict.items():
         new_splits = pkl.load(f)
     for split_idx in range(5):
         for set_idx in range(3):
-            np.testing.assert_array_equal(
-                reference_splits[split_idx][set_idx],
-                new_splits[split_idx][set_idx],
-                "Failed to reproduce {:s} split {:d} on {:s} set.".format(
-                    new,
-                    split_idx,
-                    split_names[split_idx],
-                ),
-            )
+            try:
+                np.testing.assert_array_equal(
+                    reference_splits[split_idx][set_idx],
+                    new_splits[split_idx][set_idx],
+                    "Failed to reproduce {:s} split {:d} on {:s} set.".format(
+                        new,
+                        split_idx,
+                        split_names[split_idx],
+                    ),
+                )
+            except AssertionError as ae:
+                failures.append(str(ae))
+if failures:
+    raise RuntimeError(
+        "The following splits were not reproduced successfully: " + repr(failures)
+    )
