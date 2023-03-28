@@ -24,23 +24,17 @@ tests_dict = {
     "REFERENCE_QM9_splits_scaffold.pkl": "QM9_splits/QM9_splits_scaffold.pkl",
 }
 
+split_names = ["train", "val", "test"]
+
 for reference, new in tests_dict.items():
     with open(reference, "rb") as f:
         reference_splits = pkl.load(f)
     with open(new, "rb") as f:
         new_splits = pkl.load(f)
-    np.testing.assert_array_equal(
-        reference_splits[0],
-        new_splits[0],
-        "Failed to reproduce {:s} training.".format(new),
-    )
-    np.testing.assert_array_equal(
-        reference_splits[1],
-        new_splits[1],
-        "Failed to reproduce {:s} validation.".format(new),
-    )
-    np.testing.assert_array_equal(
-        reference_splits[2],
-        new_splits[2],
-        "Failed to reproduce {:s} testing.".format(new),
-    )
+    for split_idx in range(5):
+        for set_idx in range(3):
+            np.testing.assert_array_equal(
+                reference_splits,
+                new_splits,
+                "Failed to reproduce {:s}.".format(new),
+            )
