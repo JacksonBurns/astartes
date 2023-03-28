@@ -5,7 +5,7 @@ dependencies:
   - ca-certificates=2023.01.10
   - certifi=2022.12.7
   - libcxx=14.0.6
-  - libffi=3.4.2
+  # - libffi=3.4.2
   - ncurses=6.4
   - openssl=1.1.1t
   - pip=22.3.1
