@@ -46,6 +46,7 @@ for reference, new in tests_dict.items():
             except AssertionError as ae:
                 failures.append(str(ae))
 if failures:
-    raise RuntimeError(
-        "The following splits were not reproduced successfully: " + repr(failures)
-    )
+    fail_str = "The following splits were not reproduced successfully: "
+    for err_msg in failures:
+        fail_str += err_msg
+    raise RuntimeError(fail_str)
