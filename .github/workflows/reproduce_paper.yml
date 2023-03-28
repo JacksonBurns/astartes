@@ -61,8 +61,8 @@ jobs:
         with:
           name: dynamically-generated-splits
           path: |
-          examples/QM9_splits/
-          examples/RDB7_splits/
+            examples/QM9_splits/
+            examples/RDB7_splits/
       - name: Compare Reference to Current
         run: |
           cd examples
