@@ -27,12 +27,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: mamba-org/provision-with-micromamba@main
         with:
-          environment-file: examples/publication_environment.yml
-          # environment-name: temp
-          channels: defaults #,conda-forge
-          # channel-priority: flexible
-          # extra-specs: |
-          #   python=3.8
+          environment-file: false
+          environment-name: temp
+          channels: defaults ,conda-forge
+          channel-priority: flexible
+          extra-specs: |
+            python=3.11
       - name: Install Dependencies
         run: |
           python -m pip install -e .[molecules]
@@ -56,6 +56,13 @@ jobs:
           cd examples
           ipython QM9_make_splits.ipynb
           ipython RDB7_make_splits.ipynb
+      - name: Upload New Splits as Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dynamically-generated-splits
+          path: |
+          examples/QM9_splits/
+          examples/RDB7_splits/
       - name: Compare Reference to Current
         run: |
           cd examples
