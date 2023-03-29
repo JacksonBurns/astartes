@@ -100,6 +100,13 @@ To see a complete example of using `train_test_split_molecules` with actual chem
 
 Configuration options for the featurization scheme can be found in the documentation for [`AIMSim`](https://vlachosgroup.github.io/AIMSim/README.html#currently-implemented-fingerprints) though most of the critical configuration options are shown above.
 
+### Reproducibility
+`astartes` aims to be completely reproducible across different platforms, Python versions, and dependency configurations - any version of `astartes` v1.x should result in the _exact_ same splits, always.
+To that end, the default behavior of `astartes` is to use `42` as the random seed and _always_ set it.
+Running `astartes` with the default settings will always produce the exact same results.
+We have verified this behavior on Debian Ubuntu, Windows, and Intel Macs from Python versions 3.7 through 3.11 (with appropriate dependencies for each version).
+We are limited in our ability to test on M1 Macs, but from our limited manual testing we achieve perfect reproducbility in all cases _except_ with `KMeans` on Apple silicon, which we have seen produce slightly different results between platforms regardless of random state (but is still consistent between runs on the same platform).
+
 ## Online Documentation
 [The online documentation](https://JacksonBurns.github.io/astartes/) contains everything you see in this README with an additional tutorial for [moving from `train_test_split` in `sklearn` to `astartes`](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
 
