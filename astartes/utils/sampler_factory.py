@@ -10,6 +10,7 @@ from astartes.samplers import (
     Random,
     Scaffold,
     SphereExclusion,
+    TimeBased,
 )
 from astartes.utils.exceptions import SamplerNotImplementedError
 
@@ -54,6 +55,8 @@ class SamplerFactory:
             sampler_class = SPXY
         elif self.sampler == "scaffold":
             sampler_class = Scaffold
+        elif self.sampler == 'time_based':
+            sampler_class = TimeBased
         else:
             possiblity = get_close_matches(
                 self.sampler,

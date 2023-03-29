@@ -63,7 +63,7 @@ def train_val_test_split(
     sampler_factory = SamplerFactory(sampler)
     sampler_instance = sampler_factory.get_sampler(X, y, labels, hopts)
 
-    if sampler in IMPLEMENTED_EXTRAPOLATION_SAMPLERS:
+    if sampler in IMPLEMENTED_EXTRAPOLATION_SAMPLERS and sampler != 'time_based':
         return _extrapolative_sampling(
             sampler_instance,
             test_size,
