@@ -12,9 +12,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# concurrency:
-#   group: actions-id-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-#   cancel-in-progress: true
+concurrency:
+  group: actions-id-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
         with:
           environment-file: false
           environment-name: temp
-          channels: defaults ,conda-forge
+          channels: defaults,conda-forge
           channel-priority: flexible
           extra-specs: |
             python=3.11
@@ -56,13 +56,13 @@ jobs:
           cd examples
           ipython QM9_make_splits.ipynb
           ipython RDB7_make_splits.ipynb
-      - name: Upload New Splits as Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: dynamically-generated-splits
-          path: |
-            examples/QM9_splits/
-            examples/RDB7_splits/
+      # - name: Upload New Splits as Artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: dynamically-generated-splits
+      #     path: |
+      #       examples/QM9_splits/
+      #       examples/RDB7_splits/
       - name: Compare Reference to Current
         run: |
           cd examples
