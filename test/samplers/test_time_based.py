@@ -26,7 +26,7 @@ class Test_time_based(unittest.TestCase):
             ]
         )
         self.y = np.array([1, 2, 3, 4, 5])
-  
+
         self.dates = [f'20{y:02}/01/01' for y in range(5)]
         self.labels_datetime = np.array([datetime.strptime(date, '%Y/%m/%d') for date in self.dates])
         self.labels_date = np.array([datetime.strptime(date, '%Y/%m/%d').date() for date in self.dates])
