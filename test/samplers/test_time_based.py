@@ -53,7 +53,7 @@ class Test_time_based(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_train,
-                np.array([[0, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 1, 0, 0, 0] ]),
+                np.array([[0, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 1, 0, 0, 0]]),
             ),
             "Train X incorrect.",
         )
