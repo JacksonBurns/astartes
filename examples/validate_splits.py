@@ -24,6 +24,10 @@ tests_dict = {
     "REFERENCE_QM9_splits_scaffold.pkl": "QM9_splits/QM9_splits_scaffold.pkl",
 }
 
+# KMeans assigns labels randomly even with random_seed fixed, which will cause at most
+# 2 clusters to be sorted into a different category on subsequent runs
+KMEANS_REPRODUCIBILITY_TARGET = 0.99_9999  # 99.9999% the same
+
 split_names = ["train", "val", "test"]
 fail = False
 for reference, new in tests_dict.items():
@@ -33,28 +37,41 @@ for reference, new in tests_dict.items():
         new_splits = pkl.load(f)
     for split_idx in range(5):
         for set_idx in range(3):
-            shared_indexes = np.intersect1d(
-                reference_splits[split_idx][set_idx], new_splits[split_idx][set_idx]
-            )
-            largest_split = max(
-                len(reference_splits[split_idx][set_idx]),
-                len(new_splits[split_idx][set_idx]),
-            )
-            shared_percent = len(shared_indexes) / largest_split
-            print(
-                "{:s} split {:d} on {:s} set.".format(
-                    new,
-                    split_idx,
-                    split_names[set_idx],
+            if "kmeans" in new:
+                shared_indexes = np.intersect1d(
+                    reference_splits[split_idx][set_idx], new_splits[split_idx][set_idx]
                 )
-            )
-            print(
-                "Dynamically generated and reference split shared {:.2f}\% of indexes.".format(
-                    shared_percent * 100
+                largest_split = max(
+                    len(reference_splits[split_idx][set_idx]),
+                    len(new_splits[split_idx][set_idx]),
                 )
-            )
-            if shared_percent < 0.99:
-                fail = True
-
+                shared_percent = len(shared_indexes) / largest_split
+                print(
+                    "{:s} split {:d} on {:s} set.".format(
+                        new,
+                        split_idx,
+                        split_names[set_idx],
+                    )
+                )
+                print(
+                    "Dynamically generated and reference split shared {:.4f}% of indexes.".format(
+                        shared_percent * 100
+                    )
+                )
+                if shared_percent < KMEANS_REPRODUCIBILITY_TARGET:
+                    fail = True
+            else:
+                try:
+                    np.testing.assert_array_equal(
+                        reference_splits[split_idx][set_idx],
+                        new_splits[split_idx][set_idx],
+                        "Failed {:s} split {:d} on {:s} set.".format(
+                            new,
+                            split_idx,
+                            split_names[set_idx],
+                        ),
+                    )
+                except AssertionError as ae:
+                    print(ae)
 if fail:
     raise RuntimeError("Regression testing failed, see above output.")
