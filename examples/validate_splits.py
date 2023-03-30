@@ -58,7 +58,7 @@ for reference, new in tests_dict.items():
                     )
                 )
                 print(
-                    "Dynamically generated and reference split shared {:.4f}% of indexes.".format(
+                    "Dynamically generated and reference split shared {:.10f}% of indexes.".format(
                         shared_percent * 100
                     )
                 )
