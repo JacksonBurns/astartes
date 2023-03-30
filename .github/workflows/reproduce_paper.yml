@@ -49,15 +49,15 @@ jobs:
       - name: Execute Splitting Notebooks
         run: |
           cd examples
-          ipython QM9_make_splits.ipynb
+          # ipython QM9_make_splits.ipynb
           ipython RDB7_make_splits.ipynb
-      - name: Upload New Splits as Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: dynamically-generated-splits
-          path: |
-            examples/QM9_splits/
-            examples/RDB7_splits/
+      # - name: Upload New Splits as Artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: dynamically-generated-splits
+      #     path: |
+      #       examples/QM9_splits/
+      #       examples/RDB7_splits/
       - name: Compare Reference to Current
         run: |
           cd examples
