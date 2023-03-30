@@ -40,10 +40,10 @@ jobs:
       - name: Backup Reference Splits
         run: |
           cd examples
-          cp QM9_splits/QM9_splits_kmeans.pkl REFERENCE_QM9_splits_kmeans.pkl
+          cp QM9_splits/QM9_splits_sphere_exclusion.pkl REFERENCE_QM9_splits_sphere_exclusion.pkl
           cp QM9_splits/QM9_splits_random.pkl REFERENCE_QM9_splits_random.pkl
           cp QM9_splits/QM9_splits_scaffold.pkl REFERENCE_QM9_splits_scaffold.pkl
-          cp RDB7_splits/RDB7_splits_kmeans.pkl REFERENCE_RDB7_splits_kmeans.pkl
+          cp RDB7_splits/RDB7_splits_sphere_exclusion.pkl REFERENCE_RDB7_splits_sphere_exclusion.pkl
           cp RDB7_splits/RDB7_splits_random.pkl REFERENCE_RDB7_splits_random.pkl
           cp RDB7_splits/RDB7_splits_scaffold.pkl REFERENCE_RDB7_splits_scaffold.pkl
       - name: Execute Splitting Notebooks

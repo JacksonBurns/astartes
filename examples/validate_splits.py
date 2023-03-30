@@ -16,10 +16,10 @@ import pickle as pkl
 import numpy as np
 
 tests_dict = {
-    "REFERENCE_RDB7_splits_kmeans.pkl": "RDB7_splits/RDB7_splits_kmeans.pkl",
+    "REFERENCE_RDB7_splits_sphere_exclusion.pkl": "RDB7_splits/RDB7_splits_sphere_exclusion.pkl",
     "REFERENCE_RDB7_splits_random.pkl": "RDB7_splits/RDB7_splits_random.pkl",
     "REFERENCE_RDB7_splits_scaffold.pkl": "RDB7_splits/RDB7_splits_scaffold.pkl",
-    "REFERENCE_QM9_splits_kmeans.pkl": "QM9_splits/QM9_splits_kmeans.pkl",
+    "REFERENCE_QM9_splits_sphere_exclusion.pkl": "QM9_splits/QM9_splits_sphere_exclusion.pkl",
     "REFERENCE_QM9_splits_random.pkl": "QM9_splits/QM9_splits_random.pkl",
     "REFERENCE_QM9_splits_scaffold.pkl": "QM9_splits/QM9_splits_scaffold.pkl",
 }
