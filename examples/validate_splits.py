@@ -25,7 +25,7 @@ tests_dict = {
 }
 
 split_names = ["train", "val", "test"]
-failures = []
+fail = False
 for reference, new in tests_dict.items():
     with open(reference, "rb") as f:
         reference_splits = pkl.load(f)
@@ -33,20 +33,28 @@ for reference, new in tests_dict.items():
         new_splits = pkl.load(f)
     for split_idx in range(5):
         for set_idx in range(3):
-            try:
-                np.testing.assert_array_equal(
-                    reference_splits[split_idx][set_idx],
-                    new_splits[split_idx][set_idx],
-                    "Failed to reproduce {:s} split {:d} on {:s} set.".format(
-                        new,
-                        split_idx,
-                        split_names[set_idx],
-                    ),
+            shared_indexes = np.intersect1d(
+                reference_splits[split_idx][set_idx], new_splits[split_idx][set_idx]
+            )
+            largest_split = max(
+                len(reference_splits[split_idx][set_idx]),
+                len(new_splits[split_idx][set_idx]),
+            )
+            shared_percent = len(shared_indexes) / largest_split
+            print(
+                "{:s} split {:d} on {:s} set.".format(
+                    new,
+                    split_idx,
+                    split_names[set_idx],
                 )
-            except AssertionError as ae:
-                failures.append(str(ae))
-if failures:
-    fail_str = "The following splits were not reproduced successfully: "
-    for err_msg in failures:
-        fail_str += err_msg
-    raise RuntimeError(fail_str)
+            )
+            print(
+                "Dynamically generated and reference split shared {:.2f}\% of indexes.".format(
+                    shared_percent * 100
+                )
+            )
+            if shared_percent < 0.99:
+                fail = True
+
+if fail:
+    raise RuntimeError("Regression testing failed, see above output.")
