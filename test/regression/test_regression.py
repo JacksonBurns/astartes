@@ -70,7 +70,7 @@ class Test_regression(unittest.TestCase):
                 self.y,
                 sampler=sampler_name,
                 random_state=42,
-                hopts={"eps": 3.55},
+                hopts={"eps": 3.55},  # eps is used by DBSCAN
             )
             all_output = [
                 X_train,
