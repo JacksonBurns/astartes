@@ -11,6 +11,7 @@
   <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/astartes?style=plastic">
   <img alt="PyPI - License" src="https://img.shields.io/github/license/JacksonBurns/astartes">
   <img alt="Test Status" src="https://github.com/JacksonBurns/astartes/actions/workflows/run_tests.yml/badge.svg?branch=main&event=schedule">
+  <img alt="Reproduce Paper" src="https://github.com/JacksonBurns/astartes/actions/workflows/reproduce_paper.yml/badge.svg?branch=main&event=schedule">
 </p>
 
 ## Installing `astartes`
@@ -99,6 +100,13 @@ train_test_split_molecules(
 To see a complete example of using `train_test_split_molecules` with actual chemical data, take a look in the `examples` directory.
 
 Configuration options for the featurization scheme can be found in the documentation for [`AIMSim`](https://vlachosgroup.github.io/AIMSim/README.html#currently-implemented-fingerprints) though most of the critical configuration options are shown above.
+
+### Reproducibility
+`astartes` aims to be completely reproducible across different platforms, Python versions, and dependency configurations - any version of `astartes` v1.x should result in the _exact_ same splits, always.
+To that end, the default behavior of `astartes` is to use `42` as the random seed and _always_ set it.
+Running `astartes` with the default settings will always produce the exact same results.
+We have verified this behavior on Debian Ubuntu, Windows, and Intel Macs from Python versions 3.7 through 3.11 (with appropriate dependencies for each version).
+We are limited in our ability to test on M1 Macs, but from our limited manual testing we achieve perfect reproducbility in all cases _except occasionally_ with `KMeans` on Apple silicon. It has produced _slightly_ different results between platforms regardless of `random_state`, with up to two clusters being assigned differently resulting in data splits which are >99% identical. `astartes` is still consistent between runs on the same platform in all cases.
 
 ## Online Documentation
 [The online documentation](https://JacksonBurns.github.io/astartes/) contains everything you see in this README with an additional tutorial for [moving from `train_test_split` in `sklearn` to `astartes`](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
