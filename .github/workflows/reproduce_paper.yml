@@ -5,11 +5,7 @@ name: Reproduce Paper
 # that subsequent releases of astartes have backwards compatibility.
 on:
   schedule:
-    - cron: "0 8 * * 1-5"
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    - cron: "0 8 * * 1"
   workflow_dispatch:
 
 concurrency:
