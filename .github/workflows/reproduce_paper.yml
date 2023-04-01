@@ -40,12 +40,12 @@ jobs:
       - name: Backup Reference Splits
         run: |
           cd examples
-          mv QM9_splits/QM9_splits_kmeans.pkl REFERENCE_QM9_splits_kmeans.pkl
-          mv QM9_splits/QM9_splits_random.pkl REFERENCE_QM9_splits_random.pkl
-          mv QM9_splits/QM9_splits_scaffold.pkl REFERENCE_QM9_splits_scaffold.pkl
-          mv RDB7_splits/RDB7_splits_kmeans.pkl REFERENCE_RDB7_splits_kmeans.pkl
-          mv RDB7_splits/RDB7_splits_random.pkl REFERENCE_RDB7_splits_random.pkl
-          mv RDB7_splits/RDB7_splits_scaffold.pkl REFERENCE_RDB7_splits_scaffold.pkl
+          cp QM9_splits/QM9_splits_kmeans.pkl REFERENCE_QM9_splits_kmeans.pkl
+          cp QM9_splits/QM9_splits_random.pkl REFERENCE_QM9_splits_random.pkl
+          cp QM9_splits/QM9_splits_scaffold.pkl REFERENCE_QM9_splits_scaffold.pkl
+          cp RDB7_splits/RDB7_splits_kmeans.pkl REFERENCE_RDB7_splits_kmeans.pkl
+          cp RDB7_splits/RDB7_splits_random.pkl REFERENCE_RDB7_splits_random.pkl
+          cp RDB7_splits/RDB7_splits_scaffold.pkl REFERENCE_RDB7_splits_scaffold.pkl
       - name: Execute Splitting Notebooks
         run: |
           cd examples
