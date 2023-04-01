@@ -67,7 +67,7 @@ There are two broad categories of sampling algorithms implemented in `astartes`:
 | Minimum Test Set Dissimilarity (MTSD) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 | Restricted Boltzmann Machine (RBM) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 | Kohonen Self-Organizing Map (SOM) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
-| Split Method | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
+| SPlit Method | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 
 ### Using the `astartes.molecules` Subpackage
 After installing with `pip install astartes[molecules]` one can import the new train/test splitting function like this: `from astartes.molecules import train_test_split_molecules`
