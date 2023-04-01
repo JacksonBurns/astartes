@@ -57,13 +57,13 @@ Machine learning has sparked an explosion of progress in chemical kinetics [@kom
 To facilitate adoption of these models, researchers must critically think about several topics, such as comparing model performance to relevant baselines, operating on user-friendly inputs, and reporting performance on both interpolative and extrapolative tasks<!-- cite Kevin's comment article-->. 
 `astartes` aims to make it straightforward for machine learning scientists and researchers to focus on two important points: rigorous hyperparameter optimization and accurate performance evaluation.
 
-First, `astartes`' key function `train_val_test_split` returns splits for training, validation, and testing sets using an sklearn-like interface. 
+First, `astartes`' key function `train_val_test_split` returns splits for training, validation, and testing sets using an `sklearn`-like interface. 
 This partitioning is crucial since best practices in data science dictate that, in order to minimize the risk of hyperparameter overfitting, one must only optimize hyperparameters with a validation set and use a held-out test set to accurately measure performance on unseen data [@ramsundar2019deep; @geron2019hands; @lakshmanan2020machine; @huyen2022designing; @wang2020machine]. 
 Unfortunately, many published papers only mention training and testing sets but do not mention validation sets, implying that they optimize the hyperparameters to the test set, which would be blatant data leakage that leads to overly optimistic results [@li2020predicting; @van2022physics; @ismail2022successes; @liu2023predict].
 For researchers interested in quickly obtaining preliminary results without using a validation set to optimize hyperparameters, `astartes` also implements an an sklearn-compatible `train_test_split` function.
 
 Second, it is crucial to evaluate model performance in both interpolation and extrapolation settings so future users are informed of any potential limitations.
-Although random splits are frequently used in the literature, this simply measures interpolation performance.
+Although random splits are frequently used in the cheminformatics literature, this simply measures interpolation performance.
 However, given the vastness of chemical space [@ruddigkeit_GDB-17_2012] and its often unsmooth nature (e.g. activity cliffs), it seems unlikely that users will want to be restricted to exclusively operate in an interpolation regime.
 Thus, to encourage adoption of these models, it is crucial to measure performance on more challenging splits as well.
 The general workflow is:
@@ -125,7 +125,7 @@ We also do not use ensembling here nor do we co-train the model with the reactio
 
 In the machine learning space, `astartes` functions as a drop-in replacement for the ubiquitous `train_test_split` from scikit-learn [@scikit-learn].
 Transitioning existing code to use this new methodology is as simple as running `pip install astartes`, modifying an `import` statement at the top of the file, and then specifying an additional keyword parameter.
-`astartes` has been especially designed to allow for maximum interoperability with other packages, using few depdencies, supporting all platforms, and continuous integration testing for Python 3.7 through 3.11.
+`astartes` has been especially designed to allow for maximum interoperability with other packages, using few depdencies, supporting all platforms, and validated suppport for Python 3.7 through 3.11.
 Specific tutorials on this transition are provided in the online documentation for `astartes`, which is available on [GitHub](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
 
 Here is an example workflow using `train_test_split` taken from the `scikit-learn` documentation [@scikit-learn]:
@@ -135,7 +135,8 @@ from sklearn.model_selection import train_test_split
 
 X, y = np.arange(10).reshape((5, 2)), range(5)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+  X, y, test_size=0.33, random_state=42)
 ```
 
 To switch to using `astartes`, `from sklearn.model_selection import train_test_split` becomes `from astartes import train_test_split` and the call to split the data is nearly identical and simple in the extensions that it provides:
@@ -146,14 +147,18 @@ from astartes import train_test_split
 
 X, y = np.arange(10).reshape((5, 2)), range(5)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, sampler="kmeans", random_state=42) 
+X_train, X_test, y_train, y_test = train_test_split(
+  X, y, test_size=0.33, sampler="kmeans", random_state=42) 
 ```
 
 With this small change, an extrapoative sampler based on k-means clustering will be used.
 
 Inside cheminformatics, `astartes` makes use of all molecular featurization options implemented in `AIMSim` [@aimsim_cpc], which includes those from virtually all popular descriptor generation tools used in the cheminformatics field.
 
-The codebase itself has a clearly defined contribution guideline and thorough, easily accesible documentation. The functionality is checked nightly via GitHub actions Constant Integration testing. Test coverage currently sits at >99%, and all pull requests are automatically subject to a coverage check and merged only if they cover all existing and new lines added.
+The codebase itself has a clearly defined contribution guideline and thorough, easily accesible documentation.
+`astartes` uses GitHub actions for Constant Integration testing including unit tests, functional tests, and regression tests.
+To emphasize the reliability and reproducibility of `astartes`, the data splits used to generate Table 1 and Table 2 are included in the regression tests.
+Test coverage currently sits at >99%, and all proposed changes are subjected to a coverage check and merged only if they cover all existing and new lines added as well as satisfy the regression tests.
 
 
 # Acknowledgements
@@ -165,14 +170,4 @@ This material is based upon work supported by the U.S. Department of Energy, Off
 # Disclaimer
 This report was prepared as an account of work sponsored by an agency of the United States Government. Neither the United States Government nor any agency thereof, nor any of their employees, makes any warranty, express or implied, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness of any information, apparatus, product, or process disclosed, or represents that its use would not infringe privately owned rights. Reference herein to any specific commercial product, process, or service by trade name, trademark, manufacturer, or otherwise does not necessarily constitute or imply its endorsement, recommendation, or favoring by the United States Government or any agency thereof. The views and opinions of authors expressed herein do not necessarily state or reflect those of the United States Government or any agency thereof.
 
-<!--
-# Figures
-
-Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
-
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% }
--->
 # References
