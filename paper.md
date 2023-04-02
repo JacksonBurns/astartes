@@ -6,7 +6,6 @@ tags:
   - sampling
   - interpolation
   - extrapolation
-  - extrapolation
   - data splits
 authors:
   - name: Jackson W. Burns
