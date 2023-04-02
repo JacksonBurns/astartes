@@ -113,13 +113,9 @@ Together, these tables demonstrate the utility of `astartes` in allowing users t
 | K-means   | 4.33 $\pm$ 0.58 | 7.35 $\pm$ 1.26 |
 
 
-Note that the scaffold errors presented above are higher than what is reported in the original study [@spiekermann2022fast] for several reasons.
+Note that the scaffold errors presented in Table 2 are higher than what is reported in the original study [@spiekermann2022fast] for several reasons.
 First, pretraining on the B97-D3 and $\omega$B97X-D3 datasets was done in the prior study, but neglected here for simplicity.
 We also do not use ensembling here nor do we co-train the model with the reaction enthalpy.
-<!--, which often improves model performance and is not an unexpected observation given that a reaction’s enthalpy is often correlated to its barrier height (e.g. Evans-Polanyi relationships [@evans1938inertia]). -->
-<!-- If suitable pretraining data is available, transfer learning is an established technique to improve model performance [@pan2010survey]. -->
-<!-- Second, we do not use ensembling here; however, this is another established method to improve model predictions [@yang2019analyzing; @dietterich2000ensemble]. -->
- <!-- Bell-Evans- Polanyi (BEP)-type correlations.14,20,21  from https://pubs.acs.org/doi/pdf/10.1021/acs.jcim.2c01502 -->
 
 # Related Software and Code Availability
 
