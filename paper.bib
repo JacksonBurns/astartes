@@ -1,0 +1,434 @@
+%%%%%%%%%%%%%%%% ML Basics %%%%%%%%%%%%%%%%
+@article{scikit-learn,
+ title={Scikit-learn: Machine Learning in {P}ython},
+ author={Pedregosa, F. and Varoquaux, G. and Gramfort, A. and Michel, V.
+         and Thirion, B. and Grisel, O. and Blondel, M. and Prettenhofer, P.
+         and Weiss, R. and Dubourg, V. and Vanderplas, J. and Passos, A. and
+         Cournapeau, D. and Brucher, M. and Perrot, M. and Duchesnay, E.},
+ journal={Journal of Machine Learning Research},
+ volume={12},
+ pages={2825--2830},
+ year={2011}
+}
+
+% train val test splits
+@book{geron2019hands,
+  title={{Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems}},
+  author={G{\'e}ron, Aur{\'e}lien},
+  year={2019},
+  publisher={O'Reilly Media, Inc.}
+}
+
+% Page 17: "We must not allow the test set to influence the model, or it is no longer an unbiased test set. The solution is to create yet another dataset, which is called the validation set. It must not share any samples with either the training set or the test set. 
+% 1. For each set of hyperparameter values, train the model on the training set, then compute the loss on the validation set.
+% 2. Whichever set of hyperparameters give the lowest loss on the validation set, accept them as your final model.
+% 3. Evaluate that final model on the test set to get an unbiased measure of how well it works."
+@book{ramsundar2019deep,
+  title={Deep Learning for the Life Sciences: Applying Deep Learning to Genomics, Microscopy, Drug Discovery, and More},
+  author={Ramsundar, Bharath and Eastman, Peter and Walters, Patrick and Pande, Vijay},
+  year={2019},
+  publisher={O'Reilly Media, Inc.}
+}
+
+% Page 33: "Validation data is data that is held out from your training set and used to evaluate how the model is performing after each training epoch (or pass through the training data). The performance of the model on the validation data is used to decide when to stop the training run, and to choose hyperparameters, such as the number of trees in a random forest model. Test data is data that is not used in the training process at all and is used to evaluate how the trained model performs. Performance reports of the machine learning model must be computed on the independent test data, rather than the training or validation tests."
+@book{lakshmanan2020machine,
+  title={Machine Learning Design Patterns: Solutions to Common Challenges in Data Preparation, Model Building, and MLOps},
+  author={Lakshmanan, Valliappa and Robinson, Sara and Munn, Michael},
+  year={2020},
+  publisher={O'Reilly Media, Inc.}
+}
+
+% Page 174: "It’s crucial to never use your test split to tune hyperparameters. Choose the best set of hyperparameters for a model based on its performance on a validation split, then report the model’s final performance on the test split. If you use your test split to tune hyperparameters, you risk overfitting your model to the test split."
+@book{huyen2022designing,
+  title={Designing Machine Learning Systems: An Iterative Process for Production-Ready Applications},
+  author={Huyen, Chip},
+  year={2022},
+  publisher={O'Reilly Media, Inc.}
+}
+
+% "Split your data once into three data sets: train, validation, and test. The split should be performed in a reproducible way."
+% "Make sure that no same (or similar) data appear in the test data set, if they are already present in the train or validation data set."
+@article{wang2020machine,
+  title={Machine Learning for Materials Scientists: An Introductory Guide Toward Best Practices},
+  author={Wang, Anthony Yu-Tung and Murdock, Ryan J. and Kauwe, Steven K. and Oliynyk, Anton O. and Gurlo, Aleksander and Brgoch, Jakoah and Persson, Kristin A. and Sparks, Taylor D.},
+  journal={Chemistry of Materials},
+  volume={32},
+  number={12},
+  pages={4954--4965},
+  year={2020},
+  publisher={ACS Publications}
+}
+
+% transfer learning
+% colin's paper has other sources for transfer learning https://pubs.acs.org/doi/full/10.1021/acs.jpca.9b04195?casa_token=QNg8dRc2AnUAAAAA%3ACveKSCkIbAQ9sZ8UpNYFIyGvpX6RE2dHOSJRj_gYSjGe8j0HSBsWpskij7QGKoCOMP8mNY4Re7otvHlJ
+@misc{pan2010survey,
+  title={A Survey on Transfer Learning. IEEE Transaction on Knowledge Discovery and Data Engineering, 22 (10)},
+  author={Pan, S. and Yang, Q.},
+  year={2010},
+  publisher={IEEE press}
+}
+
+
+%%%%%%%%%%%% Bad examples that did not mention validation set %%%%%%%%%%%%
+% Showed that PM7 and MMFF94 geometries give identical performance as those from DFT
+% "The regression performances using five-fold cross validation and random splitting are summarized in Table 1."
+@article{li2020predicting,
+  title={{Predicting Regioselectivity in Radical C-H Functionalization of Heterocycles through Machine Learning}},
+  author={Li, Xin and Zhang, Shuo-Qing and Xu, Li-Cheng and Hong, Xin},
+  journal={Angewandte Chemie International Edition},
+  volume={59},
+  number={32},
+  pages={13253--13259},
+  year={2020},
+  publisher={Wiley Online Library}
+}
+
+@article{van2022physics,
+  title={{Physics-based Representations for Machine Learning Properties of Chemical Reactions}},
+  author={van Gerwen, Puck and Fabrizio, Alberto and Wodrich, Matthew and Corminboeuf, Cl{\'e}mence},
+  journal={Machine Learning: Science and Technology},
+  year={2022},
+  publisher={IOP Publishing}
+}
+
+% trained an ANN to predict barriers from Colin's dataset. Weirdly, they ignored the wb97xd3 data and only trained on the b97d3 data which makes their test MAE of 2.8 kcal/mol not impressive, especially since it came from random split. Being 2.8 kcal/mol away from b97d3 which is itself at least 7 kcal/mol away from CCSD(T)-F12 just seems useless.. 
+@article{ismail2022successes,
+  title={Successes and Challenges in Using Machine-Learned Activation Energies in Kinetic Simulations},
+  author={Ismail, Idil and Robertson, Christopher and Habershon, Scott},
+  journal={The Journal of Chemical Physics},
+  volume={157},
+  number={1},
+  pages={014109},
+  year={2022},
+  publisher={AIP Publishing LLC}
+}
+
+% This paper used random splits and does not mention a validation set
+@article{liu2023predict,
+  title={Predict Ionization Energy of Molecules Using Conventional and Graph-Based Machine Learning Models},
+  author={Liu, Yufeng and Li, Zhenyu},
+  journal={Journal of Chemical Information and Modeling},
+  year={2023},
+  publisher={ACS Publications}
+}
+
+
+
+%%%%%%%%%% Datasets %%%%%%%%%%
+% Original QM9
+@article{ramakrishnan2014quantum,
+  title={{Quantum Chemistry Structures and Properties of 134 Kilo Molecules}},
+  author={Ramakrishnan, Raghunathan and Dral, Pavlo O. and Rupp, Matthias and von Lilienfeld, O. Anatole},
+  journal={Scientific Data},
+  volume={1},
+  number={1},
+  pages={1--7},
+  year={2014},
+  publisher={Nature Publishing Group}
+}
+
+@article{ruddigkeit_GDB-17_2012,
+  title={{Enumeration of 166 Billion Organic Small Molecules in the Chemical Universe Database GDB-17}},
+  author={Ruddigkeit, Lars and Van Deursen, Ruud and Blum, Lorenz C. and Reymond, Jean-Louis},
+  journal={Journal of Chemical Information and Modeling},
+  volume={52},
+  number={11},
+  pages={2864--2875},
+  year={2012},
+  publisher={ACS Publications}
+}
+
+@article{spiekermann2022high,
+  title={{High Accuracy Barrier Heights, Enthalpies, and Rate Coefficients for Chemical Reactions}},
+  author={Spiekermann, Kevin A. and Pattanaik, Lagnajit and Green, William H.},
+  journal={Scientific Data},
+  volume={9},
+  number={1},
+  pages={1--12},
+  year={2022},
+  publisher={Nature Publishing Group}
+}
+
+@misc{spiekermann_zenodo_database,
+  author       = {Spiekermann, Kevin A. and Pattanaik, Lagnajit and Green, William H.},
+  title        = {High Accuracy Barrier Heights, Enthalpies, and Rate Coefficients for Chemical Reactions},
+  month        = {4},
+  year         = {2022},
+  publisher    = {Zenodo},
+  version      = {1.0.1},
+  doi          = {10.5281/zenodo.6618262},
+  url          = {https://zenodo.org/record/6618262#.YyXlICHMI0Q}
+}
+
+% our feature article
+@article{spiekermann2022fast,
+  title={Fast Predictions of Reaction Barrier Heights: Toward Coupled-Cluster Accuracy},
+  author={Spiekermann, Kevin A. and Pattanaik, Lagnajit and Green, William H.},
+  journal={The Journal of Physical Chemistry A},
+  volume={126},
+  number={25},
+  pages={3976--3986},
+  year={2022},
+  publisher={ACS Publications}
+}
+
+@misc{spiekermann_forked_chemprop,
+  author = {Spiekermann, Kevin A. and Pattanaik, Lagnajit and Green, William H. and Yang, Kevin and Swanson, Kyle and Jin, Wengong and Coley, Connor and Eiden, Philipp and Gao, Hua and Guzman-Perez, Angel and Hopper, Timothy and Kelley, Brian and Mathea, Miriam and others},
+  url = {https://github.com/kspieks/chemprop/tree/barrier_prediction},
+  note = {Accessed 2023-02-10}, 
+}
+
+
+%%%%%%%% Review Articles %%%%%%%%
+@article{yang2019concepts,
+  title={Concepts of Artificial Intelligence for Computer-Assisted Drug Discovery},
+  author={Yang, Xin and Wang, Yifei and Byrne, Ryan and Schneider, Gisbert and Yang, Shengyong},
+  journal={Chemical Reviews},
+  volume={119},
+  number={18},
+  pages={10520--10594},
+  year={2019},
+  publisher={ACS Publications}
+}
+
+@article{bannigan2021machine,
+  title={Machine Learning Directed Drug Formulation Development},
+  author={Bannigan, Pauric and Aldeghi, Matteo and Bao, Zeqing and H{\"a}se, Florian and Aspuru-Guzik, Alan and Allen, Christine},
+  journal={Advanced Drug Delivery Reviews},
+  volume={175},
+  pages={113806},
+  year={2021},
+  publisher={Elsevier}
+}
+
+@article{jha2023learning,
+  title={Learning-Assisted Materials Development and Device Management in Batteries and Supercapacitors: Performance Comparison and Challenges},
+  author={Jha, Swarn and Yen, Matthew and Salinas, Yazmin and Palmer, Evan and Villafuerte, John and Liang, Hong},
+  journal={Journal of Materials Chemistry A},
+  year={2023},
+  publisher={Royal Society of Chemistry},
+  volume={11},
+  pages={3904--3936},
+}
+
+@article{komp2022progress,
+  title={{Progress Towards Machine Learning Reaction Rate Constants}},
+  author={Komp, Evan and Janulaitis, Nida and Valleau, St{\'e}phanie},
+  journal={Physical Chemistry Chemical Physics},
+  year={2022},
+  publisher={Royal Society of Chemistry},
+  volume={24},
+  pages={2692--2705},
+}
+
+@article{wei2019machine,
+  title={Machine Learning in Materials Science},
+  author={Wei, Jing and Chu, Xuan and Sun, Xiang-Yu and Xu, Kun and Deng, Hui-Xiong and Chen, Jigen and Wei, Zhongming and Lei, Ming},
+  journal={InfoMat},
+  volume={1},
+  number={3},
+  pages={338--358},
+  year={2019},
+  publisher={Wiley Online Library}
+}
+
+
+%%%%%%%% Previous Clustering Examples %%%%%%%%
+% Introduces leave-one-cluster-out cross-validation to measure performance on more realistic data splits
+% "few real-world materials datasets are uniformly or randomly sampled within their domains"
+% they just normalize the input features, shuffle the data, and then use K-means clustering to create 2-10 clusters
+% they use a toy synthetic dataset with just 6 features so no need to do Morgan fingerprint or PCA projection
+@article{meredig2018can,
+  title={Can Machine Learning Identify the Next High-Temperature Superconductor? Examining Extrapolation Performance for Materials Discovery},
+  author={Meredig, Bryce and Antono, Erin and Church, Carena and Hutchinson, Maxwell and Ling, Julia and Paradiso, Sean and Blaiszik, Ben and Foster, Ian and Gibbons, Brenna and Hattrick-Simpers, Jason and Mehta, Apurva and Ward, Logan},
+  journal={Molecular Systems Design & Engineering},
+  volume={3},
+  number={5},
+  pages={819--825},
+  year={2018},
+  publisher={Royal Society of Chemistry}
+}
+
+% used K-means clustering to exclude similar families of materials from the training set to measure the extrapolatory power of an ML algorithm
+% used hand-selected expert features. not morgan fingerprints
+% used PCA only for visualizing
+@article{durdy2022random,
+  title={Random Projections and Kernelised Leave One Cluster Out Cross Validation: Universal Baselines and Evaluation Tools for Supervised Machine Learning of Material Properties},
+  author={Durdy, Samantha and Gaultois, Michael W. and Gusev, Vladimir V. and Bollegala, Danushka and Rosseinsky, Matthew J.},
+  journal={Digital Discovery},
+  volume={1},
+  pages={763--778},
+  year={2022},
+  publisher={Royal Society of Chemistry}
+}
+
+% Emphasized that when creating training, validation, and testing sets for molecular datasets, we must satisfy 2 requirements
+% 1) robustness i.e. making a test set that is chemically dissimilar from the training set. i.e. extrapolate
+% 2) data balance by trying to distribute labels evenly among the sets
+% these are inherently opposing objectives so they present some linear algebra method that scales terribly to solve this
+@article{tricarico2022construction,
+  title={Construction of Balanced, Chemically Dissimilar Training, Validation and Test Sets for Machine Learning on Molecular Datasets},
+  author={Tricarico, Giovanni A. and Hofmans, Johan and Lenselink, Eelke B. and Ramos, Miriam L{\'o}pez and Dr{\'e}anic, Marie-Pierre and Stouten, Pieter FW},
+  year={2022},
+  journal={10.26434/chemrxiv-2022-m8l33}
+}
+
+% predicts excited state properties of iridium complexes using TD-DFT
+% uses experimental data for 1380 Ir complexes 
+% use both random and grouped slit. As expected, performance on the grouped split is much worse
+@article{terrones2023low,
+  title={Low-Cost Machine Learning Prediction of Excited State Properties of Iridium-Centered Phosphors},
+  author={Terrones, Gianmarco G. and Duan, Chenru and Nandy, Aditya and Kulik, Heather J.},
+  journal={Chemical Science},
+  volume={14},
+  pages={1419--1433},
+  year={2023},
+  publisher={Royal Society of Chemistry}
+}
+
+% used 3 different kinds of data splits
+% 1) per target: generated 102 unique models each created independently for a single protein target (trained only on its active and decoys ligands)
+% 2) horizontal split interpolative both training and test sets contain data from all targets, i.e. each target has its ligands both in training and test sets. Such approach mimics experiments where docking is performed on targets for which there are already known ligands. This is stratified interpolative splits similar to FPS or KS
+% 3) vertical split is extrapolative. the training and test data are created independently, i.e. there are no shared targets between training and test data.
+@article{wojcikowski2017performance,
+  title={Performance of Machine-Learning Scoring Functions in Structure-Based Virtual Screening},
+  author={W{\'o}jcikowski, Maciej and Ballester, Pedro J. and Siedlecki, Pawel},
+  journal={Scientific Reports},
+  volume={7},
+  number={1},
+  pages={1--10},
+  year={2017},
+  publisher={Springer}
+}
+
+% Thijs QM ML
+% used both random splits and splitting by leaving group
+@article{stuyver2022quantum,
+  title={{Quantum Chemistry-Augmented Neural Networks for Reactivity Prediction: Performance, Generalizability, and Explainability}},
+  author={Stuyver, Thijs and Coley, Connor W.},
+  journal={The Journal of Chemical Physics},
+  volume={156},
+  number={8},
+  pages={084104},
+  year={2022},
+  publisher={AIP Publishing LLC}
+}
+
+%%%%%%%%% Cheminformatics Software %%%%%%%%%
+% RDKit
+@misc{landrum2006rdkit,
+  title={{RDKit: Open-Source Cheminformatics}},
+  author={Landrum, Greg and others},
+  year={\textbf{2006}},
+  url= {https://www.rdkit.org}
+}
+
+@article{bemis1996properties,
+  title={{The Properties of Known Drugs. 1. Molecular Frameworks}},
+  author={Bemis, Guy W. and Murcko, Mark A.},
+  journal={Journal of Medicinal Chemistry},
+  volume={39},
+  number={15},
+  pages={2887--2893},
+  year={1996},
+  publisher={ACS Publications}
+}
+
+% Morgan algorithm
+@article{morgan1965generation,
+  title={The Generation of a Unique Machine Description for Chemical Structures-A Technique Developed at Chemical Abstracts Service},
+  author={Morgan, Harry L.},
+  journal={Journal of Chemical Documentation},
+  volume={5},
+  number={2},
+  pages={107--113},
+  year={1965},
+  publisher={ACS Publications}
+}
+
+% Morgan (ECFP) fingerprints
+@article{rogers2010extended,
+  title={Extended-Connectivity Fingerprints},
+  author={Rogers, David and Hahn, Mathew},
+  journal={Journal of Chemical Information and Modeling},
+  volume={50},
+  number={5},
+  pages={742--754},
+  year={2010},
+  publisher={ACS Publications}
+}
+
+% they use random splits
+@article{hu2023improved,
+  title={Improved Graph-Based Multitask Learning Model with Sparse Sharing for Quantitative Structure--Property Relationship Prediction of Drug Molecules},
+  author={Hu, Haoyang and Bai, Yunke and Yuan, Zhihong},
+  journal={AIChE Journal},
+  volume={69},
+  number={2},
+  pages={e17968},
+  year={2023},
+  publisher={Wiley Online Library}
+}
+
+
+
+% Evans−Polanyi relationships
+@article{evans1938inertia,
+  title={{Inertia and Driving Force of Chemical Reactions}},
+  author={Evans, MG and Polanyi, Michael},
+  journal={Transactions of the Faraday Society},
+  volume={34},
+  pages={11--24},
+  year={1938},
+  publisher={Royal Society of Chemistry}
+}
+
+
+% ChemProp 
+@article{yang2019analyzing,
+  title={{Analyzing Learned Molecular Representations for Property Prediction}},
+  author={Yang, Kevin and Swanson, Kyle and Jin, Wengong and Coley, Connor and Eiden, Philipp and Gao, Hua and Guzman-Perez, Angel and Hopper, Timothy and Kelley, Brian and Mathea, Miriam and others},
+  journal={Journal of Chemical Information and Modeling},
+  volume={59},
+  number={8},
+  pages={3370--3388},
+  year={2019},
+  publisher={ACS Publications}
+}
+
+% reference for ensembling, cited by ChemProp paper
+% note={{https://link.springer.com/chapter/10.1007/3-540-45014-9\_1.pdf}}
+@inproceedings{dietterich2000ensemble,
+  title={{Ensemble Methods in Machine Learning}},
+  author={Dietterich, Thomas G.},
+  booktitle={Multiple Classifier Systems. MCS 2000. Lecture Notes in Computer Science, vol 1857. Springer, Berlin, Heidelberg},
+  pages={1--15},
+  year={2000},
+  organization={Springer},
+}
+
+
+% requested citation for supercloud
+@inproceedings{reuther2018interactive,
+    title={Interactive supercomputing on 40,000 cores for machine learning and data analysis},
+    author={Reuther, Albert and Kepner, Jeremy and Byun, Chansup and Samsi, Siddharth and Arcand, William and Bestor, David and Bergeron, Bill and Gadepally, Vijay and Houle, Michael and Hubbell, Matthew and Jones, Michael and Klein, Anna and Milechin, Lauren and Mullen, Julia and Prout, Andrew and Rosa, Antonio and Yee, Charles and Michaleas, Peter},
+    booktitle={2018 IEEE High Performance extreme Computing Conference (HPEC)},
+    pages={1--6},
+    year={2018},
+    organization={IEEE}
+}
+
+
+% AIMSim
+@article{aimsim_cpc,
+    title = {AIMSim: An accessible cheminformatics platform for similarity operations on chemicals datasets},
+    journal = {Computer Physics Communications},
+    volume = {283},
+    pages = {108579},
+    year = {2023},
+    issn = {0010-4655},
+    doi = {https://doi.org/10.1016/j.cpc.2022.108579},
+    url = {https://www.sciencedirect.com/science/article/pii/S0010465522002983},
+    author = {Himaghna Bhattacharjee and Jackson Burns and Dionisios G. Vlachos},
+    keywords = {Cheminformatics, Molecular fingerprints, Similarity, Data visualization, Open-source software},
+}

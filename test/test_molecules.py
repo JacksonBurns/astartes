@@ -4,6 +4,7 @@ import unittest
 import warnings
 
 import numpy as np
+from rdkit import Chem
 
 from astartes.molecules import (
     train_test_split_molecules,
@@ -36,6 +37,11 @@ class Test_molecules(unittest.TestCase):
         self.X = np.array(qm9_smiles_short)
         self.y = np.array(list(range(len(qm9_smiles_short))))
 
+        molecule_array = []
+        for smile in qm9_smiles_short:
+            molecule_array.append(Chem.MolFromSmiles(smile))
+        self.molecules = np.array(molecule_array)
+
         self.X_long = np.array(qm9_smiles_full)
         self.y_long = np.array(list(range(len(qm9_smiles_full))))
 
@@ -47,6 +53,27 @@ class Test_molecules(unittest.TestCase):
                 self.y,
                 train_size=0.2,
                 sampler=sampler,
+                fprints_hopts={"n_bits": 100},
+            )
+
+    def test_molecules_with_rdkit(self):
+        """Try train_test_split molecules, every sampler, passing rdkit objects."""
+        for sampler in IMPLEMENTED_INTERPOLATION_SAMPLERS:
+            tts = train_test_split_molecules(
+                self.molecules,
+                self.y,
+                train_size=0.2,
+                sampler=sampler,
+                fprints_hopts={"n_bits": 100},
+            )
+
+    def test_molecules_with_troublesome_smiles(self):
+        """Helpful errors when rdkit graphs can't be featurized."""
+        with self.assertRaises(RuntimeError):
+            tts = train_test_split_molecules(
+                np.array(["Nc1ncnc2n(cnc12)[C@@H]3O[C@H](CN=[N]=N)[C@@H](O)[C@H]3O"]),
+                train_size=0.2,
+                sampler="random",
                 fprints_hopts={"n_bits": 100},
             )
 
@@ -108,9 +135,7 @@ class Test_molecules(unittest.TestCase):
                 self.X,
                 self.y,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
             )
             self.assertFalse(
                 len(w),
@@ -140,9 +165,7 @@ class Test_molecules(unittest.TestCase):
                 "minSize": 64,
             },
             sampler="random",
-            hopts={
-                "random_state": 42,
-            },
+            random_state=42,
         )
 
 

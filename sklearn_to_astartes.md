@@ -12,7 +12,7 @@ In one of the first few lines of your Python script, you have the line `from skl
 
 That's it! You are now using `astartes`.
 
-If you were just calling `train_test_split(X, y)`, your script should now work in the exact same way as `sklearn` with no changes required. If you were specifying a `random_state`, you will need to change the syntax slightly:
+If you were just calling `train_test_split(X, y)`, your script should now work in the exact same way as `sklearn` with no changes required. 
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(
@@ -26,14 +26,12 @@ _becomes_
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
-    hopts={
-        "random_state": 42,
-    },
+    random_state=42,
 )
 ```
-But we encourage you to try out a non-random sampler (see below)!
+But we encourage you to try one of our many other samplers (see below)!
 
-## Step 3. Specifying a Non-Random Sampler
+## Step 3. Specifying an Algorithmic Sampler
 By default (for interoperability), `astartes` will use a random sampler to produce train/test splits - but the real value of `astartes` is in the algorithmic sampling algorithms it implements. Check out the [README for a complete list of available algorithms](https://github.com/JacksonBurns/astartes#implemented-sampling-algorithms) and how to call and customize them.
 
 If you existing call to `train_test_split` looks like this:
@@ -43,7 +41,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     y,
 )
 ```
-and you want to try out using Kennard Stone sampling, switch it to this:
+and you want to try out using Kennard-Stone sampling, switch it to this:
 ```python
 X_train, X_test, y_train, y_test = train_test_split(
     X,
@@ -55,7 +53,7 @@ That's it!
 
 ## Step 4. Passing Keyword Arguments
 
-All of the arguments to the `sklearn`'s `train_test_split` (except `random_state`, which is instead in `hopts`) can still be passed to `astartes`' `train_test_split`:
+All of the arguments to the `sklearn`'s `train_test_split` can still be passed to `astartes`' `train_test_split`:
 ```python
 X_train, X_test, y_train, y_test, labels_train, labels_test = train_test_split(
     X,
@@ -81,7 +79,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 ## Step 5. Useful `astartes` Features
 
 ### `return_indices`: Improve Code Clarity
-When providing `X`, `y`, and `labels` it can become cumbersome to unpack all of arrays, and there are cirumstances where the indices of the train/test data can be useful (for example, if `y` or `labels` are large, memory-intense objects). By default, `astartes` will return the arrays themselves, but it can also return just the indices for the user to manipulate according to their needs:
+There are circumstances where the indices of the train/test data can be useful (for example, if `y` or `labels` are large, memory-intense objects), and there is no way to directly return these indices in `sklearn`. `astartes` will return the sampling splits themselves by default, but it can also return the indices for the user to manipulate according to their needs:
 ```python
 X_train, X_test, y_train, y_test, labels_train, labels_test = train_test_split(
     X,
@@ -92,13 +90,15 @@ X_train, X_test, y_train, y_test, labels_train, labels_test = train_test_split(
 ```
 _could instead be_
 ```python
-indices_train, indices_test = train_test_split(
+X_train, X_test, y_train, y_test, labels_train, labels_test, indices_train, indices_test = train_test_split(
     X,
     y,
     labels,
     return_indices = True,
 )
 ```
+If `y` or `labels` were large, memory-intense objects it could be beneficial to _not_ pass them in to `train_test_split` and instead separate the existing lists later using the returned indices.
+
 ### `train_val_test_split`: More Rigorous ML
 Behind the scenes, `train_test_split` is actually just a one-line function that calls the real workhorse of `astartes` - `train_val_test_split`:
 ```python
@@ -138,5 +138,5 @@ X_train, X_val, X_test, y_train, y_val, y_test = train_val_test_split(
 For truly rigorous ML modeling, the validation set should be used for hyperparameter tuning and the test set held out until the _very final_ change has been made to the model to get a true sense of its performance. For better or for worse, this is _not_ the current standard for ML modeling, but the authors believe it should be.
 
 ### Custom Warnings: `ImperfectSplittingWarning` and `NormalizationWarning`
-In the event that your requested train/validation/test split is not mathematically possible given the dimensions of the input data (i.e. you request 50/25/25 but have 101 data points), `astartes` will warn you during runtime that it has occured. `sklearn` simply moves on quietly, and while this is fine _most_ of the time, the authors felt it prudent to warn the user.
+In the event that your requested train/validation/test split is not mathematically possible given the dimensions of the input data (i.e. you request 50/25/25 but have 101 data points), `astartes` will warn you during runtime that it has occurred. `sklearn` simply moves on quietly, and while this is fine _most_ of the time, the authors felt it prudent to warn the user.
 When entering a train/validation/test split, `astartes` will check that it is normalized and make it so if not, warning the user during runtime. This will hopefully help prevent head-scratching hours of debugging.

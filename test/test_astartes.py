@@ -86,9 +86,7 @@ class Test_astartes(unittest.TestCase):
                 val_size=0.2,
                 train_size=0.6,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
             )
             self.assertFalse(
                 len(w),
@@ -170,6 +168,141 @@ class Test_astartes(unittest.TestCase):
                 labels_test,
                 np.array(["seven", "nine"]),
                 "Test labels incorrect.",
+            )
+        )
+
+    def test_train_val_test_split_extrpolation_shuffling(self):
+        """Split data into training, validation, and test sets with shuffling."""
+        with warnings.catch_warnings(record=True) as w:
+            warnings.filterwarnings("always")
+            (
+                X_train,
+                X_val,
+                X_test,
+                y_train,
+                y_val,
+                y_test,
+                labels_train,
+                labels_val,
+                labels_test,
+                clusters_train,
+                clusters_val,
+                clusters_test,
+            ) = train_val_test_split(
+                self.X,
+                self.y,
+                labels=self.labels,
+                test_size=0.1,
+                val_size=0.1,
+                train_size=0.8,
+                sampler="sphere_exclusion",
+                random_state=867_5309,
+            )
+            self.assertFalse(
+                len(w),
+                "\nNo warnings should have been raised when requesting a mathematically possible split."
+                "\nReceived {:d} warnings instead: \n -> {:s}".format(
+                    len(w),
+                    "\n -> ".join(
+                        [str(i.category.__name__) + ": " + str(i.message) for i in w]
+                    ),
+                ),
+            )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                X_train,
+                np.array(
+                    [
+                        [1, 0, 0, 0, 0],
+                        [1, 0, 0, 0, 0],
+                        [1, 1, 0, 0, 0],
+                        [1, 1, 0, 0, 0],
+                        [1, 1, 1, 0, 0],
+                        [1, 1, 1, 0, 0],
+                        [1, 1, 1, 1, 0],
+                        [1, 1, 1, 1, 0],
+                    ]
+                ),
+                "Train X incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                X_val,
+                np.array([[0, 0, 0, 0, 0]]),
+                "Validation X incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                X_test,
+                np.array([[1, 1, 1, 1, 1]]),
+                "Test X incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                y_train,
+                np.array([2, 6, 3, 7, 4, 8, 5, 9]),
+                "Train y incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                y_val,
+                np.array([1]),
+                "Validation y incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                y_test,
+                np.array([10]),
+                "Test y incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                labels_train,
+                np.array(
+                    ["two", "six", "three", "seven", "four", "eight", "five", "nine"]
+                ),
+                "Train labels incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                labels_val,
+                np.array(["one"]),
+                "Validation labels incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                labels_test,
+                np.array(["ten"]),
+                "Test labels incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                clusters_train,
+                np.array([4, 4, 0, 0, 1, 1, 5, 5]),
+                "Train cluster assignments incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                clusters_val,
+                np.array([2]),
+                "Validation cluster assignments incorrect.",
+            )
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                clusters_test,
+                np.array([3]),
+                "Test cluster assignments incorrect.",
             )
         )
 
@@ -368,9 +501,7 @@ class Test_astartes(unittest.TestCase):
                 test_size=0.5,
                 train_size=0.5,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
             )
             self.assertIsNone(
                 np.testing.assert_array_equal(
@@ -416,23 +547,30 @@ class Test_astartes(unittest.TestCase):
             )
 
     def test_return_indices(self):
-        """Test the ability to return the indices and not the values."""
+        """Test the ability to return the indices and the values."""
         with self.assertWarns(ImperfectSplittingWarning):
-            (indices_train, indices_test,) = train_test_split(
+            (
+                train_X,
+                test_X,
+                train_y,
+                test_y,
+                train_labels,
+                test_labels,
+                train_indices,
+                test_indices,
+            ) = train_test_split(
                 np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
                 np.array([10, 11, 12]),
                 labels=np.array(["apple", "banana", "apple"]),
                 test_size=0.5,
                 train_size=0.5,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
                 return_indices=True,
             )
             self.assertIsNone(
                 np.testing.assert_array_equal(
-                    indices_test,
+                    test_indices,
                     np.array([2, 0]),
                     "Test indices incorrect.",
                 ),
@@ -441,7 +579,20 @@ class Test_astartes(unittest.TestCase):
     def test_return_indices_with_validation(self):
         """Test the ability to return indices in train_val_test_split"""
         with self.assertWarns(ImperfectSplittingWarning):
-            (indices_train, indices_val, indices_test,) = train_val_test_split(
+            (
+                train_X,
+                val_X,
+                test_X,
+                train_y,
+                val_y,
+                test_y,
+                train_labels,
+                val_labels,
+                test_labels,
+                train_indices,
+                val_indices,
+                test_indices,
+            ) = train_val_test_split(
                 np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
                 np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
                 labels=np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]),
@@ -449,14 +600,12 @@ class Test_astartes(unittest.TestCase):
                 val_size=0.33,
                 train_size=0.34,
                 sampler="random",
-                hopts={
-                    "random_state": 42,
-                },
+                random_state=42,
                 return_indices=True,
             )
             self.assertIsNone(
                 np.testing.assert_array_equal(
-                    indices_val,
+                    val_indices,
                     np.array([8, 2]),
                     "Validation indices incorrect.",
                 ),

@@ -1,5 +1,5 @@
 <h1 align="center">astartes</h1> 
-<h3 align="center">Train:Test Algorithmic Sampling for Molecules, Images, and Arbitrary Arrays</h3>
+<h3 align="center">Train:Validation:Test Algorithmic Sampling for Molecules and Arbitrary Arrays</h3>
 
 <p align="center">  
   <img alt="astarteslogo" src="https://github.com/JacksonBurns/astartes/blob/main/astartes_logo.png">
@@ -8,17 +8,18 @@
   <img alt="GitHub Repo Stars" src="https://img.shields.io/github/stars/JacksonBurns/astartes?style=social">
   <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/astartes">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/astartes">
+  <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/astartes?style=plastic">
   <img alt="PyPI - License" src="https://img.shields.io/github/license/JacksonBurns/astartes">
   <img alt="Test Status" src="https://github.com/JacksonBurns/astartes/actions/workflows/run_tests.yml/badge.svg?branch=main&event=schedule">
 </p>
 
 ## Installing `astartes`
-We reccomend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management.
+We recommend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management. Python versions 3.7, 3.8, 3.9, 3.10, and 3.11 are supported on all platforms.
 
-`astartes` is availble on `PyPI` and can be installed using `pip`:
+`astartes` is available on `PyPI` and can be installed using `pip`:
 
  - To include the featurization options for chemical data, use `pip install astartes[molecules]`.
- - To install only the sampling algorithms, use `pip install astartes` (this install will have fewer depdencies and may be more readily compatible in environments with existing workflows).
+ - To install only the sampling algorithms, use `pip install astartes` (this install will have fewer dependencies and may be more readily compatible in environments with existing workflows).
 
 __Note for Windows Powershell or MacOS Catalina or newer__: On these systems the command line will complain about square brackets, so you will need to double quote the `molecules` command (i.e. `pip install "astartes[molecules]"`)
 
@@ -47,22 +48,24 @@ Click the badges in the table below to be taken to a live, interactive demo of `
 ### Rational Splitting Algorithms
 While much machine learning is done with a random choice between training/test/validation data, an alternative is the use of so-called "rational" splitting algorithms. These approaches use some similarity-based algorithm to divide data into sets. Some of these algorithms include Kennard-Stone, minimal test set dissimilarity, and sphere exclusion algorithms [as discussed by Tropsha et. al](https://pubs.acs.org/doi/pdf/10.1021/ci300338w) as well as the OptiSim as discussed in [Applied Chemoinformatics: Achievements and Future Opportunities](https://www.wiley.com/en-us/Applied+Chemoinformatics%3A+Achievements+and+Future+Opportunities-p-9783527806546). Some clustering-based splitting techniques have also been introduced, such as [DBSCAN](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1016.890&rep=rep1&type=pdf).
 
-There are two broad categories of sampling algorithms implemented in `astartes`: extrapolative and interpolative. The former will force your model to predict on out-of-smaple data, effectively asking a 'harder question' than interpolative sampling. See the table below for all of the sampling approaches currently implemented in `astartes`.
+There are two broad categories of sampling algorithms implemented in `astartes`: extrapolative and interpolative. The former will force your model to predict on out-of-sample data, effectively asking a 'harder question' than interpolative sampling. See the table below for all of the sampling approaches currently implemented in `astartes`, as well as the hyperparameters that each algorithm accepts (which are passed in with `hopts`) and a helpful reference for understanding how the hyperparameters work. Note that `random_state` is defined as a keyword argument in `train_test_split` itself, even though these algorithms will use the `random_state` in their own work. Do not provide a `random_state` in the `hopts` dictionary - it will be overwritten by the `random_state` you provide for `train_test_split` (or the default if none is provided).
 
 #### Implemented Sampling Algorithms
 
 | Sampler Name | Usage String | Type | Hyperparameters | Reference | Notes |
 |:---:|---|---|---|---|---|
-| Random | 'random' | Interpolative | `random_state`, `shuffle` | [`sklearn train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) | This sampler is a direct passthrough to `sklearn`'s `train_test_split`, though it does not currently reproduce splits identically. |
+| Random | 'random' | Interpolative | `shuffle` | [`sklearn train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) | This sampler is a direct passthrough to `sklearn`'s `train_test_split`, though it does not currently reproduce splits identically. |
 | Kennard-Stone | 'kennard_stone' | Interpolative | _none_ | [yu9824's `kennard_stone`](https://github.com/yu9824/kennard_stone) | Fully deterministic, no hyperparameters accepted. |
 | Sample set Partitioning based on join X-Y distances (SPXY) | 'spxy' | Interpolative | `distance_metric` | Saldhana et. al [original paper](https://www.sciencedirect.com/science/article/abs/pii/S003991400500192X) | Extension of Kennard Stone that also includes the response when sampling distances. |
 | Scaffold | 'scaffold' | Extrapolative | `explicit_hydrogens`, `include_chirality` | [Bemis-Murcko Scaffold](https://pubs.acs.org/doi/full/10.1021/jm9602928) as implemented in RDKit | This sampler requires SMILES strings as input (use the `molecules` subpackage) |
-| Sphere Exclusion | 'sphere_exclusion' | Extrapolative | `metric`, `random_state`, `distance_cutoff` | _custom implementation_ | Variation on Sphere Exclusion for arbitrary-valued vectors. |
-| Optimizable K-Dissimilarity Selection (OptiSim) | 'optisim' | Extrapolative | `random_state`, `n_clusters`, `max_subsample_size`, `distance_cutoff` | _custom implementation_ | Variation on [OptiSim](https://pubs.acs.org/doi/10.1021/ci025662h) for arbitrary-valued vectors. |
-| K-Means | 'kmeans' | Extrapolative | `random_state`, `n_clusters`, `n_init` | [`sklearn KMeans`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) | Passthrough to `sklearn`'s `KMeans`. |
+| Sphere Exclusion | 'sphere_exclusion' | Extrapolative | `metric`, `distance_cutoff` | _custom implementation_ | Variation on Sphere Exclusion for arbitrary-valued vectors. |
+| Optimizable K-Dissimilarity Selection (OptiSim) | 'optisim' | Extrapolative | `n_clusters`, `max_subsample_size`, `distance_cutoff` | _custom implementation_ | Variation on [OptiSim](https://pubs.acs.org/doi/10.1021/ci025662h) for arbitrary-valued vectors. |
+| K-Means | 'kmeans' | Extrapolative | `n_clusters`, `n_init` | [`sklearn KMeans`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) | Passthrough to `sklearn`'s `KMeans`. |
 | Density-Based Spatial Clustering of Applications with Noise (DBSCAN) | 'dbscan' | Extrapolative | `eps`, `min_samples`, `algorithm`, `metric`, `leaf_size` | [`sklearn DBSCAN`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html) | Passthrough to `sklearn`'s `DBSCAN`. |
-| Mimimm Test Set Dissimilarity | ~ | ~ | _will be released with_ `astartes` _v1.0.0_ | ~ | ~ |
-| RBM Sampler | ~ | ~ | _will be released with_ `astartes` _v1.0.0_ | ~ | ~ |
+| Minimum Test Set Dissimilarity (MTSD) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
+| Restricted Boltzmann Machine (RBM) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
+| Kohonen Self-Organizing Map (SOM) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
+| SPlit Method | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 
 ### Using the `astartes.molecules` Subpackage
 After installing with `pip install astartes[molecules]` one can import the new train/test splitting function like this: `from astartes.molecules import train_test_split_molecules`
@@ -71,7 +74,7 @@ The usage of this function is identical to `train_test_split` but with the addit
 
 ```python
 train_test_split_molecules(
-    smiles=smiles,
+    molecules=smiles,
     y=y,
     test_size=0.2,
     train_size=0.8,
@@ -85,9 +88,9 @@ train_test_split_molecules(
         "tgtDensity": 0.4,
         "minSize": 64,
     },
-    splitter="random",
+    sampler="random",
+    random_state=42,
     hopts={
-        "random_state": 42,
         "shuffle": True,
     },
 )
@@ -103,6 +106,8 @@ Configuration options for the featurization scheme can be found in the documenta
 ## Contributing & Developer Notes
 Pull Requests, Bug Reports, and all Contributions are welcome! Please use the appropriate issue or pull request template when making a contribution.
 
+We make use of [the GitHub Discussions page](https://github.com/JacksonBurns/astartes/discussions) to go over potential features to add. Please feel free to stop by if you are looking for something to develop or have an idea for a useful feature!
+
 When submitting a PR, please mark your PR with the "PR Ready for Review" label when you are finished making changes so that the GitHub actions bots can work their magic!
 
 ### Developer Install
@@ -112,23 +117,23 @@ To contribute to the `astartes` source code, start by cloning the repository (i.
 __Note for Windows Powershell or MacOS Catalina or newer__: On these systems the command line will complain about square brackets, so you will need to double quote the `molecules` command (i.e. `pip install -e ".[molecules,dev]"`)
 
 ### Unit Testing
-All of the tests in `astartes` are written using the built-in python `unittest` module (to allow running without `pytest`) but we _highly_ reccomend using `pytest`. To execute the tests from the `astartes` repository, simply type `pytest` after running the developer install (or alternately, `pytest -v` for a more helpful output).
+All of the tests in `astartes` are written using the built-in python `unittest` module (to allow running without `pytest`) but we _highly_ recommend using `pytest`. To execute the tests from the `astartes` repository, simply type `pytest` after running the developer install (or alternately, `pytest -v` for a more helpful output).
 
 ### Adding New Samplers
 Adding a new sampler should extend the `abstract_sampler.py` abstract base class.
 
 It can be as simple as a passthrough to a another `train_test_split`, or it can be an original implementation that results in X and y being split into two lists. Take a look at `astartes/samplers/random_split.py` for a basic example!
 
-After the sampler has been implemented, add it to `__init__.py` in in `astartes/samplers` and it will automatically be unit tested. Additional unit tests to verify that hyperparameters can be properly passed, etc. are also reccomended.
+After the sampler has been implemented, add it to `__init__.py` in in `astartes/samplers` and it will automatically be unit tested. Additional unit tests to verify that hyperparameters can be properly passed, etc. are also recommended.
 
 For historical reasons, and as a guide for any developers who would like add new samplers, below is a running list of samplers which have been _considered_ for addition to `asartes` but ultimately not added for various reasons.
 
 #### Not Implemented Sampling Algorithms
 
-| Sampler Name | Reasoning |
-|:---:|---|
-| D-Optimal | Requires _a-priori_ knowledge of the test and train size which does not fit in the `astartes` framework (samplers are all agnostic to the size of the sets) and it is questionable if the use of the Fischer information matrix is actually meaningful in the context of sampling existing data rather than tuning for ideal data. |
-| Duplex | Requires knowing test and train size before execution, and can only partition data into two sets which owuld make it incompatible with `train_val_test_split`. |
+| Sampler Name | Reasoning | Relevant Link(s) |
+|:---:|---|---|
+| D-Optimal | Requires _a-priori_ knowledge of the test and train size which does not fit in the `astartes` framework (samplers are all agnostic to the size of the sets) and it is questionable if the use of the Fischer information matrix is actually meaningful in the context of sampling existing data rather than tuning for ideal data. | The [Wikipedia article for optimal design](https://en.wikipedia.org/wiki/Optimal_design#:~:text=Of%20course%2C%20fixing%20the%20number%20of%20experimental%20runs%20a%20priori%20would%20be%20impractical.) does a good job explaining why this is difficult, and points at some potential alternatives. |
+| Duplex | Requires knowing test and train size before execution, and can only partition data into two sets which would make it incompatible with `train_val_test_split`. | This [implementation in R](https://search.r-project.org/CRAN/refmans/prospectr/html/duplex.html#:~:text=The%20DUPLEX%20algorithm%20is%20similar,that%20are%20the%20farthest%20apart.) includes helpful references and a reference implementation. |
 
 ### Adding New Featurization Schemes
 All of the sampling methods implemented in `astartes` accept arbitrary arrays of numbers and return the sampled groups (with the exception of `Scaffold.py`). If you have an existing featurization scheme (i.e. take an arbitrary input and turn it into an array of numbers), we would be thrilled to include it in `astartes`.
@@ -168,11 +173,11 @@ def train_test_split_INTERFACE(
 
 If possible, we would like to also add an example Jupyter Notebook with any new interface to demonstrate to new users how it functions. See our other examples in the `examples` directory.
 
-Contact @JacksonBurns if you need assistance adding an existing workflow to `astartes`. If this featurization scheme requires additional dependencies to function, we may add it as an additional _extra_ package in the same way that `molecules` in installed.
+Contact [@JacksonBurns](https://github.com/JacksonBurns) if you need assistance adding an existing workflow to `astartes`. If this featurization scheme requires additional dependencies to function, we may add it as an additional _extra_ package in the same way that `molecules` in installed.
 
-## JORS Branch
+## JOSS Branch
 
-`astartes` corresponding JORS paper is stored in this repository on a separate branch. You can find `paper.tex` on the aptly named `jors-paper` paper. 
+`astartes` corresponding JOSS paper is stored in this repository on a separate branch. You can find `paper.md` on the aptly named `joss-paper` branch. 
 
-_Note for Maintainers_: To push changes from the `main` branch into the `jors-paper` branch, run the `Update JORS Branch` workflow.
+_Note for Maintainers_: To push changes from the `main` branch into the `joss-paper` branch, run the `Update JOSS Branch` workflow.
 
