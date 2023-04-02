@@ -83,8 +83,10 @@ The QM9 dataset and RDB7 datasets were organized into 100 and 20 clusters, respe
 For each split, we create 5 different folds (by changing the random seed) and report the mean absolute error (MAE) and root-mean-squared error (RMSE).
 The values in Table 1 and Table 2 correspond to the mean $\pm$ one standard deviation calculated across folds.
 
-First is property prediction with QM9 [@ramakrishnan2014quantum], a dataset containing approximately 133,000 small organic molecules and 12 relevant chemical properties for each. We train a multi-task model to predict all properties, with the arithmetic mean of all predictions tabulated below. <!-- the actual properties are: "mu", "alpha", "homo", "lumo", "gap", "r2", "zpve", "cv", "u0", "u298", "h298", "g298" with units listed in Table 3 from https://www.nature.com/articles/sdata201422-->
-Second is a single-task model to predict a reaction's barrier height using the RDB7 dataset [@spiekermann2022high; @spiekermann_zenodo_database]. This reaction database contains a diverse set of around 12,000 organic reactions relevant to the field of chemical kinetics.
+First is property prediction with QM9 [@ramakrishnan2014quantum], a dataset containing approximately 133,000 small organic molecules, each containing 12 relevant chemical properties calculated at B3LYP/6-31G(2df,p). 
+We train a multi-task model to predict all properties, with the arithmetic mean of all predictions tabulated below. <!-- the actual properties are: "mu", "alpha", "homo", "lumo", "gap", "r2", "zpve", "cv", "u0", "u298", "h298", "g298" with units listed in Table 3 from https://www.nature.com/articles/sdata201422-->
+Second is a single-task model to predict a reaction's barrier height using the RDB7 dataset [@spiekermann2022high; @spiekermann_zenodo_database]. 
+This reaction database contains a diverse set of 12,000 organic reactions calculated at CCSD(T)-F12 that is relevant to the field of chemical kinetics.
 Models were generated using a modified version of Chemprop [@yang2019analyzing] to train a deep message passing neural network to predict the regression targets of interest. 
 We use the hyperparameters reported by @spiekermann2022fast as implemented in the `barrier_prediction` branch, which is publicly available on [GitHub](https://github.com/kspieks/chemprop/tree/barrier_prediction) [@spiekermann_forked_chemprop].
 
