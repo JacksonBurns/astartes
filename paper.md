@@ -7,6 +7,7 @@ tags:
   - interpolation
   - extrapolation
   - data splits
+  - cheminformatics
 authors:
   - name: Jackson W. Burns
     orcid: 0000-0002-0657-9426
