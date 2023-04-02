@@ -121,7 +121,7 @@ We also do not use ensembling here nor do we co-train the model with the reactio
 
 In the machine learning space, `astartes` functions as a drop-in replacement for the ubiquitous `train_test_split` from scikit-learn [@scikit-learn].
 Transitioning existing code to use this new methodology is as simple as running `pip install astartes`, modifying an `import` statement at the top of the file, and then specifying an additional keyword parameter.
-`astartes` has been especially designed to allow for maximum interoperability with other packages, using few depdencies, supporting all platforms, and validated suppport for Python 3.7 through 3.11.
+`astartes` has been especially designed to allow for maximum interoperability with other packages, using few dependencies, supporting all platforms, and validated support for Python 3.7 through 3.11.
 Specific tutorials on this transition are provided in the online documentation for `astartes`, which is available on [GitHub](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
 
 Here is an example workflow using `train_test_split` taken from the `scikit-learn` documentation [@scikit-learn]:
@@ -147,11 +147,11 @@ X_train, X_test, y_train, y_test = train_test_split(
   X, y, test_size=0.33, sampler="kmeans", random_state=42) 
 ```
 
-With this small change, an extrapoative sampler based on k-means clustering will be used.
+With this small change, an extrapolative sampler based on k-means clustering will be used.
 
 Inside cheminformatics, `astartes` makes use of all molecular featurization options implemented in `AIMSim` [@aimsim_cpc], which includes those from virtually all popular descriptor generation tools used in the cheminformatics field.
 
-The codebase itself has a clearly defined contribution guideline and thorough, easily accesible documentation.
+The codebase itself has a clearly defined contribution guideline and thorough, easily accessible documentation.
 `astartes` uses GitHub actions for Constant Integration testing including unit tests, functional tests, and regression tests.
 To emphasize the reliability and reproducibility of `astartes`, the data splits used to generate Table 1 and Table 2 are included in the regression tests.
 Test coverage currently sits at >99%, and all proposed changes are subjected to a coverage check and merged only if they cover all existing and new lines added as well as satisfy the regression tests.
