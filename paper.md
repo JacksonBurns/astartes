@@ -6,8 +6,8 @@ tags:
   - sampling
   - interpolation
   - extrapolation
-  - extrapolation
   - data splits
+  - cheminformatics
 authors:
   - name: Jackson W. Burns
     orcid: 0000-0002-0657-9426
@@ -59,8 +59,8 @@ To facilitate adoption of these models, researchers must critically think about 
 
 First, `astartes`' key function `train_val_test_split` returns splits for training, validation, and testing sets using an `sklearn`-like interface. 
 This partitioning is crucial since best practices in data science dictate that, in order to minimize the risk of hyperparameter overfitting, one must only optimize hyperparameters with a validation set and use a held-out test set to accurately measure performance on unseen data [@ramsundar2019deep; @geron2019hands; @lakshmanan2020machine; @huyen2022designing; @wang2020machine]. 
-Unfortunately, many published papers only mention training and testing sets but do not mention validation sets, implying that they optimize the hyperparameters to the test set, which would be blatant data leakage that leads to overly optimistic results [@li2020predicting; @van2022physics; @ismail2022successes; @liu2023predict].
-For researchers interested in quickly obtaining preliminary results without using a validation set to optimize hyperparameters, `astartes` also implements an an sklearn-compatible `train_test_split` function.
+Unfortunately, many published papers only mention training and testing sets but do not mention validation sets, implying that they optimize the hyperparameters to the test set, which would be blatant data leakage that leads to overly optimistic results.
+For researchers interested in quickly obtaining preliminary results without using a validation set to optimize hyperparameters, `astartes` also implements an an `sklearn`-compatible `train_test_split` function.
 
 Second, it is crucial to evaluate model performance in both interpolation and extrapolation settings so future users are informed of any potential limitations.
 Although random splits are frequently used in the cheminformatics literature, this simply measures interpolation performance.
@@ -83,8 +83,10 @@ The QM9 dataset and RDB7 datasets were organized into 100 and 20 clusters, respe
 For each split, we create 5 different folds (by changing the random seed) and report the mean absolute error (MAE) and root-mean-squared error (RMSE).
 The values in Table 1 and Table 2 correspond to the mean $\pm$ one standard deviation calculated across folds.
 
-First is property prediction with QM9 [@ramakrishnan2014quantum], a dataset containing approximately 133,000 small organic molecules and 12 relevant chemical properties for each. We train a multi-task model to predict all properties, with the arithmetic mean of all predictions tabulated below. <!-- the actual properties are: "mu", "alpha", "homo", "lumo", "gap", "r2", "zpve", "cv", "u0", "u298", "h298", "g298" with units listed in Table 3 from https://www.nature.com/articles/sdata201422-->
-Second is a single-task model to predict a reaction's barrier height using the RDB7 dataset [@spiekermann2022high; @spiekermann_zenodo_database]. This reaction database contains a diverse set of around 12,000 organic reactions relevant to the field of chemical kinetics.
+First is property prediction with QM9 [@ramakrishnan2014quantum], a dataset containing approximately 133,000 small organic molecules, each containing 12 relevant chemical properties calculated at B3LYP/6-31G(2df,p). 
+We train a multi-task model to predict all properties, with the arithmetic mean of all predictions tabulated below. <!-- the actual properties are: "mu", "alpha", "homo", "lumo", "gap", "r2", "zpve", "cv", "u0", "u298", "h298", "g298" with units listed in Table 3 from https://www.nature.com/articles/sdata201422-->
+Second is a single-task model to predict a reaction's barrier height using the RDB7 dataset [@spiekermann2022high; @spiekermann_zenodo_database]. 
+This reaction database contains a diverse set of 12,000 organic reactions calculated at CCSD(T)-F12 that is relevant to the field of chemical kinetics.
 Models were generated using a modified version of Chemprop [@yang2019analyzing] to train a deep message passing neural network to predict the regression targets of interest. 
 We use the hyperparameters reported by @spiekermann2022fast as implemented in the `barrier_prediction` branch, which is publicly available on [GitHub](https://github.com/kspieks/chemprop/tree/barrier_prediction) [@spiekermann_forked_chemprop].
 
@@ -101,7 +103,7 @@ Together, these tables demonstrate the utility of `astartes` in allowing users t
 |-----------|------------------|-----------------|
 | Random    | 2.02 $\pm$ 0.06  | 3.63 $\pm$ 0.21 |
 | Scaffold  | 2.20 $\pm$ 0.16  | 3.60 $\pm$ 0.31 |
-| K-means   | 2.55 $\pm$ 0.28  | 4.74 $\pm$ 0.86 |
+| K-means   | 2.38 $\pm$ 0.27  | 4.38 $\pm$ 0.41 |
 
 
 ### Table 2: Testing errors in kcal/mol for predicting a reaction's barrier height from RDB7 [@spiekermann2022high].
@@ -110,22 +112,18 @@ Together, these tables demonstrate the utility of `astartes` in allowing users t
 |-----------|-----------------|-----------------|
 | Random    | 3.87 $\pm$ 0.05 | 6.81 $\pm$ 0.28 |
 | Scaffold  | 4.12 $\pm$ 0.13 | 7.09 $\pm$ 0.22 |
-| K-means   | 4.37 $\pm$ 0.76 | 7.43 $\pm$ 1.45 |
+| K-means   | 4.33 $\pm$ 0.58 | 7.35 $\pm$ 1.26 |
 
 
-Note that the scaffold errors presented above are higher than what is reported in the original study [@spiekermann2022fast] for several reasons.
+Note that the scaffold errors presented in Table 2 are higher than what is reported in the original study [@spiekermann2022fast] for several reasons.
 First, pretraining on the B97-D3 and $\omega$B97X-D3 datasets was done in the prior study, but neglected here for simplicity.
 We also do not use ensembling here nor do we co-train the model with the reaction enthalpy.
-<!--, which often improves model performance and is not an unexpected observation given that a reaction’s enthalpy is often correlated to its barrier height (e.g. Evans-Polanyi relationships [@evans1938inertia]). -->
-<!-- If suitable pretraining data is available, transfer learning is an established technique to improve model performance [@pan2010survey]. -->
-<!-- Second, we do not use ensembling here; however, this is another established method to improve model predictions [@yang2019analyzing; @dietterich2000ensemble]. -->
- <!-- Bell-Evans- Polanyi (BEP)-type correlations.14,20,21  from https://pubs.acs.org/doi/pdf/10.1021/acs.jcim.2c01502 -->
 
 # Related Software and Code Availability
 
 In the machine learning space, `astartes` functions as a drop-in replacement for the ubiquitous `train_test_split` from scikit-learn [@scikit-learn].
 Transitioning existing code to use this new methodology is as simple as running `pip install astartes`, modifying an `import` statement at the top of the file, and then specifying an additional keyword parameter.
-`astartes` has been especially designed to allow for maximum interoperability with other packages, using few depdencies, supporting all platforms, and validated suppport for Python 3.7 through 3.11.
+`astartes` has been especially designed to allow for maximum interoperability with other packages, using few dependencies, supporting all platforms, and validated support for Python 3.7 through 3.11.
 Specific tutorials on this transition are provided in the online documentation for `astartes`, which is available on [GitHub](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
 
 Here is an example workflow using `train_test_split` taken from the `scikit-learn` documentation [@scikit-learn]:
@@ -151,11 +149,11 @@ X_train, X_test, y_train, y_test = train_test_split(
   X, y, test_size=0.33, sampler="kmeans", random_state=42) 
 ```
 
-With this small change, an extrapoative sampler based on k-means clustering will be used.
+With this small change, an extrapolative sampler based on k-means clustering will be used.
 
 Inside cheminformatics, `astartes` makes use of all molecular featurization options implemented in `AIMSim` [@aimsim_cpc], which includes those from virtually all popular descriptor generation tools used in the cheminformatics field.
 
-The codebase itself has a clearly defined contribution guideline and thorough, easily accesible documentation.
+The codebase itself has a clearly defined contribution guideline and thorough, easily accessible documentation.
 `astartes` uses GitHub actions for Constant Integration testing including unit tests, functional tests, and regression tests.
 To emphasize the reliability and reproducibility of `astartes`, the data splits used to generate Table 1 and Table 2 are included in the regression tests.
 Test coverage currently sits at >99%, and all proposed changes are subjected to a coverage check and merged only if they cover all existing and new lines added as well as satisfy the regression tests.
