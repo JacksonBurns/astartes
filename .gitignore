@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # mac annoying file
-.DS_store
+.DS_Store

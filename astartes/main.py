@@ -63,7 +63,17 @@ def train_val_test_split(
     sampler_factory = SamplerFactory(sampler)
     sampler_instance = sampler_factory.get_sampler(X, y, labels, hopts)
 
-    if sampler in IMPLEMENTED_EXTRAPOLATION_SAMPLERS:
+    if sampler in (*IMPLEMENTED_INTERPOLATION_SAMPLERS, "time_based"):
+        # time_based does extrapolation but does not support random_state
+        # because it always sorts in time order
+        return _interpolative_sampling(
+            sampler_instance,
+            test_size,
+            val_size,
+            train_size,
+            return_indices,
+        )
+    else:
         return _extrapolative_sampling(
             sampler_instance,
             test_size,
@@ -71,14 +81,6 @@ def train_val_test_split(
             train_size,
             return_indices,
             random_state,
-        )
-    else:
-        return _interpolative_sampling(
-            sampler_instance,
-            test_size,
-            val_size,
-            train_size,
-            return_indices,
         )
 
 
