@@ -59,61 +59,6 @@
   publisher={ACS Publications}
 }
 
-% transfer learning
-% colin's paper has other sources for transfer learning https://pubs.acs.org/doi/full/10.1021/acs.jpca.9b04195?casa_token=QNg8dRc2AnUAAAAA%3ACveKSCkIbAQ9sZ8UpNYFIyGvpX6RE2dHOSJRj_gYSjGe8j0HSBsWpskij7QGKoCOMP8mNY4Re7otvHlJ
-@misc{pan2010survey,
-  title={A Survey on Transfer Learning. IEEE Transaction on Knowledge Discovery and Data Engineering, 22 (10)},
-  author={Pan, S. and Yang, Q.},
-  year={2010},
-  publisher={IEEE press}
-}
-
-
-%%%%%%%%%%%% Bad examples that did not mention validation set %%%%%%%%%%%%
-% Showed that PM7 and MMFF94 geometries give identical performance as those from DFT
-% "The regression performances using five-fold cross validation and random splitting are summarized in Table 1."
-@article{li2020predicting,
-  title={{Predicting Regioselectivity in Radical C-H Functionalization of Heterocycles through Machine Learning}},
-  author={Li, Xin and Zhang, Shuo-Qing and Xu, Li-Cheng and Hong, Xin},
-  journal={Angewandte Chemie International Edition},
-  volume={59},
-  number={32},
-  pages={13253--13259},
-  year={2020},
-  publisher={Wiley Online Library}
-}
-
-@article{van2022physics,
-  title={{Physics-based Representations for Machine Learning Properties of Chemical Reactions}},
-  author={van Gerwen, Puck and Fabrizio, Alberto and Wodrich, Matthew and Corminboeuf, Cl{\'e}mence},
-  journal={Machine Learning: Science and Technology},
-  year={2022},
-  publisher={IOP Publishing}
-}
-
-% trained an ANN to predict barriers from Colin's dataset. Weirdly, they ignored the wb97xd3 data and only trained on the b97d3 data which makes their test MAE of 2.8 kcal/mol not impressive, especially since it came from random split. Being 2.8 kcal/mol away from b97d3 which is itself at least 7 kcal/mol away from CCSD(T)-F12 just seems useless.. 
-@article{ismail2022successes,
-  title={Successes and Challenges in Using Machine-Learned Activation Energies in Kinetic Simulations},
-  author={Ismail, Idil and Robertson, Christopher and Habershon, Scott},
-  journal={The Journal of Chemical Physics},
-  volume={157},
-  number={1},
-  pages={014109},
-  year={2022},
-  publisher={AIP Publishing LLC}
-}
-
-% This paper used random splits and does not mention a validation set
-@article{liu2023predict,
-  title={Predict Ionization Energy of Molecules Using Conventional and Graph-Based Machine Learning Models},
-  author={Liu, Yufeng and Li, Zhenyu},
-  journal={Journal of Chemical Information and Modeling},
-  year={2023},
-  publisher={ACS Publications}
-}
-
-
-
 %%%%%%%%%% Datasets %%%%%%%%%%
 % Original QM9
 @article{ramakrishnan2014quantum,
@@ -275,7 +220,7 @@
 
 % predicts excited state properties of iridium complexes using TD-DFT
 % uses experimental data for 1380 Ir complexes 
-% use both random and grouped slit. As expected, performance on the grouped split is much worse
+% use both random and grouped split. As expected, performance on the grouped split is much worse
 @article{terrones2023low,
   title={Low-Cost Machine Learning Prediction of Excited State Properties of Iridium-Centered Phosphors},
   author={Terrones, Gianmarco G. and Duan, Chenru and Nandy, Aditya and Kulik, Heather J.},
@@ -313,6 +258,48 @@
   year={2022},
   publisher={AIP Publishing LLC}
 }
+
+% Sn2 E2 barrier prediction
+% "To train our R2B models, the dataset was split into a training set and a test set to optimize the hyperparameters and evaluate the model, respectively. 
+% To get the optimal hyperparameters, we used k-fold cross validation. We divide the training data into k folds and, for each fold, we trained on all but one fold, which was used for evaluating the model. 
+% This procedure was done in an iterative fashion over all the folds"
+% used both random splits and cluster splits by leaving out functional groups
+@article{heinen2021toward,
+  title={{Toward the Design of Chemical Reactions: Machine Learning Barriers of Competing Mechanisms in Reactant Space}},
+  author={Heinen, Stefan and von Rudorff, Guido Falk and von Lilienfeld, O. Anatole},
+  journal={J. Chem. Phys.},
+  volume={155},
+  number={6},
+  pages={064105},
+  year={2021},
+  publisher={AIP Publishing LLC}
+}
+% we developed a graph-based neural network architecture and applied it to the problem of predicting the viscosity of binary liquid mixtures as a function of composition and temperature
+% trained on data from NIST
+% they explain that random splitting can lead to data leakage and unreliable model performance. They want to robustly analyze performance in which one or both of the compounds in the binary mixture has never been seen by the model.
+% "To accomplish this, we randomly selected a set of test set compounds and removed any data points containing those compounds from the training set" 
+@article{bilodeau2023machine,
+  title={Machine Learning for Predicting the Viscosity of Binary Liquid Mixtures},
+  author={Bilodeau, Camille and Kazakov, Andrei and Mukhopadhyay, Sukrit and Emerson, Jillian and Kalantar, Tom and Muzny, Chris and Jensen, Klavs},
+  journal={Chem. Eng. J.},
+  pages={142454},
+  year={2023},
+  publisher={Elsevier}
+}
+
+% With this leave-one-reaction-out validation approach, we observed a MAE of 1.00 kcal mol−1 for GPRM3/2 (compared to 0.80 kcal mol−1 from normal cross-validation)
+% We also tested leave-one-electrophile-out, giving a MAE of 1.20 kcal mol−1 and leave-one-nucleophile-out, giving a of MAE 0.68 kcal mol−1. These results indicate that the model is able to predict outside its immediate chemical space with good accuracy, and not only interpolate. 
+@article{jorner2021machine,
+  title={{Machine Learning Meets Mechanistic Modelling for Accurate Prediction of Experimental Activation Energies}},
+  author={Jorner, Kjell and Brinck, Tore and Norrby, Per-Ola and Buttar, David},
+  journal={Chem. Sci.},
+  volume={12},
+  number={3},
+  pages={1163--1175},
+  year={2021},
+  publisher={Royal Society of Chemistry}
+}
+
 
 %%%%%%%%% Cheminformatics Software %%%%%%%%%
 % RDKit
@@ -358,32 +345,6 @@
   publisher={ACS Publications}
 }
 
-% they use random splits
-@article{hu2023improved,
-  title={Improved Graph-Based Multitask Learning Model with Sparse Sharing for Quantitative Structure--Property Relationship Prediction of Drug Molecules},
-  author={Hu, Haoyang and Bai, Yunke and Yuan, Zhihong},
-  journal={AIChE Journal},
-  volume={69},
-  number={2},
-  pages={e17968},
-  year={2023},
-  publisher={Wiley Online Library}
-}
-
-
-
-% Evans−Polanyi relationships
-@article{evans1938inertia,
-  title={{Inertia and Driving Force of Chemical Reactions}},
-  author={Evans, MG and Polanyi, Michael},
-  journal={Transactions of the Faraday Society},
-  volume={34},
-  pages={11--24},
-  year={1938},
-  publisher={Royal Society of Chemistry}
-}
-
-
 % ChemProp 
 @article{yang2019analyzing,
   title={{Analyzing Learned Molecular Representations for Property Prediction}},
@@ -395,29 +356,6 @@
   year={2019},
   publisher={ACS Publications}
 }
-
-% reference for ensembling, cited by ChemProp paper
-% note={{https://link.springer.com/chapter/10.1007/3-540-45014-9\_1.pdf}}
-@inproceedings{dietterich2000ensemble,
-  title={{Ensemble Methods in Machine Learning}},
-  author={Dietterich, Thomas G.},
-  booktitle={Multiple Classifier Systems. MCS 2000. Lecture Notes in Computer Science, vol 1857. Springer, Berlin, Heidelberg},
-  pages={1--15},
-  year={2000},
-  organization={Springer},
-}
-
-
-% requested citation for supercloud
-@inproceedings{reuther2018interactive,
-    title={Interactive supercomputing on 40,000 cores for machine learning and data analysis},
-    author={Reuther, Albert and Kepner, Jeremy and Byun, Chansup and Samsi, Siddharth and Arcand, William and Bestor, David and Bergeron, Bill and Gadepally, Vijay and Houle, Michael and Hubbell, Matthew and Jones, Michael and Klein, Anna and Milechin, Lauren and Mullen, Julia and Prout, Andrew and Rosa, Antonio and Yee, Charles and Michaleas, Peter},
-    booktitle={2018 IEEE High Performance extreme Computing Conference (HPEC)},
-    pages={1--6},
-    year={2018},
-    organization={IEEE}
-}
-
 
 % AIMSim
 @article{aimsim_cpc,
