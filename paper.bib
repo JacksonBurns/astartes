@@ -59,61 +59,6 @@
   publisher={ACS Publications}
 }
 
-% transfer learning
-% colin's paper has other sources for transfer learning https://pubs.acs.org/doi/full/10.1021/acs.jpca.9b04195?casa_token=QNg8dRc2AnUAAAAA%3ACveKSCkIbAQ9sZ8UpNYFIyGvpX6RE2dHOSJRj_gYSjGe8j0HSBsWpskij7QGKoCOMP8mNY4Re7otvHlJ
-@misc{pan2010survey,
-  title={A Survey on Transfer Learning. IEEE Transaction on Knowledge Discovery and Data Engineering, 22 (10)},
-  author={Pan, S. and Yang, Q.},
-  year={2010},
-  publisher={IEEE press}
-}
-
-
-%%%%%%%%%%%% Bad examples that did not mention validation set %%%%%%%%%%%%
-% Showed that PM7 and MMFF94 geometries give identical performance as those from DFT
-% "The regression performances using five-fold cross validation and random splitting are summarized in Table 1."
-@article{li2020predicting,
-  title={{Predicting Regioselectivity in Radical C-H Functionalization of Heterocycles through Machine Learning}},
-  author={Li, Xin and Zhang, Shuo-Qing and Xu, Li-Cheng and Hong, Xin},
-  journal={Angewandte Chemie International Edition},
-  volume={59},
-  number={32},
-  pages={13253--13259},
-  year={2020},
-  publisher={Wiley Online Library}
-}
-
-@article{van2022physics,
-  title={{Physics-based Representations for Machine Learning Properties of Chemical Reactions}},
-  author={van Gerwen, Puck and Fabrizio, Alberto and Wodrich, Matthew and Corminboeuf, Cl{\'e}mence},
-  journal={Machine Learning: Science and Technology},
-  year={2022},
-  publisher={IOP Publishing}
-}
-
-% trained an ANN to predict barriers from Colin's dataset. Weirdly, they ignored the wb97xd3 data and only trained on the b97d3 data which makes their test MAE of 2.8 kcal/mol not impressive, especially since it came from random split. Being 2.8 kcal/mol away from b97d3 which is itself at least 7 kcal/mol away from CCSD(T)-F12 just seems useless.. 
-@article{ismail2022successes,
-  title={Successes and Challenges in Using Machine-Learned Activation Energies in Kinetic Simulations},
-  author={Ismail, Idil and Robertson, Christopher and Habershon, Scott},
-  journal={The Journal of Chemical Physics},
-  volume={157},
-  number={1},
-  pages={014109},
-  year={2022},
-  publisher={AIP Publishing LLC}
-}
-
-% This paper used random splits and does not mention a validation set
-@article{liu2023predict,
-  title={Predict Ionization Energy of Molecules Using Conventional and Graph-Based Machine Learning Models},
-  author={Liu, Yufeng and Li, Zhenyu},
-  journal={Journal of Chemical Information and Modeling},
-  year={2023},
-  publisher={ACS Publications}
-}
-
-
-
 %%%%%%%%%% Datasets %%%%%%%%%%
 % Original QM9
 @article{ramakrishnan2014quantum,
@@ -400,32 +345,6 @@
   publisher={ACS Publications}
 }
 
-% they use random splits
-@article{hu2023improved,
-  title={Improved Graph-Based Multitask Learning Model with Sparse Sharing for Quantitative Structure--Property Relationship Prediction of Drug Molecules},
-  author={Hu, Haoyang and Bai, Yunke and Yuan, Zhihong},
-  journal={AIChE Journal},
-  volume={69},
-  number={2},
-  pages={e17968},
-  year={2023},
-  publisher={Wiley Online Library}
-}
-
-
-
-% Evans−Polanyi relationships
-@article{evans1938inertia,
-  title={{Inertia and Driving Force of Chemical Reactions}},
-  author={Evans, MG and Polanyi, Michael},
-  journal={Transactions of the Faraday Society},
-  volume={34},
-  pages={11--24},
-  year={1938},
-  publisher={Royal Society of Chemistry}
-}
-
-
 % ChemProp 
 @article{yang2019analyzing,
   title={{Analyzing Learned Molecular Representations for Property Prediction}},
@@ -437,29 +356,6 @@
   year={2019},
   publisher={ACS Publications}
 }
-
-% reference for ensembling, cited by ChemProp paper
-% note={{https://link.springer.com/chapter/10.1007/3-540-45014-9\_1.pdf}}
-@inproceedings{dietterich2000ensemble,
-  title={{Ensemble Methods in Machine Learning}},
-  author={Dietterich, Thomas G.},
-  booktitle={Multiple Classifier Systems. MCS 2000. Lecture Notes in Computer Science, vol 1857. Springer, Berlin, Heidelberg},
-  pages={1--15},
-  year={2000},
-  organization={Springer},
-}
-
-
-% requested citation for supercloud
-@inproceedings{reuther2018interactive,
-    title={Interactive supercomputing on 40,000 cores for machine learning and data analysis},
-    author={Reuther, Albert and Kepner, Jeremy and Byun, Chansup and Samsi, Siddharth and Arcand, William and Bestor, David and Bergeron, Bill and Gadepally, Vijay and Houle, Michael and Hubbell, Matthew and Jones, Michael and Klein, Anna and Milechin, Lauren and Mullen, Julia and Prout, Andrew and Rosa, Antonio and Yee, Charles and Michaleas, Peter},
-    booktitle={2018 IEEE High Performance extreme Computing Conference (HPEC)},
-    pages={1--6},
-    year={2018},
-    organization={IEEE}
-}
-
 
 % AIMSim
 @article{aimsim_cpc,
