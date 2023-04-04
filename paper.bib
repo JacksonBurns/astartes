@@ -314,6 +314,48 @@
   publisher={AIP Publishing LLC}
 }
 
+% Sn2 E2 barrier prediction
+% "To train our R2B models, the dataset was split into a training set and a test set to optimize the hyperparameters and evaluate the model, respectively. 
+% To get the optimal hyperparameters, we used k-fold cross validation. We divide the training data into k folds and, for each fold, we trained on all but one fold, which was used for evaluating the model. 
+% This procedure was done in an iterative fashion over all the folds"
+% used both random splits and cluster splits by leaving out functional groups
+@article{heinen2021toward,
+  title={{Toward the Design of Chemical Reactions: Machine Learning Barriers of Competing Mechanisms in Reactant Space}},
+  author={Heinen, Stefan and von Rudorff, Guido Falk and von Lilienfeld, O. Anatole},
+  journal={J. Chem. Phys.},
+  volume={155},
+  number={6},
+  pages={064105},
+  year={2021},
+  publisher={AIP Publishing LLC}
+}
+% we developed a graph-based neural network architecture and applied it to the problem of predicting the viscosity of binary liquid mixtures as a function of composition and temperature
+% trained on data from NIST
+% they explain that random splitting can lead to data leakage and unreliable model performance. They want to robustly analyze performance in which one or both of the compounds in the binary mixture has never been seen by the model.
+% "To accomplish this, we randomly selected a set of test set compounds and removed any data points containing those compounds from the training set" 
+@article{bilodeau2023machine,
+  title={Machine Learning for Predicting the Viscosity of Binary Liquid Mixtures},
+  author={Bilodeau, Camille and Kazakov, Andrei and Mukhopadhyay, Sukrit and Emerson, Jillian and Kalantar, Tom and Muzny, Chris and Jensen, Klavs},
+  journal={Chem. Eng. J.},
+  pages={142454},
+  year={2023},
+  publisher={Elsevier}
+}
+
+% With this leave-one-reaction-out validation approach, we observed a MAE of 1.00 kcal mol−1 for GPRM3/2 (compared to 0.80 kcal mol−1 from normal cross-validation)
+% We also tested leave-one-electrophile-out, giving a MAE of 1.20 kcal mol−1 and leave-one-nucleophile-out, giving a of MAE 0.68 kcal mol−1. These results indicate that the model is able to predict outside its immediate chemical space with good accuracy, and not only interpolate. 
+@article{jorner2021machine,
+  title={{Machine Learning Meets Mechanistic Modelling for Accurate Prediction of Experimental Activation Energies}},
+  author={Jorner, Kjell and Brinck, Tore and Norrby, Per-Ola and Buttar, David},
+  journal={Chem. Sci.},
+  volume={12},
+  number={3},
+  pages={1163--1175},
+  year={2021},
+  publisher={Royal Society of Chemistry}
+}
+
+
 %%%%%%%%% Cheminformatics Software %%%%%%%%%
 % RDKit
 @misc{landrum2006rdkit,
