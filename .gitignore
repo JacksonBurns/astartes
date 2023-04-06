@@ -130,3 +130,6 @@ dmypy.json
 
 # mac annoying file
 .DS_Store
+
+# vscode configuration
+.vscode
