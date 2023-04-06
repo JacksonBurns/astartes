@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         nb-file:
-          ["RDB7_barrier_prediction_example", "train_val_test_split_example"]
+          ["RDB7_barrier_prediction_example", "train_val_test_split_example", "split_comparisons"]
     runs-on: ubuntu-latest
     defaults:
       run:
