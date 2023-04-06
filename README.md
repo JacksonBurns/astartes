@@ -44,6 +44,7 @@ Click the badges in the table below to be taken to a live, interactive demo of `
 | Demo | Link |
 |:---:|---|
 | Using `train_val_test_split` with the `sklearn` example datasets | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2Ftrain_val_test_split_example.ipynb) |
+| Comparing Sampling Algorithms with Fast Food | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2Fsplit_comparisons.ipynb) |
 | Cheminformatics sample set partitioning with `astartes` | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2FRDB7_barrier_prediction_example.ipynb) |
 
 ### Rational Splitting Algorithms

@@ -1,0 +1,78 @@
+Item,Category,Calories,Fat Calories,Fat (g),Saturated Fat (g),Trans Fat (g),Cholesterol (mg),Sodium (mg),Total Carb (g),Dietary Fiber (g),Sugars (g),Protein (g),Weight Watchers
+Whopper® Sandwich,Burgers,660.0,360.0,40.0,12.0,1.5,90.0,980.0,49.0,2.0,11.0,28.0,655.0
+Whopper® Sandwich with Cheese,Burgers,740.0,420.0,46.0,16.0,2.0,115.0,1340.0,50.0,2.0,11.0,32.0,735.0
+Bacon & Cheese Whopper® Sandwich,Burgers,790.0,460.0,51.0,17.0,2.0,125.0,1560.0,50.0,2.0,11.0,35.0,783.0
+Double Whopper® Sandwich,Burgers,900.0,520.0,58.0,20.0,3.0,175.0,1050.0,49.0,2.0,11.0,48.0,883.0
+Double Whopper® Sandwich with Cheese,Burgers,980.0,580.0,64.0,24.0,3.0,195.0,1410.0,50.0,2.0,11.0,52.0,963.0
+Triple Whopper® Sandwich,Burgers,1130.0,680.0,75.0,28.0,4.0,255.0,1120.0,49.0,2.0,11.0,67.0,1102.0
+Triple Whopper® Sandwich with Cheese,Burgers,1220.0,740.0,82.0,32.0,4.5,280.0,1470.0,50.0,2.0,11.0,71.0,1192.0
+Whopper JR.® Sandwich,Burgers,310.0,160.0,18.0,5.0,0.5,40.0,390.0,27.0,1.0,7.0,13.0,309.0
+Bacon King Sandwich,Burgers,1150.0,710.0,79.0,31.0,3.5,240.0,2150.0,49.0,2.0,10.0,61.0,1130.0
+Cheddar Bacon King Sandwich,Burgers,1190.0,750.0,84.0,33.0,3.5,235.0,1930.0,50.0,2.0,11.0,64.0,1170.0
+Single Quarter Pound King Sandwich,Burgers,580.0,260.0,29.0,13.0,1.5,105.0,1310.0,49.0,2.0,10.0,32.0,571.0
+Double Quarter Pound King Sandwich,Burgers,900.0,480.0,54.0,25.0,3.0,210.0,1740.0,50.0,2.0,11.0,56.0,880.0
+Single Stacker King,Burgers,700.0,380.0,42.0,16.0,2.0,125.0,1360.0,48.0,1.0,10.0,35.0,691.0
+Double Stacker King,Burgers,1050.0,610.0,68.0,28.0,3.5,235.0,1870.0,49.0,1.0,11.0,61.0,1028.0
+IMPOSSIBLE Whopper® Sandwich,Burgers,630.0,310.0,34.0,11.0,0.0,10.0,1080.0,58.0,4.0,12.0,25.0,628.0
+Hamburger,Burgers,240.0,90.0,10.0,3.5,0.5,35.0,380.0,26.0,1.0,6.0,13.0,237.0
+Cheeseburger,Burgers,280.0,120.0,13.0,6.0,0.5,45.0,560.0,27.0,1.0,7.0,15.0,278.0
+Double Hamburger,Burgers,350.0,160.0,18.0,7.0,1.0,70.0,410.0,26.0,1.0,6.0,21.0,342.0
+Double Cheeseburger,Burgers,390.0,190.0,21.0,9.0,1.5,85.0,590.0,27.0,1.0,7.0,23.0,383.0
+Extra Long Cheeseburger,Burgers,630.0,330.0,37.0,14.0,1.5,100.0,1050.0,45.0,2.0,9.0,29.0,624.0
+Bacon Cheeseburger,Burgers,320.0,140.0,16.0,7.0,0.5,55.0,710.0,27.0,1.0,7.0,17.0,317.0
+Bacon Double Cheeseburger,Burgers,420.0,210.0,24.0,10.0,1.5,90.0,740.0,27.0,1.0,7.0,25.0,412.0
+Crispy Chicken Sandwich,Chicken,670.0,370.0,41.0,7.0,0.0,60.0,1080.0,54.0,2.0,8.0,23.0,662.0
+Spicy Crispy Chicken Sandwich,Chicken,700.0,370.0,42.0,7.0,0.0,65.0,1140.0,57.0,3.0,8.0,25.0,690.0
+Original Chicken Sandwich,Chicken,660.0,360.0,40.0,7.0,0.0,75.0,1170.0,48.0,2.0,5.0,28.0,644.0
+Bacon & Cheese Crispy Chicken Sandwich,Chicken,800.0,460.0,52.0,13.0,1.0,95.0,1650.0,55.0,2.0,8.0,30.0,791.0
+BBQ Bacon Crispy Chicken Sandwich,Chicken,790.0,440.0,49.0,10.0,0.5,80.0,1630.0,60.0,2.0,13.0,28.0,785.0
+Crispy Chicken Jr.,Chicken,450.0,270.0,30.0,5.0,0.0,30.0,780.0,34.0,2.0,5.0,12.0,448.0
+Spicy Crispy Chicken Jr.,Chicken,390.0,190.0,21.0,3.5,0.0,30.0,740.0,37.0,2.0,6.0,12.0,388.0
+Chicken Nuggets- 4pc,Chicken,170.0,100.0,11.0,1.5,0.0,25.0,310.0,11.0,1.0,0.0,8.0,164.0
+Chicken Nuggets- 6pc,Chicken,260.0,150.0,16.0,2.5,0.0,35.0,470.0,16.0,1.0,0.0,12.0,251.0
+Chicken Nuggets- 10pc,Chicken,430.0,240.0,27.0,4.5,0.0,55.0,780.0,27.0,2.0,0.0,20.0,415.0
+Chicken Nuggets- 20pc,Chicken,860.0,490.0,54.0,9.0,0.0,115.0,1570.0,53.0,3.0,1.0,39.0,831.0
+Spicy Chicken Nuggets- 4pc,Chicken,210.0,130.0,15.0,3.0,0.0,20.0,570.0,11.0,2.0,0.0,8.0,205.0
+Spicy Chicken Nuggets- 6pc,Chicken,320.0,200.0,22.0,4.5,0.0,35.0,850.0,17.0,3.0,0.0,12.0,313.0
+Spicy Chicken Nuggets- 10 pc,Chicken,530.0,330.0,37.0,7.0,0.0,55.0,1420.0,28.0,4.0,1.0,20.0,518.0
+Spicy Chicken Nuggets- 20 pc,Chicken,1050.0,670.0,74.0,15.0,0.0,110.0,2840.0,56.0,9.0,1.0,40.0,1026.0
+Chicken Fries – 9 pc.,Chicken,280.0,150.0,17.0,2.5,0.0,35.0,850.0,20.0,1.0,1.0,13.0,271.0
+Crispy Taco,Chicken,170.0,80.0,9.0,3.0,0.0,10.0,410.0,19.0,2.0,1.0,5.0,169.0
+BIG FISH Sandwich,Chicken,510.0,250.0,28.0,4.5,0.0,30.0,1180.0,51.0,2.0,7.0,16.0,506.0
+Chicken Nuggets- 4pc,Burgers,170.0,100.0,11.0,1.5,0.0,25.0,310.0,11.0,1.0,0.0,8.0,164.0
+Chicken Nuggets- 6pc,Burgers,260.0,150.0,16.0,2.5,0.0,35.0,470.0,16.0,1.0,0.0,12.0,251.0
+Hamburger,Burgers,240.0,90.0,10.0,3.5,0.5,35.0,380.0,26.0,1.0,6.0,13.0,237.0
+Cheeseburger,Burgers,280.0,120.0,13.0,6.0,0.5,45.0,560.0,27.0,1.0,7.0,15.0,278.0
+CROISSAN’WICH® Egg & Cheese,Breakfast,340.0,170.0,18.0,8.0,0.0,160.0,610.0,29.0,1.0,4.0,12.0,340.0
+"CROISSAN’WICH® Sausage, Egg & Cheese",Breakfast,500.0,300.0,33.0,13.0,0.0,195.0,930.0,30.0,1.0,4.0,19.0,498.0
+"CROISSAN’WICH® Ham, Egg & Cheese",Breakfast,370.0,170.0,19.0,8.0,0.0,175.0,1030.0,30.0,1.0,5.0,17.0,366.0
+"CROISSAN’WICH® Bacon, Egg & Cheese",Breakfast,370.0,190.0,21.0,9.0,0.0,170.0,760.0,30.0,1.0,4.0,14.0,369.0
+Fully Loaded CROISSAN’WICH®,Breakfast,610.0,360.0,40.0,17.0,0.5,225.0,1680.0,31.0,1.0,5.0,28.0,604.0
+Double CROISSAN’WICH® with Sausage & Bacon,Breakfast,580.0,340.0,40.0,16.0,0.5,215.0,1260.0,31.0,1.0,5.0,23.0,578.0
+Double CROISSAN’WICH® with Sausage,Breakfast,710.0,470.0,52.0,20.0,0.5,240.0,1420.0,31.0,1.0,5.0,29.0,706.0
+Double CROISSAN’WICH® with Ham & Sausage,Breakfast,580.0,340.0,38.0,16.0,0.5,220.0,1530.0,31.0,1.0,5.0,27.0,574.0
+Fully Loaded Biscuit,Breakfast,640.0,400.0,45.0,20.0,0.0,225.0,2190.0,31.0,1.0,4.0,28.0,636.0
+"Ham, Egg, & Cheese Biscuit",Breakfast,400.0,210.0,24.0,12.0,0.0,175.0,1550.0,29.0,1.0,3.0,17.0,398.0
+"Sausage, Egg, & Cheese Biscuit",Breakfast,530.0,340.0,38.0,17.0,0.0,195.0,1440.0,29.0,1.0,3.0,19.0,531.0
+"Bacon, Egg & Cheese Biscuit",Breakfast,400.0,230.0,26.0,13.0,0.0,170.0,1270.0,29.0,1.0,3.0,13.0,403.0
+Sausage Biscuit,Breakfast,420.0,250.0,28.0,6.0,0.0,35.0,1050.0,28.0,1.0,2.0,12.0,416.0
+Breakfast Burrito Jr.,Breakfast,370.0,210.0,23.0,8.0,0.0,150.0,930.0,27.0,3.0,2.0,15.0,365.0
+EGG-NORMOUS BURRITOΡ,Breakfast,780.0,380.0,42.0,15.0,0.0,355.0,1960.0,68.0,3.0,4.0,32.0,767.0
+BK™ Ultimate Breakfast Platter,Breakfast,930.0,390.0,44.0,11.0,0.0,390.0,2230.0,110.0,4.0,40.0,24.0,957.0
+NY Ultimate Platter (Regional menu item),Breakfast,900.0,420.0,46.0,12.0,0.0,380.0,1760.0,95.0,5.0,31.0,25.0,918.0
+Pancake and Sausage platter,Breakfast,610.0,280.0,31.0,9.0,0.0,80.0,1010.0,72.0,1.0,30.0,12.0,637.0
+Hash Browns – small,Breakfast,250.0,150.0,16.0,3.5,0.0,0.0,580.0,24.0,3.0,0.0,2.0,252.0
+Hash Browns – medium,Breakfast,500.0,290.0,33.0,7.0,0.0,0.0,1140.0,48.0,7.0,0.0,4.0,503.0
+Hash Browns – large,Breakfast,670.0,390.0,44.0,9.0,0.0,0.0,1530.0,65.0,9.0,0.0,5.0,674.0
+French Toast Sticks (3 piece),Breakfast,230.0,100.0,11.0,2.0,0.0,0.0,260.0,29.0,1.0,8.0,3.0,237.0
+French Toast Sticks (5 piece),Breakfast,380.0,160.0,18.0,3.0,0.0,0.0,430.0,49.0,2.0,13.0,5.0,391.0
+American Cheese (slice),Breakfast,40.0,30.0,3.5,2.0,0.0,10.0,180.0,1.0,0.0,0.0,2.0,40.0
+Ketchup (Packet),Breakfast,10.0,0.0,0.0,0.0,0.0,0.0,125.0,3.0,0.0,2.0,0.0,12.0
+Mayonnaise (Packet),Breakfast,80.0,80.0,9.0,0.5,0.0,10.0,75.0,1.0,0.0,0.0,0.0,81.0
+Strawberry or Grape Jam (packet),Breakfast,30.0,0.0,0.0,0.0,0.0,0.0,0.0,7.0,0.0,6.0,0.0,36.0
+Breakfast Syrup (1 oz),Breakfast,120.0,0.0,0.0,0.0,0.0,0.0,15.0,30.0,0.0,18.0,0.0,138.0
+Barbecue Dipping Sauce (1 oz),Breakfast,40.0,0.0,0.0,0.0,0.0,0.0,310.0,11.0,0.0,10.0,0.0,50.0
+Ranch Dipping Sauce (1 oz),Breakfast,140.0,140.0,15.0,2.5,0.0,10.0,85.0,1.0,0.0,1.0,1.0,143.0
+Buffalo Dipping Sauce (1 oz),Breakfast,80.0,70.0,8.0,1.5,0.0,5.0,360.0,2.0,0.0,1.0,0.0,83.0
+Zesty Onion Ring Dipping Sauce (1 oz),Breakfast,150.0,140.0,15.0,2.5,0.0,20.0,240.0,3.0,0.0,0.0,0.0,153.0
+Honey Mustard Dipping Sauce (1oz),Breakfast,90.0,60.0,6.0,1.0,0.0,10.0,180.0,8.0,0.0,7.0,0.0,98.0
