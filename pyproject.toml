@@ -26,6 +26,7 @@ dependencies = ["kennard_stone", "scikit_learn", "numpy", "scipy"]
 [project.optional-dependencies]
 molecules = ["aimsim"]
 dev = ["black", "isort", "pytest"]
+demos = ["plotly"]
 
 [project.readme]
 file = "README.md"

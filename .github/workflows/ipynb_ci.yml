@@ -31,7 +31,7 @@ jobs:
             python=3.11
       - name: Install dependencies
         run: |
-          python -m pip install -e .[molecules]
+          python -m pip install -e .[molecules,demos]
           python -m pip install notebook
       - name: Test Execution
         run: |
