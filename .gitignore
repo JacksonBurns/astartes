@@ -133,3 +133,7 @@ dmypy.json
 
 # vscode configuration
 .vscode
+
+# quarto ipynb to html
+examples/split_comparisons.html
+examples/split_comparisons_files
