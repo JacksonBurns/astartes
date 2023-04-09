@@ -19,16 +19,16 @@ class Test_scaffold(unittest.TestCase):
         # scaffold only contains the ring structure, not the side chains
         self.X = np.array(
             [
-                "c1ccccc1CC",       # scaffold is c1ccccc1
-                "O=C1NCCO1",        # scaffold is O=C1NCCO1
+                "c1ccccc1CC",  # scaffold is c1ccccc1
+                "O=C1NCCO1",  # scaffold is O=C1NCCO1
                 "O=C1CCC(CC)CCN1",  # scaffold is O=C1CCCCCN1
-                "C1CCNCC1CC",       # scaffold is C1CCNCC1
+                "C1CCNCC1CC",  # scaffold is C1CCNCC1
             ]
         )
 
         self.X_atom_mapped = np.array(
             [
-                "[C:1]([c:2]1[n:3][o:4][n:5][n:6]1)([H:7])([H:8])[H:9]",       # scaffold is c1nnon1
+                "[C:1]([c:2]1[n:3][o:4][n:5][n:6]1)([H:7])([H:8])[H:9]",  # scaffold is c1nnon1
             ]
         )
 
@@ -115,14 +115,14 @@ class Test_scaffold(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 clusters_train,
-                np.array(['O=C1NCCO1', 'O=C1CCCCCN1', 'C1CCNCC1']),
+                np.array(["O=C1NCCO1", "O=C1CCCCCN1", "C1CCNCC1"]),
             ),
             "Train clusters incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 clusters_test,
-                np.array(['c1ccccc1']),
+                np.array(["c1ccccc1"]),
             ),
             "Test clusters incorrect.",
         )
@@ -206,6 +206,7 @@ class Test_scaffold(unittest.TestCase):
             ),
             "Scaffold class did not remove atom-mapping.",
         )
+
 
 if __name__ == "__main__":
     unittest.main()
