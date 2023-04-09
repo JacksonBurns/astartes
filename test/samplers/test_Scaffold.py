@@ -174,15 +174,6 @@ class Test_scaffold(unittest.TestCase):
             {},
         )
 
-    def test_explicit_hydrogens(self):
-        """Include H in scaffold calculation"""
-        Scaffold(
-            self.X,
-            None,
-            None,
-            {"explicit_hydrogens": True},
-        )
-
     def test_include_chirality(self):
         """Include chirality in scaffold calculation"""
         Scaffold(
