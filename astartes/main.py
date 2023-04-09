@@ -177,7 +177,7 @@ def _extrapolative_sampling(
             test_idxs = np.append(
                 test_idxs, sampler_instance.get_sample_idxs(cluster_length)
             )
-        if (len(val_idxs) + cluster_length) <= n_val_samples:
+        elif (len(val_idxs) + cluster_length) <= n_val_samples:
             val_idxs = np.append(
                 val_idxs, sampler_instance.get_sample_idxs(cluster_length)
             )
