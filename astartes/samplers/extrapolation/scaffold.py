@@ -92,6 +92,10 @@ class Scaffold(AbstractSampler):
             RDKIT_SMILES_PARSER_PARAMS.removeHs = True
             mol = Chem.MolFromSmiles(string, RDKIT_SMILES_PARSER_PARAMS)
 
+        # atom map numbers should not be present when creating scaffolds
+        for atom in mol.GetAtoms():
+            atom.SetAtomMapNum(0)
+
         return mol
 
     def generate_bemis_murcko_scaffold(self, mol, include_chirality=False):
