@@ -19,12 +19,19 @@ class Test_scaffold(unittest.TestCase):
         # scaffold only contains the ring structure, not the side chains
         self.X = np.array(
             [
-                "c1ccccc1CC",       # scaffold is c1ccccc1
-                "O=C1NCCO1",        # scaffold is O=C1NCCO1
+                "c1ccccc1CC",  # scaffold is c1ccccc1
+                "O=C1NCCO1",  # scaffold is O=C1NCCO1
                 "O=C1CCC(CC)CCN1",  # scaffold is O=C1CCCCCN1
-                "C1CCNCC1CC",       # scaffold is C1CCNCC1
+                "C1CCNCC1CC",  # scaffold is C1CCNCC1
             ]
         )
+
+        self.X_atom_mapped = np.array(
+            [
+                "[C:1]([c:2]1[n:3][o:4][n:5][n:6]1)([H:7])([H:8])[H:9]",  # scaffold is c1nnon1
+            ]
+        )
+
         self.X_inchi = np.array(
             [
                 "InChI=1S/C6H6/c1-2-4-6-5-3-1/h1-6H",
@@ -108,14 +115,14 @@ class Test_scaffold(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 clusters_train,
-                np.array(['O=C1NCCO1', 'O=C1CCCCCN1', 'C1CCNCC1']),
+                np.array(["O=C1NCCO1", "O=C1CCCCCN1", "C1CCNCC1"]),
             ),
             "Train clusters incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 clusters_test,
-                np.array(['c1ccccc1']),
+                np.array(["c1ccccc1"]),
             ),
             "Test clusters incorrect.",
         )
@@ -174,15 +181,6 @@ class Test_scaffold(unittest.TestCase):
             {},
         )
 
-    def test_explicit_hydrogens(self):
-        """Include H in scaffold calculation"""
-        Scaffold(
-            self.X,
-            None,
-            None,
-            {"explicit_hydrogens": True},
-        )
-
     def test_include_chirality(self):
         """Include chirality in scaffold calculation"""
         Scaffold(
@@ -190,6 +188,23 @@ class Test_scaffold(unittest.TestCase):
             None,
             None,
             {"include_chirality": True},
+        )
+
+    def test_remove_atom_map(self):
+        """Scaffolds should not include atom map numbers"""
+        scaffold_instance = Scaffold(
+            self.X_atom_mapped,
+            None,
+            None,
+            {"include_chirality": True},
+        )
+        scaffold_to_indices = scaffold_instance.scaffold_to_smiles(self.X_atom_mapped)
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                np.array(list(scaffold_to_indices.keys())),
+                np.array(["c1nnon1"]),
+            ),
+            "Scaffold class did not remove atom-mapping.",
         )
 
 
