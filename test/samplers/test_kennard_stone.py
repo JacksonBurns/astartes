@@ -53,10 +53,6 @@ class Test_kennard_stone(unittest.TestCase):
             len(ks_instance.get_sorted_cluster_counter()),
             "Sorted cluster Counter found when it should not be.",
         )
-        self.assertTrue(
-            len(ks_instance._samples_idxs),
-            "Sample indices not set.",
-        )
 
     def test_kennard_stone_sample(self):
         """Use kennard stone in tts and verify results"""

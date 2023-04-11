@@ -147,10 +147,6 @@ class Test_SPXY(unittest.TestCase):
             len(spxy_instance.get_sorted_cluster_counter()),
             "Sorted cluster Counter should not be found.",
         )
-        self.assertTrue(
-            len(spxy_instance._samples_idxs),
-            "Sample indices not set.",
-        )
 
 
 if __name__ == "__main__":

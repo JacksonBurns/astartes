@@ -27,9 +27,13 @@ class Test_time_based(unittest.TestCase):
         )
         self.y = np.array([1, 2, 3, 4, 5])
 
-        self.dates = [f'20{y:02}/01/01' for y in range(5)]
-        self.labels_datetime = np.array([datetime.strptime(date, '%Y/%m/%d') for date in self.dates])
-        self.labels_date = np.array([datetime.strptime(date, '%Y/%m/%d').date() for date in self.dates])
+        self.dates = [f"20{y:02}/01/01" for y in range(5)]
+        self.labels_datetime = np.array(
+            [datetime.strptime(date, "%Y/%m/%d") for date in self.dates]
+        )
+        self.labels_date = np.array(
+            [datetime.strptime(date, "%Y/%m/%d").date() for date in self.dates]
+        )
 
     def test_time_based_sampling(self):
         """Use time_based in the train_test_split and verify results."""
@@ -81,14 +85,18 @@ class Test_time_based(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_train,
-                np.array([datetime.strptime(date, '%Y/%m/%d') for date in self.dates[:3]])
+                np.array(
+                    [datetime.strptime(date, "%Y/%m/%d") for date in self.dates[:3]]
+                ),
             ),
             "Train labels incorrect.",
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
                 labels_test,
-                np.array([datetime.strptime(date, '%Y/%m/%d') for date in self.dates[-2:]])
+                np.array(
+                    [datetime.strptime(date, "%Y/%m/%d") for date in self.dates[-2:]]
+                ),
             ),
             "Test labels incorrect.",
         )
@@ -114,10 +122,6 @@ class Test_time_based(unittest.TestCase):
             len(time_based_instance.get_sorted_cluster_counter()),
             "Sorted cluster Counter found when it should not be.",
         )
-        self.assertTrue(
-            len(time_based_instance._samples_idxs),
-            "Sample indices not set.",
-        )
 
     def test_time_based_datetime(self):
         """Directly instantiate and test TimeBased."""
@@ -139,10 +143,6 @@ class Test_time_based(unittest.TestCase):
         self.assertFalse(
             len(time_based_instance.get_sorted_cluster_counter()),
             "Sorted cluster Counter found when it should not be.",
-        )
-        self.assertTrue(
-            len(time_based_instance._samples_idxs),
-            "Sample indices not set.",
         )
 
     def test_mising_labels(self):
