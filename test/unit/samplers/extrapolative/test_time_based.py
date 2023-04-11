@@ -118,10 +118,10 @@ class Test_time_based(unittest.TestCase):
             len(time_based_instance.get_clusters()),
             "Clusters was set when it should not have been.",
         )
-        self.assertFalse(
-            len(time_based_instance.get_sorted_cluster_counter()),
-            "Sorted cluster Counter found when it should not be.",
-        )
+        with self.assertRaises(
+            ValueError, msg="Sorted cluster Counter found when it should not be."
+        ):
+            time_based_instance.get_sorted_cluster_counter()
 
     def test_time_based_datetime(self):
         """Directly instantiate and test TimeBased."""
@@ -140,10 +140,10 @@ class Test_time_based(unittest.TestCase):
             len(time_based_instance.get_clusters()),
             "Clusters was set when it should not have been.",
         )
-        self.assertFalse(
-            len(time_based_instance.get_sorted_cluster_counter()),
-            "Sorted cluster Counter found when it should not be.",
-        )
+        with self.assertRaises(
+            ValueError, msg="Sorted cluster Counter found when it should not be."
+        ):
+            time_based_instance.get_sorted_cluster_counter()
 
     def test_mising_labels(self):
         """Not specifying labels should raise ValueError"""
