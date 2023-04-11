@@ -35,6 +35,6 @@ jobs:
           python -m pip install notebook
       - name: Test Execution
         run: |
-          cd examples
+          cd examples/$(dirname ${{ matrix.nb-file }})
           jupyter nbconvert --to script ${{ matrix.nb-file }}.ipynb
           ipython ${{ matrix.nb-file }}.py
