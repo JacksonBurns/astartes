@@ -116,7 +116,7 @@ class AbstractSampler(ABC):
 
         # put all the indices in order
         self._samples_idxs = np.hstack(
-            tuple(ordered_cluster_counter_with_idxs.values()), dtype=int
+            tuple(ordered_cluster_counter_with_idxs.values())
         )
 
         return ordered_cluster_counter
