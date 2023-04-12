@@ -71,7 +71,8 @@ class AbstractSampler(ABC):
 
     def get_sorted_cluster_counter(self, max_shufflable_size=None):
         """
-        Return a dict containing cluster_id: #_elts sorted by #_elts, ascending
+        Return a dict containing cluster_id: number of members sorted by number
+        of members, ascending
 
         if max_shufflable_size is not None, clusters below the passed size will be
         shuffled into a new order according to random_state in hopts
