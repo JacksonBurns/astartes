@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         nb-file:
-          ["RDB7_barrier_prediction_example", "train_val_test_split_example"]
+          ["barrier_prediction_with_RDB7/RDB7_barrier_prediction_example", "train_val_test_split_sklearn_example/train_val_test_split_example"]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -35,6 +35,6 @@ jobs:
           python -m pip install notebook
       - name: Test Execution
         run: |
-          cd examples
-          jupyter nbconvert --to script ${{ matrix.nb-file }}.ipynb
-          ipython ${{ matrix.nb-file }}.py
+          cd examples/$(dirname ${{ matrix.nb-file }})
+          jupyter nbconvert --to script $(basename ${{ matrix.nb-file }}).ipynb
+          ipython $(basename ${{ matrix.nb-file }}).py

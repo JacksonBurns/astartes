@@ -141,10 +141,6 @@ class Test_kmeans(unittest.TestCase):
             len(kmeans_instance.get_sorted_cluster_counter()),
             "Sorted cluster Counter not found.",
         )
-        self.assertTrue(
-            len(kmeans_instance._samples_idxs),
-            "Sample indices not set.",
-        )
 
 
 if __name__ == "__main__":

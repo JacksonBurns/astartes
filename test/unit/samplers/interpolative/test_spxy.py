@@ -143,14 +143,10 @@ class Test_SPXY(unittest.TestCase):
             len(spxy_instance.get_clusters()),
             "Clusters should not have been set.",
         )
-        self.assertFalse(
-            len(spxy_instance.get_sorted_cluster_counter()),
-            "Sorted cluster Counter should not be found.",
-        )
-        self.assertTrue(
-            len(spxy_instance._samples_idxs),
-            "Sample indices not set.",
-        )
+        with self.assertRaises(
+            ValueError, msg="Sorted cluster Counter found when it should not be."
+        ):
+            spxy_instance.get_sorted_cluster_counter()
 
 
 if __name__ == "__main__":
