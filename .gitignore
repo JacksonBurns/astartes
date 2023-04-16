@@ -130,3 +130,10 @@ dmypy.json
 
 # mac annoying file
 .DS_Store
+
+# vscode configuration
+.vscode
+
+# quarto ipynb to html
+examples/split_comparisons.html
+examples/split_comparisons_files
