@@ -35,7 +35,7 @@ jobs:
           python -m pip install notebook
       - name: Backup Reference Splits
         run: |
-          cd examples
+          cd examples/reproduce_paper_splits
           cp QM9_splits/QM9_splits_kmeans.pkl REFERENCE_QM9_splits_kmeans.pkl
           cp QM9_splits/QM9_splits_random.pkl REFERENCE_QM9_splits_random.pkl
           cp QM9_splits/QM9_splits_scaffold.pkl REFERENCE_QM9_splits_scaffold.pkl
@@ -44,7 +44,7 @@ jobs:
           cp RDB7_splits/RDB7_splits_scaffold.pkl REFERENCE_RDB7_splits_scaffold.pkl
       - name: Execute Splitting Notebooks
         run: |
-          cd examples
+          cd examples/reproduce_paper_splits
           ipython QM9_make_splits.ipynb
           ipython RDB7_make_splits.ipynb
       - name: Upload New Splits as Artifacts
@@ -52,9 +52,9 @@ jobs:
         with:
           name: dynamically-generated-splits
           path: |
-            examples/QM9_splits/
-            examples/RDB7_splits/
+            examples/reproduce_paper_splits/QM9_splits/
+            examples/reproduce_paper_splits/RDB7_splits/
       - name: Compare Reference to Current
         run: |
-          cd examples
+          cd examples/reproduce_paper_splits
           python validate_splits.py
