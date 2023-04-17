@@ -23,11 +23,10 @@ except ImportError:  # pragma: no cover
 # at this point we have successfully verified that rdkit is installed, so we can do this:
 from rdkit.rdBase import SeedRandomNumberGenerator
 
+from astartes import train_test_split, train_val_test_split
 from astartes.main import DEFAULT_RANDOM_STATE
 
 SeedRandomNumberGenerator(DEFAULT_RANDOM_STATE)
-
-from astartes import train_test_split, train_val_test_split
 
 
 def train_val_test_split_molecules(
