@@ -80,6 +80,7 @@ def train_val_test_split(
             val_size,
             train_size,
             return_indices,
+            random_state,
         )
 
 
@@ -130,6 +131,7 @@ def _extrapolative_sampling(
     val_size,
     train_size,
     return_indices,
+    random_state,
 ):
     """Helper function to perform extrapolative sampling.
 
@@ -158,6 +160,8 @@ def _extrapolative_sampling(
     # be shuffled
     cluster_counter = sampler_instance.get_sorted_cluster_counter(
         max_shufflable_size=min(n_test_samples, n_val_samples)
+        if random_state is not None
+        else None
     )
 
     test_idxs, val_idxs, train_idxs = (
