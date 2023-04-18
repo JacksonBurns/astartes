@@ -102,8 +102,8 @@ Together, these tables demonstrate the utility of `astartes` in allowing users t
 | Split     | MAE              | RMSE            |
 |-----------|------------------|-----------------|
 | Random    | 2.02 $\pm$ 0.06  | 3.63 $\pm$ 0.21 |
-| Scaffold  | 2.20 $\pm$ 0.16  | 3.60 $\pm$ 0.31 |
-| K-means   | 2.38 $\pm$ 0.27  | 4.38 $\pm$ 0.41 |
+| Scaffold  | 2.20 $\pm$ 0.27  | 3.46 $\pm$ 0.49 |
+| K-means   | 2.48 $\pm$ 0.33  | 4.47 $\pm$ 0.81 |
 
 
 ### Table 2: Testing errors in kcal/mol for predicting a reaction's barrier height from RDB7 [@spiekermann2022high].
@@ -111,13 +111,12 @@ Together, these tables demonstrate the utility of `astartes` in allowing users t
 | Split     | MAE             | RMSE            |
 |-----------|-----------------|-----------------|
 | Random    | 3.87 $\pm$ 0.05 | 6.81 $\pm$ 0.28 |
-| Scaffold  | 4.12 $\pm$ 0.13 | 7.09 $\pm$ 0.22 |
-| K-means   | 4.33 $\pm$ 0.58 | 7.35 $\pm$ 1.26 |
+| Scaffold  | 6.28 $\pm$ 0.43 | 9.49 $\pm$ 0.50 |
+| K-means   | 5.47 $\pm$ 1.14 | 8.77 $\pm$ 1.85 |
 
-
-Note that the scaffold errors presented in Table 2 are higher than what is reported in the original study [@spiekermann2022fast] for several reasons.
-First, pretraining on the B97-D3 and $\omega$B97X-D3 datasets was done in the prior study, but neglected here for simplicity.
-We also do not use ensembling here nor do we co-train the model with the reaction enthalpy.
+Several approaches could be taken to further reduce the errors presented here.
+One could pre-train on additional data or fine-tune with experimental values.
+Ensembling is another established method to improve model predictions.
 
 # Related Software and Code Availability
 
