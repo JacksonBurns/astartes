@@ -111,7 +111,7 @@ class Test_regression(unittest.TestCase):
                 self.y,
                 sampler=sampler_name,
                 random_state=42,
-                hopts={"eps": 3.55},  # eps is used by DBSCAN
+                hopts={"eps": 3.58},  # eps is used by DBSCAN
             )
             all_output = [
                 X_train,
@@ -128,7 +128,9 @@ class Test_regression(unittest.TestCase):
                 reference_output = pkl.load(f)
             for i, j in zip(all_output, reference_output):
                 np.testing.assert_array_equal(
-                    i, j, "Sampler {:s} failed regression testing.".format(sampler_name)
+                    i,
+                    j,
+                    "Sampler {:s} failed regression testing.".format(sampler_name),
                 )
 
 

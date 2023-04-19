@@ -158,13 +158,11 @@ def _extrapolative_sampling(
 
     # largest clusters must go into largest set, but smaller ones can optionally
     # be shuffled
-    cluster_counter = None
-    if random_state is None:
-        cluster_counter = sampler_instance.get_sorted_cluster_counter()
-    else:
-        cluster_counter = sampler_instance.get_semi_sorted_cluster_counter(
-            max_shufflable_size=min(n_test_samples, n_val_samples)
-        )
+    cluster_counter = sampler_instance.get_sorted_cluster_counter(
+        max_shufflable_size=min(n_test_samples, n_val_samples)
+        if random_state is not None
+        else None
+    )
 
     test_idxs, val_idxs, train_idxs = (
         np.array([], dtype=int),
@@ -177,7 +175,7 @@ def _extrapolative_sampling(
             test_idxs = np.append(
                 test_idxs, sampler_instance.get_sample_idxs(cluster_length)
             )
-        if (len(val_idxs) + cluster_length) <= n_val_samples:
+        elif (len(val_idxs) + cluster_length) <= n_val_samples:
             val_idxs = np.append(
                 val_idxs, sampler_instance.get_sample_idxs(cluster_length)
             )

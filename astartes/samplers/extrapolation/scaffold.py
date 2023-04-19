@@ -74,29 +74,29 @@ class Scaffold(AbstractSampler):
 
         return scaffolds
 
-    def str_to_mol(self, string, explicit_hydrogens=False):
+    def str_to_mol(self, string):
         """
         Converts an InChI or SMILES string to an RDKit molecule.
 
         Params:
             string: The InChI or SMILES string.
-            explicit_hydrogens: Whether to treat hydrogens explicitly.
 
         Returns:
             An RDKit molecule.
         """
         RDKIT_SMILES_PARSER_PARAMS = Chem.SmilesParserParams()
         if string.startswith("InChI"):
-            mol = Chem.MolFromInchi(string, removeHs=not explicit_hydrogens)
+            mol = Chem.MolFromInchi(string, removeHs=True)
         else:
             # Set params here so we don't remove hydrogens with atom mapping
-            RDKIT_SMILES_PARSER_PARAMS.removeHs = not explicit_hydrogens
+            RDKIT_SMILES_PARSER_PARAMS.removeHs = True
             mol = Chem.MolFromSmiles(string, RDKIT_SMILES_PARSER_PARAMS)
 
-        if explicit_hydrogens:
-            return Chem.AddHs(mol)
-        else:
-            return Chem.RemoveHs(mol)
+        # atom map numbers should not be present when creating scaffolds
+        for atom in mol.GetAtoms():
+            atom.SetAtomMapNum(0)
+
+        return mol
 
     def generate_bemis_murcko_scaffold(self, mol, include_chirality=False):
         """
@@ -110,7 +110,7 @@ class Scaffold(AbstractSampler):
             Bemis-Murcko scaffold
         """
         mol = (
-            self.str_to_mol(mol, self.get_config("explicit_hydrogens", False))
+            self.str_to_mol(mol)
             if isinstance(mol, str)
             else mol
         )
