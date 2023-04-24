@@ -39,9 +39,9 @@ class KennardStone(AbstractSampler):
         for _ in range(n_samples - 2):
             # find the next sample with the largest minimum distance to any sample already selected
             # get out the columns for the data already selected
-            select_spxy_distance = ks_distance[:, already_selected]
+            select_ks_distance = ks_distance[:, already_selected]
             # find which member of the selected data each of the unselected data is closest to
-            min_distances_vals = np.nanmin(select_spxy_distance, axis=1)
+            min_distances_vals = np.nanmin(select_ks_distance, axis=1)
             # pick the largest of those values
             max_min_idx = np.nanargmax(min_distances_vals)
             ks_distance[max_min_idx, :] = -np.inf
