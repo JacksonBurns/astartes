@@ -26,7 +26,7 @@ dependencies = ["scikit_learn", "numpy", "scipy"]
 [project.optional-dependencies]
 molecules = ["aimsim"]
 dev = ["black", "isort", "pytest"]
-demos = ["plotly", "tabulate", "molplotly"]
+demos = ["plotly", "tabulate", "molplotly", "py2opsin"]
 
 [project.readme]
 file = "README.md"
