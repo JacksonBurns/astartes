@@ -1,116 +1,35 @@
-iupac_name   boiling_point
-ethylmethylether   10.8
-diethylether   34.6
-isopropylmethylether   32
-butylmethylether   70.3
-ethylpropylether   63.6
-ethylisopropylether   52.5
-isobutylmethylether   59
-sec-butylmethylether   59.5
-tert-butylmethylether   55.2
-methylpentylether   99.5
-ethylbutylether   92.3
-dipropylether   90.1
-isopropylpropylether   80.2
-ethylisobutylether   82
-isopentylmethylether   91.2
-diisopropylether   69
-methyltert-pentylether   86.3
-1,2-dimethylpropylmethylether   82
-hexylmethylether   125
-ethylpentylether   118
-butylpropylether   117.1
-butylisopropylether   107
-isobutylpropylether   102.5
-ethylisopentylether   112
-tert-butylpropylether   97.4
-tert-butylisopropylether   87.6
-ethyltert-pentylether   101
-1,2-dimethylpropylethylether   99.3
-dibutylether   142
-isopentylpropylether   125
-butylisobutylether   132
-butylsec-butylether   130.5
-butyltert-butylether   125
-sec-butylisobutylether   122
-1,3-dimethylpentylmethylether   121
-isobutyltert-butylether   112
-di-tert-butylether   106
-isopropyltert-pentylether   114.5
-heptylmethylether   151
-1-ethylpropylpropylether   128.5
-ethylheptylether   165.5
-butylisopentylether   157
-tert-butylisopentylether   139
-butylpentylether   163
-1,5-dimethylhexylmethylether   153.5
-methyloctylether   173
-3,5-dimethylhexylmethylether   155.5
-ethyloctylether   186.5
-diisopentylether   173.2
-dipentylether   186.8
-isopropylheptylether   173
-heptylpropylether   187
-isopentylpentylether   174
-dimethylether   -23.7
-2,3-dimethyl-3-ethylpentane   141.6
-2,2,4,4-tetramethylpentane   122.7
-2,2,4-trimethylhexane   126.5
-2,4,4-trimethylhexane   126.5
-2,2,5-trimethylhexane   124
-2,2-dimethylheptane   132.7
-3,3-dimethylheptane   137.3
-4,4-dimethylheptane   135.2
-3-ethyl-3-methylhexane   140.6
-3,3-diethylpentane   146.2
-2,3,4-trimethylhexane   139
-2,4-dimethyl-3-ethylpentane   136.73
-2,3,5-trimethylhexane   131.3
-2,3-dimethylheptane   140.5
-3-ethyl-2-methylhexane   138
-3,4-dimethylheptane   140.1
-3-ethyl-4-methylhexane   140.4
-2,4-dimethylheptane   133.5
-4-ethyl-2-methylhexane   133.8
-3,5-dimethylheptane   136
-2,5-dimethylheptane   136
-2,6-dimethylheptane   135.2
-2-methyloctane   142.8
-3-methyloctane   143.3
-4-methyloctane   142.4
-3-ethylheptane   143
-4-ethylheptane   141.2
-nonane   150.77
-2,2,3,3,4-pentamethylpentane   166.05
-2,2,3,3-tetramethylhexane   158
-3-ethyl-2,2,3-trimethylpentane   168
-3,3,4,4-tetramethylhexane   170.5
-2,2,3,4,4-pentamethylpentane   159.29
-2,2,3,4-tetramethylhexane   154.9
-3-ethyl-2,2,4-trimethylpentane   155.3
-2,3,4,4-tetramethylhexane   162.2
-2,2,3,5-tetramethylhexane   148.4
-2,3,3-trimethylheptane   158
-2,2-dimethyl-3-ethylhexane   159
-3,3,4-trimethylheptane   164
-3,3-dimethyl-4-ethylhexane   165
-2,3,3,4-tetramethylhexane   164.59
-3,4,4-trimethylheptane   164
-3,4-dimethyl-3-ethylhexane   170
-3-ethyl-2,3,4-trimethylpentane   169.44
-2,3,3,5-tetramethylhexane   153
-2,3,3-trimethylheptane   160.1
-2,3-dimethyl-3-ethylhexane   169
-3,3-diethyl-2-methylpentane   174
-2,2,4,4-tetramethylhexane   153.3
-2,2,4,5-tetramethylhexane   148.2
-2,2,4-trimethylheptane   147.7
-2,2-dimethyl-4-ethylhexane   147
-3,3,5-trimethylheptane   155.68
-2,4,4-trimethylheptane   153
-2,4-dimethyl-4-ethylhexane   158
-2,2,5,5-tetramethylhexane   137.46
-2,2,5-trimethylheptane   148
-2,5,5-trimethylheptane   152.8
-2,2,6-trimethylheptane   148.2
-2,2-dimethyloctane   155
+idx   filename   boiling_point   iupac_name
+1   molecule001.ct   -164.0   methane   
+2   molecule002.ct   -88.60   ethane
+3   molecule003.ct   -42.10   propane
+4   molecule004.ct   -11.70   2-methylpropane
+5   molecule005.ct   -0.50   butane
+6   molecule006.ct   9.50   2,2-dimethylpropane
+7   molecule007.ct   27.80   2-methylbutane
+8   molecule008.ct   36.10   pentane
+9   molecule009.ct   49.70   2,2-dimethylbutane
+10   molecule010.ct   58.00   2,3-dimethylbutane
+11   molecule011.ct   60.30   2-methylpentane
+13   molecule013.ct   69.00   hexane
+14   molecule014.ct   80.90   2,2,3-trimethylbutane
+15   molecule015.ct   79.20   2,2-dimethylpentane
+19   molecule019.ct   90.00   2-methylhexane
+20   molecule020.ct   92.00   3-methylhexane
+21   molecule021.ct   93.50   3-ethylpentane
+22   molecule022.ct   98.40   heptane
+23   molecule023.ct   106.50   2,2,3,3-tetramethylbutane
+24   molecule024.ct   110.00   2,2,3-trimethylpentane
+31   molecule031.ct   115.60   2,3-dimethylhexane
+36   molecule036.ct   117.60   2-methylheptane
+39   molecule039.ct   118.50   3-ethylhexane
+40   molecule040.ct   125.70   octane
+41   molecule041.ct   140.27   2,2,3,3-tetramethylpentane
+43   molecule043.ct   131.70   2,2,3-trimethylhexane
+48   molecule048.ct   141.60   2,3-dimethyl-3-ethylpentane
+56   molecule056.ct   140.60   3-ethyl-3-methylhexane
+57   molecule057.ct   146.20   3,3-diethylpentane
+59   molecule059.ct   136.73   2,4-dimethyl-3-ethylpentane
+72   molecule072.ct   142.40   4-methyloctane
+73   molecule073.ct   143.00   3-ethylheptane
+77   molecule077.ct   158.00   2,2,3,3-tetramethylhexane
+99   molecule099.ct   147.70   2,2,4-trimethylheptane
