@@ -1,6 +1,8 @@
 name: Update JOSS Branch
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 
 jobs:
   sync-branch:
