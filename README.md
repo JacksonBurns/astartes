@@ -37,6 +37,9 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 ```
 
+## Paper
+For a comprehensive walkthrough of the theory and implementation of `astartes`, follow [this link](https://github.com/JacksonBurns/astartes/raw/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf) to read the companion paper.
+
 ### Example Notebooks
 
 Click the badges in the table below to be taken to a live, interactive demo of `astartes`:
