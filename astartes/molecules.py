@@ -62,7 +62,10 @@ def train_val_test_split_molecules(
     Returns:
         np.array: X, y, and labels train/val/test data, or indices.
     """
-    X = _featurize(molecules, fingerprint, fprints_hopts)
+    if sampler == "scaffold":
+        X = molecules
+    else:
+        X = _featurize(molecules, fingerprint, fprints_hopts)
     return train_val_test_split(
         X,
         y=y,
@@ -109,7 +112,10 @@ def train_test_split_molecules(
         np.array: X, y, and labels train/test data, or indices.
     """
     # turn the smiles into an input X
-    X = _featurize(molecules, fingerprint, fprints_hopts)
+    if sampler == "scaffold":
+        X = molecules
+    else:
+        X = _featurize(molecules, fingerprint, fprints_hopts)
 
     # call train test split with this input
     return train_test_split(
