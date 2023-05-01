@@ -37,7 +37,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 ```
 
-## Paper
+### Paper
 For a comprehensive walkthrough of the theory and implementation of `astartes`, follow [this link](https://github.com/JacksonBurns/astartes/raw/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf) to read the companion paper.
 
 ### Example Notebooks
@@ -116,6 +116,20 @@ We are limited in our ability to test on M1 Macs, but from our limited manual te
 
 ## Online Documentation
 [The online documentation](https://JacksonBurns.github.io/astartes/) contains everything you see in this README with an additional tutorial for [moving from `train_test_split` in `sklearn` to `astartes`](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
+
+## How to Cite
+If you use `astartes` in your work please use the below citation or the "Cite this repository" button on GitHub:
+> **BibTeX**
+> @software{Burns_astartes,
+>   author = {Burns, Jackson and Spiekermann, Kevin and Bhattacharjee, Himaghna and Vlachos, Dionisios and Green, William},
+>   license = {MIT},
+>   title = {{astartes}},
+>   url = {https://github.com/JacksonBurns/astartes}
+> }
+
+> **APA**
+> Burns, J., Spiekermann, K., Bhattacharjee, H., Vlachos, D., & Green, W. astartes [Computer software]. https://github.com/JacksonBurns/astartes
+
 
 ## Contributing & Developer Notes
 Pull Requests, Bug Reports, and all Contributions are welcome! Please use the appropriate issue or pull request template when making a contribution.
