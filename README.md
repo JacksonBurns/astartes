@@ -6,7 +6,7 @@
 </p> 
 <p align="center">
   <img alt="GitHub Repo Stars" src="https://img.shields.io/github/stars/JacksonBurns/astartes?style=social">
-  <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/astartes">
+  <img alt="PyPI - Total Downloads" src="https://static.pepy.tech/personalized-badge/astartes?period=total&units=none&left_color=grey&right_color=brightgreen&left_text=Lifetime%20Downloads">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/astartes">
   <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/astartes?style=plastic">
   <img alt="PyPI - License" src="https://img.shields.io/github/license/JacksonBurns/astartes">
