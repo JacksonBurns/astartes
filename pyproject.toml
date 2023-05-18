@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "astartes"
-version = "1.0.0rc1"
+version = "1.0.0"
 authors = [
     { name = "Jackson Burns", email = "jwburns@mit.edu" },
     { name = "Himaghna Bhattacharjee", email = "himaghna@udel.edu" },
@@ -21,12 +21,12 @@ classifiers = [
 ]
 urls = { Homepage = "https://github.com/JacksonBurns/astartes" }
 requires-python = ">=3.7"
-dependencies = ["kennard_stone", "scikit_learn", "numpy", "scipy"]
+dependencies = ["scikit_learn", "numpy", "scipy"]
 
 [project.optional-dependencies]
 molecules = ["aimsim"]
 dev = ["black", "isort", "pytest"]
-demos = ["plotly", "tabulate"]
+demos = ["plotly", "tabulate", "py2opsin", "kaleido"]
 
 [project.readme]
 file = "README.md"

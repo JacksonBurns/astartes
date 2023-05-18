@@ -1,6 +1,6 @@
 ---
 name: Question
-about: Have a question about how to use Chemprop?
+about: Have a question about how to use astartes?
 title: "[QUESTION]: "
 labels: question
 assignees: ''

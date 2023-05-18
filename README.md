@@ -2,11 +2,11 @@
 <h3 align="center">Train:Validation:Test Algorithmic Sampling for Molecules and Arbitrary Arrays</h3>
 
 <p align="center">  
-  <img alt="astarteslogo" src="https://github.com/JacksonBurns/astartes/blob/main/astartes_logo.png">
+  <img alt="astarteslogo" src="https://raw.githubusercontent.com/JacksonBurns/astartes/main/astartes_logo.png">
 </p> 
 <p align="center">
   <img alt="GitHub Repo Stars" src="https://img.shields.io/github/stars/JacksonBurns/astartes?style=social">
-  <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/astartes">
+  <img alt="PyPI - Total Downloads" src="https://static.pepy.tech/personalized-badge/astartes?period=total&units=none&left_color=grey&right_color=brightgreen&left_text=Lifetime%20Downloads">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/astartes">
   <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/astartes?style=plastic">
   <img alt="PyPI - License" src="https://img.shields.io/github/license/JacksonBurns/astartes">
@@ -37,6 +37,9 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 ```
 
+### Paper
+For a comprehensive walkthrough of the theory and implementation of `astartes`, follow [this link](https://github.com/JacksonBurns/astartes/raw/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf) to read the companion paper.
+
 ### Example Notebooks
 
 Click the badges in the table below to be taken to a live, interactive demo of `astartes`:
@@ -46,6 +49,7 @@ Click the badges in the table below to be taken to a live, interactive demo of `
 | Using `train_val_test_split` with the `sklearn` example datasets | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2Ftrain_val_test_split_sklearn_example%2Ftrain_val_test_split_example.ipynb) |
 | Comparing Sampling Algorithms with Fast Food | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2Fsplit_comparisons%2Fsplit_comparisons.ipynb) |
 | Cheminformatics sample set partitioning with `astartes` | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2Fbarrier_prediction_with_RDB7%2FRDB7_barrier_prediction_example.ipynb) |
+| Comparing partitioning approaches for alkanes | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2Fmlpds_2023_astartes_demo%2Fmlpds_2023_demo.ipynb) |
 
 ### Rational Splitting Algorithms
 While much machine learning is done with a random choice between training/validation/test data, an alternative is the use of so-called "rational" splitting algorithms. These approaches use some similarity-based algorithm to divide data into sets. Some of these algorithms include Kennard-Stone, minimal test set dissimilarity, and sphere exclusion algorithms [as discussed by Tropsha et. al](https://pubs.acs.org/doi/pdf/10.1021/ci300338w) as well as the OptiSim as discussed in [Applied Chemoinformatics: Achievements and Future Opportunities](https://www.wiley.com/en-us/Applied+Chemoinformatics%3A+Achievements+and+Future+Opportunities-p-9783527806546). Some clustering-based splitting techniques have also been incorporated, such as [DBSCAN](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1016.890&rep=rep1&type=pdf).
@@ -57,7 +61,7 @@ There are two broad categories of sampling algorithms implemented in `astartes`:
 | Sampler Name | Usage String | Type | Hyperparameters | Reference | Notes |
 |:---:|---|---|---|---|---|
 | Random | 'random' | Interpolative | `shuffle` | [`sklearn train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) | This sampler is a direct passthrough to `sklearn`'s `train_test_split`, though it does not currently reproduce splits identically. |
-| Kennard-Stone | 'kennard_stone' | Interpolative | _none_ | [yu9824's `kennard_stone`](https://github.com/yu9824/kennard_stone) | Fully deterministic, no hyperparameters accepted. |
+| Kennard-Stone | 'kennard_stone' | Interpolative | `metric` | [Kennard & Stone](https://www.tandfonline.com/doi/abs/10.1080/00401706.1969.10490666) | Euclidian distance is used by default, as described in the original paper. |
 | Sample set Partitioning based on joint X-Y distances (SPXY) | 'spxy' | Interpolative | `distance_metric` | Saldhana et. al [original paper](https://www.sciencedirect.com/science/article/abs/pii/S003991400500192X) | Extension of Kennard Stone that also includes the response when sampling distances. |
 | Scaffold | 'scaffold' | Extrapolative | `include_chirality` | [Bemis-Murcko Scaffold](https://pubs.acs.org/doi/full/10.1021/jm9602928) as implemented in RDKit | This sampler requires SMILES strings as input (use the `molecules` subpackage) |
 | Sphere Exclusion | 'sphere_exclusion' | Extrapolative | `metric`, `distance_cutoff` | _custom implementation_ | Variation on Sphere Exclusion for arbitrary-valued vectors. |
@@ -112,6 +116,20 @@ We are limited in our ability to test on M1 Macs, but from our limited manual te
 
 ## Online Documentation
 [The online documentation](https://JacksonBurns.github.io/astartes/) contains everything you see in this README with an additional tutorial for [moving from `train_test_split` in `sklearn` to `astartes`](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
+
+## How to Cite
+If you use `astartes` in your work please use the below citation or the "Cite this repository" button on GitHub:
+> **BibTeX**
+> @software{Burns_astartes,
+>   author = {Burns, Jackson and Spiekermann, Kevin and Bhattacharjee, Himaghna and Vlachos, Dionisios and Green, William},
+>   license = {MIT},
+>   title = {{astartes}},
+>   url = {https://github.com/JacksonBurns/astartes}
+> }
+
+> **APA**
+> Burns, J., Spiekermann, K., Bhattacharjee, H., Vlachos, D., & Green, W. astartes [Computer software]. https://github.com/JacksonBurns/astartes
+
 
 ## Contributing & Developer Notes
 Pull Requests, Bug Reports, and all Contributions are welcome! Please use the appropriate issue or pull request template when making a contribution.

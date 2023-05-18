@@ -38,7 +38,7 @@ class Test_kennard_stone(unittest.TestCase):
             self.X,
             self.y,
             self.labels,
-            {},  # KS does not have hyperparameters
+            {"metric": "euclidean"},
         )
         self.assertIsInstance(
             ks_instance,
