@@ -161,8 +161,8 @@ Test coverage currently sits at >99%, and all proposed changes are subjected to 
 
 # Acknowledgements
 The authors thank all users who participated in beta testing and release candidate testing throughout the development of `astartes`.
-
-This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, Department of Energy Computational Science Graduate Fellowship under Award Number DE-SC0023112.
+We gratefully acknowledge financial support from BASF under award number 88803720.
+We also acknowledge financial support from the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, Department of Energy Computational Science Graduate Fellowship under Award Number DE-SC0023112.
 
 <!-- The below section and text are required by Jackson Burns' funding agency, the DOE CSGF. -->
 # Disclaimer
