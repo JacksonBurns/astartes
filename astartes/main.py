@@ -7,6 +7,7 @@ from astartes.samplers import (
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
+from astartes.utils.convert_to_array import convert_to_array
 from astartes.utils.exceptions import InvalidConfigurationError
 from astartes.utils.sampler_factory import SamplerFactory
 from astartes.utils.warnings import ImperfectSplittingWarning, NormalizationWarning
@@ -44,6 +45,13 @@ def train_val_test_split(
     Returns:
         np.array: X, y, and labels train/val/test data, or indices.
     """
+    if type(X) is not np.ndarray:
+        X = convert_to_array(X, "X")
+    if y is not None and type(y) is not np.ndarray:
+        y = convert_to_array(y, "y")
+    if labels is not None and type(labels) is not np.ndarray:
+        labels = convert_to_array(labels, "labels")
+
     msg = ""
     if y is not None and len(y) != len(X):
         msg += "len(y)={:d} ".format(len(y))

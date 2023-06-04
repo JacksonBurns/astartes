@@ -31,7 +31,7 @@ By default, `astartes` will split data randomly. Additionally, a variety of algo
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(
-  X,
+  X,  # preferably numpy arrays, but astartes will cast it for you
   y,
   sampler = 'kennard_stone',  # any of the supported samplers
 )
