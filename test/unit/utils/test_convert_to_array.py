@@ -5,7 +5,7 @@ import unittest
 import numpy as np
 
 from astartes import train_val_test_split
-from astartes.utils.exceptions import UncastableInputError, InvalidConfigurationError
+from astartes.utils.exceptions import InvalidConfigurationError, UncastableInputError
 from astartes.utils.warnings import ConversionWarning
 
 
