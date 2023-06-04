@@ -25,11 +25,17 @@ class Test_convert_to_array(unittest.TestCase):
                 val_size=0.25,
             )
 
+    @unittest.skipIf(
+        sys.version_info.minor == 7,
+        "Versions of numpy compatible with Python 3.7 will convert ANYTHING "
+        "into an array (thus the warning in convert_to_array, and skip test)",
+    )
     def test_unconvertable_input(self):
         """Raise error when casting fails."""
         with self.assertRaises(UncastableInputError):
+            # inhomogeneous lists w/ mixed types cannot be cast to arrays
             train_val_test_split(
-                [[1], [1, 2]],  # inhomogeneous lists cannot be cast to arrays
+                [[1], [1, 2]],
             )
 
 
