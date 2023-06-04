@@ -1,8 +1,9 @@
 import warnings
+from datetime import date, datetime
 
 import numpy as np
 
-from astartes.utils.exceptions import UncastableInputError
+from astartes.utils.exceptions import InvalidConfigurationError, UncastableInputError
 from astartes.utils.warnings import ConversionWarning
 
 
@@ -26,5 +27,14 @@ def convert_to_array(obj: object, name: str):
         raise UncastableInputError(
             "Unable to cast {:s} to a numpy array using np.asarray."
         ) from e
+    # ensure that all the values in the array are floats or date/datetime objects
+    for item in new_array.ravel():
+        if type(item) not in (float, np.float_, int, np.int_, date, datetime):
+            raise InvalidConfigurationError(
+                "After casting, input object {:s} contained unsupported type {:s}".format(
+                    name,
+                    str(type(item)),
+                )
+            )
 
     return new_array

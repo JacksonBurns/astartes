@@ -5,7 +5,7 @@ import unittest
 import numpy as np
 
 from astartes import train_val_test_split
-from astartes.utils.exceptions import UncastableInputError
+from astartes.utils.exceptions import UncastableInputError, InvalidConfigurationError
 from astartes.utils.warnings import ConversionWarning
 
 
@@ -13,6 +13,13 @@ class Test_convert_to_array(unittest.TestCase):
     """
     Test convert to numpy array for failures.
     """
+
+    def test_bad_type_cast(self):
+        """Raise error when casting arrays that do not contain supported types."""
+        with self.assertRaises(InvalidConfigurationError):
+            train_val_test_split(
+                ["cat", "dog"],
+            )
 
     def test_convertable_input(self):
         """Raise warning when casting."""
