@@ -27,6 +27,11 @@ __Note for Windows Powershell or MacOS Catalina or newer__: On these systems the
 ## Using `astartes`
 `astartes` is designed as a drop-in replacement for `sklearn`'s `train_test_split` function. To switch to `astartes`, change `from sklearn.model_selection import train_test_split` to `from astartes import train_test_split`.
 
+Like `sklearn`, `astartes` accepts any iterable object as `X`, `y`, and `labels`. It will be converted to a `numpy` array for internal operations, and returned as a `numpy` array _unless_ it is a `pandas` `DataFrame` or `Series`, in which case `astartes` will attempt to cast it back.
+
+> **Note**
+> The developers recommend passing `X`, `y`, and `labels` as `numpy` arrays and handling the conversion to and from other types explicity on your own. Behind-the-scenes type casting can lead to unexpected behavior!
+
 By default, `astartes` will split data randomly. Additionally, a variety of algorithmic sampling approaches can be used by specifying the `sampler` argument to the function:
 
 ```python
