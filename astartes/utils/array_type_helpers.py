@@ -2,6 +2,7 @@ import warnings
 from datetime import date, datetime
 
 import numpy as np
+import pandas as pd
 
 from astartes.utils.exceptions import InvalidConfigurationError, UncastableInputError
 from astartes.utils.warnings import ConversionWarning
@@ -38,3 +39,23 @@ def convert_to_array(obj: object, name: str):
             )
 
     return new_array
+
+
+def panda_handla(X, y, labels):
+    meta_dict = {}
+    if type(X) is pd.DataFrame:
+        meta_dict["X"] = X.columns
+    elif type(X) is pd.Series:
+        meta_dict["X"] = True
+
+    if type(y) is pd.DataFrame:
+        meta_dict["y"] = y.columns
+    elif type(y) is pd.Series:
+        meta_dict["y"] = True
+
+    if type(labels) is pd.DataFrame:
+        meta_dict["labels"] = labels.columns
+    elif type(labels) is pd.Series:
+        meta_dict["labels"] = True
+
+    return meta_dict
