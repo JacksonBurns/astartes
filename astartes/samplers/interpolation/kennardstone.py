@@ -40,19 +40,21 @@ class KennardStone(AbstractSampler):
 
         # list of indices which have been selected, for use in the below loop
         already_selected = list(max_coords)
-
-        # iterate through the rest
+        min_distances = np.min(ks_distance[:, already_selected], axis=1)
+        # print(min_distances)
         for _ in range(n_samples - 2):
+            # print("already have", self.X[already_selected])
             # find the next sample with the largest minimum distance to any sample already selected
-            max_min_idx = np.argmax(
-                np.min(
-                    ks_distance[:, already_selected],
-                    axis=1,
-                )  # find which member of the selected data each of the unselected data is closest to
-            )  # pick the largest of those values
+            max_min_idx = np.argmax(min_distances)
             # add to the selected, remove from index tracker and distance matrix
             ks_distance = np.delete(ks_distance, max_min_idx, axis=0)
             already_selected.append(ks_idxs[max_min_idx])
             ks_idxs = np.delete(ks_idxs, max_min_idx)
+            # update the minimum distances array
+            # delete the sample we just selected
+            min_distances = np.delete(min_distances, max_min_idx)
+            # get minimum distance of unselected samples to that sample only
+            new_distances = np.min(ks_distance[:, [already_selected[-1]]], axis=1)
+            min_distances = np.minimum(min_distances, new_distances)
 
         self._samples_idxs = np.array(already_selected, dtype=int)
