@@ -5,7 +5,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from astartes import train_val_test_split, train_test_split
+from astartes import train_test_split, train_val_test_split
 from astartes.utils.exceptions import InvalidConfigurationError, UncastableInputError
 from astartes.utils.warnings import ConversionWarning
 
