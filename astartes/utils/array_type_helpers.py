@@ -1,3 +1,4 @@
+import numbers
 import warnings
 from datetime import date, datetime
 
@@ -30,7 +31,7 @@ def convert_to_array(obj: object, name: str):
         ) from e
     # ensure that all the values in the array are floats or date/datetime objects
     for item in new_array.ravel():
-        if type(item) not in (float, np.float_, int, np.int_, date, datetime):
+        if not hasattr(item, "__add__"):  # only allow items which we can do math on
             raise InvalidConfigurationError(
                 "After casting, input object {:s} contained unsupported type {:s}".format(
                     name,
