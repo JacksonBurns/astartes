@@ -9,7 +9,11 @@ from astartes.samplers import (
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
-from astartes.utils.array_type_helpers import convert_to_array, panda_handla
+from astartes.utils.array_type_helpers import (
+    convert_to_array,
+    panda_handla,
+    return_helper,
+)
 from astartes.utils.exceptions import InvalidConfigurationError
 from astartes.utils.sampler_factory import SamplerFactory
 from astartes.utils.warnings import ImperfectSplittingWarning, NormalizationWarning
@@ -19,9 +23,9 @@ DEFAULT_RANDOM_STATE = 42
 
 
 def train_val_test_split(
-    X: Union[np.array, pd.DataFrame, pd.Series],
-    y: Union[np.array, pd.DataFrame, pd.Series] = None,
-    labels: Union[np.array, pd.DataFrame, pd.Series] = None,
+    X: Union[np.array, pd.DataFrame],
+    y: Union[np.array, pd.Series] = None,
+    labels: Union[np.array, pd.Series] = None,
     train_size: float = 0.8,
     val_size: float = 0.1,
     test_size: float = 0.1,
@@ -33,9 +37,9 @@ def train_val_test_split(
     """Deterministic train_test_splitting of arbitrary arrays.
 
     Args:
-        X (np.array, pd.DataFrame, or pd.Series): Numpy array or pandas DataFrame/Series of feature vectors.
-        y (np.array, pd.DataFrame, or pd.Series, optional): Targets corresponding to X, must be of same size. Defaults to None.
-        labels (np.array, pd.DataFrame, or pd.Series, optional): Labels corresponding to X, must be of same size. Defaults to None.
+        X (np.array, pd.DataFrame): Numpy array or pandas DataFrame of feature vectors.
+        y (np.array, pd.Series, optional): Targets corresponding to X, must be of same size. Defaults to None.
+        labels (np.array, pd.Series, optional): Labels corresponding to X, must be of same size. Defaults to None.
         train_size (float, optional): Fraction of dataset to use in training set. Defaults to 0.8.
         val_size (float, optional): Fraction of dataset to use in validation set. Defaults to 0.1.
         test_size (float, optional): Fraction of dataset to use in test set. Defaults to 0.1.
@@ -164,11 +168,11 @@ def _extrapolative_sampling(
         train_size (float): Fraction of data to use in train.
         return_indices (bool): Return indices or the arrays themselves.
         output_is_pandas (array[str] or bool): True/False if output should cast to pandas,
-            list of columns if True.
+            data needed to perform casting if True.
         random_state (int, optional): The random state used to shuffle small clusters. Default to no shuffle.
 
     Returns:
-        calls: _return_helper
+        calls: return_helper
     """
     # calculate "goal" splitting sizes
     n_test_samples = floor(len(sampler_instance.X) * test_size)
@@ -206,7 +210,7 @@ def _extrapolative_sampling(
     _check_actual_split(
         train_idxs, val_idxs, test_idxs, train_size, val_size, test_size
     )
-    return _return_helper(
+    return return_helper(
         sampler_instance,
         train_idxs,
         val_idxs,
@@ -237,10 +241,10 @@ def _interpolative_sampling(
         train_size (float): Fraction of data to use in train.
         return_indices (bool): Return indices or the arrays themselves.
         output_is_pandas (array[str] or bool): True/False if output should cast to pandas,
-            list of columns if True.
+            data needed to perform casting if True.
 
     Returns:
-        calls: _return_helper
+        calls: return_helper
     """
     n_train_samples = floor(len(sampler_instance.X) * train_size)
     n_val_samples = floor(len(sampler_instance.X) * val_size)
@@ -253,7 +257,7 @@ def _interpolative_sampling(
     _check_actual_split(
         train_idxs, val_idxs, test_idxs, train_size, val_size, test_size
     )
-    return _return_helper(
+    return return_helper(
         sampler_instance,
         train_idxs,
         val_idxs,
@@ -261,73 +265,6 @@ def _interpolative_sampling(
         return_indices,
         output_is_pandas,
     )
-
-
-def _return_helper(
-    sampler_instance,
-    train_idxs,
-    val_idxs,
-    test_idxs,
-    return_indices,
-    output_is_pandas,
-):
-    """Convenience function to return the requested arrays appropriately.
-
-    Args:
-        sampler_instance (sampler): The fit sampler instance.
-        test_size (float): Fraction of data to use in test.
-        val_size (float): Fraction of data to use in val.
-        train_size (float): Fraction of data to use in train.
-        return_indices (bool): Return indices after the value arrays.
-
-    Returns:
-        np.array: Either many arrays or indices in arrays.
-    """
-    out = []
-    X_train = sampler_instance.X[train_idxs]
-    if output_is_pandas.get("X", False):
-        if type(output_is_pandas.get("x")) is bool:
-            X_train = pd.Series(X_train)
-        else:
-            X_train = pd.DataFrame(X_train, columns=output_is_pandas.get("x"))
-    out.append(X_train)
-    if len(val_idxs):
-        X_val = sampler_instance.X[val_idxs]
-        out.append(X_val)
-    X_test = sampler_instance.X[test_idxs]
-    out.append(X_test)
-
-    if sampler_instance.y is not None:
-        y_train = sampler_instance.y[train_idxs]
-        out.append(y_train)
-        if len(val_idxs):
-            y_val = sampler_instance.y[val_idxs]
-            out.append(y_val)
-        y_test = sampler_instance.y[test_idxs]
-        out.append(y_test)
-    if sampler_instance.labels is not None:
-        labels_train = sampler_instance.labels[train_idxs]
-        out.append(labels_train)
-        if len(val_idxs):
-            labels_val = sampler_instance.labels[val_idxs]
-            out.append(labels_val)
-        labels_test = sampler_instance.labels[test_idxs]
-        out.append(labels_test)
-    if len(sampler_instance.get_clusters()):  # true when the list has been filled
-        clusters_train = sampler_instance.get_clusters()[train_idxs]
-        out.append(clusters_train)
-        if len(val_idxs):
-            clusters_val = sampler_instance.get_clusters()[val_idxs]
-            out.append(clusters_val)
-        clusters_test = sampler_instance.get_clusters()[test_idxs]
-        out.append(clusters_test)
-    if return_indices:
-        out.append(train_idxs)
-        if val_idxs.any():
-            out.append(val_idxs)
-        out.append(test_idxs)
-
-    return (*out,)
 
 
 def _check_actual_split(

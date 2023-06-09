@@ -3,16 +3,50 @@ import sys
 import unittest
 
 import numpy as np
+import pandas as pd
 
-from astartes import train_val_test_split
+from astartes import train_val_test_split, train_test_split
 from astartes.utils.exceptions import InvalidConfigurationError, UncastableInputError
 from astartes.utils.warnings import ConversionWarning
 
 
 class Test_convert_to_array(unittest.TestCase):
     """
-    Test convert to numpy array for failures.
+    Test array type handling.
     """
+
+    def test_panda_handla(self):
+        """Splitting Dataframes and series should return them as such."""
+        X = pd.DataFrame([[1], [2], [3]], index=[1, 2, 3], columns=["feature"])
+        y = pd.Series([1, 2, 3], index=[1, 2, 3])
+        train_X, test_X, train_y, test_y = train_test_split(
+            X,
+            y,
+            train_size=0.67,
+            test_size=0.33,
+            sampler="kennard_stone",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                train_X.columns,
+                X.columns,
+            ),
+            "astartes should preserve dataframe column names",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                train_X.index,
+                [1, 3],
+            ),
+            "preserve indices of dataframes",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                test_y.index,
+                [2],
+            ),
+            "preserve indices of series",
+        )
 
     def test_bad_type_cast(self):
         """Raise error when casting arrays that do not contain supported types."""
