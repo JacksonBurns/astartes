@@ -66,7 +66,7 @@ def produce_table(sklearn_model,
                   X,
                   y,
                   samplers=["random"],
-                  seed=0,
+                  random_state=0,
                   sampler_hopts={},
                   train_size=0.8,
                   val_size=0.1,
@@ -83,7 +83,11 @@ def produce_table(sklearn_model,
         val_size (float, optional): Fraction of dataset to use in validation set. Defaults to 0.1.
         test_size (float, optional): Fraction of dataset to use in test set. Defaults to 0.1.
         random_state (int, optional): The random seed used throughout astartes.
-    
+        sampler_hopts (dict, optional): Hyperparameters for the sampler used above.
+                                        Should be a dictionary of dictionaries with the keys specifying
+                                        the sampler and the values being another dictionary with the 
+                                        hyperparameters. Defaults to {}.
+
     Returns:
         dict: nested dictionary with the format of 
             {
@@ -128,7 +132,7 @@ def produce_table(sklearn_model,
                                                                         val_size=val_size,
                                                                         test_size=test_size,
                                                                         sampler=sampler,
-                                                                        random_state=seed,
+                                                                        random_state=random_state,
                                                                         hopts=sampler_hopts.get(sampler, dict()),
                                                                         return_indices=True,
                                                                         )
