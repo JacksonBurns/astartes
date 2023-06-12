@@ -122,8 +122,8 @@ def return_helper(
         out.append(X_val)
     X_test = sampler_instance.X[test_idxs]
     if dataframe_metadata:
-        X_train = pd.DataFrame(
-            X_train,
+        X_test = pd.DataFrame(
+            X_test,
             columns=dataframe_metadata["columns"],
             index=dataframe_metadata["index"][test_idxs],
         )
