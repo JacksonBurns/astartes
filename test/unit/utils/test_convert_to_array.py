@@ -42,8 +42,29 @@ class Test_convert_to_array(unittest.TestCase):
         )
         self.assertIsNone(
             np.testing.assert_array_equal(
+                test_X.columns,
+                X.columns,
+            ),
+            "astartes should preserve dataframe column names",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                test_X.index,
+                [2],
+            ),
+            "preserve indices of dataframes",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
                 test_y.index,
                 [2],
+            ),
+            "preserve indices of series",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                train_y.index,
+                [1, 3],
             ),
             "preserve indices of series",
         )
