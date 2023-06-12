@@ -5,18 +5,16 @@ a table similar to what is from the paper.
 
 """
 
-import numpy as np
-import pandas as pd
 from pprint import pprint
 
+import numpy as np
+import pandas as pd
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
-
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.svm import LinearSVR
-from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 
 from astartes import train_val_test_split
-
 
 # read in the data
 CSV_PATH = '../barrier_prediction_with_RDB7/ccsdtf12_dz.csv'
@@ -64,7 +62,50 @@ for i, row in df.iterrows():
 
 y = df.dE0.values
 
-def produce_table(sklearn_model, X, y, samplers = ["random"], seed=0, hopts={},):
+def produce_table(sklearn_model,
+                  X,
+                  y,
+                  samplers=["random"],
+                  seed=0,
+                  sampler_hopts={},
+                  train_size=0.8,
+                  val_size=0.1,
+                  test_size=0.1,
+                  ):
+    """
+    Helper function to train a sklearn model using the provided data
+    and provided sampler types.
+
+    Args:
+        X (np.array, pd.DataFrame): Numpy array or pandas DataFrame of feature vectors.
+        y (np.array, pd.Series): Targets corresponding to X, must be of same size.
+        train_size (float, optional): Fraction of dataset to use in training set. Defaults to 0.8.
+        val_size (float, optional): Fraction of dataset to use in validation set. Defaults to 0.1.
+        test_size (float, optional): Fraction of dataset to use in test set. Defaults to 0.1.
+        random_state (int, optional): The random seed used throughout astartes.
+    
+    Returns:
+        dict: nested dictionary with the format of 
+            {
+                sampler: {
+                    'mae':{
+                        'train': [],
+                        'val': [],
+                        'test': [],
+                    },
+                    'rmse':{
+                        'train': [],
+                        'val': [],
+                        'test': [],
+                    },
+                    'R2':{
+                        'train': [],
+                        'val': [],
+                        'test': [],
+                    },
+                },
+            }
+    """
     final_dict = {}
     for sampler in samplers:
         error_dict = {'mae': {'train': [],
@@ -83,12 +124,12 @@ def produce_table(sklearn_model, X, y, samplers = ["random"], seed=0, hopts={},)
 
         # obtain indices
         _,_,_, train_indices, val_indices, test_indices = train_val_test_split(X,
-                                                                        train_size=0.85,
-                                                                        val_size=0.05,
-                                                                        test_size=0.1,
+                                                                        train_size=train_size,
+                                                                        val_size=val_size,
+                                                                        test_size=test_size,
                                                                         sampler=sampler,
                                                                         random_state=seed,
-                                                                        hopts=hopts,
+                                                                        hopts=sampler_hopts.get(sampler, dict()),
                                                                         return_indices=True,
                                                                         )
 
@@ -149,5 +190,5 @@ def produce_table(sklearn_model, X, y, samplers = ["random"], seed=0, hopts={},)
 # use default hyperparameters
 sklearn_model = LinearSVR()
 
-final_dict = sample_function(sklearn_model, X, y)
+final_dict = produce_table(sklearn_model, X, y)
 pprint(final_dict)
