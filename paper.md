@@ -50,7 +50,7 @@ To address this issue, we report `astartes`, an open-source Python package that 
 Separate from `astartes`, users can then use these splits to better assess out-of-sample performance with any ML model of choice.
 This publication focuses on use-cases within cheminformatics. 
 However, `astartes` operates on arbitrary vector inputs, so its principals and workflow are generalizable to other ML domains as well.
-`astartes` is available via the Python package manager `pip` and is publicly hosted on GitHub ([github.com/JacksonBurns/astartes](https://github.com/JacksonBurns/astartes)).
+`astartes` is available via the Python package managers `pip` and `conda` and is publicly hosted on GitHub ([github.com/JacksonBurns/astartes](https://github.com/JacksonBurns/astartes)).
 
 # Statement of Need
 
