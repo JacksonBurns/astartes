@@ -1,12 +1,35 @@
 name: Publish Packages
 
 on:
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
+  check-for-new-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Check PyPI version
+        uses: maybe-hello-world/pyproject-check-version@v3
+        id: versioncheck
+        with:
+          pyproject-path: "./pyproject.toml"
+      
+      - name: Report Results
+        run: |
+            echo "New Release found? ${{ steps.versioncheck.outputs.local_version_is_higher }}"
+            echo "Local version: ${{ steps.versioncheck.outputs.local_version }}"
+            echo "Public version: ${{ steps.versioncheck.outputs.public_version }}"
+    outputs:
+      do_publish: ${{ steps.versioncheck.outputs.local_version_is_higher }}
+
   pypi:
     name: Build and publish Python 🐍 distributions 📦 to PyPI
     runs-on: ubuntu-latest
+    needs: check-for-new-release
+    if: needs.check-for-new-release.outputs.do_publish
     steps:
       - uses: actions/checkout@master
       - name: Set up Python 3.10
