@@ -44,31 +44,27 @@ class SPXY(AbstractSampler):
 
         # sum the distances as per eq. 3 of Saldahna, set diagonal to nan
         spxy_distance = squareform(y_pdist + X_dist)
+        # when searching for max distance, disregard self
         np.fill_diagonal(spxy_distance, -np.inf)
 
         # get the row/col of maximum (greatest distance)
         max_idx = np.nanargmax(spxy_distance)
         max_coords = np.unravel_index(max_idx, spxy_distance.shape)
 
-        # -np.inf these points to trick numpy later on
-        spxy_distance[max_coords[0], :] = -np.inf
-        spxy_distance[max_coords[1], :] = -np.inf
+        # list of indices which have been selected
+        # - used to mask ks_distance
+        # - also tracks order of kennard-stone selection
+        already_selected = list(max_coords)
 
-        # list of indices which have been selected, for use in the below loop
-        alread_selected = list()
-        alread_selected.append(max_coords[0])
-        alread_selected.append(max_coords[1])
-
-        # iterate through the rest
+        # minimum distance of all unselected samples to the two selected samples
+        min_distances = np.min(spxy_distance[:, already_selected], axis=1)
         for _ in range(n_samples - 2):
             # find the next sample with the largest minimum distance to any sample already selected
-            # get out the columns for the data already selected
-            select_spxy_distance = spxy_distance[:, alread_selected]
-            # find which member of the selected data each of the unselected data is closest to
-            min_distances_vals = np.nanmin(select_spxy_distance, axis=1)
-            # pick the largest of those values
-            max_min_idx = np.nanargmax(min_distances_vals)
-            spxy_distance[max_min_idx, :] = -np.inf
-            alread_selected.append(max_min_idx)
+            already_selected.append(
+                np.argmax(min_distances),
+            )
+            # get minimum distance of unselected samples to that sample only
+            new_distances = np.min(spxy_distance[:, [already_selected[-1]]], axis=1)
+            min_distances = np.minimum(min_distances, new_distances)
 
-        self._samples_idxs = np.array(alread_selected, dtype=int)
+        self._samples_idxs = np.array(already_selected, dtype=int)

@@ -17,6 +17,14 @@ class NormalizationWarning(RuntimeWarning):
         super().__init__(message)
 
 
+class ConversionWarning(RuntimeWarning):
+    """Used when passed data is not a numpy array."""
+
+    def __init__(self, message=None):
+        self.message = message
+        super().__init__(message)
+
+
 class NoMatchingScaffold(Warning):
     """
     Used when an RDKit molecule does not match any
