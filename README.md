@@ -128,6 +128,30 @@ Running `astartes` with the default settings will always produce the exact same 
 We have verified this behavior on Debian Ubuntu, Windows, and Intel Macs from Python versions 3.7 through 3.11 (with appropriate dependencies for each version).
 We are limited in our ability to test on M1 Macs, but from our limited manual testing we achieve perfect reproducbility in all cases _except occasionally_ with `KMeans` on Apple silicon. It has produced _slightly_ different results between platforms regardless of `random_state`, with up to two clusters being assigned differently resulting in data splits which are >99% identical. `astartes` is still consistent between runs on the same platform in all cases.
 
+## Evaluate the impact of splitting algorithms
+The `generate_regression_results_dict` function allows users to quickly evaluate the impact of different splitting techniques on any model supported by `sklearn`. All results are stored in a dictionary format and can be displayed in a neatly formatted table using the optional `print_results` argument.
+
+```
+from sklearn.svm import LinearSVR
+
+from astartes.utils.utils import generate_regression_results_dict
+
+sklearn_model = LinearSVR()
+results_dict = generate_regression_results_dict(
+                    sklearn_model,
+                    X,
+                    y,
+                    print_results=True,
+               )
+
+         Train       Val      Test
+----  --------  --------  --------
+MAE   1.41522   3.13435   2.17091
+RMSE  2.03062   3.73721   2.40041
+R2    0.90745   0.80787   0.78412
+
+```
+
 ## Online Documentation
 [The online documentation](https://JacksonBurns.github.io/astartes/) contains everything you see in this README with an additional tutorial for [moving from `train_test_split` in `sklearn` to `astartes`](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
 
