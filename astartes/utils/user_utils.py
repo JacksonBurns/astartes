@@ -2,8 +2,7 @@ import sklearn
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from tabulate import tabulate
 
-from astartes import train_val_test_split
-from astartes.utils.exceptions import InvalidModelTypeError
+import astartes
 
 
 def generate_regression_results_dict(
@@ -57,7 +56,9 @@ def generate_regression_results_dict(
             }
     """
     if not isinstance(sklearn_model, sklearn.base.BaseEstimator):
-        raise InvalidModelTypeError("Model must be an sklearn model")
+        raise astartes.utils.exceptions.InvalidModelTypeError(
+            "Model must be an sklearn model"
+        )
 
     final_dict = {}
     for sampler in samplers:
@@ -80,7 +81,14 @@ def generate_regression_results_dict(
         }
 
         # obtain indices
-        _, _, _, train_indices, val_indices, test_indices = train_val_test_split(
+        (
+            _,
+            _,
+            _,
+            train_indices,
+            val_indices,
+            test_indices,
+        ) = astartes.train_val_test_split(
             X,
             train_size=train_size,
             val_size=val_size,
