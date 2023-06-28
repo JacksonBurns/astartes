@@ -4,8 +4,8 @@ import numpy as np
 from sklearn.svm import LinearSVR
 
 from astartes.samplers.interpolation import Random
+from astartes.utils import generate_regression_results_dict
 from astartes.utils.exceptions import InvalidModelTypeError
-from astartes.utils.utils import generate_regression_results_dict
 
 
 class Test_utils(unittest.TestCase):
