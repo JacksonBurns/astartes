@@ -3,6 +3,8 @@ import unittest
 import numpy as np
 from sklearn.svm import LinearSVR
 
+from astartes.samplers.interpolation import Random
+from astartes.utils.exceptions import InvalidModelTypeError
 from astartes.utils.utils import generate_regression_results_dict
 
 
@@ -66,6 +68,17 @@ class Test_utils(unittest.TestCase):
 
     def test_generate_regression_results_dict(self):
         """Generate results dictionary for simple regression task."""
+
+        # test that error is raised if not using sklearn model
+        with self.assertRaises(InvalidModelTypeError) as e:
+            generate_regression_results_dict(
+                Random,
+                self.X,
+                self.y,
+                train_size=0.6,
+                val_size=0.2,
+                test_size=0.2,
+            )
 
         # use default hyperparameters
         sklearn_model = LinearSVR()

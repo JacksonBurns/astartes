@@ -1,6 +1,8 @@
+import sklearn
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 from astartes import train_val_test_split
+from astartes.utils.exceptions import InvalidModelTypeError
 
 
 def generate_regression_results_dict(
@@ -51,6 +53,9 @@ def generate_regression_results_dict(
                 },
             }
     """
+    if not isinstance(sklearn_model, sklearn.base.BaseEstimator):
+        raise InvalidModelTypeError("Model must be an sklearn model")
+
     final_dict = {}
     for sampler in samplers:
         error_dict = {
