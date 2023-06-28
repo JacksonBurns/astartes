@@ -83,6 +83,7 @@ class Test_utils(unittest.TestCase):
         # use default hyperparameters
         sklearn_model = LinearSVR()
 
+        # test function call and also that a table can be printed without error
         results_dict = generate_regression_results_dict(
             sklearn_model,
             self.X,
@@ -90,6 +91,7 @@ class Test_utils(unittest.TestCase):
             train_size=0.6,
             val_size=0.2,
             test_size=0.2,
+            print_results=True,
         )
 
         # test that only results for the default random sampler are included

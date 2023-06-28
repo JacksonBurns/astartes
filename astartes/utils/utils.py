@@ -1,5 +1,6 @@
 import sklearn
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from tabulate import tabulate
 
 from astartes import train_val_test_split
 from astartes.utils.exceptions import InvalidModelTypeError
@@ -15,6 +16,7 @@ def generate_regression_results_dict(
     train_size=0.8,
     val_size=0.1,
     test_size=0.1,
+    print_results=False,
 ):
     """
     Helper function to train a sklearn model using the provided data
@@ -30,6 +32,7 @@ def generate_regression_results_dict(
         samplers_hopts (dict, optional): Should be a dictionary of dictionaries with the keys specifying
                                          the sampler and the values being another dictionary with the
                                          corresponding hyperparameters. Defaults to {}.
+        print_results (bool, optional): whether to print the resulting dictionary as a neat table
 
     Returns:
         dict: nested dictionary with the format of
@@ -137,4 +140,19 @@ def generate_regression_results_dict(
 
         final_dict[sampler] = error_dict
 
+        if print_results:
+            print(f"\nDisplaying results for {sampler} sampler")
+            display_results_as_table(error_dict)
+
     return final_dict
+
+
+def display_results_as_table(error_dict):
+    """Helper function to print a dictionary as a neat tabulate"""
+    headers = ["Train", "Val", "Test"]
+    table = []
+    for key, val in error_dict.items():
+        table_tmp = [key.upper()]
+        table_tmp.extend([val[0] for val in val.values()])
+        table.append(table_tmp)
+    print(tabulate(table, headers=headers))
