@@ -21,12 +21,12 @@ classifiers = [
 ]
 urls = { Homepage = "https://github.com/JacksonBurns/astartes" }
 requires-python = ">=3.7"
-dependencies = ["scikit_learn", "numpy", "scipy", "pandas"]
+dependencies = ["scikit_learn", "numpy", "scipy", "pandas", "tabulate"]
 
 [project.optional-dependencies]
 molecules = ["aimsim"]
 dev = ["black", "isort", "pytest"]
-demos = ["plotly", "tabulate", "py2opsin", "kaleido"]
+demos = ["plotly", "py2opsin", "kaleido"]
 
 [project.readme]
 file = "README.md"
