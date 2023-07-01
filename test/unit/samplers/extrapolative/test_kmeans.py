@@ -8,14 +8,7 @@ from astartes.samplers import KMeans
 from astartes.utils.warnings import ImperfectSplittingWarning
 
 SKLEARN_GEQ_13 = (  # get the sklearn version
-    int(
-        pkg_resources.get_distribution(
-            "scikit-learn",
-        ).version.split(
-            "."
-        )[1]
-    )
-    >= 3
+    int(pkg_resources.get_distribution("scikit-learn").version.split(".")[1]) >= 3
 )
 
 
