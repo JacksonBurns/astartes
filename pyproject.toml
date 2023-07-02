@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "astartes"
-version = "1.1.0"
+version = "1.1.1"
 authors = [
     { name = "Jackson Burns", email = "jwburns@mit.edu" },
     { name = "Himaghna Bhattacharjee", email = "himaghna@udel.edu" },
@@ -21,7 +21,7 @@ classifiers = [
 ]
 urls = { Homepage = "https://github.com/JacksonBurns/astartes" }
 requires-python = ">=3.7"
-dependencies = ["scikit_learn", "numpy", "scipy", "pandas"]
+dependencies = ["scikit_learn", "tabulate", "numpy", "scipy", "pandas"]
 
 [project.optional-dependencies]
 molecules = ["aimsim"]

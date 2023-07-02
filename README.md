@@ -127,10 +127,14 @@ To that end, the default behavior of `astartes` is to use `42` as the random see
 Running `astartes` with the default settings will always produce the exact same results.
 We have verified this behavior on Debian Ubuntu, Windows, and Intel Macs from Python versions 3.7 through 3.11 (with appropriate dependencies for each version).
 
+#### Known Reproducibility Limitations
+
 > **Note**
 > We are limited in our ability to test on M1 Macs, but from our limited manual testing we achieve perfect reproducbility in all cases _except occasionally_ with `KMeans` on Apple silicon.
 It has produced _slightly_ different results between platforms regardless of `random_state`, with up to two clusters being assigned differently resulting in data splits which are >99% identical.
 `astartes` is still consistent between runs on the same platform in all cases, and other samplers are not impacted by this apparent bug.
+
+ - `sklearn` v1.3.0 introduced backwards-incompatible changes in the `KMeans` sampler that changed how the random initialization affects the results, even given the same random seed. Different version of `sklearn` will affect the performance of `astartes` and we recommend including the exact version of `scikit-learn` and `astartes` used, when applicable.
 
 ## Evaluate the Impact of Splitting Algorithms
 The `generate_regression_results_dict` function allows users to quickly evaluate the impact of different splitting techniques on any model supported by `sklearn`. All results are stored in a dictionary format and can be displayed in a neatly formatted table using the optional `print_results` argument.
