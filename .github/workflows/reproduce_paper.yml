@@ -23,7 +23,8 @@ jobs:
     name: Reproduce Paper Data Splits
     steps:
       - uses: actions/checkout@v3
-      - run: git checkout v1.0.0
+      - name: Checkout Paper Release Version
+        run: git checkout e883a1c47d8d77099e76b5e31fea8602ba6c454a
       - uses: mamba-org/setup-micromamba@main
         with:
           environment-name: temp
