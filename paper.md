@@ -110,7 +110,7 @@ For each split, we create 5 different folds (by changing the random seed) and re
 | K-means   | 5.47 $\pm$ 1.14 | 8.77 $\pm$ 1.85 |
 
 Table 1 and Table 2 show the expected trend in which the average testing errors are higher for the extrapolation tasks than they are for the interpolation task.
-The results from random splitting are informative if the model will be primarily used in interpolation settings. 
+The results from random splitting are informative if the model is primarily used in interpolation settings. 
 However, these errors are likely unrealistically low if the model is intended to make predictions on new molecules that are chemically dissimilar to those in the training set.
 Performance is worse on the extrapolative data splits, which present a more challenging task, but these errors should be more representative of evaluating a new sample that is out-of-scope.
 Together, these tables demonstrate the utility of `astartes` in allowing users to better understand the likely performance of their model in different settings.
