@@ -21,13 +21,15 @@ jobs:
     name: Check ${{ matrix.nb-file }} Notebook Execution
     steps:
       - uses: actions/checkout@v3
-      - uses: mamba-org/provision-with-micromamba@main
+      - uses: mamba-org/setup-micromamba@main
         with:
-          environment-file: false
           environment-name: temp
-          channels: defaults,conda-forge
-          channel-priority: flexible
-          extra-specs: |
+          condarc: |
+            channels:
+              - defaults
+              - conda-forge
+            channel_priority: flexible
+          create-args: |
             python=3.11
       - name: Install dependencies
         run: |

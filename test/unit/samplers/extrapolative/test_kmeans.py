@@ -1,10 +1,15 @@
 import unittest
 
 import numpy as np
+import pkg_resources
 
 from astartes import train_test_split
 from astartes.samplers import KMeans
 from astartes.utils.warnings import ImperfectSplittingWarning
+
+SKLEARN_GEQ_13 = (  # get the sklearn version
+    int(pkg_resources.get_distribution("scikit-learn").version.split(".")[1]) >= 3
+)
 
 
 class Test_kmeans(unittest.TestCase):
@@ -35,7 +40,11 @@ class Test_kmeans(unittest.TestCase):
             ]
         )
 
-    def test_kmeans_sampling(self):
+    @unittest.skipIf(
+        SKLEARN_GEQ_13,
+        "sklearn version 1.3 or newer detected",
+    )
+    def test_kmeans_sampling_v12(self):
         """Use kmeans in the train_test_split and verify results."""
         with self.assertWarns(ImperfectSplittingWarning):
             (
@@ -113,6 +122,92 @@ class Test_kmeans(unittest.TestCase):
             np.testing.assert_array_equal(
                 clusters_test,
                 np.array([0, 0]),
+            ),
+            "Test clusters incorrect.",
+        )
+
+    @unittest.skipUnless(
+        SKLEARN_GEQ_13,
+        "sklearn version less than 1.3 detected",
+    )
+    def test_kmeans_sampling_v13(self):
+        """Use kmeans in the train_test_split and verify results."""
+        with self.assertWarns(ImperfectSplittingWarning):
+            (
+                X_train,
+                X_test,
+                y_train,
+                y_test,
+                labels_train,
+                labels_test,
+                clusters_train,
+                clusters_test,
+            ) = train_test_split(
+                self.X,
+                self.y,
+                labels=self.labels,
+                test_size=0.75,
+                train_size=0.25,
+                sampler="kmeans",
+                random_state=42,
+                hopts={
+                    "n_clusters": 2,
+                },
+            )
+        # test that the known arrays equal the result from above
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                X_train,
+                np.array([[0, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 1, 0, 0, 0]]),
+            ),
+            "Train X incorrect.",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                X_test,
+                np.array([[1, 1, 1, 0, 0], [1, 1, 1, 1, 0]]),
+            ),
+            "Test X incorrect.",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                y_train,
+                np.array([1, 2, 3]),
+            ),
+            "Train y incorrect.",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                y_test,
+                np.array([4, 5]),
+            ),
+            "Test y incorrect.",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                labels_train,
+                np.array(["one", "two", "three"]),
+            ),
+            "Train labels incorrect.",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                labels_test,
+                np.array(["four", "five"]),
+            ),
+            "Test labels incorrect.",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                clusters_train,
+                np.array([0, 0, 0]),
+            ),
+            "Train clusters incorrect.",
+        )
+        self.assertIsNone(
+            np.testing.assert_array_equal(
+                clusters_test,
+                np.array([1, 1]),
             ),
             "Test clusters incorrect.",
         )

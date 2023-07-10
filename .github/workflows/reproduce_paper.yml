@@ -8,12 +8,10 @@ on:
     - cron: "0 8 * * 1"
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
-  group: actions-id-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: actions-id-${{ github.workflow }}
   cancel-in-progress: true
 
 jobs:
@@ -25,17 +23,24 @@ jobs:
     name: Reproduce Paper Data Splits
     steps:
       - uses: actions/checkout@v3
-      - uses: mamba-org/provision-with-micromamba@main
+      - name: Checkout Paper Release Version
+        run: |
+          git fetch
+          git reset --hard e883a1c47d8d77099e76b5e31fea8602ba6c454a
+      - uses: mamba-org/setup-micromamba@main
         with:
-          environment-file: false
           environment-name: temp
-          channels: defaults,conda-forge
-          channel-priority: flexible
-          extra-specs: |
+          condarc: |
+            channels:
+              - defaults
+              - conda-forge
+            channel_priority: flexible
+          create-args: |
             python=3.11
       - name: Install Dependencies
         run: |
           python -m pip install -e .[molecules]
+          python -m pip install scikit-learn==1.2.2
           python -m pip install notebook
       - name: Backup Reference Splits
         run: |
