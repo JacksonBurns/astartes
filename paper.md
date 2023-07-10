@@ -62,7 +62,7 @@ First, `astartes`' key function `train_val_test_split` returns splits for traini
 These splits can then separately be used with any chosen ML model.
 This partitioning is crucial since best practices in data science dictate that, in order to minimize the risk of hyperparameter overfitting, one must only optimize hyperparameters with a validation set and use a held-out test set to accurately measure performance on unseen data [@ramsundar2019deep; @geron2019hands; @lakshmanan2020machine; @huyen2022designing; @wang2020machine]. 
 Unfortunately, many published papers only mention training and testing sets but do not mention validation sets, implying that they optimize the hyperparameters to the test set, which would be blatant data leakage that leads to overly optimistic results.
-For researchers interested in quickly obtaining preliminary results without using a validation set to optimize hyperparameters, `astartes` also implements an an `sklearn`-compatible `train_test_split` function.
+For researchers interested in quickly obtaining preliminary results without using a validation set to optimize hyperparameters, `astartes` also implements an `sklearn`-compatible `train_test_split` function.
 
 Second, it is crucial to evaluate model performance in both interpolation and extrapolation settings so future users are informed of any potential limitations.
 Although random splits are frequently used in the cheminformatics literature, this simply measures interpolation performance.
@@ -110,7 +110,7 @@ For each split, we create 5 different folds (by changing the random seed) and re
 | K-means   | 5.47 $\pm$ 1.14 | 8.77 $\pm$ 1.85 |
 
 Table 1 and Table 2 show the expected trend in which the average testing errors are higher for the extrapolation tasks than they are for the interpolation task.
-The results from random splitting are informative if the model will be primarily used in interpolation settings. 
+The results from random splitting are informative if the model is primarily used in interpolation settings. 
 However, these errors are likely unrealistically low if the model is intended to make predictions on new molecules that are chemically dissimilar to those in the training set.
 Performance is worse on the extrapolative data splits, which present a more challenging task, but these errors should be more representative of evaluating a new sample that is out-of-scope.
 Together, these tables demonstrate the utility of `astartes` in allowing users to better understand the likely performance of their model in different settings.
@@ -161,8 +161,9 @@ Test coverage currently sits at >99%, and all proposed changes are subjected to 
 
 # Acknowledgements
 The authors thank all users who participated in beta testing and release candidate testing throughout the development of `astartes`.
-We gratefully acknowledge financial support from BASF under award number 88803720.
-We also acknowledge financial support from the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, Department of Energy Computational Science Graduate Fellowship under Award Number DE-SC0023112.
+Authors Kevin Spiekermann and William Green gratefully acknowledge financial support from BASF under award number 88803720.
+Authors Jackson Burns and William Green gratefully acknowledge financial support from the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, Department of Energy Computational Science Graduate Fellowship under Award Number DE-SC0023112.
+Authors Himaghna Bhattacharjee and Dionisios Vlachos contribution was primarily supported by the National Science Foundation under Grant No. 2134471
 
 <!-- The below section and text are required by Jackson Burns' funding agency, the DOE CSGF. -->
 # Disclaimer
