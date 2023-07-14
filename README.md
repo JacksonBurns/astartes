@@ -126,6 +126,9 @@ R2    0.90745   0.80787   0.78412
 Below are some field specific applications of `astartes`. Interested in adding a new sampling algorithm or featurization approach? See [`CONTRIBUTING.md`](./CONTRIBUTING.md).
 
 #### Chemical Data and the `astartes.molecules` Subpackage
+Machine Learning is enormously useful in chemistry-related fields due to the high-dimensional feature space of chemical data.
+To properly apply ML to chemical data for inference _or_ discovery, it is important to know a model's accuracy under the two domains.
+To simplify the process of partitioning chemical data, `astartes` implements a pre-built featurizer for common chemistry data formats.
 After installing with `pip install astartes[molecules]` one can import the new train/test splitting function like this: `from astartes.molecules import train_test_split_molecules`
 
 The usage of this function is identical to `train_test_split` but with the addition of new arguments to control how the molecules are featurized:
@@ -154,7 +157,7 @@ train_test_split_molecules(
 )
 ```
 
-To see a complete example of using `train_test_split_molecules` with actual chemical data, take a look in the `examples` directory.
+To see a complete example of using `train_test_split_molecules` with actual chemical data, take a look in the `examples` directory and the brief [companion paper](https://github.com/JacksonBurns/astartes/raw/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf).
 
 Configuration options for the featurization scheme can be found in the documentation for [`AIMSim`](https://vlachosgroup.github.io/AIMSim/README.html#currently-implemented-fingerprints) though most of the critical configuration options are shown above.
 
