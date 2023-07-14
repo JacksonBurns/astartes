@@ -24,7 +24,7 @@ dependencies = ["scikit_learn", "tabulate", "numpy", "scipy", "pandas"]
 dynamic = ["version"]
 
 [tool.setuptools.dynamic]
-version = { attr = "package.__version__" }
+version = { attr = "astartes.__version__" }
 
 [project.optional-dependencies]
 molecules = ["aimsim"]
