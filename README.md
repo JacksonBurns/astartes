@@ -30,7 +30,7 @@ Note that this package _does not_ include built-in support for featurizing molec
 
 To install `astartes` from source, see the [Contributing & Developer Notes](#contributing--developer-notes) section.
 
-## Using `astartes`
+## Quick Start
 `astartes` is designed as a drop-in replacement for `sklearn`'s `train_test_split` function. To switch to `astartes`, change `from sklearn.model_selection import train_test_split` to `from astartes import train_test_split`.
 
 Like `sklearn`, `astartes` accepts any iterable object as `X`, `y`, and `labels`.
@@ -49,9 +49,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 ```
 
-### Paper
-For a comprehensive walkthrough of the theory and implementation of `astartes`, follow [this link](https://github.com/JacksonBurns/astartes/raw/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf) to read the companion paper.
-
 ### Example Notebooks
 
 Click the badges in the table below to be taken to a live, interactive demo of `astartes`:
@@ -65,10 +62,21 @@ Click the badges in the table below to be taken to a live, interactive demo of `
 
 To execute these notebooks locally, clone this repository (i.e. `git clone https://github.com/JacksonBurns/astartes.git`), navigate to the `astartes` directory, run `pip install .[demos]`, then open and run the notebooks in your preferred editor.
 
-### Rational Splitting Algorithms
-While much machine learning is done with a random choice between training/validation/test data, an alternative is the use of so-called "rational" splitting algorithms. These approaches use some similarity-based algorithm to divide data into sets. Some of these algorithms include Kennard-Stone, minimal test set dissimilarity, and sphere exclusion algorithms [as discussed by Tropsha et. al](https://pubs.acs.org/doi/pdf/10.1021/ci300338w) as well as the OptiSim as discussed in [Applied Chemoinformatics: Achievements and Future Opportunities](https://www.wiley.com/en-us/Applied+Chemoinformatics%3A+Achievements+and+Future+Opportunities-p-9783527806546). Some clustering-based splitting techniques have also been incorporated, such as [DBSCAN](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1016.890&rep=rep1&type=pdf).
+## Theory and Application of `astartes`
+This section of the README details some of the theory behind why the algorithms implemented in `astartes` are important and some motivating examples.
+For a comprehensive walkthrough of the theory and implementation of `astartes`, follow [this link](https://github.com/JacksonBurns/astartes/raw/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf) to read the companion paper (freely available and hosted here on GitHub).
 
-There are two broad categories of sampling algorithms implemented in `astartes`: extrapolative and interpolative. The former will force your model to predict on out-of-sample data, which creates a more challenging task than interpolative sampling. See the table below for all of the sampling approaches currently implemented in `astartes`, as well as the hyperparameters that each algorithm accepts (which are passed in with `hopts`) and a helpful reference for understanding how the hyperparameters work. Note that `random_state` is defined as a keyword argument in `train_test_split` itself, even though these algorithms will use the `random_state` in their own work. Do not provide a `random_state` in the `hopts` dictionary - it will be overwritten by the `random_state` you provide for `train_test_split` (or the default if none is provided).
+### Rational Splitting Algorithms
+While much machine learning is done with a random choice between training/validation/test data, an alternative is the use of so-called "rational" splitting algorithms.
+These approaches use some similarity-based algorithm to divide data into sets.
+Some of these algorithms include Kennard-Stone, minimal test set dissimilarity, and sphere exclusion algorithms [as discussed by Tropsha et. al](https://pubs.acs.org/doi/pdf/10.1021/ci300338w) as well as the OptiSim as discussed in [Applied Chemoinformatics: Achievements and Future Opportunities](https://www.wiley.com/en-us/Applied+Chemoinformatics%3A+Achievements+and+Future+Opportunities-p-9783527806546).
+Some clustering-based splitting techniques have also been incorporated, such as [DBSCAN](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1016.890&rep=rep1&type=pdf).
+
+There are two broad categories of sampling algorithms implemented in `astartes`: extrapolative and interpolative.
+The former will force your model to predict on out-of-sample data, which creates a more challenging task than interpolative sampling.
+See the table below for all of the sampling approaches currently implemented in `astartes`, as well as the hyperparameters that each algorithm accepts (which are passed in with `hopts`) and a helpful reference for understanding how the hyperparameters work.
+Note that `random_state` is defined as a keyword argument in `train_test_split` itself, even though these algorithms will use the `random_state` in their own work.
+Do not provide a `random_state` in the `hopts` dictionary - it will be overwritten by the `random_state` you provide for `train_test_split` (or the default if none is provided).
 
 #### Implemented Sampling Algorithms
 
@@ -88,7 +96,36 @@ There are two broad categories of sampling algorithms implemented in `astartes`:
 | Kohonen Self-Organizing Map (SOM) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 | SPlit Method | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 
-### Using the `astartes.molecules` Subpackage
+### Evaluate the Impact of Splitting Algorithms
+For data with many features it can be difficult to visualize how different sampling algorithms change the distribution of data into training, validation, and testing.
+To aid in analyzing the impact of the algorithms, `astartes` provides `generate_regression_results_dict`.
+This function allows users to quickly evaluate the impact of different splitting techniques on any model supported by `sklearn`. All results are stored in a dictionary format and can be displayed in a neatly formatted table using the optional `print_results` argument.
+
+```
+from sklearn.svm import LinearSVR
+
+from astartes.utils import generate_regression_results_dict
+
+sklearn_model = LinearSVR()
+results_dict = generate_regression_results_dict(
+                    sklearn_model,
+                    X,
+                    y,
+                    print_results=True,
+               )
+
+         Train       Val      Test
+----  --------  --------  --------
+MAE   1.41522   3.13435   2.17091
+RMSE  2.03062   3.73721   2.40041
+R2    0.90745   0.80787   0.78412
+
+```
+
+### Domain-Specific Applications
+Below are some field specific applications of `astartes`. Interested in adding a new sampling algorithm or featurization approach? See [`CONTRIBUTING.md`](./CONTRIBUTING.md).
+
+#### Chemical Data and the `astartes.molecules` Subpackage
 After installing with `pip install astartes[molecules]` one can import the new train/test splitting function like this: `from astartes.molecules import train_test_split_molecules`
 
 The usage of this function is identical to `train_test_split` but with the addition of new arguments to control how the molecules are featurized:
@@ -121,44 +158,20 @@ To see a complete example of using `train_test_split_molecules` with actual chem
 
 Configuration options for the featurization scheme can be found in the documentation for [`AIMSim`](https://vlachosgroup.github.io/AIMSim/README.html#currently-implemented-fingerprints) though most of the critical configuration options are shown above.
 
-### Reproducibility
+## Reproducibility
 `astartes` aims to be completely reproducible across different platforms, Python versions, and dependency configurations - any version of `astartes` v1.x should result in the _exact_ same splits, always.
 To that end, the default behavior of `astartes` is to use `42` as the random seed and _always_ set it.
 Running `astartes` with the default settings will always produce the exact same results.
 We have verified this behavior on Debian Ubuntu, Windows, and Intel Macs from Python versions 3.7 through 3.11 (with appropriate dependencies for each version).
 
-#### Known Reproducibility Limitations
+### Known Reproducibility Limitations
+Inevitably external dependencies of `astartes` will introduce backwards-incompatible changes.
+We continually run regression tests to catch these, and will list all _known_ limitations here:
+ - `sklearn` v1.3.0 introduced backwards-incompatible changes in the `KMeans` sampler that changed how the random initialization affects the results, even given the same random seed. Different version of `sklearn` will affect the performance of `astartes` and we recommend including the exact version of `scikit-learn` and `astartes` used, when applicable.
 
 > **Note**
 > We are limited in our ability to test on M1 Macs, but from our limited manual testing we achieve perfect reproducbility in all cases _except occasionally_ with `KMeans` on Apple silicon.
-It has produced _slightly_ different results between platforms regardless of `random_state`, with up to two clusters being assigned differently resulting in data splits which are >99% identical.
 `astartes` is still consistent between runs on the same platform in all cases, and other samplers are not impacted by this apparent bug.
-
- - `sklearn` v1.3.0 introduced backwards-incompatible changes in the `KMeans` sampler that changed how the random initialization affects the results, even given the same random seed. Different version of `sklearn` will affect the performance of `astartes` and we recommend including the exact version of `scikit-learn` and `astartes` used, when applicable.
-
-## Evaluate the Impact of Splitting Algorithms
-The `generate_regression_results_dict` function allows users to quickly evaluate the impact of different splitting techniques on any model supported by `sklearn`. All results are stored in a dictionary format and can be displayed in a neatly formatted table using the optional `print_results` argument.
-
-```
-from sklearn.svm import LinearSVR
-
-from astartes.utils import generate_regression_results_dict
-
-sklearn_model = LinearSVR()
-results_dict = generate_regression_results_dict(
-                    sklearn_model,
-                    X,
-                    y,
-                    print_results=True,
-               )
-
-         Train       Val      Test
-----  --------  --------  --------
-MAE   1.41522   3.13435   2.17091
-RMSE  2.03062   3.73721   2.40041
-R2    0.90745   0.80787   0.78412
-
-```
 
 ## Online Documentation
 [The online documentation](https://JacksonBurns.github.io/astartes/) contains everything you see in this README with an additional tutorial for [moving from `train_test_split` in `sklearn` to `astartes`](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
