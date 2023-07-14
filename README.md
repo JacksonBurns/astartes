@@ -159,7 +159,7 @@ train_test_split_molecules(
 
 To see a complete example of using `train_test_split_molecules` with actual chemical data, take a look in the `examples` directory and the brief [companion paper](https://github.com/JacksonBurns/astartes/raw/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf).
 
-Configuration options for the featurization scheme can be found in the documentation for [`AIMSim`](https://vlachosgroup.github.io/AIMSim/README.html#currently-implemented-fingerprints) though most of the critical configuration options are shown above.
+Configuration options for the featurization scheme can be found in the documentation for [AIMSim](https://vlachosgroup.github.io/AIMSim/README.html#currently-implemented-fingerprints) though most of the critical configuration options are shown above.
 
 ## Reproducibility
 `astartes` aims to be completely reproducible across different platforms, Python versions, and dependency configurations - any version of `astartes` v1.x should result in the _exact_ same splits, always.
@@ -177,21 +177,27 @@ We continually run regression tests to catch these, and will list all _known_ li
 `astartes` is still consistent between runs on the same platform in all cases, and other samplers are not impacted by this apparent bug.
 
 ## Online Documentation
-[The online documentation](https://JacksonBurns.github.io/astartes/) contains everything you see in this README with an additional tutorial for [moving from `train_test_split` in `sklearn` to `astartes`](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
+[The online documentation](https://JacksonBurns.github.io/astartes/) contains everything you see in this README with an additional tutorial for [moving from train_test_split in sklearn to astartes](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
 
 ## How to Cite
 If you use `astartes` in your work please use the below citation or the "Cite this repository" button on GitHub:
 > **BibTeX**
-> @software{Burns_astartes,
->   author = {Burns, Jackson and Spiekermann, Kevin and Bhattacharjee, Himaghna and Vlachos, Dionisios and Green, William},
->   license = {MIT},
->   title = {{astartes}},
->   url = {https://github.com/JacksonBurns/astartes}
+> @software{burns_jackson_2023_8147205,
+>   author       = {Burns, Jackson and
+>                   Spiekermann, Kevin and
+>                   Bhattacharjee, Himaghna and
+>                   Vlachos, Dionisios and
+>                   Green, William},
+>   title        = {{Machine Learning Validation via Rational Dataset 
+>                    Sampling with astartes}},
+>   month        = may,
+>   year         = 2023,
+>   publisher    = {Zenodo},
+>   version      = {1.1.1},
+>   doi          = {10.5281/zenodo.8147205},
+>   url          = {https://doi.org/10.5281/zenodo.8147205}
 > }
 
-> **APA**
-> Burns, J., Spiekermann, K., Bhattacharjee, H., Vlachos, D., & Green, W. astartes [Computer software]. https://github.com/JacksonBurns/astartes
-
 ## Contributing & Developer Notes
-See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for instructions on installing `asartes` for development and making a contribution.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for instructions on installing `astartes` for development and making a contribution.
 
