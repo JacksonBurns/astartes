@@ -31,7 +31,7 @@ Note that this package _does not_ include built-in support for featurizing molec
 To install `astartes` from source, see the [Contributing & Developer Notes](#contributing--developer-notes) section.
 
 ## Quick Start
-`astartes` is designed as a drop-in replacement for `sklearn`'s `train_test_split` function. To switch to `astartes`, change `from sklearn.model_selection import train_test_split` to `from astartes import train_test_split`.
+`astartes` is designed as a drop-in replacement for `sklearn`'s `train_test_split` function (see the [sklearn documentation](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)). To switch to `astartes`, change `from sklearn.model_selection import train_test_split` to `from astartes import train_test_split`.
 
 Like `sklearn`, `astartes` accepts any iterable object as `X`, `y`, and `labels`.
 Each will be converted to a `numpy` array for internal operations, and returned as a `numpy` array with limited exceptions: if `X` is a `pandas` `DataFrame`, `y` is a `Series`, or `labels` is a `Series`, `astartes` will cast it back to its original type including its index and column names.
@@ -61,15 +61,22 @@ Click the badges in the table below to be taken to a live, interactive demo of `
 | Comparing partitioning approaches for alkanes | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/mlpds_2023_astartes_demonstration/mlpds_2023_demo.ipynb) |
 
 To execute these notebooks locally, clone this repository (i.e. `git clone https://github.com/JacksonBurns/astartes.git`), navigate to the `astartes` directory, run `pip install .[demos]`, then open and run the notebooks in your preferred editor.
+You do _not_ need to execute the cells prefixed with `%%capture` - they are only present for compatibility with Google Colab.
+
+## Online Documentation
+[The online documentation](https://JacksonBurns.github.io/astartes/) contains everything you see in this README with an additional tutorial for [moving from train_test_split in sklearn to astartes](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
 
 ## Theory and Application of `astartes`
 This section of the README details some of the theory behind why the algorithms implemented in `astartes` are important and some motivating examples.
 For a comprehensive walkthrough of the theory and implementation of `astartes`, follow [this link](https://github.com/JacksonBurns/astartes/raw/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf) to read the companion paper (freely available and hosted here on GitHub).
 
+> **Note**
+> We reference open-access publications wherever possible. For articles locked behind a paywall (denoted with :small_blue_diamond:), we instead suggest reading [this Wikipedia page](https://en.wikipedia.org/wiki/Sci-Hub) and absolutely __not__ attempting to bypass the paywall.
+
 ### Rational Splitting Algorithms
 While much machine learning is done with a random choice between training/validation/test data, an alternative is the use of so-called "rational" splitting algorithms.
 These approaches use some similarity-based algorithm to divide data into sets.
-Some of these algorithms include Kennard-Stone, minimal test set dissimilarity, and sphere exclusion algorithms [as discussed by Tropsha et. al](https://pubs.acs.org/doi/pdf/10.1021/ci300338w) as well as the OptiSim as discussed in [Applied Chemoinformatics: Achievements and Future Opportunities](https://www.wiley.com/en-us/Applied+Chemoinformatics%3A+Achievements+and+Future+Opportunities-p-9783527806546).
+Some of these algorithms include Kennard-Stone ([Kennard & Stone](https://www.tandfonline.com/doi/abs/10.1080/00401706.1969.10490666) :small_blue_diamond:), Sphere Exclusion ([Tropsha et. al](https://pubs.acs.org/doi/pdf/10.1021/ci300338w) :small_blue_diamond:),as well as the OptiSim as discussed in [Applied Chemoinformatics: Achievements and Future Opportunities](https://www.wiley.com/en-us/Applied+Chemoinformatics%3A+Achievements+and+Future+Opportunities-p-9783527806546) :small_blue_diamond:.
 Some clustering-based splitting techniques have also been incorporated, such as [DBSCAN](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1016.890&rep=rep1&type=pdf).
 
 There are two broad categories of sampling algorithms implemented in `astartes`: extrapolative and interpolative.
@@ -82,15 +89,15 @@ Do not provide a `random_state` in the `hopts` dictionary - it will be overwritt
 
 | Sampler Name | Usage String | Type | Hyperparameters | Reference | Notes |
 |:---:|---|---|---|---|---|
-| Random | 'random' | Interpolative | `shuffle` | [`sklearn train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) | This sampler is a direct passthrough to `sklearn`'s `train_test_split`, though it does not currently reproduce splits identically. |
-| Kennard-Stone | 'kennard_stone' | Interpolative | `metric` | [Kennard & Stone](https://www.tandfonline.com/doi/abs/10.1080/00401706.1969.10490666) | Euclidian distance is used by default, as described in the original paper. |
-| Sample set Partitioning based on joint X-Y distances (SPXY) | 'spxy' | Interpolative | `distance_metric` | Saldhana et. al [original paper](https://www.sciencedirect.com/science/article/abs/pii/S003991400500192X) | Extension of Kennard Stone that also includes the response when sampling distances. |
-| Scaffold | 'scaffold' | Extrapolative | `include_chirality` | [Bemis-Murcko Scaffold](https://pubs.acs.org/doi/full/10.1021/jm9602928) as implemented in RDKit | This sampler requires SMILES strings as input (use the `molecules` subpackage) |
+| Random | 'random' | Interpolative | `shuffle` | [sklearn train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) Documentation | This sampler is a direct passthrough to `sklearn`'s `train_test_split`. |
+| Kennard-Stone | 'kennard_stone' | Interpolative | `metric` | Original Paper by [Kennard & Stone](https://www.tandfonline.com/doi/abs/10.1080/00401706.1969.10490666) :small_blue_diamond: | Euclidian distance is used by default, as described in the original paper. |
+| Sample set Partitioning based on joint X-Y distances (SPXY) | 'spxy' | Interpolative | `distance_metric` | Saldhana et. al [original paper](https://www.sciencedirect.com/science/article/abs/pii/S003991400500192X) :small_blue_diamond: | Extension of Kennard Stone that also includes the response when sampling distances. |
+| Scaffold | 'scaffold' | Extrapolative | `include_chirality` | [Bemis-Murcko Scaffold](https://pubs.acs.org/doi/full/10.1021/jm9602928) :small_blue_diamond: as implemented in RDKit | This sampler requires SMILES strings as input (use the `molecules` subpackage) |
 | Sphere Exclusion | 'sphere_exclusion' | Extrapolative | `metric`, `distance_cutoff` | _custom implementation_ | Variation on Sphere Exclusion for arbitrary-valued vectors. |
-| Time Based | 'time_based' | Extrapolative | _none_ | [Chen et al.](https://pubs.acs.org/doi/full/10.1021/ci200615h), [Sheridan, R. P](https://pubs.acs.org/doi/full/10.1021/ci400084k), [Feinberg et al.](https://pubs.acs.org/doi/full/10.1021/acs.jmedchem.9b02187), [Struble et al.](https://pubs.rsc.org/en/content/articlehtml/2020/re/d0re00071j)  | This sampler requires `labels` to be an iterable of either date or datetime objects. |
+| Time Based | 'time_based' | Extrapolative | _none_ | Papers using Time based splitting: [Chen et al.](https://pubs.acs.org/doi/full/10.1021/ci200615h) :small_blue_diamond:, [Sheridan, R. P](https://pubs.acs.org/doi/full/10.1021/ci400084k) :small_blue_diamond:, [Feinberg et al.](https://pubs.acs.org/doi/full/10.1021/acs.jmedchem.9b02187) :small_blue_diamond:, [Struble et al.](https://pubs.rsc.org/en/content/articlehtml/2020/re/d0re00071j) | This sampler requires `labels` to be an iterable of either date or datetime objects. |
 | Optimizable K-Dissimilarity Selection (OptiSim) | 'optisim' | Extrapolative | `n_clusters`, `max_subsample_size`, `distance_cutoff` | _custom implementation_ | Variation on [OptiSim](https://pubs.acs.org/doi/10.1021/ci025662h) for arbitrary-valued vectors. |
 | K-Means | 'kmeans' | Extrapolative | `n_clusters`, `n_init` | [`sklearn KMeans`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) | Passthrough to `sklearn`'s `KMeans`. |
-| Density-Based Spatial Clustering of Applications with Noise (DBSCAN) | 'dbscan' | Extrapolative | `eps`, `min_samples`, `algorithm`, `metric`, `leaf_size` | [`sklearn DBSCAN`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html) | Passthrough to `sklearn`'s `DBSCAN`. |
+| Density-Based Spatial Clustering of Applications with Noise (DBSCAN) | 'dbscan' | Extrapolative | `eps`, `min_samples`, `algorithm`, `metric`, `leaf_size` | [`sklearn DBSCAN`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html) Documentation| Passthrough to `sklearn`'s `DBSCAN`. |
 | Minimum Test Set Dissimilarity (MTSD) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 | Restricted Boltzmann Machine (RBM) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 | Kohonen Self-Organizing Map (SOM) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
@@ -175,9 +182,6 @@ We continually run regression tests to catch these, and will list all _known_ li
 > **Note**
 > We are limited in our ability to test on M1 Macs, but from our limited manual testing we achieve perfect reproducbility in all cases _except occasionally_ with `KMeans` on Apple silicon.
 `astartes` is still consistent between runs on the same platform in all cases, and other samplers are not impacted by this apparent bug.
-
-## Online Documentation
-[The online documentation](https://JacksonBurns.github.io/astartes/) contains everything you see in this README with an additional tutorial for [moving from train_test_split in sklearn to astartes](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
 
 ## How to Cite
 If you use `astartes` in your work please use the below citation or the "Cite this repository" button on GitHub:
