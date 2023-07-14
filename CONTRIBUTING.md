@@ -1,5 +1,6 @@
 ## Contributing & Developer Notes
-Pull Requests, Bug Reports, and all Contributions are welcome! Please use the appropriate issue or pull request template when making a contribution.
+Pull Requests, Bug Reports, and all Contributions are welcome, encouraged, and appreciated!
+Please use the appropriate [issue](https://github.com/JacksonBurns/astartes/issues/new/choose) or [pull request](https://github.com/JacksonBurns/astartes/compare) template when making a contribution to help the maintainers get it merged quickly.
 
 We make use of [the GitHub Discussions page](https://github.com/JacksonBurns/astartes/discussions) to go over potential features to add. Please feel free to stop by if you are looking for something to develop or have an idea for a useful feature!
 
@@ -7,10 +8,15 @@ When submitting a PR, please mark your PR with the "PR Ready for Review" label w
 
 ### Developer Install
 
-To contribute to the `astartes` source code, start by cloning the repository (i.e. `git clone git@github.com:JacksonBurns/astartes.git`) and then inside the repository run `pip install -e .[molecules,dev]`. This will set you up with all the required dependencies to run `astartes` and conform to our formatting standards (`black` and `isort`), which you can configure to run automatically in vscode [like this](https://marcobelo.medium.com/setting-up-python-black-on-visual-studio-code-5318eba4cd00#:~:text=Go%20to%20settings%20in%20your,%E2%80%9D%20and%20select%20%E2%80%9Cblack%E2%80%9D.).
+To contribute to the `astartes` source code, start by cloning the repository (i.e. `git clone git@github.com:JacksonBurns/astartes.git`) and then inside the repository run `pip install -e .[molecules,dev]`. This will set you up with all the required dependencies to run `astartes` and conform to our formatting standards (`black` and `isort`), which you can configure to run automatically in VSCode [like this](https://marcobelo.medium.com/setting-up-python-black-on-visual-studio-code-5318eba4cd00#:~:text=Go%20to%20settings%20in%20your,%E2%80%9D%20and%20select%20%E2%80%9Cblack%E2%80%9D.).
 
 > **Note**
 > Windows Powershell and MacOS Catalina or newer may complain about square brackets, so you will need to double quote the `molecules` command (i.e. `pip install "astartes[molecules,dev]"`)
+
+### Version Checking
+
+`astartes` uses `pyproject.toml` to specify all metadata _except_ the version, which is specified in `astartes/__init__.py` (via `__version__`) for backwards compatibility with Python 3.7.
+To check which version of `astartes` you have installed, you can run `python -c "import astartes; print(astartes.__version__)"` on Python 3.7 or `python -c "from importlib.metadata import version; version('astartes')" on Python 3.8 or newer.
 
 ### Unit Testing
 All of the tests in `astartes` are written using the built-in python `unittest` module (to allow running without `pytest`) but we _highly_ recommend using `pytest`. To execute the tests from the `astartes` repository, simply type `pytest` after running the developer install (or alternately, `pytest -v` for a more helpful output).
@@ -70,6 +76,15 @@ def train_test_split_INTERFACE(
 If possible, we would like to also add an example Jupyter Notebook with any new interface to demonstrate to new users how it functions. See our other examples in the `examples` directory.
 
 Contact [@JacksonBurns](https://github.com/JacksonBurns) if you need assistance adding an existing workflow to `astartes`. If this featurization scheme requires additional dependencies to function, we may add it as an additional _extra_ package in the same way that `molecules` in installed.
+
+### Development Philosophy
+
+The developers of `astartes` prioritize (1) reproducibility, (2) flexibility, and (3) maintainability.
+ 1. All versions of `astartes` `1.x` should produce the same results across all platforms, so we have thorough unit and regression testing run on a continuous basis.
+ 2. We specify as _few dependencies as possible_ with the _loosest possible_ dependency requirements, which allows integrating `astartes` with other tools more easily.
+  - Depdencies which introduce a lot of requirements and/or specific versions of requirements are shuffled into the `extras_require` to avoid weighing down the main package.
+  - Compatibility with all versions of modern Python is achieved by avoiding specifying version numbers tightly and regression testing across all versions.
+ 3. We follow DRY (Don't Repeat Yourself) principles to avoid code duplication and decrease maintainence burden, have near-perfect test coverage, and enforce consistent formatting style in the source code.
 
 ## JOSS Branch
 
