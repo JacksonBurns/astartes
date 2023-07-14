@@ -55,10 +55,10 @@ Click the badges in the table below to be taken to a live, interactive demo of `
 
 | Demo | Link |
 |:---:|---|
-| Using `train_val_test_split` with the `sklearn` example datasets | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2Ftrain_val_test_split_sklearn_example%2Ftrain_val_test_split_example.ipynb) |
-| Comparing Sampling Algorithms with Fast Food | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2Fsplit_comparisons%2Fsplit_comparisons.ipynb) |
-| Cheminformatics sample set partitioning with `astartes` | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2Fbarrier_prediction_with_RDB7%2FRDB7_barrier_prediction_example.ipynb) |
-| Comparing partitioning approaches for alkanes | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JacksonBurns/astartes/main?labpath=examples%2Fmlpds_2023_astartes_demo%2Fmlpds_2023_demo.ipynb) |
+| Comparing Sampling Algorithms with Fast Food | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/barrier_prediction_with_RDB7/RDB7_barrier_prediction_example.ipynb) |
+| Using `train_val_test_split` with the `sklearn` example datasets | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/train_val_test_split_sklearn_example/train_val_test_split_example.ipynb) |
+| Cheminformatics sample set partitioning with `astartes` | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/barrier_prediction_with_RDB7/RDB7_barrier_prediction_example.ipynb) |
+| Comparing partitioning approaches for alkanes | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/mlpds_2023_astartes_demonstration/mlpds_2023_demo.ipynb) |
 
 To execute these notebooks locally, clone this repository (i.e. `git clone https://github.com/JacksonBurns/astartes.git`), navigate to the `astartes` directory, run `pip install .[demos]`, then open and run the notebooks in your preferred editor.
 
