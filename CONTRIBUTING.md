@@ -2,7 +2,8 @@
 Pull Requests, Bug Reports, and all Contributions are welcome, encouraged, and appreciated!
 Please use the appropriate [issue](https://github.com/JacksonBurns/astartes/issues/new/choose) or [pull request](https://github.com/JacksonBurns/astartes/compare) template when making a contribution to help the maintainers get it merged quickly.
 
-We make use of [the GitHub Discussions page](https://github.com/JacksonBurns/astartes/discussions) to go over potential features to add. Please feel free to stop by if you are looking for something to develop or have an idea for a useful feature!
+We make use of [the GitHub Discussions page](https://github.com/JacksonBurns/astartes/discussions) to go over potential features to add.
+Please feel free to stop by if you are looking for something to develop or have an idea for a useful feature!
 
 When submitting a PR, please mark your PR with the "PR Ready for Review" label when you are finished making changes so that the GitHub actions bots can work their magic!
 
