@@ -15,6 +15,10 @@
   <a href="https://doi.org/10.5281/zenodo.8147205"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8147205.svg" alt="DOI"></a>
 </p>
 
+## Online Documentation
+Follow [this link](https://JacksonBurns.github.io/astartes/) for a nicely-rendered version of this README along with additional tutorials for [moving from train_test_split in sklearn to astartes](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
+Keep reading for a installation guide and links to tutorials!
+
 ## Installing `astartes`
 We recommend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management. Python versions 3.7, 3.8, 3.9, 3.10, and 3.11 are supported on all platforms.
 
@@ -40,7 +44,7 @@ Each will be converted to a `numpy` array for internal operations, and returned 
 > **Note**
 > The developers recommend passing `X`, `y`, and `labels` as `numpy` arrays and handling the conversion to and from other types explicity on your own. Behind-the-scenes type casting can lead to unexpected behavior!
 
-By default, `astartes` will split data randomly. Additionally, a variety of algorithmic sampling approaches can be used by specifying the `sampler` argument to the function:
+By default, `astartes` will split data randomly. Additionally, a variety of algorithmic sampling approaches can be used by specifying the `sampler` argument to the function (see the [Table of Implemented Samplers](#implemented-sampling-algorithms) for a complet list of options and their corresponding references):
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(
@@ -50,22 +54,71 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 ```
 
+That's all you need to get started with `astartes`! The next sections include more examples and some demo notebooks you can try in your browser.
+
 ### Example Notebooks
 
 Click the badges in the table below to be taken to a live, interactive demo of `astartes`:
 
-| Demo | Link |
-|:---:|---|
-| Comparing Sampling Algorithms with Fast Food | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/barrier_prediction_with_RDB7/RDB7_barrier_prediction_example.ipynb) |
-| Using `train_val_test_split` with the `sklearn` example datasets | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/train_val_test_split_sklearn_example/train_val_test_split_example.ipynb) |
-| Cheminformatics sample set partitioning with `astartes` | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/barrier_prediction_with_RDB7/RDB7_barrier_prediction_example.ipynb) |
-| Comparing partitioning approaches for alkanes | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/mlpds_2023_astartes_demonstration/mlpds_2023_demo.ipynb) |
+| Demo | Topic | Link |
+|:---:|---|---|
+| Comparing Sampling Algorithms with Fast Food | Visual representations of how different samplers affect data partitioning | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/split_comparisons/split_comparisons.ipynb) |
+| Using `train_val_test_split` with the `sklearn` example datasets | Demonstrating how witholding a test set with `train_val_test_split` can impact performance | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/train_val_test_split_sklearn_example/train_val_test_split_example.ipynb) |
+| Cheminformatics sample set partitioning with `astartes` | Extrapolation vs. Interpolation impact on cheminformatics model accuracy | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/barrier_prediction_with_RDB7/RDB7_barrier_prediction_example.ipynb) |
+| Comparing partitioning approaches for alkanes | Visualizing how sampler impact model performance with simple chemicals | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/mlpds_2023_astartes_demonstration/mlpds_2023_demo.ipynb) |
 
 To execute these notebooks locally, clone this repository (i.e. `git clone https://github.com/JacksonBurns/astartes.git`), navigate to the `astartes` directory, run `pip install .[demos]`, then open and run the notebooks in your preferred editor.
 You do _not_ need to execute the cells prefixed with `%%capture` - they are only present for compatibility with Google Colab.
 
-## Online Documentation
-[The online documentation](https://JacksonBurns.github.io/astartes/) contains everything you see in this README with an additional tutorial for [moving from train_test_split in sklearn to astartes](https://jacksonburns.github.io/astartes/sklearn_to_astartes.html).
+### Withhold Testing Data with `train_val_test_split`
+For rigorous ML research, it is critical to withhold some data during training to use a `test` set.
+The model should _never_ see this data during training (unlike the validation set) so that we can get an accurate measurement of its performance.
+
+With `astartes` performing this three-way data split is readily available with `train_val_test_split`:
+```python
+from astartes import train_val_test_split
+
+X_train, X_val, X_test = train_val_test_split(X, sampler = 'sphere_exclusion')
+```
+You can now train your model with `X_train`, optimize your model with `X_val`, and measure its performance with `X_test`.
+
+### Evaluate the Impact of Splitting Algorithms
+For data with many features it can be difficult to visualize how different sampling algorithms change the distribution of data into training, validation, and testing like we do in some of the demo notebooks.
+To aid in analyzing the impact of the algorithms, `astartes` provides `generate_regression_results_dict`.
+This function allows users to quickly evaluate the impact of different splitting techniques on any model supported by `sklearn`. All results are stored in a dictionary format and can be displayed in a neatly formatted table using the optional `print_results` argument.
+
+```python
+from sklearn.svm import LinearSVR
+
+from astartes.utils import generate_regression_results_dict
+
+sklearn_model = LinearSVR()
+results_dict = generate_regression_results_dict(
+    sklearn_model,
+    X,
+    y,
+    print_results=True,
+)
+
+         Train       Val      Test
+----  --------  --------  --------
+MAE   1.41522   3.13435   2.17091
+RMSE  2.03062   3.73721   2.40041
+R2    0.90745   0.80787   0.78412
+
+```
+
+### Access Sampling Algorithms Directly
+The sampling algorithms implemented in `astartes` can also be directly accessed and run if it is more useful for your applications.
+In the below example, we import the Kennard Stone sampler, use it to partition a simple array, and then retrieve a sample.
+```python
+from astartes.samplers.interpolation import KennardStone
+
+kennard_stone = KennardStone([[1, 2], [3, 4], [5, 6]])
+first_2_samples = kennard_stone.get_sample_idxs(2)
+```
+All samplers in `astartes` implement a `_sample()` method that is called by the constructor (i.e. greedily) and either a `get_sampler_idxs` or `get_cluster_idxs` for interpolative and extrapolative samplers, respectively.
+For more detail on the implementaiton and design of samplers in `astartes`, see the [Developer Notes](#contributing--developer-notes) section.
 
 ## Theory and Application of `astartes`
 This section of the README details some of the theory behind why the algorithms implemented in `astartes` are important and some motivating examples.
@@ -103,32 +156,6 @@ Do not provide a `random_state` in the `hopts` dictionary - it will be overwritt
 | Restricted Boltzmann Machine (RBM) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 | Kohonen Self-Organizing Map (SOM) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 | SPlit Method | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
-
-### Evaluate the Impact of Splitting Algorithms
-For data with many features it can be difficult to visualize how different sampling algorithms change the distribution of data into training, validation, and testing.
-To aid in analyzing the impact of the algorithms, `astartes` provides `generate_regression_results_dict`.
-This function allows users to quickly evaluate the impact of different splitting techniques on any model supported by `sklearn`. All results are stored in a dictionary format and can be displayed in a neatly formatted table using the optional `print_results` argument.
-
-```
-from sklearn.svm import LinearSVR
-
-from astartes.utils import generate_regression_results_dict
-
-sklearn_model = LinearSVR()
-results_dict = generate_regression_results_dict(
-                    sklearn_model,
-                    X,
-                    y,
-                    print_results=True,
-               )
-
-         Train       Val      Test
-----  --------  --------  --------
-MAE   1.41522   3.13435   2.17091
-RMSE  2.03062   3.73721   2.40041
-R2    0.90745   0.80787   0.78412
-
-```
 
 ### Domain-Specific Applications
 Below are some field specific applications of `astartes`. Interested in adding a new sampling algorithm or featurization approach? See [`CONTRIBUTING.md`](./CONTRIBUTING.md).
@@ -204,5 +231,5 @@ If you use `astartes` in your work please use the below citation or the "Cite th
 > }
 
 ## Contributing & Developer Notes
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for instructions on installing `astartes` for development and making a contribution.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for instructions on installing `astartes` for development, making a contribution, and general guidance on the design of `astartes`.
 

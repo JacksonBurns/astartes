@@ -41,9 +41,13 @@ jobs:
           rm docs/README.rst || true
           rm sklearn_to_astartes.rst || true
           rm docs/sklearn_to_astartes.rst || true
+          rm CONTRIBUTING.rst || true
+          rm docs/CONTRIBUTING.rst || true
           m2r README.md
+          m2r CONTRIBUTING.md
           m2r sklearn_to_astartes.md
-          mv README.rst docs
+          mv README.rst 
+          mv CONTRIBUTING.rst docs
           mv sklearn_to_astartes.rst docs
           cd docs
           rm *.html *.doctree || true

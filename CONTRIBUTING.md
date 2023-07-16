@@ -18,13 +18,22 @@ To contribute to the `astartes` source code, start by forking and then cloning t
 `astartes` uses `pyproject.toml` to specify all metadata _except_ the version, which is specified in `astartes/__init__.py` (via `__version__`) for backwards compatibility with Python 3.7.
 To check which version of `astartes` you have installed, you can run `python -c "import astartes; print(astartes.__version__)"` on Python 3.7 or `python -c "from importlib.metadata import version; version('astartes')" on Python 3.8 or newer.
 
-### Unit Testing
-All of the tests in `astartes` are written using the built-in python `unittest` module (to allow running without `pytest`) but we _highly_ recommend using `pytest`. To execute the tests from the `astartes` repository, simply type `pytest` after running the developer install (or alternately, `pytest -v` for a more helpful output).
+### Testing
+All of the tests in `astartes` are written using the built-in python `unittest` module (to allow running without `pytest`) but we _highly_ recommend using `pytest`.
+To execute the tests from the `astartes` repository, simply type `pytest` after running the developer install (or alternately, `pytest -v` for a more helpful output).
+On GitHub, we use actions to run the tests on every Pull Request and on a nightly basis (look in `.github/workflows` for more information).
+These tests include unit tests, functional tests, and regression tests.
 
 ### Adding New Samplers
 Adding a new sampler should extend the `abstract_sampler.py` abstract base class.
+Each subclass should override the `_sample` method with its own algorithm for data partitioning, and the constructor (`__init__.py`) perform any data validation.
 
-It can be as simple as a passthrough to a another `train_test_split`, or it can be an original implementation that results in X and y being split into two lists. Take a look at `astartes/samplers/random_split.py` for a basic example!
+All samplers in `astartes` are classified as one of two types: extrapolative or interpolative.
+Extrapolative samplers work by clustering data into groups (which are then partitioned into train/validation/test to enforce extrapolation) whereas interpolative samplers provide an exact _order_ in which samples should be moved into the training set.
+
+When actually implemented, this means that extrapolative samplers should set the `self._samples_clusters` attribute and interpolative samplers should set the `self._samples_idxs` attribute.
+
+New samplers can be as simple as a passthrough to another `train_test_split`, or it can be an original implementation that results in X and y being split into two lists. Take a look at `astartes/samplers/interpolation/random_split.py` for a basic example!
 
 After the sampler has been implemented, add it to `__init__.py` in in `astartes/samplers` and it will automatically be unit tested. Additional unit tests to verify that hyperparameters can be properly passed, etc. are also recommended.
 
@@ -77,6 +86,12 @@ If possible, we would like to also add an example Jupyter Notebook with any new 
 
 Contact [@JacksonBurns](https://github.com/JacksonBurns) if you need assistance adding an existing workflow to `astartes`. If this featurization scheme requires additional dependencies to function, we may add it as an additional _extra_ package in the same way that `molecules` in installed.
 
+### The `train_val_test_split` Function
+`train_val_test_split` is the workhorse function of `astartes`.
+It is responsible for instantiating the sampling algorithm, partitioning the data into training, validation, and testing, and then returning the requested results while also keeping an eye on data types.
+Under the hood, `train_test_split` is just calling `train_val_test_split` with `val_size` set to `0.0`.
+For more information on how it works, check out the inline documentation in `astartes/main.py`.
+
 ### Development Philosophy
 
 The developers of `astartes` prioritize (1) reproducibility, (2) flexibility, and (3) maintainability.
@@ -85,6 +100,7 @@ The developers of `astartes` prioritize (1) reproducibility, (2) flexibility, an
   - Depdencies which introduce a lot of requirements and/or specific versions of requirements are shuffled into the `extras_require` to avoid weighing down the main package.
   - Compatibility with all versions of modern Python is achieved by avoiding specifying version numbers tightly and regression testing across all versions.
  3. We follow DRY (Don't Repeat Yourself) principles to avoid code duplication and decrease maintainence burden, have near-perfect test coverage, and enforce consistent formatting style in the source code.
+  - Inline comments are _critical_ for maintainability - at the time of writing, `astartes` has 1 comment line for every 2 lines of source code.
 
 ## JOSS Branch
 
