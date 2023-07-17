@@ -11,6 +11,7 @@ astartes documentation
    :caption: Contents:
 
    README
+   CONTRIBUTING
    sklearn_to_astartes
    modules
 
