@@ -98,8 +98,8 @@ For more information on how it works, check out the inline documentation in `ast
 The developers of `astartes` prioritize (1) reproducibility, (2) flexibility, and (3) maintainability.
  1. All versions of `astartes` `1.x` should produce the same results across all platforms, so we have thorough unit and regression testing run on a continuous basis.
  2. We specify as _few dependencies as possible_ with the _loosest possible_ dependency requirements, which allows integrating `astartes` with other tools more easily.
-  - Depdencies which introduce a lot of requirements and/or specific versions of requirements are shuffled into the `extras_require` to avoid weighing down the main package.
-  - Compatibility with all versions of modern Python is achieved by avoiding specifying version numbers tightly and regression testing across all versions.
+  - Dependencies which introduce a lot of requirements and/or specific versions of requirements are shuffled into the `extras_require` to avoid weighing down the main package.
+  - Compatibility with all versions of modern Python is achieved by not tightly specifying version numbers as well as by regression testing across all versions.
  3. We follow DRY (Don't Repeat Yourself) principles to avoid code duplication and decrease maintainence burden, have near-perfect test coverage, and enforce consistent formatting style in the source code.
   - Inline comments are _critical_ for maintainability - at the time of writing, `astartes` has 1 comment line for every 2 lines of source code.
 
