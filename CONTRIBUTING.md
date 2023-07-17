@@ -16,7 +16,7 @@ To contribute to the `astartes` source code, start by forking and then cloning t
 
 ### Version Checking
 
-`astartes` uses `pyproject.toml` to specify all metadata _except_ the version, which is specified in `astartes/__init__.py` (via `__version__`) for backwards compatibility with Python 3.7.
+`astartes` uses `pyproject.toml` to specify all metadata, but the version is also specified in `astartes/__init__.py` (via `__version__`) for backwards compatibility with Python 3.7.
 To check which version of `astartes` you have installed, you can run `python -c "import astartes; print(astartes.__version__)"` on Python 3.7 or `python -c "from importlib.metadata import version; version('astartes')" on Python 3.8 or newer.
 
 ### Testing
