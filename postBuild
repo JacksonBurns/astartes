@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# This file is needed to make the binder demonstrations work
-# because we use a pyproject.toml file, Binder won't build
-# the environment unless we manually specify it here
-
-set -e
-pip install -e .[molecules]
