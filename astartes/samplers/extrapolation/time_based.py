@@ -7,17 +7,18 @@ from astartes.samplers import AbstractSampler
 
 class TimeBased(AbstractSampler):
     def __init__(self, *args):
+        super().__init__(*args)
+
+    def _before_sample(self):
         # verify that the user provided time as the labels (i.e. args[2])
-        if args[2] is None:
+        if self.labels is None:
             msg = "Time based splitting requires the input labels to be a date or datetime object"
             raise ValueError(msg)
 
         # verify that labels (i.e. args[2]) contains the expected data type
-        elif not isinstance(args[2][0], date) and not isinstance(args[2][0], datetime):
+        elif not all(isinstance(i, date) for i in self.labels) and not all(isinstance(i, datetime) for i in self.labels):
             msg = "Time based splitting requires the input labels to be an iterable of date or datetime objects"
             raise TypeError(msg)
-
-        super().__init__(*args)
 
     def _sample(self):
         """

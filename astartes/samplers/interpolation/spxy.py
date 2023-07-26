@@ -20,11 +20,11 @@ from astartes.utils.exceptions import InvalidConfigurationError
 
 class SPXY(AbstractSampler):
     def __init__(self, *args):
-        if args[1] is None:
-            raise InvalidConfigurationError(
-                "SPXY sampler requires both X and y arrays. Provide y or switch to kennard_stone."
-            )
         super().__init__(*args)
+
+    def _before_sample(self):
+        if self.y is None:
+            raise InvalidConfigurationError("SPXY sampler requires both X and y arrays. Provide y or switch to kennard_stone.")
 
     def _sample(self):
         """
