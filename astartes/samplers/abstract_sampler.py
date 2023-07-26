@@ -31,7 +31,6 @@ class AbstractSampler(ABC):
         self._before_sample()
         self._sample()
 
-    @abstractmethod
     def _before_sample(self):
         """This method should perform any data validation, manipulation, etc. required before proceeding to _sample
 
