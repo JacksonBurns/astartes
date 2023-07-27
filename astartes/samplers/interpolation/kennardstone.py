@@ -1,6 +1,7 @@
+from scipy.spatial.distance import pdist, squareform
+
 from astartes.samplers import AbstractSampler
 from astartes.utils.fast_kennard_stone import fast_kennard_stone
-from scipy.spatial.distance import pdist, squareform
 
 
 class KennardStone(AbstractSampler):
