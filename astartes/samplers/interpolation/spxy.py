@@ -44,4 +44,4 @@ class SPXY(AbstractSampler):
         # sum the distances as per eq. 3 of Saldahna, set diagonal to nan
         spxy_distance = squareform(y_pdist + X_dist)
 
-        self._samples_idxs = fast_kennard_stone(spxy_distance, "precomputed")
+        self._samples_idxs = fast_kennard_stone(spxy_distance)

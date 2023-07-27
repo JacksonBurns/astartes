@@ -1,15 +1,17 @@
 import numpy as np
-from scipy.spatial.distance import pdist, squareform
 
 
-def fast_kennard_stone(X, metric):
-    n_samples = len(X)
+def fast_kennard_stone(ks_distance: np.ndarray) -> np.ndarray:
+    """Implements the Kennard-Stone algorithm
 
-    if metric == "precomputed":
-        ks_distance = X
-    else:
-        X_dist = pdist(X, metric=metric)
-        ks_distance = squareform(X_dist)
+    Args:
+        ks_distance (np.ndarray): Distance matrix
+
+    Returns:
+        np.ndarray: Indices in order of Kennard-Stone selection
+    """
+    n_samples = len(ks_distance)
+
     # when searching for max distance, disregard self
     np.fill_diagonal(ks_distance, -np.inf)
 
@@ -20,17 +22,16 @@ def fast_kennard_stone(X, metric):
     # list of indices which have been selected
     # - used to mask ks_distance
     # - also tracks order of kennard-stone selection
-    already_selected = list(max_coords)
+    already_selected = np.empty(n_samples, dtype=int)
+    already_selected[0] = max_coords[0]
+    already_selected[1] = max_coords[1]
 
     # minimum distance of all unselected samples to the two selected samples
-    min_distances = np.min(ks_distance[:, already_selected], axis=1)
-    for _ in range(n_samples - 2):
+    min_distances = np.min(ks_distance[:, max_coords], axis=1)
+    for i in range(2, n_samples):
         # find the next sample with the largest minimum distance to any sample already selected
-        already_selected.append(
-            np.argmax(min_distances),
-        )
+        already_selected[i] = np.argmax(min_distances)
         # get minimum distance of unselected samples to that sample only
-        new_distances = np.min(ks_distance[:, [already_selected[-1]]], axis=1)
-        min_distances = np.minimum(min_distances, new_distances)
+        min_distances = np.minimum(min_distances, ks_distance[:, already_selected[i]])
 
-    return np.array(already_selected, dtype=int)
+    return already_selected
