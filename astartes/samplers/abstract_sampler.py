@@ -28,7 +28,15 @@ class AbstractSampler(ABC):
 
         # internal machinery
         self._current_sample_idx = 0
+        self._before_sample()
         self._sample()
+
+    def _before_sample(self):
+        """This method should perform any data validation, manipulation, etc. required before proceeding to _sample
+
+        Returns:
+            None: Returns nothing, raises an Exception if something is wrong.
+        """
 
     @abstractmethod
     def _sample(self):
@@ -55,9 +63,7 @@ class AbstractSampler(ABC):
         """
         Get idxs of samples.
         """
-        out = self._samples_idxs[
-            self._current_sample_idx : self._current_sample_idx + n_samples
-        ]
+        out = self._samples_idxs[self._current_sample_idx : self._current_sample_idx + n_samples]
         self._current_sample_idx += n_samples
         return out
 
@@ -81,23 +87,15 @@ class AbstractSampler(ABC):
         cluster_counter = Counter(self._samples_clusters)
 
         # same, sorted by number of members ascending
-        ordered_cluster_counter = dict(
-            sorted(cluster_counter.items(), key=lambda i: i[1])
-        )
+        ordered_cluster_counter = dict(sorted(cluster_counter.items(), key=lambda i: i[1]))
 
         # if using max_shufflable_size, shuffle the small clusters in this dictionary
         if max_shufflable_size is not None:
             # get a list of the small clusters
-            small_clusters = [
-                cluster_label
-                for cluster_label, length in ordered_cluster_counter.items()
-                if length <= max_shufflable_size
-            ]
+            small_clusters = [cluster_label for cluster_label, length in ordered_cluster_counter.items() if length <= max_shufflable_size]
 
             # the remaining clusters go here
-            large_clusters = [
-                i for i in ordered_cluster_counter.keys() if i not in small_clusters
-            ]
+            large_clusters = [i for i in ordered_cluster_counter.keys() if i not in small_clusters]
 
             # shuffle the small clusters according to the random state
             rng = np.random.default_rng(seed=self.get_config("random_state"))
@@ -105,19 +103,14 @@ class AbstractSampler(ABC):
 
             # recombine the clusters, rebuild the ordered dictionary
             all_clusters = small_clusters + large_clusters
-            ordered_cluster_counter = {
-                label: cluster_counter[label] for label in all_clusters
-            }
+            ordered_cluster_counter = {label: cluster_counter[label] for label in all_clusters}
 
         # make a new dictionary that maps cluster label: indexes of members
         ordered_cluster_counter_with_idxs = {
-            cluster_label: np.where(self._samples_clusters == cluster_label)[0]
-            for cluster_label, length in ordered_cluster_counter.items()
+            cluster_label: np.where(self._samples_clusters == cluster_label)[0] for cluster_label, length in ordered_cluster_counter.items()
         }
 
         # put all the indices in order
-        self._samples_idxs = np.hstack(
-            tuple(ordered_cluster_counter_with_idxs.values())
-        )
+        self._samples_idxs = np.hstack(tuple(ordered_cluster_counter_with_idxs.values()))
 
         return ordered_cluster_counter

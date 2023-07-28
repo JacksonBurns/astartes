@@ -27,7 +27,7 @@ These tests include unit tests, functional tests, and regression tests.
 
 ### Adding New Samplers
 Adding a new sampler should extend the `abstract_sampler.py` abstract base class.
-Each subclass should override the `_sample` method with its own algorithm for data partitioning, and the constructor (`__init__.py`) perform any data validation.
+Each subclass should override the `_sample` method with its own algorithm for data partitioning and optionally the `_before_sample` method to perform any data validation.
 
 All samplers in `astartes` are classified as one of two types: extrapolative or interpolative.
 Extrapolative samplers work by clustering data into groups (which are then partitioned into train/validation/test to enforce extrapolation) whereas interpolative samplers provide an exact _order_ in which samples should be moved into the training set.
