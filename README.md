@@ -33,8 +33,8 @@ We recommend installing `astartes` within a virtual environment, using either `v
 
 ### `conda`
 `astartes` package is also available on `conda-forge` with this command: `conda install -c conda-forge astartes`.
-To install `astartes` with support for featurizing molecules, use: `conda install -c conda-forge astartes-molecules`.
-This is a metapackage that will download the base `astartes` package as well as `aimsim`, which is the backend used for molecular featurization.
+To install `astartes` with support for featurizing molecules, use: `conda install -c conda-forge astartes aimsim`.
+This will download the base `astartes` package as well as `aimsim`, which is the backend used for molecular featurization.
 
 ### Source
 To install `astartes` from source for development, see the [Contributing & Developer Notes](#contributing--developer-notes) section.
