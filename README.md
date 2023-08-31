@@ -60,6 +60,15 @@ This will download the base `astartes` package as well as `aimsim`, which is the
 ### Source
 To install `astartes` from source for development, see the [Contributing & Developer Notes](#contributing--developer-notes) section.
 
+## Statement of Need
+Machine learning has sparked an explosion of progress in chemical kinetics, materials science, and many other fields as researchers use data-driven methods to accelerate steps in traditional workflows within some acceptable error tolerance. 
+To facilitate adoption of these models, there are two important tasks to consider:
+1. use a validation set when selecting the optimal hyperparameter for the model and separately use a held-out test set to measure performance on unseen data.
+2. evaluate model performance on both interpolative and extrapolative tasks so future users are informed of any potential limitations.
+
+`astartes` addresses both of these points by implementing an `sklearn`-compatible `train_val_test_split` function. Additional detail is provided below as well as in our [paper](https://raw.githubusercontent.com/JacksonBurns/astartes/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf).
+
+
 ## Quick Start
 `astartes` is designed as a drop-in replacement for `sklearn`'s `train_test_split` function (see the [sklearn documentation](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)). To switch to `astartes`, change `from sklearn.model_selection import train_test_split` to `from astartes import train_test_split`.
 
