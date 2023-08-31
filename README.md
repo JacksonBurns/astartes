@@ -69,7 +69,7 @@ Each will be converted to a `numpy` array for internal operations, and returned 
 > **Note**
 > The developers recommend passing `X`, `y`, and `labels` as `numpy` arrays and handling the conversion to and from other types explicity on your own. Behind-the-scenes type casting can lead to unexpected behavior!
 
-By default, `astartes` will split data randomly. Additionally, a variety of algorithmic sampling approaches can be used by specifying the `sampler` argument to the function (see the [Table of Implemented Samplers](#implemented-sampling-algorithms) for a complet list of options and their corresponding references):
+By default, `astartes` will split data randomly. Additionally, a variety of algorithmic sampling approaches can be used by specifying the `sampler` argument to the function (see the [Table of Implemented Samplers](#implemented-sampling-algorithms) for a complete list of options and their corresponding references):
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(
@@ -78,6 +78,9 @@ X_train, X_test, y_train, y_test = train_test_split(
   sampler = 'kennard_stone',  # any of the supported samplers
 )
 ```
+
+> **Note**
+> Extrapolation sampling algorithms will return an additional set of arrays (the cluster labels) which will result in a `ValueError: too many values to unpack` if not called properly. See the [`split_comparisons` Google colab demo](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/split_comparisons/split_comparisons.ipynb) for a full explanation.
 
 That's all you need to get started with `astartes`! The next sections include more examples and some demo notebooks you can try in your browser.
 
