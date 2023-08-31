@@ -147,6 +147,21 @@ add_met = {"mape": mean_absolute_percentage_error}
 grrd(sklearn_model, X, y, additional_metric=add_met)
 ```
 
+### Using `astartes` with Categorical Data
+Any of the implemented sampling algorithms whose hyperparameters allow specifying the `metric` or `distance_metric` (effectively `1-metric`) can be co-opted to work with categorical data.
+Simply encode the data in a format compatible with the `sklearn` metric of choice and then call `astartes` with that metric specified:
+```python
+X_train, X_test, y_train, y_test = train_test_split(
+  X,
+  y,
+  sampler='kennard_stone',
+  hopts={"metric": "accuracy"},
+)
+```
+
+Other samplers which do not allow specifying a categorical distance metric did not provide a method for doing so in their original inception, though it is possible that they can be adapted for this application.
+If you are interested in adding support for categorical metrics to an existing sampler, consider opening a [Feature Request](https://github.com/JacksonBurns/astartes/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.md&title=%5BFEATURE%5D%3A+)!
+
 ### Access Sampling Algorithms Directly
 The sampling algorithms implemented in `astartes` can also be directly accessed and run if it is more useful for your applications.
 In the below example, we import the Kennard Stone sampler, use it to partition a simple array, and then retrieve a sample.
