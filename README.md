@@ -22,18 +22,22 @@ Keep reading for a installation guide and links to tutorials!
 ## Installing `astartes`
 We recommend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management. Python versions 3.7, 3.8, 3.9, 3.10, and 3.11 are supported on all platforms.
 
+### `pip`
 `astartes` is available on `PyPI` and can be installed using `pip`:
 
  - To include the featurization options for chemical data, use `pip install astartes[molecules]`.
  - To install only the sampling algorithms, use `pip install astartes` (this install will have fewer dependencies and may be more readily compatible in environments with existing workflows).
 
-The base `astartes` package is also available on `conda` with this command: `conda install -c jacksonburns astartes`.
-Note that this package _does not_ include built-in support for featurizing molecules, which is currently only available from the PyPI package or a source install.
-
 > **Note**
 > Windows Powershell and MacOS Catalina or newer may complain about square brackets, so you will need to double quote the `molecules` command (i.e. `pip install "astartes[molecules]"`)
 
-To install `astartes` from source, see the [Contributing & Developer Notes](#contributing--developer-notes) section.
+### `conda`
+`astartes` package is also available on `conda-forge` with this command: `conda install -c conda-forge astartes`.
+To install `astartes` with support for featurizing molecules, use: `conda install -c conda-forge astartes aimsim`.
+This will download the base `astartes` package as well as `aimsim`, which is the backend used for molecular featurization.
+
+### Source
+To install `astartes` from source for development, see the [Contributing & Developer Notes](#contributing--developer-notes) section.
 
 ## Quick Start
 `astartes` is designed as a drop-in replacement for `sklearn`'s `train_test_split` function (see the [sklearn documentation](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)). To switch to `astartes`, change `from sklearn.model_selection import train_test_split` to `from astartes import train_test_split`.
