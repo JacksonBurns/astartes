@@ -16,6 +16,7 @@ def generate_regression_results_dict(
     val_size=0.1,
     test_size=0.1,
     print_results=False,
+    additional_metrics={},
 ):
     """
     Helper function to train a sklearn model using the provided data
@@ -32,6 +33,8 @@ def generate_regression_results_dict(
                                          the sampler and the values being another dictionary with the
                                          corresponding hyperparameters. Defaults to {}.
         print_results (bool, optional): whether to print the resulting dictionary as a neat table
+        additional_metrics (dict, optional): mapping of name (str) to metric (func) for additional metrics
+                                             such as those in sklearn.metrics or user-provided functions
 
     Returns:
         dict: nested dictionary with the format of
@@ -147,6 +150,11 @@ def generate_regression_results_dict(
         error_dict["R2"]["test"].append(test_R2)
 
         final_dict[sampler] = error_dict
+
+        for metric_name, metric_function in additional_metrics.items():
+            error_dict[metric_name]["train"] = metric_function(y_train, y_pred_train)
+            error_dict[metric_name]["val"] = metric_function(y_val, y_pred_val)
+            error_dict[metric_name]["test"] = metric_function(y_test, y_pred_test)
 
         if print_results:
             print(f"\nDisplaying results for {sampler} sampler")
