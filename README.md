@@ -151,11 +151,13 @@ grrd(sklearn_model, X, y, additional_metric=add_met)
 Any of the implemented sampling algorithms whose hyperparameters allow specifying the `metric` or `distance_metric` (effectively `1-metric`) can be co-opted to work with categorical data.
 Simply encode the data in a format compatible with the `sklearn` metric of choice and then call `astartes` with that metric specified:
 ```python
+from sklearn.metrics import jaccard_score
+
 X_train, X_test, y_train, y_test = train_test_split(
   X,
   y,
   sampler='kennard_stone',
-  hopts={"metric": "accuracy"},
+  hopts={"metric": jaccard_score},
 )
 ```
 
