@@ -6,9 +6,6 @@ from astartes.samplers import AbstractSampler
 
 
 class TimeBased(AbstractSampler):
-    def __init__(self, *args):
-        super().__init__(*args)
-
     def _before_sample(self):
         # verify that the user provided time as the labels (i.e. args[2])
         if self.labels is None:

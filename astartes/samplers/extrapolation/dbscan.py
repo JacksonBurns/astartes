@@ -4,9 +4,6 @@ from astartes.samplers import AbstractSampler
 
 
 class DBSCAN(AbstractSampler):
-    def __init__(self, *args):
-        super().__init__(*args)
-
     def _sample(self):
         """
         Implements the DBSCAN sampler to identify clusters.

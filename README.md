@@ -1,8 +1,10 @@
 <h1 align="center">astartes</h1> 
+<h2 align="center"><em>(as-tar-tees)</em></h2>
 <h3 align="center">Train:Validation:Test Algorithmic Sampling for Molecules and Arbitrary Arrays</h3>
 
 <p align="center">  
   <img alt="astarteslogo" src="https://raw.githubusercontent.com/JacksonBurns/astartes/main/astartes_logo.png">
+
 </p> 
 <div align="center">
   <table>
