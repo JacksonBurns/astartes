@@ -43,14 +43,14 @@ Keep reading for a installation guide and links to tutorials!
 ## Installing `astartes`
 We recommend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management. Python versions 3.7, 3.8, 3.9, 3.10, and 3.11 are supported on all platforms.
 
+> **Warning**
+> Windows (PowerShell) and MacOS Catalina or newer (zsh) require double quotes around text using the `'[]'` characters (i.e. `pip install "astartes[molecules]"`).
+
 ### `pip`
 `astartes` is available on `PyPI` and can be installed using `pip`:
 
  - To include the featurization options for chemical data, use `pip install astartes[molecules]`.
  - To install only the sampling algorithms, use `pip install astartes` (this install will have fewer dependencies and may be more readily compatible in environments with existing workflows).
-
-> **Note**
-> Windows Powershell and MacOS Catalina or newer may complain about square brackets, so you will need to double quote the `molecules` command (i.e. `pip install "astartes[molecules]"`)
 
 ### `conda`
 `astartes` package is also available on `conda-forge` with this command: `conda install -c conda-forge astartes`.
