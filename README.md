@@ -66,8 +66,13 @@ To facilitate adoption of these models, there are two important tasks to conside
 1. use a validation set when selecting the optimal hyperparameter for the model and separately use a held-out test set to measure performance on unseen data.
 2. evaluate model performance on both interpolative and extrapolative tasks so future users are informed of any potential limitations.
 
-`astartes` addresses both of these points by implementing an `sklearn`-compatible `train_val_test_split` function. Additional detail is provided below as well as in our [paper](https://raw.githubusercontent.com/JacksonBurns/astartes/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf).
+`astartes` addresses both of these points by implementing an `sklearn`-compatible `train_val_test_split` function.
+Additional technical detail is provided below as well as in our companion [paper](https://raw.githubusercontent.com/JacksonBurns/astartes/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf).
+For a demo-based explainer using machine learning on a fast food menu, see the `astartes` Reproducible Notebook published at the United States Research Software Engineers Conference at [this page](https://jacksonburns.github.io/use-rse-23-astartes/split_comparisons.html).
 
+### Target Audience
+`astartes` is generally applicable to machine learning involving both discovery and inference _and_ model validation.
+There are specific functions in `astartes` for applications in cheminformatics (`astartes.molecules`) but the methods implemented are general to all numerical data.
 
 ## Quick Start
 `astartes` is designed as a drop-in replacement for `sklearn`'s `train_test_split` function (see the [sklearn documentation](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)). To switch to `astartes`, change `from sklearn.model_selection import train_test_split` to `from astartes import train_test_split`.
@@ -76,7 +81,7 @@ Like `sklearn`, `astartes` accepts any iterable object as `X`, `y`, and `labels`
 Each will be converted to a `numpy` array for internal operations, and returned as a `numpy` array with limited exceptions: if `X` is a `pandas` `DataFrame`, `y` is a `Series`, or `labels` is a `Series`, `astartes` will cast it back to its original type including its index and column names.
 
 > **Note**
-> The developers recommend passing `X`, `y`, and `labels` as `numpy` arrays and handling the conversion to and from other types explicity on your own. Behind-the-scenes type casting can lead to unexpected behavior!
+> The developers recommend passing `X`, `y`, and `labels` as `numpy` arrays and handling the conversion to and from other types explicitly on your own. Behind-the-scenes type casting can lead to unexpected behavior!
 
 By default, `astartes` will split data randomly. Additionally, a variety of algorithmic sampling approaches can be used by specifying the `sampler` argument to the function (see the [Table of Implemented Samplers](#implemented-sampling-algorithms) for a complete list of options and their corresponding references):
 
@@ -91,7 +96,8 @@ X_train, X_test, y_train, y_test = train_test_split(
 > **Note**
 > Extrapolation sampling algorithms will return an additional set of arrays (the cluster labels) which will result in a `ValueError: too many values to unpack` if not called properly. See the [`split_comparisons` Google colab demo](https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/split_comparisons/split_comparisons.ipynb) for a full explanation.
 
-That's all you need to get started with `astartes`! The next sections include more examples and some demo notebooks you can try in your browser.
+That's all you need to get started with `astartes`!
+The next sections include more examples and some demo notebooks you can try in your browser.
 
 ### Example Notebooks
 
