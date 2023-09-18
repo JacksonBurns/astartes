@@ -86,6 +86,10 @@ Each will be converted to a `numpy` array for internal operations, and returned 
 By default, `astartes` will split data randomly. Additionally, a variety of algorithmic sampling approaches can be used by specifying the `sampler` argument to the function (see the [Table of Implemented Samplers](#implemented-sampling-algorithms) for a complete list of options and their corresponding references):
 
 ```python
+from sklearn.datasets import load_diabetes
+
+X, y = load_diabetes(return_X_y=True)
+
 X_train, X_test, y_train, y_test = train_test_split(
   X,  # preferably numpy arrays, but astartes will cast it for you
   y,
