@@ -1,4 +1,5 @@
 <h1 align="center">astartes</h1> 
+<h2 align="center"><em>(as-tar-tees)</em></h2>
 <h3 align="center">Train:Validation:Test Algorithmic Sampling for Molecules and Arbitrary Arrays</h3>
 
 <p align="center">  
