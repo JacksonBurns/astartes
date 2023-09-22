@@ -20,9 +20,6 @@ from astartes.samplers import AbstractSampler
 
 
 class SphereExclusion(AbstractSampler):
-    def __init__(self, *args):
-        super().__init__(*args)
-
     def _sample(self):
         """Cluster X according to a Sphere Exclusion-like algorithm with arbitrary distance metrics."""
         # euclidian, cosine, or city block from get_configs

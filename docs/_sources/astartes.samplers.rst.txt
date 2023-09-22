@@ -36,14 +36,6 @@ astartes.samplers.kennard\_stone module
    :undoc-members:
    :show-inheritance:
 
-astartes.samplers.mtsd module
------------------------------
-
-.. automodule:: astartes.samplers.mtsd
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 astartes.samplers.optisim module
 --------------------------------
 

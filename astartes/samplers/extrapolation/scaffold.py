@@ -27,9 +27,6 @@ from astartes.utils.warnings import NoMatchingScaffold
 
 
 class Scaffold(AbstractSampler):
-    def __init__(self, *args):
-        super().__init__(*args)
-
     def _before_sample(self):
         # ensure that X contains entries that are either a SMILES string or an RDKit Molecule
         if not all(isinstance(i, str) for i in self.X) and not all(isinstance(i, Chem.rdchem.Mol) for i in self.X):

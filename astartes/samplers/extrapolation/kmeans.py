@@ -6,9 +6,6 @@ from astartes.samplers import AbstractSampler
 
 
 class KMeans(AbstractSampler):
-    def __init__(self, *args):
-        super().__init__(*args)
-
     def _sample(self):
         """Implements the K-Means sampler to identify clusters."""
         # use the sklearn kmeans model

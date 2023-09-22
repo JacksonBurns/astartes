@@ -5,9 +5,6 @@ from astartes.samplers import AbstractSampler
 
 
 class Random(AbstractSampler):
-    def __init__(self, *args):
-        super().__init__(*args)
-
     def _sample(self):
         """Passthrough to sklearn train_test_split"""
         idx_list = list(range(len(self.X)))
