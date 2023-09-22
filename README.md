@@ -132,7 +132,8 @@ You can now train your model with `X_train`, optimize your model with `X_val`, a
 ### Evaluate the Impact of Splitting Algorithms
 For data with many features it can be difficult to visualize how different sampling algorithms change the distribution of data into training, validation, and testing like we do in some of the demo notebooks.
 To aid in analyzing the impact of the algorithms, `astartes` provides `generate_regression_results_dict`.
-This function allows users to quickly evaluate the impact of different splitting techniques on any model supported by `sklearn`. All results are stored in a dictionary format and can be displayed in a neatly formatted table using the optional `print_results` argument.
+This function allows users to quickly evaluate the impact of different splitting techniques on any `sklearn`-compatible model's performance.
+All results are stored in a nested dictionary (`{sampler:{metric:{split:score}}}`) format and can be displayed in a neatly formatted table using the optional `print_results` argument.
 
 ```python
 from sklearn.svm import LinearSVR
@@ -164,6 +165,8 @@ add_met = {"mape": mean_absolute_percentage_error}
 
 grrd(sklearn_model, X, y, additional_metric=add_met)
 ```
+
+See the docstring for `generate_regression_results_dict` (with `help(generate_regression_results_dict)`) for more information.
 
 ### Using `astartes` with Categorical Data
 Any of the implemented sampling algorithms whose hyperparameters allow specifying the `metric` or `distance_metric` (effectively `1-metric`) can be co-opted to work with categorical data.
