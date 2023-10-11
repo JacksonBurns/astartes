@@ -5,9 +5,6 @@ from astartes.utils.fast_kennard_stone import fast_kennard_stone
 
 
 class KennardStone(AbstractSampler):
-    def __init__(self, *args):
-        super().__init__(*args)
-
     def _sample(self):
         """
         Implements the Kennard-Stone algorithm

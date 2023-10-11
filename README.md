@@ -130,7 +130,7 @@ X_train, X_val, X_test = train_val_test_split(X, sampler = 'sphere_exclusion')
 ```
 You can now train your model with `X_train`, optimize your model with `X_val`, and measure its performance with `X_test`.
 
-### Evaluate the Impact of Splitting Algorithms
+### Evaluate the Impact of Splitting Algorithms on Regression Models
 For data with many features it can be difficult to visualize how different sampling algorithms change the distribution of data into training, validation, and testing like we do in some of the demo notebooks.
 To aid in analyzing the impact of the algorithms, `astartes` provides `generate_regression_results_dict`.
 This function allows users to quickly evaluate the impact of different splitting techniques on any `sklearn`-compatible model's performance.
@@ -139,10 +139,10 @@ All results are stored in a nested dictionary (`{sampler:{metric:{split:score}}}
 ```python
 from sklearn.svm import LinearSVR
 
-from astartes.utils import generate_regression_results_dict
+from astartes.utils import generate_regression_results_dict as grrd
 
 sklearn_model = LinearSVR()
-results_dict = generate_regression_results_dict(
+results_dict = grrd(
     sklearn_model,
     X,
     y,

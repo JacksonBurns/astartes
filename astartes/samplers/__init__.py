@@ -3,12 +3,11 @@ from .abstract_sampler import AbstractSampler
 
 # implementations
 from .extrapolation import DBSCAN, KMeans, OptiSim, Scaffold, SphereExclusion, TimeBased
-from .interpolation import MTSD, SPXY, KennardStone, Random
+from .interpolation import SPXY, KennardStone, Random
 
 IMPLEMENTED_INTERPOLATION_SAMPLERS = (
     "random",
     "kennard_stone",
-    # "mtsd",
     "spxy",
 )
 

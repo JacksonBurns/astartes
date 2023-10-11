@@ -4,8 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "astartes"
-# update this in astartes/__init__.py, too
-version = "1.1.2"
+dynamic = ["version"]
 authors = [
     { name = "Jackson Burns", email = "jwburns@mit.edu" },
     { name = "Himaghna Bhattacharjee", email = "himaghna@udel.edu" },
@@ -43,3 +42,6 @@ include-package-data = true
 where = ["."]
 include = ["astartes*"]
 exclude = ["docs*", "examples*", "test*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "astartes.__version__"}

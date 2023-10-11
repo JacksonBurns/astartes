@@ -20,9 +20,6 @@ from astartes.utils.fast_kennard_stone import fast_kennard_stone
 
 
 class SPXY(AbstractSampler):
-    def __init__(self, *args):
-        super().__init__(*args)
-
     def _before_sample(self):
         if self.y is None:
             raise InvalidConfigurationError("SPXY sampler requires both X and y arrays. Provide y or switch to kennard_stone.")
