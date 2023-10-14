@@ -55,7 +55,7 @@ However, `astartes` operates on arbitrary vector inputs, so its principals and w
 # Statement of Need
 
 Machine learning has sparked an explosion of progress in chemical kinetics [@komp2022progress; @spiekermann2022fast], drug discovery [@yang2019concepts; @bannigan2021machine], materials science [@wei2019machine], and energy storage [@jha2023learning] as researchers use data-driven methods to accelerate steps in traditional workflows within some acceptable error tolerance.
-To facilitate adoption of these models, researchers must critically think about several topics, such as comparing model performance to relevant baselines, operating on user-friendly inputs, and reporting performance on both interpolative and extrapolative tasks<!-- cite Kevin's comment article-->. 
+To facilitate adoption of these models, researchers must critically think about several topics, such as comparing model performance to relevant baselines, operating on user-friendly inputs, and reporting performance on both interpolative and extrapolative tasks @spiekermann2023comment. 
 `astartes` aims to make it straightforward for machine learning scientists and researchers to focus on two important points: rigorous hyperparameter optimization and accurate performance evaluation.
 
 First, `astartes`' key function `train_val_test_split` returns splits for training, validation, and testing sets using an `sklearn`-like interface.
