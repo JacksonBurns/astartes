@@ -16,22 +16,22 @@
     <tr>
       <td><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/astartes?style=plastic"></td>
       <td><img alt="Reproduce Paper" src="https://github.com/JacksonBurns/astartes/actions/workflows/reproduce_paper.yml/badge.svg?branch=main&event=schedule"></td>
-      <td><a href="https://doi.org/10.5281/zenodo.8147205"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8147205.svg" alt="DOI"></a></td>
+      <td><a href="https://github.com/pyOpenSci/software-review/issues/120"><img src="https://tinyurl.com/y22nb8up" alt="pyOpenSci approved" /></a></td>
     </tr>
     <tr>
       <td><img alt="PyPI - License" src="https://img.shields.io/github/license/JacksonBurns/astartes"></td>
       <td><img alt="Test Status" src="https://github.com/JacksonBurns/astartes/actions/workflows/run_tests.yml/badge.svg?branch=main&event=schedule"></td>
-      <td><img alt="PyPI" src="https://img.shields.io/pypi/v/astartes"></td>
+      <td><a href="https://doi.org/10.5281/zenodo.8147205"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8147205.svg" alt="DOI"></a></td>
     </tr>
     <tr>
       <td><img alt="PyPI - Total Downloads" src="https://static.pepy.tech/personalized-badge/astartes?period=total&units=none&left_color=grey&right_color=brightgreen&left_text=Lifetime%20Downloads"></td>
       <td><a alt="Documentation Status"><img src="https://github.com/JacksonBurns/astartes/actions/workflows/gen_docs.yml/badge.svg"></td>
-      <td><img alt="conda-forge version" src="https://img.shields.io/conda/vn/conda-forge/astartes.svg"></td>
+      <td><img alt="PyPI" src="https://img.shields.io/pypi/v/astartes"></td>
     </tr>
     <tr>
       <td><img alt="GitHub Repo Stars" src="https://img.shields.io/github/stars/JacksonBurns/astartes?style=social"></td>
       <td><a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed." /></a></td>
-      <td></td>
+      <td><img alt="conda-forge version" src="https://img.shields.io/conda/vn/conda-forge/astartes.svg"></td>
     </tr>
   </table>
 </div>
