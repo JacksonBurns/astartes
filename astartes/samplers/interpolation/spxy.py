@@ -16,22 +16,18 @@ from scipy.spatial.distance import pdist, squareform
 
 from astartes.samplers import AbstractSampler
 from astartes.utils.exceptions import InvalidConfigurationError
+from astartes.utils.fast_kennard_stone import fast_kennard_stone
 
 
 class SPXY(AbstractSampler):
-    def __init__(self, *args):
-        if args[1] is None:
-            raise InvalidConfigurationError(
-                "SPXY sampler requires both X and y arrays. Provide y or switch to kennard_stone."
-            )
-        super().__init__(*args)
+    def _before_sample(self):
+        if self.y is None:
+            raise InvalidConfigurationError("SPXY sampler requires both X and y arrays. Provide y or switch to kennard_stone.")
 
     def _sample(self):
         """
         Implements the SPXY algorithm as described by Saldahna et al.
         """
-        n_samples = len(self.X)
-
         distance_metric = self.get_config("metric", "euclidean")
 
         y_2d = self.y[:, np.newaxis]
@@ -44,27 +40,5 @@ class SPXY(AbstractSampler):
 
         # sum the distances as per eq. 3 of Saldahna, set diagonal to nan
         spxy_distance = squareform(y_pdist + X_dist)
-        # when searching for max distance, disregard self
-        np.fill_diagonal(spxy_distance, -np.inf)
 
-        # get the row/col of maximum (greatest distance)
-        max_idx = np.nanargmax(spxy_distance)
-        max_coords = np.unravel_index(max_idx, spxy_distance.shape)
-
-        # list of indices which have been selected
-        # - used to mask ks_distance
-        # - also tracks order of kennard-stone selection
-        already_selected = list(max_coords)
-
-        # minimum distance of all unselected samples to the two selected samples
-        min_distances = np.min(spxy_distance[:, already_selected], axis=1)
-        for _ in range(n_samples - 2):
-            # find the next sample with the largest minimum distance to any sample already selected
-            already_selected.append(
-                np.argmax(min_distances),
-            )
-            # get minimum distance of unselected samples to that sample only
-            new_distances = np.min(spxy_distance[:, [already_selected[-1]]], axis=1)
-            min_distances = np.minimum(min_distances, new_distances)
-
-        self._samples_idxs = np.array(already_selected, dtype=int)
+        self._samples_idxs = fast_kennard_stone(spxy_distance)

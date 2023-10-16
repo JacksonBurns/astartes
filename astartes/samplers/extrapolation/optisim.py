@@ -59,9 +59,6 @@ from astartes.samplers import AbstractSampler
 
 
 class OptiSim(AbstractSampler):
-    def __init__(self, *args):
-        super().__init__(*args)
-
     def _sample(self):
         """Implementes the OptiSim sampler"""
         self._init_random(self.get_config("random_state", 42))
