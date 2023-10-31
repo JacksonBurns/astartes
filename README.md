@@ -26,12 +26,12 @@
     <tr>
       <td><img alt="PyPI - Total Downloads" src="https://static.pepy.tech/personalized-badge/astartes?period=total&units=none&left_color=grey&right_color=brightgreen&left_text=Lifetime%20Downloads"></td>
       <td><a alt="Documentation Status"><img src="https://github.com/JacksonBurns/astartes/actions/workflows/gen_docs.yml/badge.svg"></td>
-      <td><img alt="PyPI" src="https://img.shields.io/pypi/v/astartes"></td>
+      <td><img alt="PyPI" src="https://img.shields.io/pypi/v/astartes"> <img alt="conda-forge version" src="https://img.shields.io/conda/vn/conda-forge/astartes.svg"></td>
     </tr>
     <tr>
       <td><img alt="GitHub Repo Stars" src="https://img.shields.io/github/stars/JacksonBurns/astartes?style=social"></td>
       <td><a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed." /></a></td>
-      <td><img alt="conda-forge version" src="https://img.shields.io/conda/vn/conda-forge/astartes.svg"></td>
+      <td><a href="https://joss.theoj.org/papers/8a9cfc71d6f75410b06510a646d5f783"><img src="https://joss.theoj.org/papers/8a9cfc71d6f75410b06510a646d5f783/status.svg"></a></td>
     </tr>
   </table>
 </div>
