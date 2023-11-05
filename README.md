@@ -68,7 +68,7 @@ To facilitate adoption of these models, there are two important tasks to conside
 2. evaluate model performance on both interpolative and extrapolative tasks so future users are informed of any potential limitations.
 
 `astartes` addresses both of these points by implementing an `sklearn`-compatible `train_val_test_split` function.
-Additional technical detail is provided below as well as in our companion [paper](https://raw.githubusercontent.com/JacksonBurns/astartes/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf).
+Additional technical detail is provided below as well as in our companion paper in the Journal of Open Source Software: [Machine Learning Validation via Rational Dataset Sampling with astartes](https://joss.theoj.org/papers/10.21105/joss.05996).
 For a demo-based explainer using machine learning on a fast food menu, see the `astartes` Reproducible Notebook published at the United States Research Software Engineers Conference at [this page](https://jacksonburns.github.io/use-rse-23-astartes/split_comparisons.html).
 
 ### Target Audience
@@ -291,23 +291,9 @@ We continually run regression tests to catch these, and will list all _known_ li
 `astartes` is still consistent between runs on the same platform in all cases, and other samplers are not impacted by this apparent bug.
 
 ## How to Cite
-If you use `astartes` in your work please use the below citation or the "Cite this repository" button on GitHub:
-> **BibTeX**
-> @software{burns_jackson_2023_8147205,
->   author       = {Burns, Jackson and
->                   Spiekermann, Kevin and
->                   Bhattacharjee, Himaghna and
->                   Vlachos, Dionisios and
->                   Green, William},
->   title        = {{Machine Learning Validation via Rational Dataset 
->                    Sampling with astartes}},
->   month        = may,
->   year         = 2023,
->   publisher    = {Zenodo},
->   version      = {1.1.1},
->   doi          = {10.5281/zenodo.8147205},
->   url          = {https://doi.org/10.5281/zenodo.8147205}
-> }
+If you use `astartes` in your work please follow the link below to our (Open Access!) paper in the Journal of Open Source Software or use the "Cite this repository" button on GitHub.
+
+[Machine Learning Validation via Rational Dataset Sampling with astartes](https://joss.theoj.org/papers/10.21105/joss.05996)
 
 ## Contributing & Developer Notes
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for instructions on installing `astartes` for development, making a contribution, and general guidance on the design of `astartes`.
