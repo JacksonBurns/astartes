@@ -1,56 +1,56 @@
-# This CITATION.cff file was generated with cffinit.
-# Visit https://bit.ly/cffinit to generate yours today!
-
-cff-version: 1.2.0
-title: astartes
-message: >-
-  If you use this software, please cite it using the
-  metadata from this file.
-type: software
+cff-version: "1.2.0"
 authors:
-  - given-names: Jackson
-    family-names: Burns
-    orcid: 'https://orcid.org/0000-0002-0657-9426'
-    affiliation: >-
-      Center for Computational Science and Engineering,
-      Massachusetts Institute of Technology
-  - given-names: Kevin
-    family-names: Spiekermann
-    affiliation: >-
-      Department of Chemical Engineering, Massachusetts
-      Institute of Technology, United States
-    orcid: 'https://orcid.org/0000-0002-9484-9253'
-  - given-names: Himaghna
-    family-names: Bhattacharjee
-    orcid: 'https://orcid.org/0000-0002-6598-3939'
-    affiliation: >-
-      Department of Chemical and Biomolecular Engineering,
-      University of Delaware, United States
-  - given-names: Dionisios
-    family-names: Vlachos
-    orcid: 'https://orcid.org/0000-0002-6795-8403'
-    affiliation: >-
-      Department of Chemical and Biomolecular Engineering,
-      University of Delaware, United States
-  - given-names: William
-    family-names: Green
-    orcid: 'https://orcid.org/0000-0003-2603-9694'
-    affiliation: >-
-      Department of Chemical and Biomolecular Engineering,
-      University of Delaware, United States
-identifiers:
-  - type: doi
-    value: 10.5281/zenodo.7884532
-    description: zenodo deposit of v1.0.0
-repository-code: 'https://github.com/JacksonBurns/astartes'
-url: 'https://jacksonburns.github.io/astartes/'
-abstract: Better Data Splits for Machine Learning with astartes
-keywords:
-  - Python
-  - machine learning
-  - sampling
-  - interpolation
-  - extrapolation
-  - data splits
-  - cheminformatics
-license: MIT
+- family-names: Burns
+  given-names: Jackson W.
+  orcid: "https://orcid.org/0000-0002-0657-9426"
+- family-names: Spiekermann
+  given-names: Kevin A.
+  orcid: "https://orcid.org/0000-0002-9484-9253"
+- family-names: Bhattacharjee
+  given-names: Himaghna
+  orcid: "https://orcid.org/0000-0002-6598-3939"
+- family-names: Vlachos
+  given-names: Dionisios G.
+  orcid: "https://orcid.org/0000-0002-6795-8403"
+- family-names: Green
+  given-names: William H.
+  orcid: "https://orcid.org/0000-0003-2603-9694"
+contact:
+- family-names: Burns
+  given-names: Jackson W.
+  orcid: "https://orcid.org/0000-0002-0657-9426"
+doi: 10.5281/zenodo.8147205
+message: If you use this software, please cite our article in the
+  Journal of Open Source Software.
+preferred-citation:
+  authors:
+  - family-names: Burns
+    given-names: Jackson W.
+    orcid: "https://orcid.org/0000-0002-0657-9426"
+  - family-names: Spiekermann
+    given-names: Kevin A.
+    orcid: "https://orcid.org/0000-0002-9484-9253"
+  - family-names: Bhattacharjee
+    given-names: Himaghna
+    orcid: "https://orcid.org/0000-0002-6598-3939"
+  - family-names: Vlachos
+    given-names: Dionisios G.
+    orcid: "https://orcid.org/0000-0002-6795-8403"
+  - family-names: Green
+    given-names: William H.
+    orcid: "https://orcid.org/0000-0003-2603-9694"
+  date-published: 2023-11-05
+  doi: 10.21105/joss.05996
+  issn: 2475-9066
+  issue: 91
+  journal: Journal of Open Source Software
+  publisher:
+    name: Open Journals
+  start: 5996
+  title: Machine Learning Validation via Rational Dataset Sampling with
+    astartes
+  type: article
+  url: "https://joss.theoj.org/papers/10.21105/joss.05996"
+  volume: 8
+title: Machine Learning Validation via Rational Dataset Sampling with
+  `astartes`
