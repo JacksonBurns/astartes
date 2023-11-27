@@ -180,10 +180,10 @@ def _extrapolative_sampling(
     n_test_samples = floor(len(sampler_instance.X) * test_size)
 
     if val_size == 0:
-        max_shufflable_size=min(n_train_samples, n_test_samples)
+        max_shufflable_size = min(n_train_samples, n_test_samples)
     else:
         # typically, the test set and val set are smaller than the training set
-        max_shufflable_size=min(n_test_samples, n_val_samples)
+        max_shufflable_size = min(n_test_samples, n_val_samples)
     # unlike interpolative, cannot calculate n_train_samples here
     # since it will vary based on cluster_lengths
 
