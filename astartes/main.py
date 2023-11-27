@@ -175,15 +175,22 @@ def _extrapolative_sampling(
         calls: return_helper
     """
     # calculate "goal" splitting sizes
-    n_test_samples = floor(len(sampler_instance.X) * test_size)
+    n_train_samples = floor(len(sampler_instance.X) * train_size)
     n_val_samples = floor(len(sampler_instance.X) * val_size)
+    n_test_samples = floor(len(sampler_instance.X) * test_size)
+
+    if val_size == 0:
+        max_shufflable_size = min(n_train_samples, n_test_samples)
+    else:
+        # typically, the test set and val set are smaller than the training set
+        max_shufflable_size = min(n_test_samples, n_val_samples)
     # unlike interpolative, cannot calculate n_train_samples here
     # since it will vary based on cluster_lengths
 
     # largest clusters must go into largest set, but smaller ones can optionally
     # be shuffled
     cluster_counter = sampler_instance.get_sorted_cluster_counter(
-        max_shufflable_size=min(n_test_samples, n_val_samples)
+        max_shufflable_size=max_shufflable_size
         if random_state is not None
         else None
     )

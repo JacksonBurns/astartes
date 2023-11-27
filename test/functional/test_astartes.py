@@ -611,6 +611,40 @@ class Test_astartes(unittest.TestCase):
                 ),
             )
 
+    def test_extrapolative_shuffling(self):
+        """extrapolative samplers should split data differently with different random_state"""
+        result_1 = train_test_split(
+            self.X,
+            self.y,
+            labels=self.labels,
+            test_size=0.7,
+            train_size=0.3,
+            sampler="kmeans",
+            random_state=42,
+            return_indices=True,
+            hopts=dict(
+                n_clusters=6,
+            ),
+        )
+        result_2 = train_test_split(
+            self.X,
+            self.y,
+            labels=self.labels,
+            test_size=0.7,
+            train_size=0.3,
+            sampler="kmeans",
+            random_state=41,
+            return_indices=True,
+            hopts=dict(
+                n_clusters=6,
+            ),
+        )
+        for arr_1, arr_2 in zip(result_1, result_2):
+            self.assertFalse(
+                np.array_equal(arr_1, arr_2),
+                "random_state did not result in different splits",
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
