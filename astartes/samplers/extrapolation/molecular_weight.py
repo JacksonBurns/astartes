@@ -1,8 +1,8 @@
 """
-This sampler partitions the data based on molecular weight. It first sorts the 
-molecules by molecular weight and then places the smallest molecules in the training set, 
-the next smallest in the validation set if applicable, and finally the largest molecules 
-in the testing set. 
+This sampler partitions the data based on molecular weight. It first sorts the
+molecules by molecular weight and then places the smallest molecules in the training set,
+the next smallest in the validation set if applicable, and finally the largest molecules
+in the testing set.
 """
 
 import numpy as np
