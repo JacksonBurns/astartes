@@ -6,6 +6,7 @@ from astartes.samplers import (
     SPXY,
     KennardStone,
     KMeans,
+    MolecularWeight,
     OptiSim,
     Random,
     Scaffold,
@@ -49,6 +50,8 @@ class SamplerFactory:
             sampler_class = KMeans
         elif self.sampler == "sphere_exclusion":
             sampler_class = SphereExclusion
+        elif self.sampler == "molecular_weight":
+            sampler_class = MolecularWeight
         elif self.sampler == "optisim":
             sampler_class = OptiSim
         elif self.sampler == "spxy":
