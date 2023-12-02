@@ -2,7 +2,7 @@
 from .abstract_sampler import AbstractSampler
 
 # implementations
-from .extrapolation import DBSCAN, KMeans, OptiSim, Scaffold, SphereExclusion, TimeBased, TargetProperty
+from .extrapolation import DBSCAN, KMeans, MolecularWeight, OptiSim, Scaffold, SphereExclusion, TimeBased, TargetProperty
 from .interpolation import SPXY, KennardStone, Random
 
 IMPLEMENTED_INTERPOLATION_SAMPLERS = (
