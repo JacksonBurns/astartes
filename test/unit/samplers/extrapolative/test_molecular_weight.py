@@ -120,7 +120,7 @@ class Test_MolecularWeight(unittest.TestCase):
             ),
             "Test labels incorrect.",
         )
-        
+
     def test_molecular_weight(self):
         """Directly instantiate and test MolecularWeight."""
         molecular_weight_instance = MolecularWeight(
