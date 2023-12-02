@@ -88,7 +88,7 @@ class Test_MolecularWeight(unittest.TestCase):
         self.assertIsNone(
             np.testing.assert_array_equal(
                 X_test,
-                self.X[8:], # X was already sorted by ascending molecular weight
+                self.X[8:],  # X was already sorted by ascending molecular weight
             ),
             "Test X incorrect.",
         )
