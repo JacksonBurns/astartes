@@ -15,6 +15,7 @@ IMPLEMENTED_EXTRAPOLATION_SAMPLERS = (
     "dbscan",
     "scaffold",
     "kmeans",
+    "molecular_weight",
     "optisim",
     "sphere_exclusion",
     "time_based",
