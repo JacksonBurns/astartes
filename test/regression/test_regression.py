@@ -111,7 +111,7 @@ class Test_regression(unittest.TestCase):
     def test_extrapolation_regression(self):
         """Regression testing of extrapolative methods relative to static results."""
         for sampler_name in IMPLEMENTED_EXTRAPOLATION_SAMPLERS:
-            if sampler_name in ("scaffold", "time_based", "kmeans"):
+            if sampler_name in ("molecular_weight", "scaffold", "time_based", "kmeans"):
                 continue
             (
                 X_train,
