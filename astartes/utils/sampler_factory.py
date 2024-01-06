@@ -59,7 +59,7 @@ class SamplerFactory:
             sampler_class = SPXY
         elif self.sampler == "scaffold":
             sampler_class = Scaffold
-        elif self.sampler == 'time_based':
+        elif self.sampler == "time_based":
             sampler_class = TimeBased
         elif self.sampler == "target_property":
             sampler_class = TargetProperty
