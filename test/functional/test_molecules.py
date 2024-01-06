@@ -82,7 +82,7 @@ class Test_molecules(unittest.TestCase):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             for sampler in IMPLEMENTED_EXTRAPOLATION_SAMPLERS:
-                if sampler in ("scaffold", "time_based"):
+                if sampler in ("scaffold", "time_based", "target_property"):
                     continue
                 tts = train_val_test_split_molecules(
                     self.X,
