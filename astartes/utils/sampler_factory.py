@@ -58,7 +58,7 @@ class SamplerFactory:
             sampler_class = SPXY
         elif self.sampler == "scaffold":
             sampler_class = Scaffold
-        elif self.sampler == 'time_based':
+        elif self.sampler == "time_based":
             sampler_class = TimeBased
         else:
             possiblity = get_close_matches(
