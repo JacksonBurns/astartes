@@ -11,6 +11,7 @@ from astartes.samplers import (
     Scaffold,
     SphereExclusion,
     TimeBased,
+    TargetProperty,
 )
 from astartes.utils.exceptions import SamplerNotImplementedError
 
@@ -57,6 +58,8 @@ class SamplerFactory:
             sampler_class = Scaffold
         elif self.sampler == 'time_based':
             sampler_class = TimeBased
+        elif self.sampler == "target_property":
+            sampler_class = TargetProperty
         else:
             possiblity = get_close_matches(
                 self.sampler,
