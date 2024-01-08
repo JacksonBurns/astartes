@@ -30,7 +30,7 @@ class Scaffold(AbstractSampler):
     def _before_sample(self):
         # ensure that X contains entries that are either a SMILES string or an RDKit Molecule
         if not all(isinstance(i, str) for i in self.X) and not all(isinstance(i, Chem.rdchem.Mol) for i in self.X):
-            msg = "Scaffold class requires input X to be an iterable of SMILES strings"
+            msg = "Scaffold class requires input X to be an iterable of SMILES strings, InChI strings, or RDKit Molecules"
             raise TypeError(msg)
 
     def _sample(self):
@@ -42,7 +42,8 @@ class Scaffold(AbstractSampler):
         for cluster_id, (scaffold, indices) in enumerate(scaffold_to_indices.items()):
             if scaffold == "":
                 warnings.warn(
-                    f"No matching scaffold was found for the {len(indices)} " f"molecules corresponding to indices {indices}",
+                    f"No matching scaffold was found for the {len(indices)} "
+                    f"molecules corresponding to indices {indices}",
                     NoMatchingScaffold,
                 )
             for idx in indices:
