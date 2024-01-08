@@ -42,7 +42,7 @@ class Scaffold(AbstractSampler):
         for cluster_id, (scaffold, indices) in enumerate(scaffold_to_indices.items()):
             if scaffold == "":
                 warnings.warn(
-                    f"No matching scaffold was found for the {len(indices)} " 
+                    f"No matching scaffold was found for the {len(indices)} "
                     f"molecules corresponding to indices {indices}",
                     NoMatchingScaffold,
                 )
