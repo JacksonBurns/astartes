@@ -66,7 +66,7 @@ jobs:
           python -m pip install coverage pytest
       - name: Run Tests
         run: |
-          coverage run --source=. --omit=astartes/__init__.py,setup.py,test/* -m pytest discover -v
+          coverage run --source=. --omit=astartes/__init__.py,setup.py,test/* -m pytest -v
       - name: Show Coverage
         run: |
           coverage report -m
