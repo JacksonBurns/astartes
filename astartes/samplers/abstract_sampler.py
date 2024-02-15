@@ -1,4 +1,5 @@
 """Abstract Sampling class"""
+
 from abc import ABC, abstractmethod
 from collections import Counter
 
@@ -30,9 +31,17 @@ class AbstractSampler(ABC):
         self._current_sample_idx = 0
         self._before_sample()
         self._sample()
+        self._after_sample()
 
     def _before_sample(self):
         """This method should perform any data validation, manipulation, etc. required before proceeding to _sample
+
+        Returns:
+            None: Returns nothing, raises an Exception if something is wrong.
+        """
+
+    def _after_sample(self):
+        """This method should perform any checks, mutations, etc. required after _sample is completed.
 
         Returns:
             None: Returns nothing, raises an Exception if something is wrong.
