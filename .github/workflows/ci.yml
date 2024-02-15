@@ -1,0 +1,163 @@
+name: Continuous Integration
+on:
+  schedule:
+    - cron: "0 8 * * 1-5"
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: actions-id-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-formatting:
+    name: Check Build and Formatting Errors
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: |
+          python -m pip install pycodestyle isort
+
+      - name: Check Build
+        run: |
+          python -m pip install .
+      
+      - name: Run pycodestyle
+        run: |
+          pycodestyle --statistics --count --max-line-length=150 --show-source --ignore=E203 .
+
+      - name: Check Import Ordering Errors
+        run: |
+          isort --check-only --verbose .
+
+  build-and-test:
+    needs: check-formatting
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -el {0}
+    name: ${{ matrix.os }} Python ${{ matrix.python-version }} Subtest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: mamba-org/setup-micromamba@main
+        with:
+          environment-name: temp
+          condarc: |
+            channels:
+              - defaults
+              - conda-forge
+            channel_priority: flexible
+          create-args: |
+            python=${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          python -m pip install -e .[molecules]
+          python -m pip install coverage pytest
+      - name: Run Tests
+        run: |
+          coverage run --source=. --omit=astartes/__init__.py,setup.py,test/* -m pytest discover -v
+      - name: Show Coverage
+        run: |
+          coverage report -m
+
+  ipynb-ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        nb-file:
+          ["barrier_prediction_with_RDB7/RDB7_barrier_prediction_example", "train_val_test_split_sklearn_example/train_val_test_split_example", "split_comparisons/split_comparisons", "mlpds_2023_astartes_demonstration/mlpds_2023_demo"]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    name: Check ${{ matrix.nb-file }} Notebook Execution
+    steps:
+      - uses: actions/checkout@v3
+      - uses: mamba-org/setup-micromamba@main
+        with:
+          environment-name: temp
+          condarc: |
+            channels:
+              - defaults
+              - conda-forge
+            channel_priority: flexible
+          create-args: |
+            python=3.11
+      - name: Install dependencies
+        run: |
+          python -m pip install -e .[molecules,demos]
+          python -m pip install notebook
+      - name: Test Execution
+        run: |
+          cd examples/$(dirname ${{ matrix.nb-file }})
+          jupyter nbconvert --to script $(basename ${{ matrix.nb-file }}).ipynb
+          ipython $(basename ${{ matrix.nb-file }}).py
+
+  coverage-check:
+    if: contains(github.event.pull_request.labels.*.name, 'PR Ready for Review')
+    needs: [build-and-test, ipynb-ci]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: "3.10"
+      - name: Install Dependencies
+        run: |
+          python -m pip install -e .[molecules]
+          python -m pip install coverage
+      - name: Run Tests
+        run: |
+          coverage run --source=. --omit=astartes/__init__.py,setup.py,test/*,astartes/samplers/sampler.py -m unittest discover -v
+      - name: Show Coverage
+        run: |
+          coverage report -m > temp.txt
+          cat temp.txt
+          python .github/workflows/coverage_helper.py
+          echo "COVERAGE_PERCENT=$(cat temp2.txt)" >> $GITHUB_ENV
+
+      - name: Request Changes via Review
+        if: ${{ env.COVERAGE_PERCENT < 90 }}
+        uses: andrewmusgrave/automatic-pull-request-review@0.0.5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          event: REQUEST_CHANGES
+          body: "Increase test coverage from ${{ env.COVERAGE_PERCENT }}% to at least 90% before merging."
+
+      - name: Approve PR if Coverage Sufficient
+        if: ${{ env.COVERAGE_PERCENT > 89 }}
+        uses: andrewmusgrave/automatic-pull-request-review@0.0.5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          event: APPROVE
+          body: "Test coverage meets or exceeds 90% threshold (currently ${{ env.COVERAGE_PERCENT }}%)."
+
+  ci-report-status:
+    name: report CI status
+    needs: [build-and-test, ipynb-ci]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          result_1="${{ needs.build-and-test.result }}"
+          result_2="${{ needs.ipynb-ci.result }}"
+          if test $result_1 == "success" && test $result_2 == "success"; then
+            exit 0
+          else
+            exit 1
+          fi
+        
