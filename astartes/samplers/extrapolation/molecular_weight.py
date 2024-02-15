@@ -8,55 +8,25 @@ in the testing set.
 import numpy as np
 
 try:
-    from rdkit import Chem
-    from rdkit.Chem import Descriptors
+    from astartes.utils.aimsim_featurizer import featurize_molecules
 except ImportError:
     # this is in place so that the import of this from parent directory will work
     # if it fails, it is caught in molecules instead and the error is more helpful
     NO_MOLECULES = True
 
-from astartes.samplers import AbstractSampler
+from .target_property import TargetProperty
+from .scaffold import Scaffold
 
 
-class MolecularWeight(AbstractSampler):
+# inherit sample method from TargetProperty
+class MolecularWeight(TargetProperty):
     def _before_sample(self):
-        # ensure that X contains entries that are either a SMILES or InChI string or an RDKit Molecule
-        if not all(isinstance(i, str) for i in self.X) and not all(
-            isinstance(i, Chem.rdchem.Mol) for i in self.X
-        ):
-            msg = "MolecularWeight class requires input X to be an iterable of SMILES strings, InChI strings, or RDKit Molecules"
-            raise TypeError(msg)
-
-    def _sample(self):
-        """
-        Implements the molecular weight sampler to create an extrapolation split.
-        """
-
-        data = [
-            (self.str_to_mol(x), idx) for x, idx in zip(self.X, np.arange(len(self.X)))
-        ]
-        sorted_list = sorted(data, reverse=False)
-
-        self._samples_idxs = np.array([idx for time, idx in sorted_list], dtype=int)
-
-    def str_to_mol(self, string):
-        """
-        Converts an InChI or SMILES string to an RDKit molecule
-        and then calculates the average molecular weight.
-
-        Params:
-            string: The InChI or SMILES string.
-
-        Returns:
-            The average molecular weight of the molecule
-        """
-        RDKIT_SMILES_PARSER_PARAMS = Chem.SmilesParserParams()
-        if string.startswith("InChI"):
-            mol = Chem.MolFromInchi(string, removeHs=True)
-        else:
-            mol = Chem.MolFromSmiles(string)
-
+        # check for invalid data types using the method in the Scaffold sampler
+        Scaffold._validate_input(self.X)
         # calculate the average molecular weight of the molecule
-        mol_wt = Descriptors.MolWt(mol)
+        self.y_backup = self.y
+        self.y = featurize_molecules((Scaffold.str_to_mol(i) for i in self.X), "mordred:MW", fprints_hopts={})
 
-        return mol_wt
+    def _after_sample(self):
+        # restore the original y values
+        self.y = self.y_backup
