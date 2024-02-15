@@ -42,7 +42,7 @@ Follow [this link](https://JacksonBurns.github.io/astartes/) for a nicely-render
 Keep reading for a installation guide and links to tutorials!
 
 ## Installing `astartes`
-We recommend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management. Python versions 3.7, 3.8, 3.9, 3.10, 3.11, and 3.12 are supported on all platforms.
+We recommend installing `astartes` within a virtual environment, using either `venv` or `conda` (or other tools) to simplify dependency management. Python versions 3.8, 3.9, 3.10, 3.11, and 3.12 are supported on all platforms.
 
 > **Warning**
 > Windows (PowerShell) and MacOS Catalina or newer (zsh) require double quotes around text using the `'[]'` characters (i.e. `pip install "astartes[molecules]"`).
