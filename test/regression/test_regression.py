@@ -9,6 +9,7 @@ import pkg_resources
 from astartes import train_val_test_split
 from astartes.samplers import (
     ALL_SAMPLERS,
+    DETERMINISTIC_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
@@ -101,7 +102,7 @@ class Test_regression(unittest.TestCase):
     def test_extrapolation_regression(self):
         """Regression testing of extrapolative methods relative to static results."""
         for sampler_name in IMPLEMENTED_EXTRAPOLATION_SAMPLERS:
-            if sampler_name in ("molecular_weight", "scaffold", "time_based", "kmeans", "target_property"):
+            if sampler_name in ("scaffold", "kmeans", *DETERMINISTIC_EXTRAPOLATION_SAMPLERS):
                 continue
             (
                 X_train,

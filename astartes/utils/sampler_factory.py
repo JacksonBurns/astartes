@@ -11,8 +11,8 @@ from astartes.samplers import (
     Random,
     Scaffold,
     SphereExclusion,
-    TimeBased,
     TargetProperty,
+    TimeBased,
 )
 from astartes.utils.exceptions import SamplerNotImplementedError
 

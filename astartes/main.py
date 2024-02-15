@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 
 from astartes.samplers import (
+    DETERMINISTIC_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
@@ -78,12 +79,10 @@ def train_val_test_split(
 
     if sampler in (
         *IMPLEMENTED_INTERPOLATION_SAMPLERS,
-        "time_based",
-        "molecular_weight",
-        "target_property",
+        *DETERMINISTIC_EXTRAPOLATION_SAMPLERS,
     ):
-        # time_based and molecular_weight samplers do extrapolation but do not support `random_state`
-        # since they always sort in order of time or weight respectively
+        # extrapolation samplers in DETERMINISTIC_EXTRAPOLATION_SAMPLERS do not accept the
+        # random_state argument because they are entirely deterministic
         return _interpolative_sampling(
             sampler_instance,
             test_size,

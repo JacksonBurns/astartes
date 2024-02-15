@@ -4,7 +4,11 @@ import unittest
 
 import numpy as np
 
-from astartes.samplers import ALL_SAMPLERS, AbstractSampler
+from astartes.samplers import (
+    ALL_SAMPLERS,
+    DETERMINISTIC_EXTRAPOLATION_SAMPLERS,
+    AbstractSampler,
+)
 from astartes.utils.sampler_factory import SamplerFactory
 
 
@@ -28,7 +32,7 @@ class Test_sampler_factory(unittest.TestCase):
     def test_train_test_split(self):
         """Call sampler factory on all inputs."""
         for sampler_name in ALL_SAMPLERS:
-            if sampler_name in ("molecular_weight", "scaffold", "time_based", "target_property"):
+            if sampler_name in ("scaffold", *DETERMINISTIC_EXTRAPOLATION_SAMPLERS):
                 continue
             test_factory = SamplerFactory(sampler_name)
             test_instance = test_factory.get_sampler(self.X, self.y, None, {})
