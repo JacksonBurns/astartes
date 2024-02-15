@@ -28,7 +28,7 @@ class Test_TargetProperty(unittest.TestCase):
                 "CCCCCCCCCC",
             ]
         )
-        
+
         self.y = np.arange(len(self.X))
         self.labels = np.array(
             [
