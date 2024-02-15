@@ -14,8 +14,8 @@ except ImportError:
     # if it fails, it is caught in molecules instead and the error is more helpful
     NO_MOLECULES = True
 
-from .target_property import TargetProperty
 from .scaffold import Scaffold
+from .target_property import TargetProperty
 
 
 # inherit sample method from TargetProperty

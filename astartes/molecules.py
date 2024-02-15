@@ -1,6 +1,5 @@
 import numpy as np
 
-
 # at this point we have successfully verified that rdkit is installed, so we can do this:
 from rdkit.rdBase import SeedRandomNumberGenerator
 
