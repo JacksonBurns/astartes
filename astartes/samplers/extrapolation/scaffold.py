@@ -9,6 +9,7 @@ to create data splits that will measure extrapolation by testing on scaffolds
 that are not in the training set.
 
 """
+
 import warnings
 from collections import defaultdict
 
@@ -27,11 +28,14 @@ from astartes.utils.warnings import NoMatchingScaffold
 
 
 class Scaffold(AbstractSampler):
-    def _before_sample(self):
+    def _validate_input(X):
         # ensure that X contains entries that are either a SMILES string or an RDKit Molecule
-        if not all(isinstance(i, str) for i in self.X) and not all(isinstance(i, Chem.rdchem.Mol) for i in self.X):
+        if not all(isinstance(i, str) for i in X) and not all(isinstance(i, Chem.rdchem.Mol) for i in X):
             msg = "Scaffold class requires input X to be an iterable of SMILES strings, InChI strings, or RDKit Molecules"
             raise TypeError(msg)
+
+    def _before_sample(self):
+        Scaffold._validate_input(self.X)
 
     def _sample(self):
         """Implements the Scaffold sampler to identify clusters via a molecule's Bemis-Murcko scaffold."""
@@ -42,8 +46,7 @@ class Scaffold(AbstractSampler):
         for cluster_id, (scaffold, indices) in enumerate(scaffold_to_indices.items()):
             if scaffold == "":
                 warnings.warn(
-                    f"No matching scaffold was found for the {len(indices)} "
-                    f"molecules corresponding to indices {indices}",
+                    f"No matching scaffold was found for the {len(indices)} " f"molecules corresponding to indices {indices}",
                     NoMatchingScaffold,
                 )
             for idx in indices:
@@ -63,12 +66,12 @@ class Scaffold(AbstractSampler):
         """
         scaffolds = defaultdict(set)
         for i, mol in enumerate(mols):
-            scaffold = self.generate_bemis_murcko_scaffold(mol, self.get_config("include_chirality", False))
+            scaffold = Scaffold.generate_bemis_murcko_scaffold(mol, self.get_config("include_chirality", False))
             scaffolds[scaffold].add(i)
 
         return scaffolds
 
-    def str_to_mol(self, string):
+    def str_to_mol(string):
         """
         Converts an InChI or SMILES string to an RDKit molecule.
 
@@ -92,7 +95,7 @@ class Scaffold(AbstractSampler):
 
         return mol
 
-    def generate_bemis_murcko_scaffold(self, mol, include_chirality=False):
+    def generate_bemis_murcko_scaffold(mol, include_chirality=False):
         """
         Compute the Bemis-Murcko scaffold for an RDKit molecule.
 
@@ -103,7 +106,7 @@ class Scaffold(AbstractSampler):
         Returns:
             Bemis-Murcko scaffold
         """
-        mol = self.str_to_mol(mol) if isinstance(mol, str) else mol
+        mol = Scaffold.str_to_mol(mol) if isinstance(mol, str) else mol
         scaffold = MurckoScaffold.MurckoScaffoldSmiles(mol=mol, includeChirality=include_chirality)
 
         return scaffold
