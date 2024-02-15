@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 
 from astartes.samplers import (
+    DETERMINISTIC_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
@@ -69,22 +70,19 @@ def train_val_test_split(
     if labels is not None and len(labels) != len(X):
         msg += "len(labels)={:d} ".format(len(labels))
     if msg:
-        raise InvalidConfigurationError(
-            "Lengths of input arrays do not match: len(X)={:d} ".format(len(X)) + msg
-        )
+        raise InvalidConfigurationError("Lengths of input arrays do not match: len(X)={:d} ".format(len(X)) + msg)
 
-    train_size, val_size, test_size = _normalize_split_sizes(
-        train_size, val_size, test_size
-    )
-    hopts["random_state"] = (
-        random_state if random_state is not None else DEFAULT_RANDOM_STATE
-    )
+    train_size, val_size, test_size = _normalize_split_sizes(train_size, val_size, test_size)
+    hopts["random_state"] = random_state if random_state is not None else DEFAULT_RANDOM_STATE
     sampler_factory = SamplerFactory(sampler)
     sampler_instance = sampler_factory.get_sampler(X, y, labels, hopts)
 
-    if sampler in (*IMPLEMENTED_INTERPOLATION_SAMPLERS, "time_based"):
-        # time_based does extrapolation but does not support random_state
-        # because it always sorts in time order
+    if sampler in (
+        *IMPLEMENTED_INTERPOLATION_SAMPLERS,
+        *DETERMINISTIC_EXTRAPOLATION_SAMPLERS,
+    ):
+        # extrapolation samplers in DETERMINISTIC_EXTRAPOLATION_SAMPLERS do not accept the
+        # random_state argument because they are entirely deterministic
         return _interpolative_sampling(
             sampler_instance,
             test_size,
@@ -189,11 +187,7 @@ def _extrapolative_sampling(
 
     # largest clusters must go into largest set, but smaller ones can optionally
     # be shuffled
-    cluster_counter = sampler_instance.get_sorted_cluster_counter(
-        max_shufflable_size=max_shufflable_size
-        if random_state is not None
-        else None
-    )
+    cluster_counter = sampler_instance.get_sorted_cluster_counter(max_shufflable_size=max_shufflable_size if random_state is not None else None)
 
     test_idxs, val_idxs, train_idxs = (
         np.array([], dtype=int),
@@ -203,20 +197,12 @@ def _extrapolative_sampling(
     for cluster_idx, cluster_length in cluster_counter.items():
         # assemble test first, avoid overfilling
         if (len(test_idxs) + cluster_length) <= n_test_samples:
-            test_idxs = np.append(
-                test_idxs, sampler_instance.get_sample_idxs(cluster_length)
-            )
+            test_idxs = np.append(test_idxs, sampler_instance.get_sample_idxs(cluster_length))
         elif (len(val_idxs) + cluster_length) <= n_val_samples:
-            val_idxs = np.append(
-                val_idxs, sampler_instance.get_sample_idxs(cluster_length)
-            )
+            val_idxs = np.append(val_idxs, sampler_instance.get_sample_idxs(cluster_length))
         else:  # then balance goes into train
-            train_idxs = np.append(
-                train_idxs, sampler_instance.get_sample_idxs(cluster_length)
-            )
-    _check_actual_split(
-        train_idxs, val_idxs, test_idxs, train_size, val_size, test_size
-    )
+            train_idxs = np.append(train_idxs, sampler_instance.get_sample_idxs(cluster_length))
+    _check_actual_split(train_idxs, val_idxs, test_idxs, train_size, val_size, test_size)
     return return_helper(
         sampler_instance,
         train_idxs,
@@ -261,9 +247,7 @@ def _interpolative_sampling(
     val_idxs = sampler_instance.get_sample_idxs(n_val_samples)
     test_idxs = sampler_instance.get_sample_idxs(n_test_samples)
 
-    _check_actual_split(
-        train_idxs, val_idxs, test_idxs, train_size, val_size, test_size
-    )
+    _check_actual_split(train_idxs, val_idxs, test_idxs, train_size, val_size, test_size)
     return return_helper(
         sampler_instance,
         train_idxs,
@@ -377,27 +361,17 @@ def _normalize_split_sizes(train_size, val_size, test_size):
         else:  # one or the other - only allow floats [0, 1), then calculate
             if train_size:
                 if train_size >= 1.0 or train_size <= 0:
-                    raise InvalidConfigurationError(
-                        "If specifying only train_size, must be float between (0, 1) (got {:.2f})".format(
-                            train_size
-                        )
-                    )
+                    raise InvalidConfigurationError("If specifying only train_size, must be float between (0, 1) (got {:.2f})".format(train_size))
                 test_size = 1.0 - train_size
                 out = [train_size, 0, test_size]
             else:
                 if test_size >= 1.0 or test_size <= 0:
-                    raise InvalidConfigurationError(
-                        "If specifying only test_size, must be float between (0, 1) (got {:.2f})".format(
-                            test_size
-                        )
-                    )
+                    raise InvalidConfigurationError("If specifying only test_size, must be float between (0, 1) (got {:.2f})".format(test_size))
                 train_size = 1.0 - test_size
                 out = [train_size, 0, test_size]
     else:  # there is a non-zero val_size
         if val_size >= 1.0 or val_size <= 0.0:
-            raise InvalidConfigurationError(
-                "val_size must be a float between (0, 1) (got {:.2f})".format(val_size)
-            )
+            raise InvalidConfigurationError("val_size must be a float between (0, 1) (got {:.2f})".format(val_size))
         if train_size and test_size:  # all three - normalize
             if train_size + test_size + val_size != 1.0:
                 normalization = train_size + test_size + val_size
@@ -423,18 +397,14 @@ def _normalize_split_sizes(train_size, val_size, test_size):
             if train_size:
                 if train_size >= 1.0 or train_size <= 0:
                     raise InvalidConfigurationError(
-                        "If specifying val_size and only train_size, must be float between (0, 1) (got {:.2f})".format(
-                            train_size
-                        )
+                        "If specifying val_size and only train_size, must be float between (0, 1) (got {:.2f})".format(train_size)
                     )
                 test_size = 1.0 - (train_size + val_size)
                 out = [train_size, val_size, test_size]
             else:
                 if test_size >= 1.0 or test_size <= 0:
                     raise InvalidConfigurationError(
-                        "If specifying val_size and only test_size, must be float between (0, 1) (got {:.2f})".format(
-                            test_size
-                        )
+                        "If specifying val_size and only test_size, must be float between (0, 1) (got {:.2f})".format(test_size)
                     )
                 train_size = 1.0 - (test_size + val_size)
                 out = [train_size, val_size, test_size]

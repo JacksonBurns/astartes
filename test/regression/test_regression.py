@@ -9,13 +9,12 @@ import pkg_resources
 from astartes import train_val_test_split
 from astartes.samplers import (
     ALL_SAMPLERS,
+    DETERMINISTIC_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
 
-SKLEARN_GEQ_13 = (  # get the sklearn version
-    int(pkg_resources.get_distribution("scikit-learn").version.split(".")[1]) >= 3
-)
+SKLEARN_GEQ_13 = int(pkg_resources.get_distribution("scikit-learn").version.split(".")[1]) >= 3  # get the sklearn version
 
 
 class Test_regression(unittest.TestCase):
@@ -29,13 +28,9 @@ class Test_regression(unittest.TestCase):
         rng = np.random.default_rng(42)
         self.X = rng.random((100, 100))
         self.y = rng.random((100,))
-        self.labels_datetime = np.array(
-            [datetime.strptime(f"20{y:02}/01/01", "%Y/%m/%d") for y in range(100)]
-        )
+        self.labels_datetime = np.array([datetime.strptime(f"20{y:02}/01/01", "%Y/%m/%d") for y in range(100)])
         cwd = os.getcwd()
-        self.reference_splits_dir = os.path.join(
-            cwd, "test", "regression", "reference_splits"
-        )
+        self.reference_splits_dir = os.path.join(cwd, "test", "regression", "reference_splits")
         self.reference_splits = {
             name: os.path.join(self.reference_splits_dir, name + "_reference.pkl")
             for name in ALL_SAMPLERS
@@ -87,9 +82,7 @@ class Test_regression(unittest.TestCase):
         with open(self.reference_splits["time_based"], "rb") as f:
             reference_output = pkl.load(f)
         for i, j in zip(all_output, reference_output):
-            np.testing.assert_array_equal(
-                i, j, "Sampler time_based failed regression testing."
-            )
+            np.testing.assert_array_equal(i, j, "Sampler time_based failed regression testing.")
 
     def test_interpolation_regression(self):
         """Regression testing of interpolative methods relative to static results."""
@@ -104,14 +97,12 @@ class Test_regression(unittest.TestCase):
             with open(self.reference_splits[sampler_name], "rb") as f:
                 reference_output = pkl.load(f)
             for i, j in zip(all_output, reference_output):
-                np.testing.assert_array_equal(
-                    i, j, "Sampler {:s} failed regression testing.".format(sampler_name)
-                )
+                np.testing.assert_array_equal(i, j, "Sampler {:s} failed regression testing.".format(sampler_name))
 
     def test_extrapolation_regression(self):
         """Regression testing of extrapolative methods relative to static results."""
         for sampler_name in IMPLEMENTED_EXTRAPOLATION_SAMPLERS:
-            if sampler_name in ("scaffold", "time_based", "kmeans"):
+            if sampler_name in ("scaffold", "kmeans", *DETERMINISTIC_EXTRAPOLATION_SAMPLERS):
                 continue
             (
                 X_train,

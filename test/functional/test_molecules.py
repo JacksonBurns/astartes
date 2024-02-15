@@ -11,6 +11,7 @@ from astartes.molecules import (
     train_val_test_split_molecules,
 )
 from astartes.samplers import (
+    DETERMINISTIC_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
@@ -82,7 +83,7 @@ class Test_molecules(unittest.TestCase):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             for sampler in IMPLEMENTED_EXTRAPOLATION_SAMPLERS:
-                if sampler in ("scaffold", "time_based"):
+                if sampler in ("scaffold", *DETERMINISTIC_EXTRAPOLATION_SAMPLERS):
                     continue
                 tts = train_val_test_split_molecules(
                     self.X,
@@ -142,9 +143,7 @@ class Test_molecules(unittest.TestCase):
                 "\nNo warnings should have been raised when requesting a mathematically possible split."
                 "\nReceived {:d} warnings instead: \n -> {:s}".format(
                     len(w),
-                    "\n -> ".join(
-                        [str(i.category.__name__) + ": " + str(i.message) for i in w]
-                    ),
+                    "\n -> ".join([str(i.category.__name__) + ": " + str(i.message) for i in w]),
                 ),
             )
 

@@ -6,10 +6,12 @@ from astartes.samplers import (
     SPXY,
     KennardStone,
     KMeans,
+    MolecularWeight,
     OptiSim,
     Random,
     Scaffold,
     SphereExclusion,
+    TargetProperty,
     TimeBased,
 )
 from astartes.utils.exceptions import SamplerNotImplementedError
@@ -49,14 +51,18 @@ class SamplerFactory:
             sampler_class = KMeans
         elif self.sampler == "sphere_exclusion":
             sampler_class = SphereExclusion
+        elif self.sampler == "molecular_weight":
+            sampler_class = MolecularWeight
         elif self.sampler == "optisim":
             sampler_class = OptiSim
         elif self.sampler == "spxy":
             sampler_class = SPXY
         elif self.sampler == "scaffold":
             sampler_class = Scaffold
-        elif self.sampler == 'time_based':
+        elif self.sampler == "time_based":
             sampler_class = TimeBased
+        elif self.sampler == "target_property":
+            sampler_class = TargetProperty
         else:
             possiblity = get_close_matches(
                 self.sampler,
