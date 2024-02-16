@@ -3,9 +3,18 @@ import unittest
 import numpy as np
 
 from astartes import train_test_split
-from astartes.samplers import MolecularWeight
+
+aimsim = None
+REASON = None
+try:
+    import aimsim
+
+    from astartes.samplers import MolecularWeight
+except ModuleNotFoundError:
+    REASON = "molecules subpackage not installed"
 
 
+@unittest.skipIf(aimsim is None, reason=REASON)
 class Test_MolecularWeight(unittest.TestCase):
     """
     Test the various functionalities of MolecularWeight.

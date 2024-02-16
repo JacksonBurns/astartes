@@ -3,11 +3,21 @@ import unittest
 import numpy as np
 
 from astartes import train_test_split
-from astartes.samplers import Scaffold
 from astartes.utils.exceptions import InvalidConfigurationError
 from astartes.utils.warnings import NoMatchingScaffold
 
+aimsim = None
+REASON = None
+try:
+    # deliberately trigger an error if molecules subpackage missing
+    import aimsim
 
+    from astartes.samplers import Scaffold
+except ModuleNotFoundError:
+    REASON = "molecules subpackage not installed"
+
+
+@unittest.skipIf(aimsim is None, reason=REASON)
 class Test_scaffold(unittest.TestCase):
     """
     Test the various functionalities of Scaffold.
