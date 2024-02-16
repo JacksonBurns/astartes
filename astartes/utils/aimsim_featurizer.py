@@ -4,6 +4,7 @@ import numpy as np
 
 from astartes.utils.exceptions import MoleculesNotInstalledError
 
+Molecule = None
 try:
     """
     aimsim depends on sklearn_extra, which uses a version checking technique that is due to
@@ -16,7 +17,7 @@ try:
         from aimsim.chemical_datastructures import Molecule
         from aimsim.exceptions import LoadingError
 except ImportError:  # pragma: no cover
-    raise MoleculesNotInstalledError("""To use molecule featurizer, install astartes with pip install astartes[molecules].""")
+    pass  # Raise an error later
 
 
 def featurize_molecules(molecules, fingerprint, fprints_hopts):
@@ -30,6 +31,10 @@ def featurize_molecules(molecules, fingerprint, fprints_hopts):
     Returns:
         np.array: X array (featurized molecules)
     """
+    if Molecule is None:
+        raise MoleculesNotInstalledError(
+            """To use molecule featurizer, install astartes with pip install astartes[molecules] or conda install astartes aimsim."""
+        )
     X = []
     for molecule in molecules:
         try:

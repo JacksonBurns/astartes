@@ -4,20 +4,28 @@ import unittest
 import warnings
 
 import numpy as np
-from rdkit import Chem
 
-from astartes.molecules import (
-    train_test_split_molecules,
-    train_val_test_split_molecules,
-)
 from astartes.samplers import (
     DETERMINISTIC_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_EXTRAPOLATION_SAMPLERS,
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
-from astartes.utils.warnings import ImperfectSplittingWarning
+
+aimsim = None
+REASON = None
+try:
+    import aimsim
+    from rdkit import Chem
+
+    from astartes.molecules import (
+        train_test_split_molecules,
+        train_val_test_split_molecules,
+    )
+except ModuleNotFoundError:
+    REASON = "molecules subpackage not installed"
 
 
+@unittest.skipIf(aimsim is None, reason=REASON)
 class Test_molecules(unittest.TestCase):
     """
     Test the various functionalities of molecules.
