@@ -24,7 +24,7 @@ requires-python = ">=3.8"
 dependencies = ["scikit_learn", "tabulate", "numpy", "scipy", "pandas"]
 
 [project.optional-dependencies]
-molecules = ["aimsim"]
+molecules = ["aimsim_core"]
 dev = ["black", "isort", "pytest"]
 demos = ["plotly", "tabulate", "py2opsin", "kaleido"]
 
