@@ -58,6 +58,9 @@ We recommend installing `astartes` within a virtual environment, using either `v
 To install `astartes` with support for featurizing molecules, use: `conda install -c conda-forge astartes aimsim`.
 This will download the base `astartes` package as well as `aimsim`, which is the backend used for molecular featurization.
 
+The PyPI distribution has fewer dependencies for the `molecules` subpackage because it uses `aimsim_core` instead of `aimsim`.
+You can achieve this on `conda` by first running `conda install -c conda-forge astartes` and then `pip install aimsim_core` (`aimsim_core` is not available on `conda-forge`).
+
 ### Source
 To install `astartes` from source for development, see the [Contributing & Developer Notes](#contributing--developer-notes) section.
 
