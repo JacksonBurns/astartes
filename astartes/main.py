@@ -313,8 +313,8 @@ def _check_actual_split(
         )
     if actual_val_size != requested_val_size:
         msg += "Requested validation size of {:.2f}, got {:.2f}. ".format(
-            requested_test_size,
-            actual_test_size,
+            requested_val_size,
+            actual_val_size,
         )
     if actual_test_size != requested_test_size:
         msg += "Requested test size of {:.2f}, got {:.2f}. ".format(
