@@ -20,7 +20,7 @@
     </tr>
     <tr>
       <td><img alt="PyPI - License" src="https://img.shields.io/github/license/JacksonBurns/astartes"></td>
-      <td><img alt="Test Status" src="https://github.com/JacksonBurns/astartes/actions/workflows/run_tests.yml/badge.svg?branch=main&event=schedule"></td>
+      <td><img alt="Test Status" src="https://github.com/JacksonBurns/astartes/actions/workflows/ci.yml/badge.svg?branch=main&event=schedule"></td>
       <td><a href="https://doi.org/10.5281/zenodo.8147205"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8147205.svg" alt="DOI"></a></td>
     </tr>
     <tr>
