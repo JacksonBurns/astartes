@@ -260,8 +260,6 @@ train_test_split_molecules(
     train_size=0.8,
     fingerprint="daylight_fingerprint",
     fprints_hopts={
-        "minPath": 2,
-        "maxPath": 5,
         "fpSize": 200,
         "bitsPerHash": 4,
         "useHs": 1,
