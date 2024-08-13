@@ -261,10 +261,8 @@ train_test_split_molecules(
     fingerprint="daylight_fingerprint",
     fprints_hopts={
         "fpSize": 200,
-        "bitsPerHash": 4,
-        "useHs": 1,
-        "tgtDensity": 0.4,
-        "minSize": 64,
+        "numBitsPerFeature": 4,
+        "useHs": True,
     },
     sampler="random",
     random_state=42,
