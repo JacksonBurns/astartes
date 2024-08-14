@@ -121,6 +121,11 @@ Click the badges in the table below to be taken to a live, interactive demo of `
 To execute these notebooks locally, clone this repository (i.e. `git clone https://github.com/JacksonBurns/astartes.git`), navigate to the `astartes` directory, run `pip install .[demos]`, then open and run the notebooks in your preferred editor.
 You do _not_ need to execute the cells prefixed with `%%capture` - they are only present for compatibility with Google Colab.
 
+#### Packages Using `astartes`
+ - [Chemprop](https://github.com/chemprop/chemprop), a machine learning library for chemical property prediction, uses `astartes` in the backend for splitting molecular structures.
+ - [`fastprop`](https://github.com/JacksonBurns/fastprop), a descriptor-based property prediction library, uses `astartes`.
+ - [Google Scholar of articles citing the JOSS paper for `astartes`](https://scholar.google.com/scholar?cites=4693802000464819413&as_sdt=40000005&sciodt=0,22&hl=en)
+
 ### Withhold Testing Data with `train_val_test_split`
 For rigorous ML research, it is critical to withhold some data during training to use a `test` set.
 The model should _never_ see this data during training (unlike the validation set) so that we can get an accurate measurement of its performance.
