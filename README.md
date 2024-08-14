@@ -20,7 +20,7 @@
     </tr>
     <tr>
       <td><img alt="PyPI - License" src="https://img.shields.io/github/license/JacksonBurns/astartes"></td>
-      <td><img alt="Test Status" src="https://github.com/JacksonBurns/astartes/actions/workflows/run_tests.yml/badge.svg?branch=main&event=schedule"></td>
+      <td><img alt="Test Status" src="https://github.com/JacksonBurns/astartes/actions/workflows/ci.yml/badge.svg?branch=main&event=schedule"></td>
       <td><a href="https://doi.org/10.5281/zenodo.8147205"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8147205.svg" alt="DOI"></a></td>
     </tr>
     <tr>
@@ -120,6 +120,11 @@ Click the badges in the table below to be taken to a live, interactive demo of `
 
 To execute these notebooks locally, clone this repository (i.e. `git clone https://github.com/JacksonBurns/astartes.git`), navigate to the `astartes` directory, run `pip install .[demos]`, then open and run the notebooks in your preferred editor.
 You do _not_ need to execute the cells prefixed with `%%capture` - they are only present for compatibility with Google Colab.
+
+#### Packages Using `astartes`
+ - [Chemprop](https://github.com/chemprop/chemprop), a machine learning library for chemical property prediction, uses `astartes` in the backend for splitting molecular structures.
+ - [`fastprop`](https://github.com/JacksonBurns/fastprop), a descriptor-based property prediction library, uses `astartes`.
+ - [Google Scholar of articles citing the JOSS paper for `astartes`](https://scholar.google.com/scholar?cites=4693802000464819413&as_sdt=40000005&sciodt=0,22&hl=en)
 
 ### Withhold Testing Data with `train_val_test_split`
 For rigorous ML research, it is critical to withhold some data during training to use a `test` set.
@@ -260,13 +265,9 @@ train_test_split_molecules(
     train_size=0.8,
     fingerprint="daylight_fingerprint",
     fprints_hopts={
-        "minPath": 2,
-        "maxPath": 5,
         "fpSize": 200,
-        "bitsPerHash": 4,
-        "useHs": 1,
-        "tgtDensity": 0.4,
-        "minSize": 64,
+        "numBitsPerFeature": 4,
+        "useHs": True,
     },
     sampler="random",
     random_state=42,

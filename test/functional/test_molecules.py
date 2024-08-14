@@ -126,13 +126,9 @@ class Test_molecules(unittest.TestCase):
             sampler="random",
             fingerprint="topological_fingerprint",
             fprints_hopts={
-                "minPath": 2,
-                "maxPath": 5,
                 "fpSize": 200,
-                "bitsPerHash": 4,
-                "useHs": 1,
-                "tgtDensity": 0.4,
-                "minSize": 64,
+                "numBitsPerFeature": 4,
+                "useHs": True,
             },
         )
 
@@ -163,13 +159,9 @@ class Test_molecules(unittest.TestCase):
             train_size=0.2,
             fingerprint="topological_fingerprint",
             fprints_hopts={
-                "minPath": 2,
-                "maxPath": 5,
                 "fpSize": 200,
-                "bitsPerHash": 4,
-                "useHs": 1,
-                "tgtDensity": 0.4,
-                "minSize": 64,
+                "numBitsPerFeature": 2,
+                "useHs": True,
             },
             sampler="random",
             random_state=42,

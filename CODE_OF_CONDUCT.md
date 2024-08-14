@@ -1,4 +1,4 @@
-# RMG Code of Conduct
+# `astartes` Code of Conduct
 
 ## Our Pledge
 
