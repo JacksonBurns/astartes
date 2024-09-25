@@ -36,7 +36,7 @@ jobs:
           python -m pip install -e .[molecules]
           python -m pip install scikit-learn==1.2.2
           python -m pip install notebook
-          python -m pip install numpy<2
+          python -m pip install "numpy<2"
       - name: Backup Reference Splits
         run: |
           cd examples/reproduce_paper_splits
