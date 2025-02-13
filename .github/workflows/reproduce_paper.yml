@@ -52,7 +52,7 @@ jobs:
           ipython QM9_make_splits.ipynb
           ipython RDB7_make_splits.ipynb
       - name: Upload New Splits as Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dynamically-generated-splits
           path: |
