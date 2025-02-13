@@ -1,5 +1,5 @@
 import sklearn
-from sklearn.metrics import mean_absolute_error, root_mean_squared_error, r2_score
+from sklearn.metrics import mean_absolute_error, r2_score, root_mean_squared_error
 from tabulate import tabulate
 
 import astartes
