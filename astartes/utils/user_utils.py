@@ -1,5 +1,5 @@
 import sklearn
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.metrics import mean_absolute_error, r2_score, root_mean_squared_error
 from tabulate import tabulate
 
 import astartes
@@ -130,13 +130,13 @@ def generate_regression_results_dict(
         error_dict["mae"]["test"].append(test_mae)
 
         # store RMSEs
-        train_rmse = mean_squared_error(y_train, y_pred_train, squared=False)
+        train_rmse = root_mean_squared_error(y_train, y_pred_train)
         error_dict["rmse"]["train"].append(train_rmse)
 
-        val_rmse = mean_squared_error(y_val, y_pred_val, squared=False)
+        val_rmse = root_mean_squared_error(y_val, y_pred_val)
         error_dict["rmse"]["val"].append(val_rmse)
 
-        test_rmse = mean_squared_error(y_test, y_pred_test, squared=False)
+        test_rmse = root_mean_squared_error(y_test, y_pred_test)
         error_dict["rmse"]["test"].append(test_rmse)
 
         # store R2
