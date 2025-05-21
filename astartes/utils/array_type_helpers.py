@@ -196,7 +196,7 @@ def return_helper(
     # append indices, if requested
     if return_indices:
         out.append(train_idxs)
-        if val_idxs.any():
+        if len(val_idxs) > 0:
             out.append(val_idxs)
         out.append(test_idxs)
 
