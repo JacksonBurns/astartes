@@ -1,7 +1,7 @@
 # convenience import to enable 'from astartes import train_test_split'
 from .main import train_test_split, train_val_test_split
 
-__version__ = "1.3.0"
+__version__ = "1.3.1"
 
 # DO NOT do this:
 # from .molecules import train_test_split_molecules
