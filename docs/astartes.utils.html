@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>astartes.utils package &mdash; astartes astartes.__version__ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=371f806f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=8209df7b" />
+
+  
+      <script src="_static/jquery.js?v=3d1d8b85"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=04b1687e"></script>
+      <script src="_static/doctools.js?v=e1f2eec6"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="test package" href="test.html" />
+    <link rel="prev" title="astartes.samplers.interpolation package" href="astartes.samplers.interpolation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            astartes
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">Online Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#installing-astartes">Installing <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#statement-of-need">Statement of Need</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#theory-and-application-of-astartes">Theory and Application of <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#reproducibility">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#id7">Contributing &amp; Developer Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing &amp; Developer Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html#joss-branch">JOSS Branch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sklearn_to_astartes.html">Transitioning from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">astartes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="astartes.html">astartes package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="astartes.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.html">astartes.samplers package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">astartes.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.html#module-astartes.main">astartes.main module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.html#module-astartes.molecules">astartes.molecules module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.html#module-astartes">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.html">test package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">astartes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">astartes</a></li>
+          <li class="breadcrumb-item"><a href="astartes.html">astartes package</a></li>
+      <li class="breadcrumb-item active">astartes.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/astartes.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="astartes-utils-package">
+<h1>astartes.utils package<a class="headerlink" href="#astartes-utils-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-astartes.utils.aimsim_featurizer">
+<span id="astartes-utils-aimsim-featurizer-module"></span><h2>astartes.utils.aimsim_featurizer module<a class="headerlink" href="#module-astartes.utils.aimsim_featurizer" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.utils.aimsim_featurizer.</span></span><span class="sig-name descname"><span class="pre">Molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_property_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_descriptor_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_src</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_smiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An abstraction of a molecule</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.mol_graph">
+<span class="sig-name descname"><span class="pre">mol_graph</span></span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.mol_graph" title="Link to this definition"></a></dt>
+<dd><p>Graph-level information of molecule.
+Implemented as an RDKIT mol object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>RDKIT mol object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.mol_text">
+<span class="sig-name descname"><span class="pre">mol_text</span></span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.mol_text" title="Link to this definition"></a></dt>
+<dd><p>Text identifier of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.mol_property_val">
+<span class="sig-name descname"><span class="pre">mol_property_val</span></span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.mol_property_val" title="Link to this definition"></a></dt>
+<dd><p>Some property associated with the molecule.
+This is typically the response being studied.
+E.g. Boiling point, Selectivity etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.descriptor">
+<span class="sig-name descname"><span class="pre">descriptor</span></span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.descriptor" title="Link to this definition"></a></dt>
+<dd><p>Vector representation of a molecule.
+Commonly a fingerprint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Descriptor object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">set_descriptor(</span></span></dt>
+<dd><p>arbitrary_descriptor_val=None,
+fingerprint_type=None,
+fingerprint_params=None): Set the descriptor value either by passing
+an arbitrary value or by specifying a fingerprint that will be
+generated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.get_descriptor_val">
+<span class="sig-name descname"><span class="pre">get_descriptor_val</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.get_descriptor_val" title="Link to this definition"></a></dt>
+<dd><p>Get the descriptor value as an numpy array.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.match_fingerprint_from">
+<span class="sig-name descname"><span class="pre">match_fingerprint_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference_mol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.match_fingerprint_from" title="Link to this definition"></a></dt>
+<dd><p>Generate the same fingerprint
+as the reference_mol.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.get_similarity_to">
+<span class="sig-name descname"><span class="pre">get_similarity_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">similarity_measure</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.get_similarity_to" title="Link to this definition"></a></dt>
+<dd><p>Get the similarity
+to target_mol using a similarity_measure of choice.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.get_name" title="Link to this definition"></a></dt>
+<dd><p>Get the mol_text attribute.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.get_mol_property_val">
+<span class="sig-name descname"><span class="pre">get_mol_property_val</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.get_mol_property_val" title="Link to this definition"></a></dt>
+<dd><p>Get mol_property_val attribute.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.draw" title="Link to this definition"></a></dt>
+<dd><p>Draw the molecule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.is_same">
+<span class="sig-name descname"><span class="pre">is_same</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_molecule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_molecule</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.is_same" title="Link to this definition"></a></dt>
+<dd><p>Static method used to check
+equivalence of two molecules.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_property_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_descriptor_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_src</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_smiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.__init__" title="Link to this definition"></a></dt>
+<dd><p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol_graph</strong> (<em>RDKIT mol object</em>) – Graph-level information of molecule.
+Implemented as an RDKIT mol object. Default is None.</p></li>
+<li><p><strong>mol_text</strong> (<em>str</em>) – Text identifier of the molecule. Default is None.
+Identifiers can be:
+——————
+1. Name of the molecule.
+2. SMILES string representing the molecule.</p></li>
+<li><p><strong>mol_property_val</strong> (<em>float</em>) – Some property associated with the
+molecule. This is typically the response being studied.
+E.g. Boiling point, Selectivity etc. Default is None.</p></li>
+<li><p><strong>mol_descriptor_val</strong> (<em>numpy ndarray</em>) – Descriptor value for the
+molecule. Must be numpy array or list. Default is None.</p></li>
+<li><p><strong>mol_src</strong> (<em>str</em>) – <p>Source file or SMILES string to load molecule. Acceptable files:
+-&gt; .pdb file
+-&gt; .txt file with SMILE string in first column, first row and</p>
+<blockquote>
+<div><p>(optionally) property in second column, first row.</p>
+</div></blockquote>
+<p>Default is None.
+If provided mol_graph is attempted to be loaded from it.</p>
+</p></li>
+<li><p><strong>mol_smiles</strong> (<em>str</em>) – SMILES string for molecule. If provided, mol_graph
+is loaded from it. If mol_text not set in keyword argument,
+this string is used to set it.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Draw or molecule graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<em>str</em>) – Path of file to store image. If None, image is
+displayed in io as a Tkinter windows. Default is None.</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Arguments to modify plot properties.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">get_descriptor_val</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Get value of molecule descriptor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>value(s) of the descriptor.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">get_mol_property_val</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">get_similarity_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">similarity_measure</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd><p>Get a similarity metric to a target molecule</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_mol</strong> (<em>AIMSim.ops Molecule</em>) – Target molecule. Similarity
+score is with respect to this molecule</p></li>
+<li><p><strong>similarity_measure</strong> (<em>AIMSim.ops SimilarityMeasure</em>) – metric used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Similarity coefficient by the chosen</dt><dd><p>method.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>similarity_score (float)</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotInitializedError</strong> – If target_molecule has uninitialized descriptor. See note.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_same</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_molecule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_molecule</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd><p>Check if the target_molecule is a duplicate of source_molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_molecule</strong> (<em>AIMSim.chemical_datastructures Molecule</em>) – Source
+molecule to compare.</p></li>
+<li><p><strong>target_molecule</strong> (<em>AIMSim.chemical_datastructures Molecule</em>) – Target
+molecule to compare.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the molecules are the same.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">match_fingerprint_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference_mol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd><p>If target_mol.descriptor is a fingerprint, this method will try
+to calculate the fingerprint of the self molecules.
+If this fails because of the absence of mol_graph attribute in
+target_molecule, a ValueError is raised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reference_mol</strong> (<em>AIMSim.ops Molecule</em>) – Target molecule. Fingerprint</p></li>
+<li><p><strong>reference.</strong> (<em>of this molecule is used as the</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.Molecule.set_descriptor">
+<span class="sig-name descname"><span class="pre">set_descriptor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arbitrary_descriptor_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fingerprint_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fingerprint_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.Molecule.set_descriptor" title="Link to this definition"></a></dt>
+<dd><p>Sets molecular descriptor attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arbitrary_descriptor_val</strong> (<em>np.array</em><em> or </em><em>list</em>) – Arbitrary descriptor
+vector. Default is None.</p></li>
+<li><p><strong>fingerprint_type</strong> (<em>str</em>) – String label specifying which fingerprint
+to use. Default is None.</p></li>
+<li><p><strong>fingerprint_params</strong> (<em>dict</em>) – Additional parameters for modifying
+fingerprint defaults. Default is None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.utils.aimsim_featurizer.featurize_molecules">
+<span class="sig-prename descclassname"><span class="pre">astartes.utils.aimsim_featurizer.</span></span><span class="sig-name descname"><span class="pre">featurize_molecules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecules</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fingerprint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fprints_hopts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.aimsim_featurizer.featurize_molecules" title="Link to this definition"></a></dt>
+<dd><p>Call AIMSim’s Molecule to featurize the molecules according to the arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molecules</strong> (<em>np.array</em>) – SMILES strings or RDKit molecule objects.</p></li>
+<li><p><strong>fingerprint</strong> (<em>str</em>) – The molecular fingerprint to be used.</p></li>
+<li><p><strong>fprints_hopts</strong> (<em>dict</em>) – Hyperparameters for AIMSim.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>X array (featurized molecules)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-astartes.utils.array_type_helpers">
+<span id="astartes-utils-array-type-helpers-module"></span><h2>astartes.utils.array_type_helpers module<a class="headerlink" href="#module-astartes.utils.array_type_helpers" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.utils.array_type_helpers.convert_to_array">
+<span class="sig-prename descclassname"><span class="pre">astartes.utils.array_type_helpers.</span></span><span class="sig-name descname"><span class="pre">convert_to_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.array_type_helpers.convert_to_array" title="Link to this definition"></a></dt>
+<dd><p>Attempt to convert obj named name to a numpy array, with appropriate warnings and exceptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – The item to attempt to convert.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Human-readable name for printing.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.utils.array_type_helpers.panda_handla">
+<span class="sig-prename descclassname"><span class="pre">astartes.utils.array_type_helpers.</span></span><span class="sig-name descname"><span class="pre">panda_handla</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.array_type_helpers.panda_handla" title="Link to this definition"></a></dt>
+<dd><p>Helper function to deal with supporting Pandas data types in astartes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>Dataframe</em>) – Features with column names</p></li>
+<li><p><strong>y</strong> (<em>Series</em>) – Targets</p></li>
+<li><p><strong>labels</strong> (<em>Series</em>) – Labels for data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Empty if no pandas types, metadata-filled otherwise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.utils.array_type_helpers.return_helper">
+<span class="sig-prename descclassname"><span class="pre">astartes.utils.array_type_helpers.</span></span><span class="sig-name descname"><span class="pre">return_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampler_instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_idxs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_idxs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_idxs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_is_pandas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.array_type_helpers.return_helper" title="Link to this definition"></a></dt>
+<dd><p>Convenience function to return the requested arrays appropriately.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sampler_instance</strong> (<em>sampler</em>) – The fit sampler instance.</p></li>
+<li><p><strong>test_size</strong> (<em>float</em>) – Fraction of data to use in test.</p></li>
+<li><p><strong>val_size</strong> (<em>float</em>) – Fraction of data to use in val.</p></li>
+<li><p><strong>train_size</strong> (<em>float</em>) – Fraction of data to use in train.</p></li>
+<li><p><strong>return_indices</strong> (<em>bool</em>) – Return indices after the value arrays.</p></li>
+<li><p><strong>output_is_pandas</strong> (<em>dict</em>) – metadata about casting to pandas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Either many arrays or indices in arrays.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function copies and pastes a lot of code when it could instead
+use some loop over (X, y, labels, sampler_instance.get_clusters())
+but such an implementation is more error prone. This is long and
+not the prettiest, but it is definitely doing what we want.</p>
+</dd></dl>
+
+</section>
+<section id="module-astartes.utils.exceptions">
+<span id="astartes-utils-exceptions-module"></span><h2>astartes.utils.exceptions module<a class="headerlink" href="#module-astartes.utils.exceptions" title="Link to this heading"></a></h2>
+<p>Exceptions used by astartes</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="astartes.utils.exceptions.InvalidConfigurationError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.utils.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidConfigurationError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.exceptions.InvalidConfigurationError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Used when user-requested split/data would not work.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.exceptions.InvalidConfigurationError.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.exceptions.InvalidConfigurationError.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="astartes.utils.exceptions.InvalidModelTypeError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.utils.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidModelTypeError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.exceptions.InvalidModelTypeError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Used when user-provided model is invalid.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.exceptions.InvalidModelTypeError.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.exceptions.InvalidModelTypeError.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="astartes.utils.exceptions.MoleculesNotInstalledError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.utils.exceptions.</span></span><span class="sig-name descname"><span class="pre">MoleculesNotInstalledError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.exceptions.MoleculesNotInstalledError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Used when attempting to featurize molecules without install.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.exceptions.MoleculesNotInstalledError.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.exceptions.MoleculesNotInstalledError.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="astartes.utils.exceptions.SamplerNotImplementedError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.utils.exceptions.</span></span><span class="sig-name descname"><span class="pre">SamplerNotImplementedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.exceptions.SamplerNotImplementedError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Used when attempting to call a non-existent sampler.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.exceptions.SamplerNotImplementedError.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.exceptions.SamplerNotImplementedError.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="astartes.utils.exceptions.UncastableInputError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.utils.exceptions.</span></span><span class="sig-name descname"><span class="pre">UncastableInputError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.exceptions.UncastableInputError" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Used when X, y, or labels cannot be cast to a np.array.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.exceptions.UncastableInputError.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.exceptions.UncastableInputError.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-astartes.utils.fast_kennard_stone">
+<span id="astartes-utils-fast-kennard-stone-module"></span><h2>astartes.utils.fast_kennard_stone module<a class="headerlink" href="#module-astartes.utils.fast_kennard_stone" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.utils.fast_kennard_stone.fast_kennard_stone">
+<span class="sig-prename descclassname"><span class="pre">astartes.utils.fast_kennard_stone.</span></span><span class="sig-name descname"><span class="pre">fast_kennard_stone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ks_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#astartes.utils.fast_kennard_stone.fast_kennard_stone" title="Link to this definition"></a></dt>
+<dd><p>Implements the Kennard-Stone algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ks_distance</strong> (<em>np.ndarray</em>) – Distance matrix</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Indices in order of Kennard-Stone selection</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-astartes.utils.sampler_factory">
+<span id="astartes-utils-sampler-factory-module"></span><h2>astartes.utils.sampler_factory module<a class="headerlink" href="#module-astartes.utils.sampler_factory" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="astartes.utils.sampler_factory.SamplerFactory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.utils.sampler_factory.</span></span><span class="sig-name descname"><span class="pre">SamplerFactory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampler</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.sampler_factory.SamplerFactory" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.sampler_factory.SamplerFactory.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampler</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.sampler_factory.SamplerFactory.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize SamplerFactory and copy a lowercased ‘sampler’ into an attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sampler</strong> (<em>string</em>) – The desired sampler.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.sampler_factory.SamplerFactory.get_sampler">
+<span class="sig-name descname"><span class="pre">get_sampler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hopts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.sampler_factory.SamplerFactory.get_sampler" title="Link to this definition"></a></dt>
+<dd><p>Instantiate (which also performs fitting) and return the sampler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Feature array.</p></li>
+<li><p><strong>y</strong> (<em>np.array</em>) – Target array.</p></li>
+<li><p><strong>labels</strong> (<em>np.array</em>) – Label array.</p></li>
+<li><p><strong>hopts</strong> (<em>dict</em>) – Hyperparameters for the sampler.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#astartes.utils.exceptions.SamplerNotImplementedError" title="astartes.utils.exceptions.SamplerNotImplementedError"><strong>SamplerNotImplementedError</strong></a> – Raised when an non-existent or not yet implemented sampler is requested.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The fit sampler instance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>astartes.sampler</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-astartes.utils.user_utils">
+<span id="astartes-utils-user-utils-module"></span><h2>astartes.utils.user_utils module<a class="headerlink" href="#module-astartes.utils.user_utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.utils.user_utils.display_results_as_table">
+<span class="sig-prename descclassname"><span class="pre">astartes.utils.user_utils.</span></span><span class="sig-name descname"><span class="pre">display_results_as_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.user_utils.display_results_as_table" title="Link to this definition"></a></dt>
+<dd><p>Helper function to print a dictionary as a neat tabulate</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.utils.user_utils.generate_regression_results_dict">
+<span class="sig-prename descclassname"><span class="pre">astartes.utils.user_utils.</span></span><span class="sig-name descname"><span class="pre">generate_regression_results_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sklearn_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samplers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['random']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samplers_hopts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.user_utils.generate_regression_results_dict" title="Link to this definition"></a></dt>
+<dd><p>Helper function to train a sklearn model using the provided data
+and provided sampler types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em><em>, </em><em>pd.DataFrame</em>) – Numpy array or pandas DataFrame of feature vectors.</p></li>
+<li><p><strong>y</strong> (<em>np.array</em><em>, </em><em>pd.Series</em>) – Targets corresponding to X, must be of same size.</p></li>
+<li><p><strong>train_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in training set. Defaults to 0.8.</p></li>
+<li><p><strong>val_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in validation set. Defaults to 0.1.</p></li>
+<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in test set. Defaults to 0.1.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The random seed used throughout astartes.</p></li>
+<li><p><strong>samplers_hopts</strong> (<em>dict</em><em>, </em><em>optional</em>) – Should be a dictionary of dictionaries with the keys specifying
+the sampler and the values being another dictionary with the
+corresponding hyperparameters. Defaults to {}.</p></li>
+<li><p><strong>print_results</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to print the resulting dictionary as a neat table</p></li>
+<li><p><strong>additional_metrics</strong> (<em>dict</em><em>, </em><em>optional</em>) – mapping of name (str) to metric (func) for additional metrics
+such as those in sklearn.metrics or user-provided functions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl>
+<dt>nested dictionary with the format of</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>sampler: {</dt><dd><dl class="simple">
+<dt>‘mae’:{</dt><dd><p>‘train’: [],
+‘val’: [],
+‘test’: [],</p>
+</dd>
+</dl>
+<p>},
+‘rmse’:{</p>
+<blockquote>
+<div><p>’train’: [],
+‘val’: [],
+‘test’: [],</p>
+</div></blockquote>
+<p>},
+‘R2’:{</p>
+<blockquote>
+<div><p>’train’: [],
+‘val’: [],
+‘test’: [],</p>
+</div></blockquote>
+<p>},</p>
+</dd>
+</dl>
+<p>},</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-astartes.utils.warnings">
+<span id="astartes-utils-warnings-module"></span><h2>astartes.utils.warnings module<a class="headerlink" href="#module-astartes.utils.warnings" title="Link to this heading"></a></h2>
+<p>Warnings used by astartes</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="astartes.utils.warnings.ConversionWarning">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.utils.warnings.</span></span><span class="sig-name descname"><span class="pre">ConversionWarning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.warnings.ConversionWarning" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></p>
+<p>Used when passed data is not a numpy array.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.warnings.ConversionWarning.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.warnings.ConversionWarning.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="astartes.utils.warnings.ImperfectSplittingWarning">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.utils.warnings.</span></span><span class="sig-name descname"><span class="pre">ImperfectSplittingWarning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.warnings.ImperfectSplittingWarning" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></p>
+<p>Used when a sampler cannot match requested splits.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.warnings.ImperfectSplittingWarning.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.warnings.ImperfectSplittingWarning.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="astartes.utils.warnings.NoMatchingScaffold">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.utils.warnings.</span></span><span class="sig-name descname"><span class="pre">NoMatchingScaffold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.warnings.NoMatchingScaffold" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Warning</span></code></p>
+<p>Used when an RDKit molecule does not match any
+Bemis-Murcko scaffold and returns an empty string.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.warnings.NoMatchingScaffold.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.warnings.NoMatchingScaffold.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="astartes.utils.warnings.NormalizationWarning">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">astartes.utils.warnings.</span></span><span class="sig-name descname"><span class="pre">NormalizationWarning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.warnings.NormalizationWarning" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></p>
+<p>Used when a requested split does not add to 1.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="astartes.utils.warnings.NormalizationWarning.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.warnings.NormalizationWarning.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-astartes.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-astartes.utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.utils.generate_regression_results_dict">
+<span class="sig-prename descclassname"><span class="pre">astartes.utils.</span></span><span class="sig-name descname"><span class="pre">generate_regression_results_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sklearn_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samplers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['random']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samplers_hopts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.utils.generate_regression_results_dict" title="Link to this definition"></a></dt>
+<dd><p>Helper function to train a sklearn model using the provided data
+and provided sampler types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em><em>, </em><em>pd.DataFrame</em>) – Numpy array or pandas DataFrame of feature vectors.</p></li>
+<li><p><strong>y</strong> (<em>np.array</em><em>, </em><em>pd.Series</em>) – Targets corresponding to X, must be of same size.</p></li>
+<li><p><strong>train_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in training set. Defaults to 0.8.</p></li>
+<li><p><strong>val_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in validation set. Defaults to 0.1.</p></li>
+<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in test set. Defaults to 0.1.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The random seed used throughout astartes.</p></li>
+<li><p><strong>samplers_hopts</strong> (<em>dict</em><em>, </em><em>optional</em>) – Should be a dictionary of dictionaries with the keys specifying
+the sampler and the values being another dictionary with the
+corresponding hyperparameters. Defaults to {}.</p></li>
+<li><p><strong>print_results</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to print the resulting dictionary as a neat table</p></li>
+<li><p><strong>additional_metrics</strong> (<em>dict</em><em>, </em><em>optional</em>) – mapping of name (str) to metric (func) for additional metrics
+such as those in sklearn.metrics or user-provided functions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl>
+<dt>nested dictionary with the format of</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>sampler: {</dt><dd><dl class="simple">
+<dt>‘mae’:{</dt><dd><p>‘train’: [],
+‘val’: [],
+‘test’: [],</p>
+</dd>
+</dl>
+<p>},
+‘rmse’:{</p>
+<blockquote>
+<div><p>’train’: [],
+‘val’: [],
+‘test’: [],</p>
+</div></blockquote>
+<p>},
+‘R2’:{</p>
+<blockquote>
+<div><p>’train’: [],
+‘val’: [],
+‘test’: [],</p>
+</div></blockquote>
+<p>},</p>
+</dd>
+</dl>
+<p>},</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="astartes.samplers.interpolation.html" class="btn btn-neutral float-left" title="astartes.samplers.interpolation package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test.html" class="btn btn-neutral float-right" title="test package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jackson Burns.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
