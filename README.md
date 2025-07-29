@@ -231,7 +231,7 @@ Do not provide a `random_state` in the `hopts` dictionary - it will be overwritt
 |:---:|---|---|---|---|---|
 | Random | 'random' | Interpolative | `shuffle` | [sklearn train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) Documentation | This sampler is a direct passthrough to `sklearn`'s `train_test_split`. |
 | Kennard-Stone | 'kennard_stone' | Interpolative | `metric` | Original Paper by [Kennard & Stone](https://www.tandfonline.com/doi/abs/10.1080/00401706.1969.10490666) :small_blue_diamond: | Euclidian distance is used by default, as described in the original paper. |
-| Sample set Partitioning based on joint X-Y distances (SPXY) | 'spxy' | Interpolative | `distance_metric` | Saldhana et. al [original paper](https://www.sciencedirect.com/science/article/abs/pii/S003991400500192X) :small_blue_diamond: | Extension of Kennard Stone that also includes the response when sampling distances. |
+| Sample set Partitioning based on joint X-Y distances (SPXY) | 'spxy' | Interpolative | `distance_metric`, `distance_metric_X`, `distance_metric_y` (*) | Saldhana et. al [original paper](https://www.sciencedirect.com/science/article/abs/pii/S003991400500192X) :small_blue_diamond: | Extension of Kennard Stone that also includes the response when sampling distances. |
 | Mahalanobis Distance Kennard Stone (MDKS) | 'spxy' _(MDKS is derived from SPXY)_ | Interpolative | _none, see Notes_ | Saptoro et. al [original paper](https://espace.curtin.edu.au/bitstream/handle/20.500.11937/45101/217844_70585_PUB-SE-DCE-FM-71008.pdf?sequence=2&isAllowed=y) | MDKS is SPXY using Mahalanobis distance and can be called by using SPXY with `distance_metric="mahalanobis"` |
 | Scaffold | 'scaffold' | Extrapolative | `include_chirality` | [Bemis-Murcko Scaffold](https://pubs.acs.org/doi/full/10.1021/jm9602928) :small_blue_diamond: as implemented in RDKit | This sampler requires SMILES strings as input (use the `molecules` subpackage) |
 | Molecular Weight| 'molecular_weight' | Extrapolative | _none_ | ~ | Sorts molecules by molecular weight as calculated by RDKit |
@@ -245,6 +245,8 @@ Do not provide a `random_state` in the `hopts` dictionary - it will be overwritt
 | Restricted Boltzmann Machine (RBM) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 | Kohonen Self-Organizing Map (SOM) | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
 | SPlit Method | ~ | ~ | _upcoming in_ `astartes` _v1.x_ | ~ | ~ |
+
+(*) specifying `distance_metric_X` or `distance_metric_y` will override the choice of `distance_metric`
 
 ### Domain-Specific Applications
 Below are some field specific applications of `astartes`. Interested in adding a new sampling algorithm or featurization approach? See [`CONTRIBUTING.md`](./CONTRIBUTING.md).
