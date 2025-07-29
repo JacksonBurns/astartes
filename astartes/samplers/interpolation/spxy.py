@@ -28,14 +28,16 @@ class SPXY(AbstractSampler):
         """
         Implements the SPXY algorithm as described by Saldahna et al.
         """
-        distance_metric = self.get_config("metric", "euclidean")
+        _default = self.get_config("distance_metric", False) or self.get_config("metric", "euclidean")
+        distance_metric_X = self.get_config("metric", _default)
+        distance_metric_y = self.get_config("metric", _default)
 
         y_2d = self.y[:, np.newaxis]
 
-        y_pdist = pdist(y_2d, metric=distance_metric)
+        y_pdist = pdist(y_2d, metric=distance_metric_X)
         y_pdist = np.divide(y_pdist, np.amax(y_pdist))
 
-        X_dist = pdist(self.X, metric=distance_metric)
+        X_dist = pdist(self.X, metric=distance_metric_y)
         X_dist = np.divide(X_dist, np.amax(X_dist))
 
         # sum the distances as per eq. 3 of Saldahna, set diagonal to nan
