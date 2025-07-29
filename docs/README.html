@@ -1,0 +1,565 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Documentation &mdash; astartes astartes.__version__ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=371f806f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=8209df7b" />
+
+  
+      <script src="_static/jquery.js?v=3d1d8b85"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=04b1687e"></script>
+      <script src="_static/doctools.js?v=e1f2eec6"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing &amp; Developer Notes" href="CONTRIBUTING.html" />
+    <link rel="prev" title="astartes documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            astartes
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Online Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#installing-astartes">Installing <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pip"><code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conda"><code class="docutils literal notranslate"><span class="pre">conda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#source">Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#statement-of-need">Statement of Need</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#target-audience">Target Audience</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#quick-start">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example-notebooks">Example Notebooks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#packages-using-astartes">Packages Using <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#withhold-testing-data-with-train-val-test-split">Withhold Testing Data with <code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluate-the-impact-of-splitting-algorithms-on-regression-models">Evaluate the Impact of Splitting Algorithms on Regression Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-astartes-with-categorical-data">Using <code class="docutils literal notranslate"><span class="pre">astartes</span></code> with Categorical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#access-sampling-algorithms-directly">Access Sampling Algorithms Directly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#theory-and-application-of-astartes">Theory and Application of <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rational-splitting-algorithms">Rational Splitting Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#implemented-sampling-algorithms">Implemented Sampling Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#domain-specific-applications">Domain-Specific Applications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#chemical-data-and-the-astartes-molecules-subpackage">Chemical Data and the <code class="docutils literal notranslate"><span class="pre">astartes.molecules</span></code> Subpackage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#reproducibility">Reproducibility</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#known-reproducibility-limitations">Known Reproducibility Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#how-to-cite">How to Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id7">Contributing &amp; Developer Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing &amp; Developer Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html#joss-branch">JOSS Branch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sklearn_to_astartes.html">Transitioning from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">astartes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">astartes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Online Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p><span class="raw-html-m2r"><h1 align="center">astartes</h1></span></p>
+<p><span class="raw-html-m2r"><h2 align="center"><em>(as-tar-tees)</em></h2></span></p>
+<h3 align="center">Train:Validation:Test Algorithmic Sampling for Molecules and Arbitrary Arrays</h3><dl class="simple">
+<dt>:raw-html-m2r:<a href="#id1"><span class="problematic" id="id2">`</span></a>&lt;p align=”center”&gt;</dt><dd><p>&lt;img alt=”astarteslogo” src=”<a class="reference external" href="https://raw.githubusercontent.com/JacksonBurns/astartes/main/astartes_logo.png">https://raw.githubusercontent.com/JacksonBurns/astartes/main/astartes_logo.png</a>”&gt;</p>
+</dd>
+</dl>
+<p>&lt;/p&gt;`</p>
+<div align="center">
+  <table>
+    <caption><p style="font-weight:bold">Status Badges</p></caption>
+    <tr>
+      <th>Usage</th>
+      <th>Continuous Integration</th>
+      <th>Release</th>
+    </tr>
+    <tr>
+      <td><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/astartes?style=plastic"></td>
+      <td><img alt="Reproduce Paper" src="https://github.com/JacksonBurns/astartes/actions/workflows/reproduce_paper.yml/badge.svg?branch=main&event=schedule"></td>
+      <td><a href="https://github.com/pyOpenSci/software-review/issues/120"><img src="https://tinyurl.com/y22nb8up" alt="pyOpenSci approved" /></a></td>
+    </tr>
+    <tr>
+      <td><img alt="PyPI - License" src="https://img.shields.io/github/license/JacksonBurns/astartes"></td>
+      <td><img alt="Test Status" src="https://github.com/JacksonBurns/astartes/actions/workflows/ci.yml/badge.svg?branch=main&event=schedule"></td>
+      <td><a href="https://doi.org/10.5281/zenodo.8147205"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8147205.svg" alt="DOI"></a></td>
+    </tr>
+    <tr>
+      <td><img alt="PyPI - Total Downloads" src="https://static.pepy.tech/personalized-badge/astartes?period=total&units=none&left_color=grey&right_color=brightgreen&left_text=Lifetime%20Downloads"></td>
+      <td><a alt="Documentation Status"><img src="https://github.com/JacksonBurns/astartes/actions/workflows/gen_docs.yml/badge.svg"></td>
+      <td><img alt="PyPI" src="https://img.shields.io/pypi/v/astartes"> <img alt="conda-forge version" src="https://img.shields.io/conda/vn/conda-forge/astartes.svg"></td>
+    </tr>
+    <tr>
+      <td><img alt="GitHub Repo Stars" src="https://img.shields.io/github/stars/JacksonBurns/astartes?style=social"></td>
+      <td><a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed." /></a></td>
+      <td><a href="https://joss.theoj.org/papers/8a9cfc71d6f75410b06510a646d5f783"><img src="https://joss.theoj.org/papers/8a9cfc71d6f75410b06510a646d5f783/status.svg"></a></td>
+    </tr>
+  </table>
+</div><section id="online-documentation">
+<h1>Online Documentation<a class="headerlink" href="#online-documentation" title="Link to this heading"></a></h1>
+<p>Follow <a class="reference external" href="https://JacksonBurns.github.io/astartes/">this link</a> for a nicely-rendered version of this README along with additional tutorials for <a class="reference external" href="https://jacksonburns.github.io/astartes/sklearn_to_astartes.html">moving from train_test_split in sklearn to astartes</a>.
+Keep reading for a installation guide and links to tutorials!</p>
+</section>
+<section id="installing-astartes">
+<h1>Installing <code class="docutils literal notranslate"><span class="pre">astartes</span></code><a class="headerlink" href="#installing-astartes" title="Link to this heading"></a></h1>
+<p>We recommend installing <code class="docutils literal notranslate"><span class="pre">astartes</span></code> within a virtual environment, using either <code class="docutils literal notranslate"><span class="pre">venv</span></code> or <code class="docutils literal notranslate"><span class="pre">conda</span></code> (or other tools) to simplify dependency management. Python versions 3.8, 3.9, 3.10, 3.11, and 3.12 are supported on all platforms.</p>
+<blockquote>
+<div><p><strong>Warning</strong>
+Windows (PowerShell) and MacOS Catalina or newer (zsh) require double quotes around text using the <code class="docutils literal notranslate"><span class="pre">'[]'</span></code> characters (i.e. <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">&quot;astartes[molecules]&quot;</span></code>).</p>
+</div></blockquote>
+<section id="pip">
+<h2><code class="docutils literal notranslate"><span class="pre">pip</span></code><a class="headerlink" href="#pip" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">astartes</span></code> is available on <code class="docutils literal notranslate"><span class="pre">PyPI</span></code> and can be installed using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<ul class="simple">
+<li><p>To include the featurization options for chemical data, use <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">astartes[molecules]</span></code>.</p></li>
+<li><p>To install only the sampling algorithms, use <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">astartes</span></code> (this install will have fewer dependencies and may be more readily compatible in environments with existing workflows).</p></li>
+</ul>
+</section>
+<section id="conda">
+<h2><code class="docutils literal notranslate"><span class="pre">conda</span></code><a class="headerlink" href="#conda" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">astartes</span></code> package is also available on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> with this command: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">astartes</span></code>.
+To install <code class="docutils literal notranslate"><span class="pre">astartes</span></code> with support for featurizing molecules, use: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">astartes</span> <span class="pre">aimsim</span></code>.
+This will download the base <code class="docutils literal notranslate"><span class="pre">astartes</span></code> package as well as <code class="docutils literal notranslate"><span class="pre">aimsim</span></code>, which is the backend used for molecular featurization.</p>
+<p>The PyPI distribution has fewer dependencies for the <code class="docutils literal notranslate"><span class="pre">molecules</span></code> subpackage because it uses <code class="docutils literal notranslate"><span class="pre">aimsim_core</span></code> instead of <code class="docutils literal notranslate"><span class="pre">aimsim</span></code>.
+You can achieve this on <code class="docutils literal notranslate"><span class="pre">conda</span></code> by first running <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">astartes</span></code> and then <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">aimsim_core</span></code> (<code class="docutils literal notranslate"><span class="pre">aimsim_core</span></code> is not available on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>).</p>
+</section>
+<section id="source">
+<h2>Source<a class="headerlink" href="#source" title="Link to this heading"></a></h2>
+<p>To install <code class="docutils literal notranslate"><span class="pre">astartes</span></code> from source for development, see the <a class="reference external" href="#contributing--developer-notes">Contributing &amp; Developer Notes</a> section.</p>
+</section>
+</section>
+<section id="statement-of-need">
+<h1>Statement of Need<a class="headerlink" href="#statement-of-need" title="Link to this heading"></a></h1>
+<p>Machine learning has sparked an explosion of progress in chemical kinetics, materials science, and many other fields as researchers use data-driven methods to accelerate steps in traditional workflows within some acceptable error tolerance.
+To facilitate adoption of these models, there are two important tasks to consider:</p>
+<ol class="arabic simple">
+<li><p>use a validation set when selecting the optimal hyperparameter for the model and separately use a held-out test set to measure performance on unseen data.</p></li>
+<li><p>evaluate model performance on both interpolative and extrapolative tasks so future users are informed of any potential limitations.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">astartes</span></code> addresses both of these points by implementing an <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>-compatible <code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code> function.
+Additional technical detail is provided below as well as in our companion paper in the Journal of Open Source Software: <a class="reference external" href="https://joss.theoj.org/papers/10.21105/joss.05996">Machine Learning Validation via Rational Dataset Sampling with astartes</a>.
+For a demo-based explainer using machine learning on a fast food menu, see the <code class="docutils literal notranslate"><span class="pre">astartes</span></code> Reproducible Notebook published at the United States Research Software Engineers Conference at <a class="reference external" href="https://jacksonburns.github.io/use-rse-23-astartes/split_comparisons.html">this page</a>.</p>
+<section id="target-audience">
+<h2>Target Audience<a class="headerlink" href="#target-audience" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">astartes</span></code> is generally applicable to machine learning involving both discovery and inference <em>and</em> model validation.
+There are specific functions in <code class="docutils literal notranslate"><span class="pre">astartes</span></code> for applications in cheminformatics (<code class="docutils literal notranslate"><span class="pre">astartes.molecules</span></code>) but the methods implemented are general to all numerical data.</p>
+</section>
+</section>
+<section id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">astartes</span></code> is designed as a drop-in replacement for <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>‘s <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> function (see the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">sklearn documentation</a>). To switch to <code class="docutils literal notranslate"><span class="pre">astartes</span></code>, change <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">sklearn.model_selection</span> <span class="pre">import</span> <span class="pre">train_test_split</span></code> to <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">astartes</span> <span class="pre">import</span> <span class="pre">train_test_split</span></code>.</p>
+<p>Like <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>, <code class="docutils literal notranslate"><span class="pre">astartes</span></code> accepts any iterable object as <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">labels</span></code>.
+Each will be converted to a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array for internal operations, and returned as a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array with limited exceptions: if <code class="docutils literal notranslate"><span class="pre">X</span></code> is a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> is a <code class="docutils literal notranslate"><span class="pre">Series</span></code>, or <code class="docutils literal notranslate"><span class="pre">labels</span></code> is a <code class="docutils literal notranslate"><span class="pre">Series</span></code>, <code class="docutils literal notranslate"><span class="pre">astartes</span></code> will cast it back to its original type including its index and column names.</p>
+<blockquote>
+<div><p><strong>Note</strong>
+The developers recommend passing <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">labels</span></code> as <code class="docutils literal notranslate"><span class="pre">numpy</span></code> arrays and handling the conversion to and from other types explicitly on your own. Behind-the-scenes type casting can lead to unexpected behavior!</p>
+</div></blockquote>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">astartes</span></code> will split data randomly. Additionally, a variety of algorithmic sampling approaches can be used by specifying the <code class="docutils literal notranslate"><span class="pre">sampler</span></code> argument to the function (see the <a class="reference external" href="#implemented-sampling-algorithms">Table of Implemented Samplers</a> for a complete list of options and their corresponding references):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_diabetes</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+  <span class="n">X</span><span class="p">,</span>  <span class="c1"># preferably numpy arrays, but astartes will cast it for you</span>
+  <span class="n">y</span><span class="p">,</span>
+  <span class="n">sampler</span> <span class="o">=</span> <span class="s1">&#39;kennard_stone&#39;</span><span class="p">,</span>  <span class="c1"># any of the supported samplers</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note</strong>
+Extrapolation sampling algorithms will return an additional set of arrays (the cluster labels) which will result in a <code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">too</span> <span class="pre">many</span> <span class="pre">values</span> <span class="pre">to</span> <span class="pre">unpack</span></code> if not called properly. See the <cite>``split_comparisons`</cite> Google colab demo &lt;<a class="reference external" href="https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/split_comparisons/split_comparisons.ipynb">https://colab.research.google.com/github/JacksonBurns/astartes/blob/main/examples/split_comparisons/split_comparisons.ipynb</a>&gt;`_ for a full explanation.</p>
+</div></blockquote>
+<p>That’s all you need to get started with <code class="docutils literal notranslate"><span class="pre">astartes</span></code>!
+The next sections include more examples and some demo notebooks you can try in your browser.</p>
+<section id="example-notebooks">
+<h2>Example Notebooks<a class="headerlink" href="#example-notebooks" title="Link to this heading"></a></h2>
+<p>Click the badges in the table below to be taken to a live, interactive demo of <code class="docutils literal notranslate"><span class="pre">astartes</span></code>:</p>
+<p>To execute these notebooks locally, clone this repository (i.e. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/JacksonBurns/astartes.git</span></code>), navigate to the <code class="docutils literal notranslate"><span class="pre">astartes</span></code> directory, run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.[demos]</span></code>, then open and run the notebooks in your preferred editor.
+You do <em>not</em> need to execute the cells prefixed with <code class="docutils literal notranslate"><span class="pre">%%capture</span></code> - they are only present for compatibility with Google Colab.</p>
+<section id="packages-using-astartes">
+<h3>Packages Using <code class="docutils literal notranslate"><span class="pre">astartes</span></code><a class="headerlink" href="#packages-using-astartes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/chemprop/chemprop">Chemprop</a>, a machine learning library for chemical property prediction, uses <code class="docutils literal notranslate"><span class="pre">astartes</span></code> in the backend for splitting molecular structures.</p></li>
+<li><p><cite>``fastprop`</cite> &lt;<a class="reference external" href="https://github.com/JacksonBurns/fastprop">https://github.com/JacksonBurns/fastprop</a>&gt;`_, a descriptor-based property prediction library, uses <code class="docutils literal notranslate"><span class="pre">astartes</span></code>.</p></li>
+<li><p><cite>Google Scholar of articles citing the JOSS paper for ``astartes`</cite> &lt;<a class="reference external" href="https://scholar.google.com/scholar?cites=4693802000464819413&amp;as_sdt=40000005&amp;sciodt=0,22&amp;hl=en">https://scholar.google.com/scholar?cites=4693802000464819413&amp;as_sdt=40000005&amp;sciodt=0,22&amp;hl=en</a>&gt;`_</p></li>
+</ul>
+</section>
+</section>
+<section id="withhold-testing-data-with-train-val-test-split">
+<h2>Withhold Testing Data with <code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code><a class="headerlink" href="#withhold-testing-data-with-train-val-test-split" title="Link to this heading"></a></h2>
+<p>For rigorous ML research, it is critical to withhold some data during training to use a <code class="docutils literal notranslate"><span class="pre">test</span></code> set.
+The model should <em>never</em> see this data during training (unlike the validation set) so that we can get an accurate measurement of its performance.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">astartes</span></code> performing this three-way data split is readily available with <code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">astartes</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_val_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">train_val_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">sampler</span> <span class="o">=</span> <span class="s1">&#39;sphere_exclusion&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can now train your model with <code class="docutils literal notranslate"><span class="pre">X_train</span></code>, optimize your model with <code class="docutils literal notranslate"><span class="pre">X_val</span></code>, and measure its performance with <code class="docutils literal notranslate"><span class="pre">X_test</span></code>.</p>
+</section>
+<section id="evaluate-the-impact-of-splitting-algorithms-on-regression-models">
+<h2>Evaluate the Impact of Splitting Algorithms on Regression Models<a class="headerlink" href="#evaluate-the-impact-of-splitting-algorithms-on-regression-models" title="Link to this heading"></a></h2>
+<p>For data with many features it can be difficult to visualize how different sampling algorithms change the distribution of data into training, validation, and testing like we do in some of the demo notebooks.
+To aid in analyzing the impact of the algorithms, <code class="docutils literal notranslate"><span class="pre">astartes</span></code> provides <code class="docutils literal notranslate"><span class="pre">generate_regression_results_dict</span></code>.
+This function allows users to quickly evaluate the impact of different splitting techniques on any <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>-compatible model’s performance.
+All results are stored in a nested dictionary (<code class="docutils literal notranslate"><span class="pre">{sampler:{metric:{split:score}}}</span></code>) format and can be displayed in a neatly formatted table using the optional <code class="docutils literal notranslate"><span class="pre">print_results</span></code> argument.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSVR</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">astartes.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_regression_results_dict</span> <span class="k">as</span> <span class="n">grrd</span>
+
+<span class="n">sklearn_model</span> <span class="o">=</span> <span class="n">LinearSVR</span><span class="p">()</span>
+<span class="n">results_dict</span> <span class="o">=</span> <span class="n">grrd</span><span class="p">(</span>
+    <span class="n">sklearn_model</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">print_results</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+         <span class="n">Train</span>       <span class="n">Val</span>      <span class="n">Test</span>
+<span class="o">----</span>  <span class="o">--------</span>  <span class="o">--------</span>  <span class="o">--------</span>
+<span class="n">MAE</span>   <span class="mf">1.41522</span>   <span class="mf">3.13435</span>   <span class="mf">2.17091</span>
+<span class="n">RMSE</span>  <span class="mf">2.03062</span>   <span class="mf">3.73721</span>   <span class="mf">2.40041</span>
+<span class="n">R2</span>    <span class="mf">0.90745</span>   <span class="mf">0.80787</span>   <span class="mf">0.78412</span>
+</pre></div>
+</div>
+<p>Additional metrics can be passed to <code class="docutils literal notranslate"><span class="pre">generate_regression_results_dict</span></code> via the <code class="docutils literal notranslate"><span class="pre">additional_metrics</span></code> argument, which should be a dictionary mapping the name of the metric (as a <code class="docutils literal notranslate"><span class="pre">string</span></code>) to the function itself, like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_absolute_percentage_error</span>
+
+<span class="n">add_met</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mape&quot;</span><span class="p">:</span> <span class="n">mean_absolute_percentage_error</span><span class="p">}</span>
+
+<span class="n">grrd</span><span class="p">(</span><span class="n">sklearn_model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">additional_metric</span><span class="o">=</span><span class="n">add_met</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See the docstring for <code class="docutils literal notranslate"><span class="pre">generate_regression_results_dict</span></code> (with <code class="docutils literal notranslate"><span class="pre">help(generate_regression_results_dict)</span></code>) for more information.</p>
+</section>
+<section id="using-astartes-with-categorical-data">
+<h2>Using <code class="docutils literal notranslate"><span class="pre">astartes</span></code> with Categorical Data<a class="headerlink" href="#using-astartes-with-categorical-data" title="Link to this heading"></a></h2>
+<p>Any of the implemented sampling algorithms whose hyperparameters allow specifying the <code class="docutils literal notranslate"><span class="pre">metric</span></code> or <code class="docutils literal notranslate"><span class="pre">distance_metric</span></code> (effectively <code class="docutils literal notranslate"><span class="pre">1-metric</span></code>) can be co-opted to work with categorical data.
+Simply encode the data in a format compatible with the <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> metric of choice and then call <code class="docutils literal notranslate"><span class="pre">astartes</span></code> with that metric specified:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">jaccard_score</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+  <span class="n">X</span><span class="p">,</span>
+  <span class="n">y</span><span class="p">,</span>
+  <span class="n">sampler</span><span class="o">=</span><span class="s1">&#39;kennard_stone&#39;</span><span class="p">,</span>
+  <span class="n">hopts</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;metric&quot;</span><span class="p">:</span> <span class="n">jaccard_score</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Other samplers which do not allow specifying a categorical distance metric did not provide a method for doing so in their original inception, though it is possible that they can be adapted for this application.
+If you are interested in adding support for categorical metrics to an existing sampler, consider opening a <a class="reference external" href="https://github.com/JacksonBurns/astartes/issues/new?assignees=&amp;labels=enhancement&amp;projects=&amp;template=feature_request.md&amp;title=%5BFEATURE%5D%3A+">Feature Request</a>!</p>
+</section>
+<section id="access-sampling-algorithms-directly">
+<h2>Access Sampling Algorithms Directly<a class="headerlink" href="#access-sampling-algorithms-directly" title="Link to this heading"></a></h2>
+<p>The sampling algorithms implemented in <code class="docutils literal notranslate"><span class="pre">astartes</span></code> can also be directly accessed and run if it is more useful for your applications.
+In the below example, we import the Kennard Stone sampler, use it to partition a simple array, and then retrieve a sample.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">astartes.samplers.interpolation</span><span class="w"> </span><span class="kn">import</span> <span class="n">KennardStone</span>
+
+<span class="n">kennard_stone</span> <span class="o">=</span> <span class="n">KennardStone</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="n">first_2_samples</span> <span class="o">=</span> <span class="n">kennard_stone</span><span class="o">.</span><span class="n">get_sample_idxs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All samplers in <code class="docutils literal notranslate"><span class="pre">astartes</span></code> implement a <code class="docutils literal notranslate"><span class="pre">_sample()</span></code> method that is called by the constructor (i.e. greedily) and either a <code class="docutils literal notranslate"><span class="pre">get_sampler_idxs</span></code> or <code class="docutils literal notranslate"><span class="pre">get_cluster_idxs</span></code> for interpolative and extrapolative samplers, respectively.
+For more detail on the implementaiton and design of samplers in <code class="docutils literal notranslate"><span class="pre">astartes</span></code>, see the <a class="reference external" href="#contributing--developer-notes">Developer Notes</a> section.</p>
+</section>
+</section>
+<section id="theory-and-application-of-astartes">
+<h1>Theory and Application of <code class="docutils literal notranslate"><span class="pre">astartes</span></code><a class="headerlink" href="#theory-and-application-of-astartes" title="Link to this heading"></a></h1>
+<p>This section of the README details some of the theory behind why the algorithms implemented in <code class="docutils literal notranslate"><span class="pre">astartes</span></code> are important and some motivating examples.
+For a comprehensive walkthrough of the theory and implementation of <code class="docutils literal notranslate"><span class="pre">astartes</span></code>, follow <a class="reference external" href="https://github.com/JacksonBurns/astartes/raw/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf">this link</a> to read the companion paper (freely available and hosted here on GitHub).</p>
+<blockquote>
+<div><p><strong>Note</strong>
+We reference open-access publications wherever possible. For articles locked behind a paywall (denoted with :small_blue_diamond:), we instead suggest reading <a class="reference external" href="https://en.wikipedia.org/wiki/Sci-Hub">this Wikipedia page</a> and absolutely <strong>not</strong> attempting to bypass the paywall.</p>
+</div></blockquote>
+<section id="rational-splitting-algorithms">
+<h2>Rational Splitting Algorithms<a class="headerlink" href="#rational-splitting-algorithms" title="Link to this heading"></a></h2>
+<p>While much machine learning is done with a random choice between training/validation/test data, an alternative is the use of so-called “rational” splitting algorithms.
+These approaches use some similarity-based algorithm to divide data into sets.
+Some of these algorithms include Kennard-Stone (<a class="reference external" href="https://www.tandfonline.com/doi/abs/10.1080/00401706.1969.10490666">Kennard &amp; Stone</a> :small_blue_diamond:), Sphere Exclusion (<a class="reference external" href="https://pubs.acs.org/doi/pdf/10.1021/ci300338w">Tropsha et. al</a> :small_blue_diamond:),as well as the OptiSim as discussed in <a class="reference external" href="https://www.wiley.com/en-us/Applied+Chemoinformatics%3A+Achievements+and+Future+Opportunities-p-9783527806546">Applied Chemoinformatics: Achievements and Future Opportunities</a> :small_blue_diamond:.
+Some clustering-based splitting techniques have also been incorporated, such as <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1016.890&amp;rep=rep1&amp;type=pdf">DBSCAN</a>.</p>
+<p>There are two broad categories of sampling algorithms implemented in <code class="docutils literal notranslate"><span class="pre">astartes</span></code>: extrapolative and interpolative.
+The former will force your model to predict on out-of-sample data, which creates a more challenging task than interpolative sampling.
+See the table below for all of the sampling approaches currently implemented in <code class="docutils literal notranslate"><span class="pre">astartes</span></code>, as well as the hyperparameters that each algorithm accepts (which are passed in with <code class="docutils literal notranslate"><span class="pre">hopts</span></code>) and a helpful reference for understanding how the hyperparameters work.
+Note that <code class="docutils literal notranslate"><span class="pre">random_state</span></code> is defined as a keyword argument in <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> itself, even though these algorithms will use the <code class="docutils literal notranslate"><span class="pre">random_state</span></code> in their own work.
+Do not provide a <code class="docutils literal notranslate"><span class="pre">random_state</span></code> in the <code class="docutils literal notranslate"><span class="pre">hopts</span></code> dictionary - it will be overwritten by the <code class="docutils literal notranslate"><span class="pre">random_state</span></code> you provide for <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> (or the default if none is provided).</p>
+<section id="implemented-sampling-algorithms">
+<h3>Implemented Sampling Algorithms<a class="headerlink" href="#implemented-sampling-algorithms" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sampler Name</p></th>
+<th class="head"><p>Usage String</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Hyperparameters</p></th>
+<th class="head"><p>Reference</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Random</p></td>
+<td><p>‘random’</p></td>
+<td><p>Interpolative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">shuffle</span></code></p></td>
+<td><p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">sklearn train_test_split</a> Documentation</p></td>
+<td><p>This sampler is a direct passthrough to <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>‘s <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kennard-Stone</p></td>
+<td><p>‘kennard_stone’</p></td>
+<td><p>Interpolative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">metric</span></code></p></td>
+<td><p>Original Paper by <a class="reference external" href="https://www.tandfonline.com/doi/abs/10.1080/00401706.1969.10490666">Kennard &amp; Stone</a> :small_blue_diamond:</p></td>
+<td><p>Euclidian distance is used by default, as described in the original paper.</p></td>
+</tr>
+<tr class="row-even"><td><p>Sample set Partitioning based on joint X-Y distances (SPXY)</p></td>
+<td><p>‘spxy’</p></td>
+<td><p>Interpolative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">distance_metric</span></code>, <code class="docutils literal notranslate"><span class="pre">distance_metric_X</span></code>, <code class="docutils literal notranslate"><span class="pre">distance_metric_y</span></code> (*)</p></td>
+<td><p>Saldhana et. al <a class="reference external" href="https://www.sciencedirect.com/science/article/abs/pii/S003991400500192X">original paper</a> :small_blue_diamond:</p></td>
+<td><p>Extension of Kennard Stone that also includes the response when sampling distances.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mahalanobis Distance Kennard Stone (MDKS)</p></td>
+<td><p>‘spxy’ <em>(MDKS is derived from SPXY)</em></p></td>
+<td><p>Interpolative</p></td>
+<td><p><em>none, see Notes</em></p></td>
+<td><p>Saptoro et. al <a class="reference external" href="https://espace.curtin.edu.au/bitstream/handle/20.500.11937/45101/217844_70585_PUB-SE-DCE-FM-71008.pdf?sequence=2&amp;isAllowed=y">original paper</a></p></td>
+<td><p>MDKS is SPXY using Mahalanobis distance and can be called by using SPXY with <code class="docutils literal notranslate"><span class="pre">distance_metric=&quot;mahalanobis&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Scaffold</p></td>
+<td><p>‘scaffold’</p></td>
+<td><p>Extrapolative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">include_chirality</span></code></p></td>
+<td><p><a class="reference external" href="https://pubs.acs.org/doi/full/10.1021/jm9602928">Bemis-Murcko Scaffold</a> :small_blue_diamond: as implemented in RDKit</p></td>
+<td><p>This sampler requires SMILES strings as input (use the <code class="docutils literal notranslate"><span class="pre">molecules</span></code> subpackage)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Molecular Weight</p></td>
+<td><p>‘molecular_weight’</p></td>
+<td><p>Extrapolative</p></td>
+<td><p><em>none</em></p></td>
+<td><p>~</p></td>
+<td><p>Sorts molecules by molecular weight as calculated by RDKit</p></td>
+</tr>
+<tr class="row-even"><td><p>Sphere Exclusion</p></td>
+<td><p>‘sphere_exclusion’</p></td>
+<td><p>Extrapolative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">metric</span></code>, <code class="docutils literal notranslate"><span class="pre">distance_cutoff</span></code></p></td>
+<td><p><em>custom implementation</em></p></td>
+<td><p>Variation on Sphere Exclusion for arbitrary-valued vectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Time Based</p></td>
+<td><p>‘time_based’</p></td>
+<td><p>Extrapolative</p></td>
+<td><p><em>none</em></p></td>
+<td><p>Papers using Time based splitting: <a class="reference external" href="https://pubs.acs.org/doi/full/10.1021/ci200615h">Chen et al.</a> :small_blue_diamond:, <a class="reference external" href="https://pubs.acs.org/doi/full/10.1021/ci400084k">Sheridan, R. P</a> :small_blue_diamond:, <a class="reference external" href="https://pubs.acs.org/doi/full/10.1021/acs.jmedchem.9b02187">Feinberg et al.</a> :small_blue_diamond:, <a class="reference external" href="https://pubs.rsc.org/en/content/articlehtml/2020/re/d0re00071j">Struble et al.</a></p></td>
+<td><p>This sampler requires <code class="docutils literal notranslate"><span class="pre">labels</span></code> to be an iterable of either date or datetime objects.</p></td>
+</tr>
+<tr class="row-even"><td><p>Target Property</p></td>
+<td><p>‘target_property’</p></td>
+<td><p>Extrapolative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">descending</span></code></p></td>
+<td><p>~</p></td>
+<td><p>Sorts data by regression target y</p></td>
+</tr>
+<tr class="row-odd"><td><p>Optimizable K-Dissimilarity Selection (OptiSim)</p></td>
+<td><p>‘optisim’</p></td>
+<td><p>Extrapolative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n_clusters</span></code>, <code class="docutils literal notranslate"><span class="pre">max_subsample_size</span></code>, <code class="docutils literal notranslate"><span class="pre">distance_cutoff</span></code></p></td>
+<td><p><em>custom implementation</em></p></td>
+<td><p>Variation on <a class="reference external" href="https://pubs.acs.org/doi/10.1021/ci025662h">OptiSim</a> for arbitrary-valued vectors.</p></td>
+</tr>
+<tr class="row-even"><td><p>K-Means</p></td>
+<td><p>‘kmeans’</p></td>
+<td><p>Extrapolative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n_clusters</span></code>, <code class="docutils literal notranslate"><span class="pre">n_init</span></code></p></td>
+<td><p><cite>``sklearn KMeans`</cite> &lt;<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html</a>&gt;`_</p></td>
+<td><p>Passthrough to <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>‘s <code class="docutils literal notranslate"><span class="pre">KMeans</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Density-Based Spatial Clustering of Applications with Noise (DBSCAN)</p></td>
+<td><p>‘dbscan’</p></td>
+<td><p>Extrapolative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">eps</span></code>, <code class="docutils literal notranslate"><span class="pre">min_samples</span></code>, <code class="docutils literal notranslate"><span class="pre">algorithm</span></code>, <code class="docutils literal notranslate"><span class="pre">metric</span></code>, <code class="docutils literal notranslate"><span class="pre">leaf_size</span></code></p></td>
+<td><p><cite>``sklearn DBSCAN`</cite> &lt;<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html">https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html</a>&gt;`_ Documentation</p></td>
+<td><p>Passthrough to <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>‘s <code class="docutils literal notranslate"><span class="pre">DBSCAN</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Minimum Test Set Dissimilarity (MTSD)</p></td>
+<td><p>~</p></td>
+<td><p>~</p></td>
+<td><p><em>upcoming in</em> <code class="docutils literal notranslate"><span class="pre">astartes</span></code> <em>v1.x</em></p></td>
+<td><p>~</p></td>
+<td><p>~</p></td>
+</tr>
+<tr class="row-odd"><td><p>Restricted Boltzmann Machine (RBM)</p></td>
+<td><p>~</p></td>
+<td><p>~</p></td>
+<td><p><em>upcoming in</em> <code class="docutils literal notranslate"><span class="pre">astartes</span></code> <em>v1.x</em></p></td>
+<td><p>~</p></td>
+<td><p>~</p></td>
+</tr>
+<tr class="row-even"><td><p>Kohonen Self-Organizing Map (SOM)</p></td>
+<td><p>~</p></td>
+<td><p>~</p></td>
+<td><p><em>upcoming in</em> <code class="docutils literal notranslate"><span class="pre">astartes</span></code> <em>v1.x</em></p></td>
+<td><p>~</p></td>
+<td><p>~</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPlit Method</p></td>
+<td><p>~</p></td>
+<td><p>~</p></td>
+<td><p><em>upcoming in</em> <code class="docutils literal notranslate"><span class="pre">astartes</span></code> <em>v1.x</em></p></td>
+<td><p>~</p></td>
+<td><p>~</p></td>
+</tr>
+</tbody>
+</table>
+<p>(*) specifying <code class="docutils literal notranslate"><span class="pre">distance_metric_X</span></code> or <code class="docutils literal notranslate"><span class="pre">distance_metric_y</span></code> will override the choice of <code class="docutils literal notranslate"><span class="pre">distance_metric</span></code></p>
+</section>
+</section>
+<section id="domain-specific-applications">
+<h2>Domain-Specific Applications<a class="headerlink" href="#domain-specific-applications" title="Link to this heading"></a></h2>
+<p>Below are some field specific applications of <code class="docutils literal notranslate"><span class="pre">astartes</span></code>. Interested in adding a new sampling algorithm or featurization approach? See <cite>``CONTRIBUTING.md`</cite> &lt;./CONTRIBUTING.md&gt;`_.</p>
+<section id="chemical-data-and-the-astartes-molecules-subpackage">
+<h3>Chemical Data and the <code class="docutils literal notranslate"><span class="pre">astartes.molecules</span></code> Subpackage<a class="headerlink" href="#chemical-data-and-the-astartes-molecules-subpackage" title="Link to this heading"></a></h3>
+<p>Machine Learning is enormously useful in chemistry-related fields due to the high-dimensional feature space of chemical data.
+To properly apply ML to chemical data for inference <em>or</em> discovery, it is important to know a model’s accuracy under the two domains.
+To simplify the process of partitioning chemical data, <code class="docutils literal notranslate"><span class="pre">astartes</span></code> implements a pre-built featurizer for common chemistry data formats.
+After installing with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">astartes[molecules]</span></code> one can import the new train/test splitting function like this: <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">astartes.molecules</span> <span class="pre">import</span> <span class="pre">train_test_split_molecules</span></code></p>
+<p>The usage of this function is identical to <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> but with the addition of new arguments to control how the molecules are featurized:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_test_split_molecules</span><span class="p">(</span>
+    <span class="n">molecules</span><span class="o">=</span><span class="n">smiles</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">fingerprint</span><span class="o">=</span><span class="s2">&quot;daylight_fingerprint&quot;</span><span class="p">,</span>
+    <span class="n">fprints_hopts</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;fpSize&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="s2">&quot;numBitsPerFeature&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;useHs&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">sampler</span><span class="o">=</span><span class="s2">&quot;random&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">hopts</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;shuffle&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To see a complete example of using <code class="docutils literal notranslate"><span class="pre">train_test_split_molecules</span></code> with actual chemical data, take a look in the <code class="docutils literal notranslate"><span class="pre">examples</span></code> directory and the brief <a class="reference external" href="https://github.com/JacksonBurns/astartes/raw/joss-paper/Burns-Spiekermann-Bhattacharjee_astartes.pdf">companion paper</a>.</p>
+<p>Configuration options for the featurization scheme can be found in the documentation for <a class="reference external" href="https://vlachosgroup.github.io/AIMSim/README.html#currently-implemented-fingerprints">AIMSim</a> though most of the critical configuration options are shown above.</p>
+</section>
+</section>
+</section>
+<section id="reproducibility">
+<h1>Reproducibility<a class="headerlink" href="#reproducibility" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">astartes</span></code> aims to be completely reproducible across different platforms, Python versions, and dependency configurations - any version of <code class="docutils literal notranslate"><span class="pre">astartes</span></code> v1.x should result in the <em>exact</em> same splits, always.
+To that end, the default behavior of <code class="docutils literal notranslate"><span class="pre">astartes</span></code> is to use <code class="docutils literal notranslate"><span class="pre">42</span></code> as the random seed and <em>always</em> set it.
+Running <code class="docutils literal notranslate"><span class="pre">astartes</span></code> with the default settings will always produce the exact same results.
+We have verified this behavior on Debian Ubuntu, Windows, and Intel Macs from Python versions 3.7 through 3.11 (with appropriate dependencies for each version).</p>
+<section id="known-reproducibility-limitations">
+<h2>Known Reproducibility Limitations<a class="headerlink" href="#known-reproducibility-limitations" title="Link to this heading"></a></h2>
+<p>Inevitably external dependencies of <code class="docutils literal notranslate"><span class="pre">astartes</span></code> will introduce backwards-incompatible changes.
+We continually run regression tests to catch these, and will list all <em>known</em> limitations here:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sklearn</span></code> v1.3.0 introduced backwards-incompatible changes in the <code class="docutils literal notranslate"><span class="pre">KMeans</span></code> sampler that changed how the random initialization affects the results, even given the same random seed. Different version of <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> will affect the performance of <code class="docutils literal notranslate"><span class="pre">astartes</span></code> and we recommend including the exact version of <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> and <code class="docutils literal notranslate"><span class="pre">astartes</span></code> used, when applicable.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note</strong>
+We are limited in our ability to test on M1 Macs, but from our limited manual testing we achieve perfect reproducbility in all cases <em>except occasionally</em> with <code class="docutils literal notranslate"><span class="pre">KMeans</span></code> on Apple silicon.
+<code class="docutils literal notranslate"><span class="pre">astartes</span></code> is still consistent between runs on the same platform in all cases, and other samplers are not impacted by this apparent bug.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="how-to-cite">
+<h1>How to Cite<a class="headerlink" href="#how-to-cite" title="Link to this heading"></a></h1>
+<p>If you use <code class="docutils literal notranslate"><span class="pre">astartes</span></code> in your work please follow the link below to our (Open Access!) paper in the Journal of Open Source Software or use the “Cite this repository” button on GitHub.</p>
+<p><a class="reference external" href="https://joss.theoj.org/papers/10.21105/joss.05996">Machine Learning Validation via Rational Dataset Sampling with astartes</a></p>
+</section>
+<section id="id7">
+<h1>Contributing &amp; Developer Notes<a class="headerlink" href="#id7" title="Link to this heading"></a></h1>
+<p>See <a class="reference external" href="./CONTRIBUTING.md">CONTRIBUTING.md</a> for instructions on installing <code class="docutils literal notranslate"><span class="pre">astartes</span></code> for development, making a contribution, and general guidance on the design of <code class="docutils literal notranslate"><span class="pre">astartes</span></code>.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="astartes documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CONTRIBUTING.html" class="btn btn-neutral float-right" title="Contributing &amp; Developer Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jackson Burns.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
