@@ -11,7 +11,7 @@ class AbstractSampler(ABC):
     Abstract Base Class for all samplers.
     """
 
-    def __init__(self, X, y, labels, configs):
+    def __init__(self, X, y=None, labels=None, configs=None):
         """Copies X, y, labels, and configs into class attributes and then calls sampler."""
         # required in all splitting methods
         self.X = X
