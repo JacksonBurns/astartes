@@ -19,7 +19,7 @@ class AbstractSampler(ABC):
         # optional in all splitting methods
         self.y = y
         self.labels = labels
-        self._configs = configs
+        self._configs = {} if configs is None else configs
 
         # this must be set by _sample for interpolation
         self._samples_idxs = np.array([], dtype=int)
