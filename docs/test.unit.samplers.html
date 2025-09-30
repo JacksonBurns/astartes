@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test.unit.samplers package &mdash; astartes astartes.__version__ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=371f806f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=8209df7b" />
+
+  
+      <script src="_static/jquery.js?v=3d1d8b85"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=04b1687e"></script>
+      <script src="_static/doctools.js?v=e1f2eec6"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="test.unit.samplers.extrapolative package" href="test.unit.samplers.extrapolative.html" />
+    <link rel="prev" title="test.unit package" href="test.unit.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            astartes
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">Online Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#installing-astartes">Installing <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#statement-of-need">Statement of Need</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#theory-and-application-of-astartes">Theory and Application of <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#reproducibility">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#id7">Contributing &amp; Developer Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing &amp; Developer Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html#joss-branch">JOSS Branch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sklearn_to_astartes.html">Transitioning from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">astartes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="astartes.html">astartes package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="test.html">test package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="test.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="test.functional.html">test.functional package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.regression.html">test.regression package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="test.unit.html">test.unit package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="test.html#module-test">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">astartes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">astartes</a></li>
+          <li class="breadcrumb-item"><a href="test.html">test package</a></li>
+          <li class="breadcrumb-item"><a href="test.unit.html">test.unit package</a></li>
+      <li class="breadcrumb-item active">test.unit.samplers package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/test.unit.samplers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="test-unit-samplers-package">
+<h1>test.unit.samplers package<a class="headerlink" href="#test-unit-samplers-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="test.unit.samplers.extrapolative.html">test.unit.samplers.extrapolative package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.extrapolative.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.extrapolative.html#module-test.unit.samplers.extrapolative.test_DBSCAN">test.unit.samplers.extrapolative.test_DBSCAN module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_DBSCAN.Test_DBSCAN"><code class="docutils literal notranslate"><span class="pre">Test_DBSCAN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_DBSCAN.Test_DBSCAN.setUpClass"><code class="docutils literal notranslate"><span class="pre">Test_DBSCAN.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_DBSCAN.Test_DBSCAN.test_dbscan"><code class="docutils literal notranslate"><span class="pre">Test_DBSCAN.test_dbscan()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_DBSCAN.Test_DBSCAN.test_dbscan_sampling"><code class="docutils literal notranslate"><span class="pre">Test_DBSCAN.test_dbscan_sampling()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.extrapolative.html#module-test.unit.samplers.extrapolative.test_Scaffold">test.unit.samplers.extrapolative.test_Scaffold module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_Scaffold.Test_scaffold"><code class="docutils literal notranslate"><span class="pre">Test_scaffold</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_Scaffold.Test_scaffold.setUpClass"><code class="docutils literal notranslate"><span class="pre">Test_scaffold.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_Scaffold.Test_scaffold.test_include_chirality"><code class="docutils literal notranslate"><span class="pre">Test_scaffold.test_include_chirality()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_Scaffold.Test_scaffold.test_incorrect_input"><code class="docutils literal notranslate"><span class="pre">Test_scaffold.test_incorrect_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_Scaffold.Test_scaffold.test_mol_from_inchi"><code class="docutils literal notranslate"><span class="pre">Test_scaffold.test_mol_from_inchi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_Scaffold.Test_scaffold.test_no_scaffold_found_warning"><code class="docutils literal notranslate"><span class="pre">Test_scaffold.test_no_scaffold_found_warning()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_Scaffold.Test_scaffold.test_remove_atom_map"><code class="docutils literal notranslate"><span class="pre">Test_scaffold.test_remove_atom_map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_Scaffold.Test_scaffold.test_scaffold"><code class="docutils literal notranslate"><span class="pre">Test_scaffold.test_scaffold()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_Scaffold.Test_scaffold.test_scaffold_sampling"><code class="docutils literal notranslate"><span class="pre">Test_scaffold.test_scaffold_sampling()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.extrapolative.html#module-test.unit.samplers.extrapolative.test_kmeans">test.unit.samplers.extrapolative.test_kmeans module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_kmeans.Test_kmeans"><code class="docutils literal notranslate"><span class="pre">Test_kmeans</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_kmeans.Test_kmeans.setUpClass"><code class="docutils literal notranslate"><span class="pre">Test_kmeans.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_kmeans.Test_kmeans.test_kmeans"><code class="docutils literal notranslate"><span class="pre">Test_kmeans.test_kmeans()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_kmeans.Test_kmeans.test_kmeans_sampling_v12"><code class="docutils literal notranslate"><span class="pre">Test_kmeans.test_kmeans_sampling_v12()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_kmeans.Test_kmeans.test_kmeans_sampling_v13"><code class="docutils literal notranslate"><span class="pre">Test_kmeans.test_kmeans_sampling_v13()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.extrapolative.html#module-test.unit.samplers.extrapolative.test_molecular_weight">test.unit.samplers.extrapolative.test_molecular_weight module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_molecular_weight.Test_MolecularWeight"><code class="docutils literal notranslate"><span class="pre">Test_MolecularWeight</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_molecular_weight.Test_MolecularWeight.setUpClass"><code class="docutils literal notranslate"><span class="pre">Test_MolecularWeight.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_molecular_weight.Test_MolecularWeight.test_incorrect_input"><code class="docutils literal notranslate"><span class="pre">Test_MolecularWeight.test_incorrect_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_molecular_weight.Test_MolecularWeight.test_mol_from_inchi"><code class="docutils literal notranslate"><span class="pre">Test_MolecularWeight.test_mol_from_inchi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_molecular_weight.Test_MolecularWeight.test_molecular_weight"><code class="docutils literal notranslate"><span class="pre">Test_MolecularWeight.test_molecular_weight()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_molecular_weight.Test_MolecularWeight.test_molecular_weight_sampling"><code class="docutils literal notranslate"><span class="pre">Test_MolecularWeight.test_molecular_weight_sampling()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.extrapolative.html#module-test.unit.samplers.extrapolative.test_optisim">test.unit.samplers.extrapolative.test_optisim module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_optisim.Test_optisim"><code class="docutils literal notranslate"><span class="pre">Test_optisim</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_optisim.Test_optisim.setUpClass"><code class="docutils literal notranslate"><span class="pre">Test_optisim.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_optisim.Test_optisim.test_optisim"><code class="docutils literal notranslate"><span class="pre">Test_optisim.test_optisim()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_optisim.Test_optisim.test_optisim_sampling"><code class="docutils literal notranslate"><span class="pre">Test_optisim.test_optisim_sampling()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.extrapolative.html#module-test.unit.samplers.extrapolative.test_sphere_exclusion">test.unit.samplers.extrapolative.test_sphere_exclusion module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_sphere_exclusion.Test_sphere_exclusion"><code class="docutils literal notranslate"><span class="pre">Test_sphere_exclusion</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_sphere_exclusion.Test_sphere_exclusion.setUpClass"><code class="docutils literal notranslate"><span class="pre">Test_sphere_exclusion.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_sphere_exclusion.Test_sphere_exclusion.test_sphereexclusion"><code class="docutils literal notranslate"><span class="pre">Test_sphere_exclusion.test_sphereexclusion()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_sphere_exclusion.Test_sphere_exclusion.test_sphereexclusion_sampling"><code class="docutils literal notranslate"><span class="pre">Test_sphere_exclusion.test_sphereexclusion_sampling()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.extrapolative.html#module-test.unit.samplers.extrapolative.test_target_property">test.unit.samplers.extrapolative.test_target_property module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_target_property.Test_TargetProperty"><code class="docutils literal notranslate"><span class="pre">Test_TargetProperty</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_target_property.Test_TargetProperty.setUpClass"><code class="docutils literal notranslate"><span class="pre">Test_TargetProperty.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_target_property.Test_TargetProperty.test_target_property"><code class="docutils literal notranslate"><span class="pre">Test_TargetProperty.test_target_property()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_target_property.Test_TargetProperty.test_target_property_sampling_ascending"><code class="docutils literal notranslate"><span class="pre">Test_TargetProperty.test_target_property_sampling_ascending()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_target_property.Test_TargetProperty.test_target_property_sampling_descending"><code class="docutils literal notranslate"><span class="pre">Test_TargetProperty.test_target_property_sampling_descending()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.extrapolative.html#module-test.unit.samplers.extrapolative.test_time_based">test.unit.samplers.extrapolative.test_time_based module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_time_based.Test_time_based"><code class="docutils literal notranslate"><span class="pre">Test_time_based</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_time_based.Test_time_based.setUpClass"><code class="docutils literal notranslate"><span class="pre">Test_time_based.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_time_based.Test_time_based.test_incorrect_input"><code class="docutils literal notranslate"><span class="pre">Test_time_based.test_incorrect_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_time_based.Test_time_based.test_mising_labels"><code class="docutils literal notranslate"><span class="pre">Test_time_based.test_mising_labels()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_time_based.Test_time_based.test_time_based_date"><code class="docutils literal notranslate"><span class="pre">Test_time_based.test_time_based_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_time_based.Test_time_based.test_time_based_datetime"><code class="docutils literal notranslate"><span class="pre">Test_time_based.test_time_based_datetime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.extrapolative.html#test.unit.samplers.extrapolative.test_time_based.Test_time_based.test_time_based_sampling"><code class="docutils literal notranslate"><span class="pre">Test_time_based.test_time_based_sampling()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.extrapolative.html#module-test.unit.samplers.extrapolative">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test.unit.samplers.interpolative.html">test.unit.samplers.interpolative package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.interpolative.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.interpolative.html#module-test.unit.samplers.interpolative.test_kennard_stone">test.unit.samplers.interpolative.test_kennard_stone module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_kennard_stone.Test_kennard_stone"><code class="docutils literal notranslate"><span class="pre">Test_kennard_stone</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_kennard_stone.Test_kennard_stone.setUpClass"><code class="docutils literal notranslate"><span class="pre">Test_kennard_stone.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_kennard_stone.Test_kennard_stone.test_kennard_stone"><code class="docutils literal notranslate"><span class="pre">Test_kennard_stone.test_kennard_stone()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_kennard_stone.Test_kennard_stone.test_kennard_stone_sample"><code class="docutils literal notranslate"><span class="pre">Test_kennard_stone.test_kennard_stone_sample()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_kennard_stone.Test_kennard_stone.test_kennard_stone_sample_no_warning"><code class="docutils literal notranslate"><span class="pre">Test_kennard_stone.test_kennard_stone_sample_no_warning()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.interpolative.html#module-test.unit.samplers.interpolative.test_random">test.unit.samplers.interpolative.test_random module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_random.Test_random"><code class="docutils literal notranslate"><span class="pre">Test_random</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_random.Test_random.setUpClass"><code class="docutils literal notranslate"><span class="pre">Test_random.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_random.Test_random.test_random"><code class="docutils literal notranslate"><span class="pre">Test_random.test_random()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_random.Test_random.test_random_sample"><code class="docutils literal notranslate"><span class="pre">Test_random.test_random_sample()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_random.Test_random.test_random_sample_no_warning"><code class="docutils literal notranslate"><span class="pre">Test_random.test_random_sample_no_warning()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.interpolative.html#module-test.unit.samplers.interpolative.test_spxy">test.unit.samplers.interpolative.test_spxy module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_spxy.Test_SPXY"><code class="docutils literal notranslate"><span class="pre">Test_SPXY</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_spxy.Test_SPXY.setUpClass"><code class="docutils literal notranslate"><span class="pre">Test_SPXY.setUpClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_spxy.Test_SPXY.test_missing_y"><code class="docutils literal notranslate"><span class="pre">Test_SPXY.test_missing_y()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_spxy.Test_SPXY.test_spxy"><code class="docutils literal notranslate"><span class="pre">Test_SPXY.test_spxy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.unit.samplers.interpolative.html#test.unit.samplers.interpolative.test_spxy.Test_SPXY.test_spxy_sampling"><code class="docutils literal notranslate"><span class="pre">Test_SPXY.test_spxy_sampling()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.unit.samplers.interpolative.html#module-test.unit.samplers.interpolative">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-test.unit.samplers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-test.unit.samplers" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="test.unit.html" class="btn btn-neutral float-left" title="test.unit package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test.unit.samplers.extrapolative.html" class="btn btn-neutral float-right" title="test.unit.samplers.extrapolative package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jackson Burns.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

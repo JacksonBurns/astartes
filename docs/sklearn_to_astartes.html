@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transitioning from sklearn to astartes &mdash; astartes astartes.__version__ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=371f806f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=8209df7b" />
+
+  
+      <script src="_static/jquery.js?v=3d1d8b85"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=04b1687e"></script>
+      <script src="_static/doctools.js?v=e1f2eec6"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="astartes" href="modules.html" />
+    <link rel="prev" title="Contributing &amp; Developer Notes" href="CONTRIBUTING.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            astartes
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">Online Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#installing-astartes">Installing <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#statement-of-need">Statement of Need</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#theory-and-application-of-astartes">Theory and Application of <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#reproducibility">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#id7">Contributing &amp; Developer Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing &amp; Developer Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html#joss-branch">JOSS Branch</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Transitioning from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-installation">Step 1. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-changing-the-import-statement">Step 2. Changing the <code class="docutils literal notranslate"><span class="pre">import</span></code> Statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-specifying-an-algorithmic-sampler">Step 3. Specifying an Algorithmic Sampler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-passing-keyword-arguments">Step 4. Passing Keyword Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-5-useful-astartes-features">Step 5. Useful <code class="docutils literal notranslate"><span class="pre">astartes</span></code> Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#return-indices-improve-code-clarity"><code class="docutils literal notranslate"><span class="pre">return_indices</span></code>: Improve Code Clarity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#train-val-test-split-more-rigorous-ml"><code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code>: More Rigorous ML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-warnings-imperfectsplittingwarning-and-normalizationwarning">Custom Warnings: <code class="docutils literal notranslate"><span class="pre">ImperfectSplittingWarning</span></code> and <code class="docutils literal notranslate"><span class="pre">NormalizationWarning</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">astartes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">astartes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Transitioning from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to <code class="docutils literal notranslate"><span class="pre">astartes</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/sklearn_to_astartes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="transitioning-from-sklearn-to-astartes">
+<h1>Transitioning from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to <code class="docutils literal notranslate"><span class="pre">astartes</span></code><a class="headerlink" href="#transitioning-from-sklearn-to-astartes" title="Link to this heading"></a></h1>
+<section id="step-1-installation">
+<h2>Step 1. Installation<a class="headerlink" href="#step-1-installation" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">astartes</span></code> has been designed to rely on (1) as few packages as possible and (2) packages which are already likely to be installed in a Machine Learning (ML) Python workflow (i.e. Numpy and Sklearn). Because of this, <code class="docutils literal notranslate"><span class="pre">astartes</span></code> should be compatible with your <em>existing</em> workflow such as a conda environment.</p>
+<p>To install <code class="docutils literal notranslate"><span class="pre">astartes</span></code> for general ML use (the sampling of arbitrary vectors): <a href="#id1"><span class="problematic" id="id2">**</span></a><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">astartes</span></code>**</p>
+<p>For users in cheminformatics, <code class="docutils literal notranslate"><span class="pre">astartes</span></code> has an optional add-on that includes featurization as part of the sampling. To install, type <a href="#id3"><span class="problematic" id="id4">**</span></a><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'astartes[molecules]'</span></code><a href="#id5"><span class="problematic" id="id6">**</span></a>. With this extra install, <code class="docutils literal notranslate"><span class="pre">astartes</span></code> uses  <cite>``AIMSim`</cite> &lt;<a class="reference external" href="https://vlachosgroup.github.io/AIMSim/README.html">https://vlachosgroup.github.io/AIMSim/README.html</a>&gt;`_ to encode SMILES strings as feature vectors. The SMILES strings are parsed into molecular graphs using RDKit and then sampled with a single function call: <code class="docutils literal notranslate"><span class="pre">train_test_split_molecules</span></code>.</p>
+<ul class="simple">
+<li><p>If your workflow already has a featurization scheme in place (i.e. you already have a vector representation of your chemical of interest), you can directly use <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> (though we invite you to explore the many molecular descriptors made available through AIMSim).</p></li>
+</ul>
+</section>
+<section id="step-2-changing-the-import-statement">
+<h2>Step 2. Changing the <code class="docutils literal notranslate"><span class="pre">import</span></code> Statement<a class="headerlink" href="#step-2-changing-the-import-statement" title="Link to this heading"></a></h2>
+<p>In one of the first few lines of your Python script, you have the line <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">sklearn.model_selection</span> <span class="pre">import</span> <span class="pre">train_test_split</span></code>. To switch to using <code class="docutils literal notranslate"><span class="pre">astartes</span></code> change this line to <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">astartes</span> <span class="pre">import</span> <span class="pre">train_test_split</span></code>.</p>
+<p>That’s it! You are now using <code class="docutils literal notranslate"><span class="pre">astartes</span></code>.</p>
+<p>If you were just calling <code class="docutils literal notranslate"><span class="pre">train_test_split(X,</span> <span class="pre">y)</span></code>, your script should now work in the exact same way as <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> with no changes required.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><em>becomes</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>But we encourage you to try one of our many other samplers (see below)!</p>
+</section>
+<section id="step-3-specifying-an-algorithmic-sampler">
+<h2>Step 3. Specifying an Algorithmic Sampler<a class="headerlink" href="#step-3-specifying-an-algorithmic-sampler" title="Link to this heading"></a></h2>
+<p>By default (for interoperability), <code class="docutils literal notranslate"><span class="pre">astartes</span></code> will use a random sampler to produce train/test splits - but the real value of <code class="docutils literal notranslate"><span class="pre">astartes</span></code> is in the algorithmic sampling algorithms it implements. Check out the <a class="reference external" href="https://github.com/JacksonBurns/astartes#implemented-sampling-algorithms">README for a complete list of available algorithms</a> and how to call and customize them.</p>
+<p>If you existing call to <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> looks like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>and you want to try out using Kennard-Stone sampling, switch it to this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">sampler</span><span class="o">=</span><span class="s2">&quot;kennard_stone&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>That’s it!</p>
+</section>
+<section id="step-4-passing-keyword-arguments">
+<h2>Step 4. Passing Keyword Arguments<a class="headerlink" href="#step-4-passing-keyword-arguments" title="Link to this heading"></a></h2>
+<p>All of the arguments to the <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>‘s <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> can still be passed to <code class="docutils literal notranslate"><span class="pre">astartes</span></code>‘ <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">train_size</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span>
+    <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span>
+    <span class="n">sampler</span> <span class="o">=</span> <span class="s2">&quot;kmeans&quot;</span><span class="p">,</span>
+    <span class="n">hopts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;n_clusters&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Some samplers have tunable hyperparameters that allow you to more finely control their behavior. To do this with Sphere Exclusion, for example, switch your call to this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">sampler</span><span class="o">=</span><span class="s2">&quot;sphere_exclusion&quot;</span><span class="p">,</span>
+    <span class="n">hopts</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;distance_cutoff&quot;</span><span class="p">:</span><span class="mf">0.15</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-5-useful-astartes-features">
+<h2>Step 5. Useful <code class="docutils literal notranslate"><span class="pre">astartes</span></code> Features<a class="headerlink" href="#step-5-useful-astartes-features" title="Link to this heading"></a></h2>
+<section id="return-indices-improve-code-clarity">
+<h3><code class="docutils literal notranslate"><span class="pre">return_indices</span></code>: Improve Code Clarity<a class="headerlink" href="#return-indices-improve-code-clarity" title="Link to this heading"></a></h3>
+<p>There are circumstances where the indices of the train/test data can be useful (for example, if <code class="docutils literal notranslate"><span class="pre">y</span></code> or <code class="docutils literal notranslate"><span class="pre">labels</span></code> are large, memory-intense objects), and there is no way to directly return these indices in <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>. <code class="docutils literal notranslate"><span class="pre">astartes</span></code> will return the sampling splits themselves by default, but it can also return the indices for the user to manipulate according to their needs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">return_indices</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><em>could instead be</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">,</span> <span class="n">indices_train</span><span class="p">,</span> <span class="n">indices_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">return_indices</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">y</span></code> or <code class="docutils literal notranslate"><span class="pre">labels</span></code> were large, memory-intense objects it could be beneficial to <em>not</em> pass them in to <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> and instead separate the existing lists later using the returned indices.</p>
+</section>
+<section id="train-val-test-split-more-rigorous-ml">
+<h3><code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code>: More Rigorous ML<a class="headerlink" href="#train-val-test-split-more-rigorous-ml" title="Link to this heading"></a></h3>
+<p>Behind the scenes, <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> is actually just a one-line function that calls the real workhorse of <code class="docutils literal notranslate"><span class="pre">astartes</span></code> - <code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="o">...</span>
+    <span class="n">return_indices</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="k">return</span> <span class="n">train_val_test_split</span><span class="p">(</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">train_size</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">test_size</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">hopts</span><span class="p">,</span> <span class="n">return_indices</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>The function call to <code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code> is identical to <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> and supports all the same samplers and hyperparameters, except for one additional keyword argument <code class="docutils literal notranslate"><span class="pre">val_size</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">train_val_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">train_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">val_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">sampler</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;random&quot;</span><span class="p">,</span>
+    <span class="n">hopts</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">return_indices</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+</pre></div>
+</div>
+<p>When called, this will return <em>three</em> arrays from <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">labels</span></code> (or three arrays of indices, if <code class="docutils literal notranslate"><span class="pre">return_indices=True</span></code>) rather than the usual two, according to the values given for <code class="docutils literal notranslate"><span class="pre">train_size</span></code>, <code class="docutils literal notranslate"><span class="pre">val_size</span></code>, and <code class="docutils literal notranslate"><span class="pre">test_size</span></code> in the function call.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_val_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">train_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">val_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For truly rigorous ML modeling, the validation set should be used for hyperparameter tuning and the test set held out until the <em>very final</em> change has been made to the model to get a true sense of its performance. For better or for worse, this is <em>not</em> the current standard for ML modeling, but the authors believe it should be.</p>
+</section>
+<section id="custom-warnings-imperfectsplittingwarning-and-normalizationwarning">
+<h3>Custom Warnings: <code class="docutils literal notranslate"><span class="pre">ImperfectSplittingWarning</span></code> and <code class="docutils literal notranslate"><span class="pre">NormalizationWarning</span></code><a class="headerlink" href="#custom-warnings-imperfectsplittingwarning-and-normalizationwarning" title="Link to this heading"></a></h3>
+<p>In the event that your requested train/validation/test split is not mathematically possible given the dimensions of the input data (i.e. you request 50/25/25 but have 101 data points), <code class="docutils literal notranslate"><span class="pre">astartes</span></code> will warn you during runtime that it has occurred. <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> simply moves on quietly, and while this is fine <em>most</em> of the time, the authors felt it prudent to warn the user.
+When entering a train/validation/test split, <code class="docutils literal notranslate"><span class="pre">astartes</span></code> will check that it is normalized and make it so if not, warning the user during runtime. This will hopefully help prevent head-scratching hours of debugging.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CONTRIBUTING.html" class="btn btn-neutral float-left" title="Contributing &amp; Developer Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="astartes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jackson Burns.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

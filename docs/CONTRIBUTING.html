@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing &amp; Developer Notes &mdash; astartes astartes.__version__ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=371f806f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=8209df7b" />
+
+  
+      <script src="_static/jquery.js?v=3d1d8b85"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=04b1687e"></script>
+      <script src="_static/doctools.js?v=e1f2eec6"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Transitioning from sklearn to astartes" href="sklearn_to_astartes.html" />
+    <link rel="prev" title="Online Documentation" href="README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            astartes
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">Online Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#installing-astartes">Installing <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#statement-of-need">Statement of Need</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#theory-and-application-of-astartes">Theory and Application of <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#reproducibility">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#id7">Contributing &amp; Developer Notes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing &amp; Developer Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#developer-install">Developer Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-checking">Version Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-new-samplers">Adding New Samplers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#not-implemented-sampling-algorithms">Not Implemented Sampling Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-new-featurization-schemes">Adding New Featurization Schemes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-train-val-test-split-function">The <code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code> Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-philosophy">Development Philosophy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#joss-branch">JOSS Branch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sklearn_to_astartes.html">Transitioning from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">astartes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">astartes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Contributing &amp; Developer Notes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/CONTRIBUTING.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contributing-developer-notes">
+<h1>Contributing &amp; Developer Notes<a class="headerlink" href="#contributing-developer-notes" title="Link to this heading"></a></h1>
+<p>Pull Requests, Bug Reports, and all Contributions are welcome, encouraged, and appreciated!
+Please use the appropriate <a class="reference external" href="https://github.com/JacksonBurns/astartes/issues/new/choose">issue</a> or <a class="reference external" href="https://github.com/JacksonBurns/astartes/compare">pull request</a> template when making a contribution to help the maintainers get it merged quickly.</p>
+<p>We make use of <a class="reference external" href="https://github.com/JacksonBurns/astartes/discussions">the GitHub Discussions page</a> to go over potential features to add.
+Please feel free to stop by if you are looking for something to develop or have an idea for a useful feature!</p>
+<p>When submitting a PR, please mark your PR with the “PR Ready for Review” label when you are finished making changes so that the GitHub actions bots can work their magic!</p>
+<section id="developer-install">
+<h2>Developer Install<a class="headerlink" href="#developer-install" title="Link to this heading"></a></h2>
+<p>To contribute to the <code class="docutils literal notranslate"><span class="pre">astartes</span></code> source code, start by forking and then cloning the repository (i.e. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">git&#64;github.com:YourUsername/astartes.git</span></code>) and then inside the repository run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.[dev]</span></code>. This will set you up with all the required dependencies to run <code class="docutils literal notranslate"><span class="pre">astartes</span></code> and conform to our formatting standards (<code class="docutils literal notranslate"><span class="pre">black</span></code> and <code class="docutils literal notranslate"><span class="pre">isort</span></code>), which you can configure to run automatically in VSCode <a class="reference external" href="https://marcobelo.medium.com/setting-up-python-black-on-visual-studio-code-5318eba4cd00#:~:text=Go%20to%20settings%20in%20your,%E2%80%9D%20and%20select%20%E2%80%9Cblack%E2%80%9D.">like this</a>.</p>
+<blockquote>
+<div><p><strong>Warning</strong>
+Windows (PowerShell) and MacOS Catalina or newer (zsh) require double quotes around the <code class="docutils literal notranslate"><span class="pre">[]</span></code> characters (i.e. <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">&quot;astartes[dev]&quot;</span></code>)</p>
+</div></blockquote>
+</section>
+<section id="version-checking">
+<h2>Version Checking<a class="headerlink" href="#version-checking" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">astartes</span></code> uses <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> to specify all metadata except the version, which is specified in <code class="docutils literal notranslate"><span class="pre">astartes/__init__.py</span></code> (via <code class="docutils literal notranslate"><span class="pre">__version__</span></code>) for backwards compatibility with Python 3.7.
+To check which version of <code class="docutils literal notranslate"><span class="pre">astartes</span></code> you have installed, you can run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-c</span> <span class="pre">&quot;import</span> <span class="pre">astartes;</span> <span class="pre">print(astartes.__version__)&quot;</span></code> on Python 3.7 or <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-c</span> <span class="pre">&quot;from</span> <span class="pre">importlib.metadata</span> <span class="pre">import</span> <span class="pre">version;</span> <span class="pre">version('astartes')&quot;</span></code> on Python 3.8 or newer.</p>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>All of the tests in <code class="docutils literal notranslate"><span class="pre">astartes</span></code> are written using the built-in python <code class="docutils literal notranslate"><span class="pre">unittest</span></code> module (to allow running without <code class="docutils literal notranslate"><span class="pre">pytest</span></code>) but we <em>highly</em> recommend using <code class="docutils literal notranslate"><span class="pre">pytest</span></code>.
+To execute the tests from the <code class="docutils literal notranslate"><span class="pre">astartes</span></code> repository, simply type <code class="docutils literal notranslate"><span class="pre">pytest</span></code> after running the developer install (or alternately, <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">-v</span></code> for a more helpful output).
+On GitHub, we use actions to run the tests on every Pull Request and on a nightly basis (look in <code class="docutils literal notranslate"><span class="pre">.github/workflows</span></code> for more information).
+These tests include unit tests, functional tests, and regression tests.</p>
+</section>
+<section id="adding-new-samplers">
+<h2>Adding New Samplers<a class="headerlink" href="#adding-new-samplers" title="Link to this heading"></a></h2>
+<p>Adding a new sampler should extend the <code class="docutils literal notranslate"><span class="pre">abstract_sampler.py</span></code> abstract base class.
+Each subclass should override the <code class="docutils literal notranslate"><span class="pre">_sample</span></code> method with its own algorithm for data partitioning and optionally the <code class="docutils literal notranslate"><span class="pre">_before_sample</span></code> method to perform any data validation.</p>
+<p>All samplers in <code class="docutils literal notranslate"><span class="pre">astartes</span></code> are classified as one of two types: extrapolative or interpolative.
+Extrapolative samplers work by clustering data into groups (which are then partitioned into train/validation/test to enforce extrapolation) whereas interpolative samplers provide an exact <em>order</em> in which samples should be moved into the training set.</p>
+<p>When actually implemented, this means that extrapolative samplers should set the <code class="docutils literal notranslate"><span class="pre">self._samples_clusters</span></code> attribute and interpolative samplers should set the <code class="docutils literal notranslate"><span class="pre">self._samples_idxs</span></code> attribute.</p>
+<p>New samplers can be as simple as a passthrough to another <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>, or it can be an original implementation that results in X and y being split into two lists. Take a look at <code class="docutils literal notranslate"><span class="pre">astartes/samplers/interpolation/random_split.py</span></code> for a basic example!</p>
+<p>After the sampler has been implemented, add it to <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> in in <code class="docutils literal notranslate"><span class="pre">astartes/samplers</span></code> and it will automatically be unit tested. Additional unit tests to verify that hyperparameters can be properly passed, etc. are also recommended.</p>
+<p>For historical reasons, and as a guide for any developers who would like add new samplers, below is a running list of samplers which have been <em>considered</em> for addition to <code class="docutils literal notranslate"><span class="pre">asartes</span></code> but ultimately not added for various reasons.</p>
+<section id="not-implemented-sampling-algorithms">
+<h3>Not Implemented Sampling Algorithms<a class="headerlink" href="#not-implemented-sampling-algorithms" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sampler Name</p></th>
+<th class="head"><p>Reasoning</p></th>
+<th class="head"><p>Relevant Link(s)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>D-Optimal</p></td>
+<td><p>Requires <em>a-priori</em> knowledge of the test and train size which does not fit in the <code class="docutils literal notranslate"><span class="pre">astartes</span></code> framework (samplers are all agnostic to the size of the sets) and it is questionable if the use of the Fischer information matrix is actually meaningful in the context of sampling existing data rather than tuning for ideal data.</p></td>
+<td><p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Optimal_design#:~:text=Of%20course%2C%20fixing%20the%20number%20of%20experimental%20runs%20a%20priori%20would%20be%20impractical.">Wikipedia article for optimal design</a> does a good job explaining why this is difficult, and points at some potential alternatives.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Duplex</p></td>
+<td><p>Requires knowing test and train size before execution, and can only partition data into two sets which would make it incompatible with <code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code>.</p></td>
+<td><p>This <a class="reference external" href="https://search.r-project.org/CRAN/refmans/prospectr/html/duplex.html#:~:text=The%20DUPLEX%20algorithm%20is%20similar,that%20are%20the%20farthest%20apart.">implementation in R</a> includes helpful references and a reference implementation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="adding-new-featurization-schemes">
+<h2>Adding New Featurization Schemes<a class="headerlink" href="#adding-new-featurization-schemes" title="Link to this heading"></a></h2>
+<p>All of the sampling methods implemented in <code class="docutils literal notranslate"><span class="pre">astartes</span></code> accept arbitrary arrays of numbers and return the sampled groups (with the exception of <code class="docutils literal notranslate"><span class="pre">Scaffold.py</span></code>). If you have an existing featurization scheme (i.e. take an arbitrary input and turn it into an array of numbers), we would be thrilled to include it in <code class="docutils literal notranslate"><span class="pre">astartes</span></code>.</p>
+<p>Adding a new interface should take on this format:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">astartes</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">train_test_split_INTERFACE</span><span class="p">(</span>
+    <span class="n">INTERFACE_input</span><span class="p">,</span>
+    <span class="n">INTERFACE_ARGS</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span>
+    <span class="n">train_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span>
+    <span class="n">splitter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;random&#39;</span><span class="p">,</span>
+    <span class="n">hopts</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">INTERFACE_hopts</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+<span class="p">):</span>
+    <span class="c1"># turn the INTERFACE_input into an input X</span>
+    <span class="c1"># based on INTERFACE ARGS where INTERFACE_hopts</span>
+    <span class="c1"># specifies additional behavior</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># call train test split with this input</span>
+    <span class="k">return</span> <span class="n">train_test_split</span><span class="p">(</span>
+        <span class="n">X</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+        <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span>
+        <span class="n">train_size</span><span class="o">=</span><span class="n">train_size</span><span class="p">,</span>
+        <span class="n">splitter</span><span class="o">=</span><span class="n">splitter</span><span class="p">,</span>
+        <span class="n">hopts</span><span class="o">=</span><span class="n">hopts</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>If possible, we would like to also add an example Jupyter Notebook with any new interface to demonstrate to new users how it functions. See our other examples in the <code class="docutils literal notranslate"><span class="pre">examples</span></code> directory.</p>
+<p>Contact <a class="reference external" href="https://github.com/JacksonBurns">&#64;JacksonBurns</a> if you need assistance adding an existing workflow to <code class="docutils literal notranslate"><span class="pre">astartes</span></code>. If this featurization scheme requires additional dependencies to function, we may add it as an additional <em>extra</em> package in the same way that <code class="docutils literal notranslate"><span class="pre">molecules</span></code> in installed.</p>
+</section>
+<section id="the-train-val-test-split-function">
+<h2>The <code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code> Function<a class="headerlink" href="#the-train-val-test-split-function" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code> is the workhorse function of <code class="docutils literal notranslate"><span class="pre">astartes</span></code>.
+It is responsible for instantiating the sampling algorithm, partitioning the data into training, validation, and testing, and then returning the requested results while also keeping an eye on data types.
+Under the hood, <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> is just calling <code class="docutils literal notranslate"><span class="pre">train_val_test_split</span></code> with <code class="docutils literal notranslate"><span class="pre">val_size</span></code> set to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.
+For more information on how it works, check out the inline documentation in <code class="docutils literal notranslate"><span class="pre">astartes/main.py</span></code>.</p>
+</section>
+<section id="development-philosophy">
+<h2>Development Philosophy<a class="headerlink" href="#development-philosophy" title="Link to this heading"></a></h2>
+<p>The developers of <code class="docutils literal notranslate"><span class="pre">astartes</span></code> prioritize (1) reproducibility, (2) flexibility, and (3) maintainability.</p>
+<ol class="arabic simple">
+<li><p>All versions of <code class="docutils literal notranslate"><span class="pre">astartes</span></code> <code class="docutils literal notranslate"><span class="pre">1.x</span></code> should produce the same results across all platforms, so we have thorough unit and regression testing run on a continuous basis.</p></li>
+<li><p>We specify as <em>few dependencies as possible</em> with the <em>loosest possible</em> dependency requirements, which allows integrating <code class="docutils literal notranslate"><span class="pre">astartes</span></code> with other tools more easily.</p>
+<ul class="simple">
+<li><p>Dependencies which introduce a lot of requirements and/or specific versions of requirements are shuffled into the <code class="docutils literal notranslate"><span class="pre">extras_require</span></code> to avoid weighing down the main package.</p></li>
+<li><p>Compatibility with all versions of modern Python is achieved by not tightly specifying version numbers as well as by regression testing across all versions.</p></li>
+</ul>
+</li>
+<li><p>We follow DRY (Don’t Repeat Yourself) principles to avoid code duplication and decrease maintainence burden, have near-perfect test coverage, and enforce consistent formatting style in the source code.</p>
+<ul class="simple">
+<li><p>Inline comments are <em>critical</em> for maintainability - at the time of writing, <code class="docutils literal notranslate"><span class="pre">astartes</span></code> has 1 comment line for every 2 lines of source code.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="joss-branch">
+<h1>JOSS Branch<a class="headerlink" href="#joss-branch" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">astartes</span></code> corresponding JOSS paper is stored in this repository on a separate branch. You can find <code class="docutils literal notranslate"><span class="pre">paper.md</span></code> on the aptly named <code class="docutils literal notranslate"><span class="pre">joss-paper</span></code> branch.</p>
+<p><em>Note for Maintainers</em>: To push changes from the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch into the <code class="docutils literal notranslate"><span class="pre">joss-paper</span></code> branch, run the <code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">JOSS</span> <span class="pre">Branch</span></code> workflow.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="README.html" class="btn btn-neutral float-left" title="Online Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sklearn_to_astartes.html" class="btn btn-neutral float-right" title="Transitioning from sklearn to astartes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jackson Burns.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
