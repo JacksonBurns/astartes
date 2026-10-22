@@ -135,7 +135,8 @@ class OptiSim(AbstractSampler):
                 labels[sample] = cluster_labels[sample]
             else:  # find which cluster center is closest
                 distances = {
-                    i: self.get_dist(sample, i) for i in cluster_labels.values()
+                    label: self.get_dist(sample, center)
+                    for center, label in cluster_labels.items()
                 }
                 labels[sample] = min(distances, key=distances.get)
 
@@ -159,6 +160,12 @@ class OptiSim(AbstractSampler):
                 dist_array - np.amin(dist_array),
                 np.amax(dist_array) - np.amin(dist_array),
             )
+        # distance from a sample to itself is zero
+        if i == j:
+            return 0.0
+        # the condensed index formula is only valid for i < j
+        if i > j:
+            i, j = j, i
         return self._pdist[len(self.X) * i + j - ((i + 2) * (i + 1)) // 2]
 
     def move_item(self, item, source_set, destintation_set):
