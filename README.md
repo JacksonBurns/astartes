@@ -178,6 +178,7 @@ grrd(sklearn_model, X, y, additional_metric=add_met)
 See the docstring for `generate_regression_results_dict` (with `help(generate_regression_results_dict)`) for more information.
 
 ### Using `astartes` with Categorical Data
+
 Any of the implemented sampling algorithms whose hyperparameters allow specifying the `metric` or `distance_metric` (effectively `1-metric`) can be co-opted to work with categorical data.
 Simply encode the data in a format compatible with the `sklearn` metric of choice and then call `astartes` with that metric specified:
 ```python
