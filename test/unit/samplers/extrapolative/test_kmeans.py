@@ -1,15 +1,23 @@
 import unittest
 
 import numpy as np
-import pkg_resources
 
 from astartes import train_test_split
 from astartes.samplers import KMeans
 from astartes.utils.warnings import ImperfectSplittingWarning
 
-SKLEARN_GEQ_13 = (  # get the sklearn version
-    int(pkg_resources.get_distribution("scikit-learn").version.split(".")[1]) >= 3
-)
+try:
+    from importlib.metadata import version
+except ImportError:  # Python < 3.8
+    try:
+        from importlib_metadata import version
+    except ImportError:
+        from pkg_resources import get_distribution
+
+        def version(distribution_name):
+            return get_distribution(distribution_name).version
+
+SKLEARN_GEQ_13 = int(version("scikit-learn").split(".")[1]) >= 3
 
 
 class Test_kmeans(unittest.TestCase):
