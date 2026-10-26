@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>astartes package &mdash; astartes astartes.__version__ documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=371f806f" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=8209df7b" />
+
+  
+      <script src="_static/jquery.js?v=3d1d8b85"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=04b1687e"></script>
+      <script src="_static/doctools.js?v=e1f2eec6"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="astartes.samplers package" href="astartes.samplers.html" />
+    <link rel="prev" title="astartes" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            astartes
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">Online Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#installing-astartes">Installing <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#statement-of-need">Statement of Need</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#theory-and-application-of-astartes">Theory and Application of <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#reproducibility">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#id7">Contributing &amp; Developer Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing &amp; Developer Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html#joss-branch">JOSS Branch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sklearn_to_astartes.html">Transitioning from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to <code class="docutils literal notranslate"><span class="pre">astartes</span></code></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">astartes</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">astartes package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.html">astartes.samplers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html">astartes.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-astartes.main">astartes.main module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#astartes.main.train_test_split"><code class="docutils literal notranslate"><span class="pre">train_test_split()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#astartes.main.train_val_test_split"><code class="docutils literal notranslate"><span class="pre">train_val_test_split()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-astartes.molecules">astartes.molecules module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#astartes.molecules.train_test_split_molecules"><code class="docutils literal notranslate"><span class="pre">train_test_split_molecules()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#astartes.molecules.train_val_test_split_molecules"><code class="docutils literal notranslate"><span class="pre">train_val_test_split_molecules()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-astartes">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.html">test package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">astartes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">astartes</a></li>
+      <li class="breadcrumb-item active">astartes package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/astartes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="astartes-package">
+<h1>astartes package<a class="headerlink" href="#astartes-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="astartes.samplers.html">astartes.samplers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="astartes.samplers.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astartes.samplers.extrapolation.html">astartes.samplers.extrapolation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.extrapolation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.extrapolation.html#module-astartes.samplers.extrapolation.dbscan">astartes.samplers.extrapolation.dbscan module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.extrapolation.html#module-astartes.samplers.extrapolation.kmeans">astartes.samplers.extrapolation.kmeans module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.extrapolation.html#module-astartes.samplers.extrapolation.molecular_weight">astartes.samplers.extrapolation.molecular_weight module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.extrapolation.html#module-astartes.samplers.extrapolation.optisim">astartes.samplers.extrapolation.optisim module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.extrapolation.html#module-astartes.samplers.extrapolation.scaffold">astartes.samplers.extrapolation.scaffold module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.extrapolation.html#module-astartes.samplers.extrapolation.sphere_exclusion">astartes.samplers.extrapolation.sphere_exclusion module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.extrapolation.html#module-astartes.samplers.extrapolation.target_property">astartes.samplers.extrapolation.target_property module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.extrapolation.html#module-astartes.samplers.extrapolation.time_based">astartes.samplers.extrapolation.time_based module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.extrapolation.html#module-astartes.samplers.extrapolation">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.samplers.interpolation.html">astartes.samplers.interpolation package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.interpolation.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.interpolation.html#module-astartes.samplers.interpolation.kennardstone">astartes.samplers.interpolation.kennardstone module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.interpolation.html#module-astartes.samplers.interpolation.random_split">astartes.samplers.interpolation.random_split module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.interpolation.html#module-astartes.samplers.interpolation.spxy">astartes.samplers.interpolation.spxy module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.interpolation.html#module-astartes.samplers.interpolation">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astartes.samplers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="astartes.samplers.html#module-astartes.samplers.abstract_sampler">astartes.samplers.abstract_sampler module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astartes.samplers.html#astartes.samplers.abstract_sampler.AbstractSampler"><code class="docutils literal notranslate"><span class="pre">AbstractSampler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.html#astartes.samplers.abstract_sampler.AbstractSampler.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractSampler.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.html#astartes.samplers.abstract_sampler.AbstractSampler.get_clusters"><code class="docutils literal notranslate"><span class="pre">AbstractSampler.get_clusters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.html#astartes.samplers.abstract_sampler.AbstractSampler.get_config"><code class="docutils literal notranslate"><span class="pre">AbstractSampler.get_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.html#astartes.samplers.abstract_sampler.AbstractSampler.get_sample_idxs"><code class="docutils literal notranslate"><span class="pre">AbstractSampler.get_sample_idxs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.samplers.html#astartes.samplers.abstract_sampler.AbstractSampler.get_sorted_cluster_counter"><code class="docutils literal notranslate"><span class="pre">AbstractSampler.get_sorted_cluster_counter()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astartes.samplers.html#module-astartes.samplers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="astartes.utils.html">astartes.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="astartes.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="astartes.utils.html#module-astartes.utils.aimsim_featurizer">astartes.utils.aimsim_featurizer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule"><code class="docutils literal notranslate"><span class="pre">Molecule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.mol_graph"><code class="docutils literal notranslate"><span class="pre">Molecule.mol_graph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.mol_text"><code class="docutils literal notranslate"><span class="pre">Molecule.mol_text</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.mol_property_val"><code class="docutils literal notranslate"><span class="pre">Molecule.mol_property_val</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.descriptor"><code class="docutils literal notranslate"><span class="pre">Molecule.descriptor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.get_descriptor_val"><code class="docutils literal notranslate"><span class="pre">Molecule.get_descriptor_val()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.match_fingerprint_from"><code class="docutils literal notranslate"><span class="pre">Molecule.match_fingerprint_from()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.get_similarity_to"><code class="docutils literal notranslate"><span class="pre">Molecule.get_similarity_to()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.get_name"><code class="docutils literal notranslate"><span class="pre">Molecule.get_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.get_mol_property_val"><code class="docutils literal notranslate"><span class="pre">Molecule.get_mol_property_val()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.draw"><code class="docutils literal notranslate"><span class="pre">Molecule.draw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.is_same"><code class="docutils literal notranslate"><span class="pre">Molecule.is_same()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.__init__"><code class="docutils literal notranslate"><span class="pre">Molecule.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#id0"><code class="docutils literal notranslate"><span class="pre">Molecule.draw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#id1"><code class="docutils literal notranslate"><span class="pre">Molecule.get_descriptor_val()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#id2"><code class="docutils literal notranslate"><span class="pre">Molecule.get_mol_property_val()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#id3"><code class="docutils literal notranslate"><span class="pre">Molecule.get_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#id4"><code class="docutils literal notranslate"><span class="pre">Molecule.get_similarity_to()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#id5"><code class="docutils literal notranslate"><span class="pre">Molecule.is_same()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#id6"><code class="docutils literal notranslate"><span class="pre">Molecule.match_fingerprint_from()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.Molecule.set_descriptor"><code class="docutils literal notranslate"><span class="pre">Molecule.set_descriptor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.aimsim_featurizer.featurize_molecules"><code class="docutils literal notranslate"><span class="pre">featurize_molecules()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astartes.utils.html#module-astartes.utils.array_type_helpers">astartes.utils.array_type_helpers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.array_type_helpers.convert_to_array"><code class="docutils literal notranslate"><span class="pre">convert_to_array()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.array_type_helpers.panda_handla"><code class="docutils literal notranslate"><span class="pre">panda_handla()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.array_type_helpers.return_helper"><code class="docutils literal notranslate"><span class="pre">return_helper()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astartes.utils.html#module-astartes.utils.exceptions">astartes.utils.exceptions module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.exceptions.InvalidConfigurationError"><code class="docutils literal notranslate"><span class="pre">InvalidConfigurationError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.exceptions.InvalidConfigurationError.__init__"><code class="docutils literal notranslate"><span class="pre">InvalidConfigurationError.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.exceptions.InvalidModelTypeError"><code class="docutils literal notranslate"><span class="pre">InvalidModelTypeError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.exceptions.InvalidModelTypeError.__init__"><code class="docutils literal notranslate"><span class="pre">InvalidModelTypeError.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.exceptions.MoleculesNotInstalledError"><code class="docutils literal notranslate"><span class="pre">MoleculesNotInstalledError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.exceptions.MoleculesNotInstalledError.__init__"><code class="docutils literal notranslate"><span class="pre">MoleculesNotInstalledError.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.exceptions.SamplerNotImplementedError"><code class="docutils literal notranslate"><span class="pre">SamplerNotImplementedError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.exceptions.SamplerNotImplementedError.__init__"><code class="docutils literal notranslate"><span class="pre">SamplerNotImplementedError.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.exceptions.UncastableInputError"><code class="docutils literal notranslate"><span class="pre">UncastableInputError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.exceptions.UncastableInputError.__init__"><code class="docutils literal notranslate"><span class="pre">UncastableInputError.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astartes.utils.html#module-astartes.utils.fast_kennard_stone">astartes.utils.fast_kennard_stone module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.fast_kennard_stone.fast_kennard_stone"><code class="docutils literal notranslate"><span class="pre">fast_kennard_stone()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astartes.utils.html#module-astartes.utils.sampler_factory">astartes.utils.sampler_factory module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.sampler_factory.SamplerFactory"><code class="docutils literal notranslate"><span class="pre">SamplerFactory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.sampler_factory.SamplerFactory.__init__"><code class="docutils literal notranslate"><span class="pre">SamplerFactory.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.sampler_factory.SamplerFactory.get_sampler"><code class="docutils literal notranslate"><span class="pre">SamplerFactory.get_sampler()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astartes.utils.html#module-astartes.utils.user_utils">astartes.utils.user_utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.user_utils.display_results_as_table"><code class="docutils literal notranslate"><span class="pre">display_results_as_table()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.user_utils.generate_regression_results_dict"><code class="docutils literal notranslate"><span class="pre">generate_regression_results_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astartes.utils.html#module-astartes.utils.warnings">astartes.utils.warnings module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.warnings.ConversionWarning"><code class="docutils literal notranslate"><span class="pre">ConversionWarning</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.warnings.ConversionWarning.__init__"><code class="docutils literal notranslate"><span class="pre">ConversionWarning.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.warnings.ImperfectSplittingWarning"><code class="docutils literal notranslate"><span class="pre">ImperfectSplittingWarning</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.warnings.ImperfectSplittingWarning.__init__"><code class="docutils literal notranslate"><span class="pre">ImperfectSplittingWarning.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.warnings.NoMatchingScaffold"><code class="docutils literal notranslate"><span class="pre">NoMatchingScaffold</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.warnings.NoMatchingScaffold.__init__"><code class="docutils literal notranslate"><span class="pre">NoMatchingScaffold.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.warnings.NormalizationWarning"><code class="docutils literal notranslate"><span class="pre">NormalizationWarning</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="astartes.utils.html#astartes.utils.warnings.NormalizationWarning.__init__"><code class="docutils literal notranslate"><span class="pre">NormalizationWarning.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astartes.utils.html#module-astartes.utils">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="astartes.utils.html#astartes.utils.generate_regression_results_dict"><code class="docutils literal notranslate"><span class="pre">generate_regression_results_dict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-astartes.main">
+<span id="astartes-main-module"></span><h2>astartes.main module<a class="headerlink" href="#module-astartes.main" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.main.train_test_split">
+<span class="sig-prename descclassname"><span class="pre">astartes.main.</span></span><span class="sig-name descname"><span class="pre">train_test_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hopts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.main.train_test_split" title="Link to this definition"></a></dt>
+<dd><p>Deterministic train_test_splitting of arbitrary arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Numpy array of feature vectors.</p></li>
+<li><p><strong>y</strong> (<em>np.array</em><em>, </em><em>optional</em>) – Targets corresponding to X, must be of same size. Defaults to None.</p></li>
+<li><p><strong>labels</strong> (<em>np.array</em><em>, </em><em>optional</em>) – Labels corresponding to X, must be of same size. Defaults to None.</p></li>
+<li><p><strong>train_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in training set. Defaults to 0.75.</p></li>
+<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in test set. Defaults to None.</p></li>
+<li><p><strong>sampler</strong> (<em>str</em><em>, </em><em>optional</em>) – Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to “random”.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The random seed used throughout astartes.</p></li>
+<li><p><strong>hopts</strong> (<em>dict</em><em>, </em><em>optional</em>) – Hyperparameters for the sampler used above. Defaults to {}.</p></li>
+<li><p><strong>return_indices</strong> (<em>bool</em><em>, </em><em>optional</em>) – True to return indices of train/test instead of values. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>X, y, and labels train/val/test data, or indices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.main.train_val_test_split">
+<span class="sig-prename descclassname"><span class="pre">astartes.main.</span></span><span class="sig-name descname"><span class="pre">train_val_test_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hopts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.main.train_val_test_split" title="Link to this definition"></a></dt>
+<dd><p>Deterministic train_test_splitting of arbitrary arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em><em>, </em><em>pd.DataFrame</em>) – Numpy array or pandas DataFrame of feature vectors.</p></li>
+<li><p><strong>y</strong> (<em>np.array</em><em>, </em><em>pd.Series</em><em>, </em><em>optional</em>) – Targets corresponding to X, must be of same size. Defaults to None.</p></li>
+<li><p><strong>labels</strong> (<em>np.array</em><em>, </em><em>pd.Series</em><em>, </em><em>optional</em>) – Labels corresponding to X, must be of same size. Defaults to None.</p></li>
+<li><p><strong>train_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in training set. Defaults to 0.8.</p></li>
+<li><p><strong>val_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in validation set. Defaults to 0.1.</p></li>
+<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in test set. Defaults to 0.1.</p></li>
+<li><p><strong>sampler</strong> (<em>str</em><em>, </em><em>optional</em>) – Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to “random”.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The random seed used throughout astartes.</p></li>
+<li><p><strong>hopts</strong> (<em>dict</em><em>, </em><em>optional</em>) – Hyperparameters for the sampler used above. Defaults to {}.</p></li>
+<li><p><strong>return_indices</strong> (<em>bool</em><em>, </em><em>optional</em>) – True to return indices of train/test after values. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>X, y, and labels train/val/test data, or indices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array(s)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-astartes.molecules">
+<span id="astartes-molecules-module"></span><h2>astartes.molecules module<a class="headerlink" href="#module-astartes.molecules" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.molecules.train_test_split_molecules">
+<span class="sig-prename descclassname"><span class="pre">astartes.molecules.</span></span><span class="sig-name descname"><span class="pre">train_test_split_molecules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecules</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hopts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fingerprint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'morgan_fingerprint'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fprints_hopts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.molecules.train_test_split_molecules" title="Link to this definition"></a></dt>
+<dd><p>Deterministic train/test splitting of molecules (SMILES strings or RDKit objects).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molecules</strong> (<em>np.array</em>) – List of SMILES strings or RDKit molecule objects representing molecules or reactions.</p></li>
+<li><p><strong>y</strong> (<em>np.array</em><em>, </em><em>optional</em>) – Targets corresponding to SMILES, must be of same size. Defaults to None.</p></li>
+<li><p><strong>labels</strong> (<em>np.array</em><em>, </em><em>optional</em>) – Labels corresponding to SMILES, must be of same size. Defaults to None.</p></li>
+<li><p><strong>train_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in training (test+train~1). Defaults to 0.75.</p></li>
+<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in test set. Defaults to None.</p></li>
+<li><p><strong>sampler</strong> (<em>str</em><em>, </em><em>optional</em>) – Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to “random”.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The random seed used throughout astartes. Defaults to None.</p></li>
+<li><p><strong>hopts</strong> (<em>dict</em><em>, </em><em>optional</em>) – Hyperparameters for the sampler used above. Defaults to {}.</p></li>
+<li><p><strong>fingerprint</strong> (<em>str</em><em>, </em><em>optional</em>) – Molecular fingerprint to be used from AIMSim. Defaults to “morgan_fingerprint”.</p></li>
+<li><p><strong>fprints_hopts</strong> (<em>dict</em><em>, </em><em>optional</em>) – Hyperparameters for AIMSim featurization. Defaults to {}.</p></li>
+<li><p><strong>return_indices</strong> (<em>bool</em><em>, </em><em>optional</em>) – True to return indices of train/test after the values. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>X, y, and labels train/test data, or indices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="astartes.molecules.train_val_test_split_molecules">
+<span class="sig-prename descclassname"><span class="pre">astartes.molecules.</span></span><span class="sig-name descname"><span class="pre">train_val_test_split_molecules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecules</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hopts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fingerprint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'morgan_fingerprint'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fprints_hopts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#astartes.molecules.train_val_test_split_molecules" title="Link to this definition"></a></dt>
+<dd><p>Deterministic train_test_splitting of molecules (SMILES strings or RDKit objects).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molecules</strong> (<em>np.array</em>) – List of SMILES strings or RDKit molecule objects representing molecules or reactions.</p></li>
+<li><p><strong>y</strong> (<em>np.array</em><em>, </em><em>optional</em>) – Targets corresponding to SMILES, must be of same size. Defaults to None.</p></li>
+<li><p><strong>labels</strong> (<em>np.array</em><em>, </em><em>optional</em>) – Labels corresponding to SMILES, must be of same size. Defaults to None.</p></li>
+<li><p><strong>train_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in training set. Defaults to 0.8.</p></li>
+<li><p><strong>val_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in validation set. Defaults to 0.1.</p></li>
+<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Fraction of dataset to use in test set. Defaults to 0.1.</p></li>
+<li><p><strong>sampler</strong> (<em>str</em><em>, </em><em>optional</em>) – Sampler to use, see IMPLEMENTED_INTER/EXTRAPOLATION_SAMPLERS. Defaults to “random”.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The random seed used throughout astartes. Defaults to 42.</p></li>
+<li><p><strong>hopts</strong> (<em>dict</em><em>, </em><em>optional</em>) – Hyperparameters for the sampler used above. Defaults to {}.</p></li>
+<li><p><strong>fingerprint</strong> (<em>str</em><em>, </em><em>optional</em>) – Molecular fingerprint to be used from AIMSim. Defaults to “morgan_fingerprint”.</p></li>
+<li><p><strong>fprints_hopts</strong> (<em>dict</em><em>, </em><em>optional</em>) – Hyperparameters for AIMSim featurization. Defaults to {}.</p></li>
+<li><p><strong>return_indices</strong> (<em>bool</em><em>, </em><em>optional</em>) – True to return indices of train/test after the values. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>X, y, and labels train/val/test data, or indices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-astartes">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-astartes" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="astartes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="astartes.samplers.html" class="btn btn-neutral float-right" title="astartes.samplers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jackson Burns.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
