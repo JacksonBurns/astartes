@@ -4,7 +4,17 @@ import unittest
 from datetime import datetime
 
 import numpy as np
-import pkg_resources
+
+try:
+    from importlib.metadata import version
+except ImportError:  # Python < 3.8
+    try:
+        from importlib_metadata import version
+    except ImportError:
+        from pkg_resources import get_distribution
+
+        def version(distribution_name):
+            return get_distribution(distribution_name).version
 
 from astartes import train_val_test_split
 from astartes.samplers import (
@@ -14,7 +24,7 @@ from astartes.samplers import (
     IMPLEMENTED_INTERPOLATION_SAMPLERS,
 )
 
-SKLEARN_GEQ_13 = int(pkg_resources.get_distribution("scikit-learn").version.split(".")[1]) >= 3  # get the sklearn version
+SKLEARN_GEQ_13 = int(version("scikit-learn").split(".")[1]) >= 3
 
 
 class Test_regression(unittest.TestCase):
