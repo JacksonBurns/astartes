@@ -5,5 +5,4 @@ astartes
    :maxdepth: 4
 
    astartes
-   setup
    test

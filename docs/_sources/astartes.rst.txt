@@ -7,16 +7,24 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   astartes.interfaces
    astartes.samplers
+   astartes.utils
 
 Submodules
 ----------
 
-astartes.astartes module
-------------------------
+astartes.main module
+--------------------
 
-.. automodule:: astartes.astartes
+.. automodule:: astartes.main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+astartes.molecules module
+-------------------------
+
+.. automodule:: astartes.molecules
    :members:
    :undoc-members:
    :show-inheritance:
